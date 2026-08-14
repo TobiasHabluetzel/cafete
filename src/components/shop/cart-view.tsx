@@ -8,8 +8,10 @@ import { ctaClass } from "@/components/brand/cta-button";
 import { MAX_QUANTITY, useCart } from "@/components/shop/use-cart";
 import { packSizes, site } from "@/config/site";
 import { Link } from "@/i18n/navigation";
+import { formatMoney } from "@/lib/format-money";
+import type { PackPrice } from "@/lib/pricing";
 
-export function CartView() {
+export function CartView({ prices }: { prices: PackPrice[] }) {
   const t = useTranslations("checkout");
   const tCart = useTranslations("cart");
   const tPacks = useTranslations("packs");
@@ -24,6 +26,17 @@ export function CartView() {
     const pack = packSizes.find((p) => p.bottles === bottles);
     return pack ? tPacks(pack.labelKey) : tPacks("bottles", { count: bottles });
   };
+
+  const priceFor = (bottles: number) => prices.find((p) => p.bottles === bottles);
+
+  // Indicative only — Stripe computes the authoritative total, including
+  // shipping and any tax. Shown because a cart with no figures is worse.
+  const subtotal = lines.reduce((sum, line) => {
+    const price = priceFor(line.bottles);
+    return price ? sum + price.amount * line.quantity : sum;
+  }, 0);
+  const currency = prices[0]?.currency ?? "CHF";
+  const allPriced = lines.every((line) => priceFor(line.bottles));
 
   async function checkout() {
     setStatus("redirecting");
@@ -112,6 +125,19 @@ export function CartView() {
               </button>
             </div>
 
+            {(() => {
+              const price = priceFor(line.bottles);
+              return price ? (
+                <span className="font-display w-24 text-right text-lg font-extrabold tabular-nums">
+                  {formatMoney(price.amount * line.quantity, price.currency, locale)}
+                </span>
+              ) : (
+                <span className="label-caps text-sunset-ink w-24 text-right">
+                  {t("priceTbd")}
+                </span>
+              );
+            })()}
+
             <button
               type="button"
               onClick={() => remove(line.bottles)}
@@ -124,10 +150,19 @@ export function CartView() {
         ))}
       </ul>
 
-      <p className="font-display mt-6 text-lg font-extrabold">
-        {t("bottlesTotal", { count: totalBottles })}
+      <div className="mt-6 flex items-baseline justify-between gap-4">
+        <span className="font-display text-lg font-extrabold">
+          {allPriced ? t("subtotal") : t("bottlesTotal", { count: totalBottles })}
+        </span>
+        {allPriced ? (
+          <span className="font-display text-2xl font-extrabold tabular-nums">
+            {formatMoney(subtotal, currency, locale)}
+          </span>
+        ) : null}
+      </div>
+      <p className="text-charcoal/60 mt-1 text-sm">
+        {t("bottlesTotal", { count: totalBottles })} · {t("lineTotalNote")}
       </p>
-      <p className="text-charcoal/60 mt-1 text-sm">{t("lineTotalNote")}</p>
 
       <button
         type="button"

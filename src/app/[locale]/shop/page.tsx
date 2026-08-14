@@ -12,7 +12,7 @@ import {
   resolvePageLocale,
   type LocaleParams,
 } from "@/lib/page";
-import { getEntryPrice } from "@/lib/pricing";
+import { getEntryPrice, getPackPrices } from "@/lib/pricing";
 import { configuredPacks, isStripeConfigured } from "@/lib/stripe";
 
 export const generateStaticParams = generateLocaleParams;
@@ -34,7 +34,9 @@ export default async function ShopPage({ params }: LocaleParams) {
   // exist that is none, and the page falls back to the teaser.
   const buyable = isStripeConfigured() ? configuredPacks() : [];
   const isOpen = buyable.length > 0;
-  const entryPrice = isOpen ? await getEntryPrice(locale) : null;
+  const [entryPrice, packPrices] = isOpen
+    ? await Promise.all([getEntryPrice(locale), getPackPrices()])
+    : [null, []];
 
   return (
     <>
@@ -64,7 +66,10 @@ export default async function ShopPage({ params }: LocaleParams) {
           <>
             <h2 className="text-h2">{t("packHeading")}</h2>
             <div className="mt-10">
-              <PackPicker packs={buyable.map((pack) => ({ ...pack }))} />
+              <PackPicker
+                packs={buyable.map((pack) => ({ ...pack }))}
+                prices={packPrices}
+              />
             </div>
             <p className="text-charcoal/60 mt-6 text-sm">
               {tCheckout("lineTotalNote")} {tCheckout("securePayment")}

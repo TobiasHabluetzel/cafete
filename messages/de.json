@@ -119,14 +119,18 @@
     "added": "Hinzugefügt",
     "quantity": "Menge",
     "remove": "Entfernen",
-    "lineTotalNote": "Preise und Versand werden im Checkout berechnet.",
+    "lineTotalNote": "Versandkosten werden im Checkout berechnet.",
     "goToCheckout": "Zur Kasse",
     "redirecting": "Weiterleitung zu Stripe …",
     "cartCount": "{count, plural, =0 {Warenkorb leer} =1 {# Artikel} other {# Artikel}}",
     "bottlesTotal": "{count, plural, =1 {# Flasche} other {# Flaschen}} total",
     "notConfigured": "Der Shop öffnet zum Launch am 19. September 2026. Bis dahin kannst du dich für den Newsletter anmelden.",
     "error": "Der Checkout konnte nicht gestartet werden. Versuch es später nochmals oder schreib uns an {email}.",
-    "securePayment": "Sichere Zahlung mit Karte oder TWINT über Stripe."
+    "securePayment": "Sichere Zahlung mit Karte oder TWINT über Stripe.",
+    "perBottle": "{price} pro Flasche",
+    "subtotal": "Zwischensumme",
+    "priceTbd": "Preis folgt",
+    "bestValue": "Bester Preis pro Flasche"
   },
   "event": {
     "label": "Save the date",

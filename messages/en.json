@@ -119,14 +119,18 @@
     "added": "Added",
     "quantity": "Quantity",
     "remove": "Remove",
-    "lineTotalNote": "Prices and shipping are calculated at checkout.",
+    "lineTotalNote": "Shipping is calculated at checkout.",
     "goToCheckout": "Checkout",
     "redirecting": "Redirecting to Stripe …",
     "cartCount": "{count, plural, =0 {Cart empty} =1 {# item} other {# items}}",
     "bottlesTotal": "{count, plural, =1 {# bottle} other {# bottles}} in total",
     "notConfigured": "The shop opens for the launch on 19 September 2026. Until then you can sign up for the newsletter.",
     "error": "Checkout could not be started. Please try again later or write to us at {email}.",
-    "securePayment": "Secure payment by card or TWINT via Stripe."
+    "securePayment": "Secure payment by card or TWINT via Stripe.",
+    "perBottle": "{price} per bottle",
+    "subtotal": "Subtotal",
+    "priceTbd": "Price to follow",
+    "bestValue": "Best per bottle"
   },
   "event": {
     "label": "Save the date",
