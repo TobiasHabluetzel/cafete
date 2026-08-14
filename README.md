@@ -12,7 +12,7 @@ coffee-fruit (cascara) refreshment. Bilingual (DE default / EN), Zurich-based.
 | i18n | next-intl 4 — `de` (default) / `en`, locale-prefixed + localized slugs |
 | Payments | Stripe Checkout (card + TWINT) — Phase 2 |
 | Email | Resend — Phase 2 |
-| Hosting | Vercel (region eu-central) |
+| Hosting | Railway (Docker, `output: "standalone"`) — EU West region |
 
 ## Getting started
 
@@ -82,6 +82,48 @@ See `.env.local.example`. Summary:
 | `STRIPE_WEBHOOK_SECRET` | 2 | From the Stripe webhook endpoint / `stripe listen` |
 | `STRIPE_PRICE_PACK_{1,6,12,24}` | 2 | Price IDs — never hardcode in source |
 | `RESEND_API_KEY`, `RESEND_FROM` | 2 | Order + RSVP confirmations |
+
+## Deploying to Railway
+
+The repo ships a multi-stage [`Dockerfile`](Dockerfile) and [`railway.json`](railway.json),
+so Railway builds from Docker rather than guessing via Nixpacks.
+
+**One-time setup**
+
+1. Railway → New Project → Deploy from GitHub repo → `TobiasHabluetzel/cafete`.
+   It picks up `railway.json` and builds the Dockerfile automatically.
+2. Set the region to **EU West** (project Settings → the service → Region) —
+   the audience is Swiss.
+3. Service → Settings → Networking → **Generate Domain** to get a
+   `*.up.railway.app` URL, then add `drink-cafete.ch` as a custom domain and
+   point the DNS CNAME at the value Railway shows.
+4. Variables (see the table above). `NEXT_PUBLIC_*` vars are inlined at
+   **build** time, so they are also declared as `ARG`s in the Dockerfile —
+   changing one requires a rebuild, not just a restart.
+
+**Things that will bite otherwise**
+
+- The container binds `HOSTNAME=0.0.0.0` and reads Railway's injected `PORT`.
+  Do **not** set `HOSTNAME` in Railway's variables — binding to localhost makes
+  the healthcheck fail and the container get killed.
+- Healthcheck path is `/api/health`. `/` returns a 307 to `/de`, so it is not a
+  valid healthcheck target.
+- Base image is Alpine (musl) on purpose: on glibc, `next/image` + `sharp` need
+  extra allocator tuning to avoid runaway memory. `sharp` is an explicit
+  dependency so the standalone trace includes it.
+- Railway serves the container directly with no CDN in front. Every page here
+  is prerendered, so it is fast enough — but if EU/CH latency or bandwidth cost
+  matters later, put Cloudflare in front of the custom domain.
+- ISR/data-cache lives in the container filesystem and is lost on redeploy. Not
+  an issue today (no revalidating fetches); revisit if a CMS is added.
+
+**Local verification of the production image**
+
+```bash
+docker build --build-arg NEXT_PUBLIC_SITE_URL=https://drink-cafete.ch -t cafete .
+docker run --rm -p 8099:8080 -e PORT=8080 cafete
+curl localhost:8099/api/health   # {"status":"ok"}
+```
 
 ## Build phases
 
