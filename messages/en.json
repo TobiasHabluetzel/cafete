@@ -28,6 +28,242 @@
     "ctaPrimary": "Order now — from CHF 24.90",
     "ctaSecondary": "Launch Event"
   },
+  "coffeeFruit": {
+    "label": "The coffee fruit",
+    "title": "The other half of coffee",
+    "intro": "The coffee bean isn’t a bean at all — it’s the seed of a fruit. Around it grows red pulp with a character all its own. That’s exactly what CAFÉTÉ puts at the centre.",
+    "tasteTitle": "What does CAFÉTÉ taste like?",
+    "tasteBody": "Fruity notes, a delicate natural sweetness and a gentle acidity define the taste. The finish recalls red berries and rosehip — not classic coffee.",
+    "traditionTitle": "Valued for generations",
+    "traditionBody": "An infusion of dried coffee fruit has been enjoyed for generations across coffee-growing regions. CAFÉTÉ carries on that tradition and brings it into a new form.",
+    "originTitle": "Origin",
+    "originBody": "Our coffee fruit comes from Brazil, a country with centuries of coffee tradition."
+  },
+  "project": {
+    "label": "The product",
+    "title": "The project",
+    "body": "CAFÉTÉ is a sparkling drink based on the coffee fruit. Its base is a real infusion of dried coffee fruit — no extract, no flavouring. Added to that: cranberry and elderberry juice, a little beet sugar and carbonation. Bottled in a 33 cl glass bottle, pasteurised, developed and produced in Switzerland."
+  },
+  "pillars": {
+    "label": "Why CAFÉTÉ",
+    "title": "The four pillars of CAFÉTÉ",
+    "functional": {
+      "title": "Functional",
+      "body": "For active moments in everyday life — at the office, on the go or during sport. Sparkling, refreshing, with natural caffeine from the coffee fruit. At 4.5 g of sugar per 100 ml, CAFÉTÉ has over 50 % less sugar than conventional soft drinks."
+    },
+    "social": {
+      "title": "Social",
+      "body": "Around 10 million tonnes of coffee beans are produced worldwide each year — and with them a correspondingly huge amount of coffee fruit. Using it creates value from a part of the harvest that until now brought little return and could mostly only be used locally."
+    },
+    "ecological": {
+      "title": "Ecological",
+      "body": "Every drink needs a raw material — and almost every raw material needs land. The coffee fruit doesn’t: it grows anyway, about 2.0–2.3 kg per kilogram of coffee beans. For CAFÉTÉ, no additional land is planted, irrigated or fertilised. We work with what is already there."
+    },
+    "economic": {
+      "title": "Economic",
+      "body": "The coffee fruit is still often underestimated. CAFÉTÉ turns it into a premium drink — and shows that this raw material holds a market of its own."
+    }
+  },
+  "story": {
+    "label": "Our story",
+    "title": "How it all began",
+    "p1": "CAFÉTÉ began three years ago in a claro shop, where Kareem — one of the two founders — spotted a large glass jar full of dried, reddish fruit. He couldn’t say what it was. When he asked, he learned: it’s part of the coffee plant. His curiosity was sparked — and since hardly anyone asked about it back then, he was given a handful to try.",
+    "p2": "At home he brewed his first infusion from it: fruity, slightly tart and surprisingly distinct. The more Kareem learned about the coffee fruit, the clearer it became that there was far more to it.",
+    "p3": "Three years later, a handful of coffee fruit became CAFÉTÉ."
+  },
+  "vision": {
+    "label": "The vision",
+    "title": "A category of its own",
+    "body": "CAFÉTÉ wants to establish the coffee fruit as a category of its own in Switzerland — not a niche product for connoisseurs, but a fixture on the shelf. We believe the coffee fruit deserves more attention. With CAFÉTÉ, we make a raw material rich in tradition experienceable in a new way."
+  },
+  "founders": {
+    "label": "The founders",
+    "title": "Behind CAFÉTÉ",
+    "kareem": {
+      "name": "Kareem Oueini",
+      "role": "Recipe & product",
+      "bio": "Kareem Oueini is a trained chef and food craftsman by passion. He has worked in hospitality for 16 years, developing a fine instinct for taste, balance and quality. He brings that experience to CAFÉTÉ — especially in recipe development, where the interplay of aromas, sweetness, acidity and structure is decisive. A nature-loving and sporty person, he has also long been interested in nutrition, hydration and the quality of what we put into our bodies."
+    },
+    "hannes": {
+      "name": "Hannes-Valentin Juon",
+      "role": "Commercial & operations",
+      "bio": "Through his qualification as a Technical Business Specialist (Technischer Kaufmann FA), Hannes-Valentin Juon has a solid grounding in business and a practical feel for numbers and commercial context. At CAFÉTÉ he handles the commercial side: financial planning, pricing and — together with Kareem — the company’s overall direction. He is also interested in digitalisation and operations, and wants to build CAFÉTÉ step by step into a stable, locally rooted company."
+    }
+  },
+  "shopTeaser": {
+    "label": "Shop",
+    "title": "Get your CAFÉTÉ",
+    "body": "33 cl glass bottle, pasteurised, naturally caffeinated. Available as a single bottle or by the pack — shipping within Switzerland.",
+    "packLabel": "Pack size",
+    "cta": "Go to shop",
+    "fromPrice": "from CHF 24.90"
+  },
+  "packs": {
+    "bottles": "{count, plural, =1 {# bottle} other {# bottles}}",
+    "single": "Single bottle",
+    "six": "6-pack",
+    "twelve": "12-pack",
+    "twentyfour": "24-pack"
+  },
+  "event": {
+    "label": "Save the date",
+    "title": "CAFÉTÉ Launch Event",
+    "dateLine": "Saturday, 19 September 2026",
+    "timeLine": "13:00 – 17:00",
+    "venue": "Restaurant Osso",
+    "address": "Zollstrasse 121, 8005 Zürich",
+    "body": "We’re celebrating the launch of CAFÉTÉ — with a tasting, both founders, and the story behind the coffee fruit. Entry is free; a quick heads-up that you’re coming is appreciated.",
+    "addToCalendar": "Add to calendar",
+    "openMap": "Open in maps",
+    "rsvpTitle": "RSVP",
+    "rsvpIntro": "So we know how many bottles to chill.",
+    "rsvpName": "Name",
+    "rsvpEmail": "Email",
+    "rsvpGuests": "Number of people",
+    "rsvpMessage": "Message (optional)",
+    "rsvpSubmit": "Sign up",
+    "rsvpSending": "Sending …",
+    "rsvpSuccess": "Thank you! Your RSVP has reached us.",
+    "rsvpError": "That didn’t work, sorry. Email us at {email} and we’ll add you to the list."
+  },
+  "product": {
+    "label": "Sparkling · Naturally energizing",
+    "title": "CAFÉTÉ",
+    "subtitle": "Sparkling refreshment with an infusion of dried coffee cherry pulp (cascara from Brazil), pasteurised.",
+    "volumeLabel": "Volume",
+    "volumeValue": "33 cl single-use glass bottle, recyclable",
+    "extractLabel": "Extract content",
+    "extractValue": "min. 2.8 g/L. Naturally contains caffeine.",
+    "storageLabel": "Storage",
+    "storageValue": "Store cool and dark. Produced in Switzerland.",
+    "ingredientsTitle": "Ingredients",
+    "ingredientsValue": "Water, infusion of dried coffee cherry pulp (water, dried coffee cherry pulp), cranberry juice (5.0 %), beet sugar, elderberry juice (1.0 %), carbon dioxide, acidifier: citric acid, antioxidant: ascorbic acid.",
+    "nutritionTitle": "Nutrition per 100 ml",
+    "nutritionHeadNutrient": "Nutrient",
+    "nutritionHeadValue": "Per 100 ml",
+    "nutrition": [
+      { "nutrient": "Energy", "value": "84.2 kJ / 20.3 kcal" },
+      { "nutrient": "Fat", "value": "< 0.5 g" },
+      { "nutrient": "of which saturates", "value": "0.0 g" },
+      { "nutrient": "Carbohydrate", "value": "4.5 g" },
+      { "nutrient": "of which sugars", "value": "4.5 g" },
+      { "nutrient": "Protein", "value": "< 0.5 g" },
+      { "nutrient": "Salt", "value": "0.0 g" }
+    ],
+    "taglineLabel": "On the label",
+    "taglineValue": "Fruity. Fizzy. Light."
+  },
+  "shop": {
+    "title": "Shop",
+    "intro": "The online shop opens for the launch on 19 September 2026. Sign up for the newsletter and you’ll be the first to know.",
+    "packHeading": "Pack sizes",
+    "packBody": "CAFÉTÉ comes as a single bottle and in 6, 12 and 24-bottle packs. Entry price from CHF 24.90.",
+    "notifyCta": "See the launch event",
+    "priceTbd": "Price to follow"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is still empty. The shop opens for the launch on 19 September 2026.",
+    "continue": "Continue to the shop"
+  },
+  "faq": {
+    "label": "Frequently asked",
+    "title": "FAQ",
+    "items": [
+      {
+        "q": "What is the coffee fruit — and does CAFÉTÉ taste like coffee?",
+        "a": "The coffee bean is the seed of a fruit. The red pulp around it is called cascara. CAFÉTÉ is made from a real infusion of that dried fruit, so it doesn’t taste like coffee but fruity — the finish leans towards red berries and rosehip."
+      },
+      {
+        "q": "How much caffeine does CAFÉTÉ contain?",
+        "a": "CAFÉTÉ naturally contains caffeine from the coffee fruit. We’ll add the exact figure per 100 ml here as soon as the lab analysis is finally confirmed."
+      },
+      {
+        "q": "How much sugar is in it?",
+        "a": "4.5 g of sugar per 100 ml — over 50 % less than conventional soft drinks. The only sweetening comes from a little beet sugar plus the natural sugars in cranberry and elderberry juice."
+      },
+      {
+        "q": "Is CAFÉTÉ vegan?",
+        "a": "Yes. CAFÉTÉ contains only plant-based ingredients."
+      },
+      {
+        "q": "How should I store it?",
+        "a": "Cool and dark. CAFÉTÉ is at its best well chilled — that’s when the fruit notes and the carbonation come through most clearly."
+      },
+      {
+        "q": "Where do you ship, and what does it cost?",
+        "a": "At launch we ship within Switzerland. Shipping rates and the free-shipping threshold will be announced when the shop opens."
+      },
+      {
+        "q": "Can I return or exchange an order?",
+        "a": "Yes. You’ll find the details on the Returns page. If a bottle arrives damaged, just let us know — we’ll replace it."
+      },
+      {
+        "q": "Is CAFÉTÉ available in bars, restaurants or shops?",
+        "a": "We’re building out distribution. If you’re a venue or retailer and interested, write to us at {email}."
+      }
+    ]
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "Get in touch",
+    "intro": "Questions about the product, interest as a retailer or venue, or simply saying hello — we’re happy to reply.",
+    "emailLabel": "Email",
+    "producerLabel": "A product by",
+    "bottlerLabel": "Bottled by",
+    "eventLabel": "Meet us",
+    "eventValue": "At the launch event on 19 September 2026 at Restaurant Osso, Zürich."
+  },
+  "legal": {
+    "placeholderTitle": "Placeholder — not yet legally binding",
+    "placeholderBody": "This text is a placeholder and must be replaced with a reviewed version before publication.",
+    "imprint": {
+      "title": "Imprint",
+      "responsibleHeading": "Responsible for the content",
+      "bottlerHeading": "Bottled by",
+      "contactHeading": "Contact",
+      "uidHeading": "Commercial register / UID",
+      "uidBody": "Company name and UID will be added before publication.",
+      "disclaimerHeading": "Disclaimer",
+      "disclaimerBody": "The content of this website is compiled with care. We cannot, however, guarantee its accuracy, completeness or timeliness."
+    },
+    "terms": {
+      "title": "Terms and conditions",
+      "sections": [
+        { "heading": "1. Scope", "body": "These terms apply to all orders placed through this online shop." },
+        { "heading": "2. Prices", "body": "All prices are in Swiss francs and include statutory VAT. Shipping costs are shown separately at checkout." },
+        { "heading": "3. Delivery", "body": "We deliver within Switzerland. Details on delivery times and shipping costs follow when the shop opens." },
+        { "heading": "4. Payment", "body": "Payment is processed by Stripe, by card or TWINT." },
+        { "heading": "5. Withdrawal", "body": "The return policy described on the Returns page applies." },
+        { "heading": "6. Warranty", "body": "If a shipment arrives damaged or incomplete, contact us within 14 days and we will replace the affected goods." }
+      ]
+    },
+    "privacy": {
+      "title": "Privacy policy",
+      "sections": [
+        { "heading": "Controller", "body": "The controller for data processing is CAFÉTÉ, Neugasse 33, 8005 Zürich. Send privacy enquiries to info@drink-cafete.ch." },
+        { "heading": "What data we process", "body": "We process data you actively provide: name and email address when signing up for the newsletter or the event, plus order and delivery details when you buy." },
+        { "heading": "Purpose", "body": "We use this data solely to fulfil your order, answer your enquiry, or — with your consent — send you news about CAFÉTÉ." },
+        { "heading": "Processors", "body": "We use Stripe for payments, Resend for email, and our hosting provider to run the website. These services process data on our behalf." },
+        { "heading": "Analytics", "body": "We use privacy-friendly, cookie-free analytics and do not build personal profiles." },
+        { "heading": "Your rights", "body": "You have the right to access, correct and delete your data, and to withdraw consent at any time. The revised Swiss Data Protection Act (revFADP) applies." }
+      ]
+    },
+    "returns": {
+      "title": "Returns and withdrawal",
+      "sections": [
+        { "heading": "Right of return", "body": "You may return unopened goods within 14 days of receipt. Please let us know by email before sending anything back." },
+        { "heading": "Foodstuffs", "body": "For hygiene reasons we cannot accept opened bottles." },
+        { "heading": "Damaged shipments", "body": "If a bottle arrives damaged, send us a photo — we’ll replace it or refund you, with no need to return it." },
+        { "heading": "Refunds", "body": "Refunds are issued to the original payment method, usually within ten working days of the return arriving." }
+      ]
+    }
+  },
+  "notFound": {
+    "title": "This page doesn’t exist",
+    "body": "The page you were looking for has moved or never existed. Head back to the start — something fizzy is waiting.",
+    "cta": "Back to home"
+  },
   "footer": {
     "tagline": "Developed and bottled in Switzerland. Made from the coffee fruit. Naturally caffeinated.",
     "shopHeading": "Shop",
@@ -43,12 +279,9 @@
     "newsletterPlaceholder": "you@email.com",
     "newsletterLabel": "Email address",
     "newsletterSubmit": "Sign up",
+    "newsletterSuccess": "Thank you! You’re on the list.",
+    "newsletterError": "That didn’t work. Email us at {email}.",
     "copyright": "© {year} CAFÉTÉ. All rights reserved."
-  },
-  "notFound": {
-    "title": "This page doesn't exist",
-    "body": "The page you were looking for has moved or never existed. Head back to the start — something fizzy is waiting.",
-    "cta": "Back to home"
   },
   "common": {
     "loading": "Loading …",

@@ -28,6 +28,242 @@
     "ctaPrimary": "Jetzt bestellen — ab CHF 24.90",
     "ctaSecondary": "Launch Event"
   },
+  "coffeeFruit": {
+    "label": "Die Kaffeefrucht",
+    "title": "Die andere Hälfte des Kaffees",
+    "intro": "Die Kaffeebohne ist keine Bohne, sondern der Kern einer Frucht. Um sie herum wächst rotes Fruchtfleisch mit eigenem Charakter. Genau das steht bei CAFÉTÉ im Mittelpunkt.",
+    "tasteTitle": "Wie schmeckt CAFÉTÉ?",
+    "tasteBody": "Fruchtige Noten, eine feine natürliche Süsse und eine dezente Säure prägen den Geschmack. Im Abgang erinnert CAFÉTÉ an rote Beeren und Hagebutte — nicht an klassischen Kaffee.",
+    "traditionTitle": "Seit Generationen geschätzt",
+    "traditionBody": "Ein Aufguss aus getrockneten Kaffeefrüchten wird in verschiedenen Kaffeeanbauregionen seit Generationen getrunken. CAFÉTÉ knüpft an diese Tradition an und bringt sie in eine neue Form.",
+    "originTitle": "Herkunft",
+    "originBody": "Unsere Kaffeefrucht stammt aus Brasilien, einem Land mit einer jahrhundertelangen Kaffeetradition."
+  },
+  "project": {
+    "label": "Das Produkt",
+    "title": "Das Projekt",
+    "body": "CAFÉTÉ ist ein kohlensäurehaltiges Getränk auf Basis der Kaffeefrucht. Grundlage ist ein echter Aufguss aus getrockneten Kaffeefrüchten — kein Extrakt und kein Aroma. Dazu kommen Cranberry- und Holundersaft, etwas Rübenzucker und Kohlensäure. Abgefüllt in der 33-cl-Glasflasche, pasteurisiert, entwickelt und produziert in der Schweiz."
+  },
+  "pillars": {
+    "label": "Warum CAFÉTÉ",
+    "title": "Die vier Säulen von CAFÉTÉ",
+    "functional": {
+      "title": "Funktional",
+      "body": "Für aktive Momente im Alltag — im Büro, unterwegs oder beim Sport. Prickelnd, erfrischend und mit natürlichem Koffein aus der Kaffeefrucht. Mit 4,5 g Zucker pro 100 ml enthält CAFÉTÉ über 50 % weniger Zucker als herkömmliche Softdrinks."
+    },
+    "social": {
+      "title": "Sozial",
+      "body": "Weltweit werden jährlich rund 10 Millionen Tonnen Kaffeebohnen produziert. Entsprechend gross ist die Menge an Kaffeefrüchten, welche dabei anfällt. Ihre Verwertung schafft Wertschöpfung aus einem Teil der Ernte, der bisher kaum Erlös brachte und meist nur lokal genutzt werden konnte."
+    },
+    "ecological": {
+      "title": "Ökologisch",
+      "body": "Jedes Getränk braucht einen Rohstoff — und fast jeder Rohstoff braucht Anbaufläche. Die Kaffeefrucht nicht: Sie wächst ohnehin, pro Kilogramm Kaffeebohnen rund 2,0–2,3 kg. Für CAFÉTÉ wird keine zusätzliche Fläche bepflanzt, bewässert oder gedüngt. Wir arbeiten mit dem, was bereits da ist."
+    },
+    "economic": {
+      "title": "Ökonomisch",
+      "body": "Die Kaffeefrucht wird bis heute häufig unterschätzt. CAFÉTÉ macht aus ihr ein hochwertiges Getränk — und zeigt, dass in diesem Rohstoff ein eigener Markt steckt."
+    }
+  },
+  "story": {
+    "label": "Unsere Geschichte",
+    "title": "Wie alles begann",
+    "p1": "Angefangen hat CAFÉTÉ vor drei Jahren in einem claro-Laden. Dort entdeckte Kareem, einer der beiden Gründer, einen grossen Glasbehälter voll getrockneter, rötlicher Früchte. Was das war, konnte er nicht sagen. Auf Nachfrage erfuhr er: ein Teil der Kaffeepflanze. Das Interesse war geweckt — und weil damals kaum jemand danach fragte, bekam er eine Handvoll zum Probieren geschenkt.",
+    "p2": "Zuhause bereitete er daraus seinen ersten Aufguss zu: fruchtig, leicht säuerlich und überraschend eigenständig. Je mehr Kareem über die Kaffeefrucht lernte, desto klarer wurde ihm, dass in dieser Frucht weit mehr steckt.",
+    "p3": "Drei Jahre später wurde aus einer Handvoll Kaffeefrüchten CAFÉTÉ."
+  },
+  "vision": {
+    "label": "Die Vision",
+    "title": "Eine eigene Getränkekategorie",
+    "body": "CAFÉTÉ möchte die Kaffeefrucht als eigenständige Getränkekategorie in der Schweiz etablieren. Nicht als Nischenprodukt für Kenner, sondern als feste Grösse im Getränkeregal. Wir glauben, dass die Kaffeefrucht mehr Aufmerksamkeit verdient. Mit CAFÉTÉ machen wir einen traditionsreichen Rohstoff auf eine neue Art erlebbar."
+  },
+  "founders": {
+    "label": "Die Gründer",
+    "title": "Hinter CAFÉTÉ",
+    "kareem": {
+      "name": "Kareem Oueini",
+      "role": "Rezeptur & Produkt",
+      "bio": "Kareem Oueini ist gelernter Koch und Lebensmittelveredler aus Leidenschaft. Seit 16 Jahren arbeitet er in der Gastronomie und hat dabei ein ausgeprägtes Feingefühl für Geschmack, Balance und Qualität entwickelt. Diese Erfahrung bringt er auch in das Projekt CAFÉTÉ ein — insbesondere bei der Rezeptentwicklung, wo das Zusammenspiel von Aromen, Süsse, Säure und Struktur entscheidend ist. Als naturverbundener und sportlicher Mensch beschäftigt er sich zudem seit längerem mit der Bedeutung von Ernährung, Hydration und der Qualität dessen, was wir unserem Körper zuführen."
+    },
+    "hannes": {
+      "name": "Hannes-Valentin Juon",
+      "role": "Kaufmännisches & Aufbau",
+      "bio": "Hannes-Valentin Juon hat durch seine Weiterbildung zum Technischen Kaufmann FA gute betriebswirtschaftliche Grundlagen und ein praktisches Gespür für Zahlen und wirtschaftliche Zusammenhänge. Bei CAFÉTÉ ist er zuständig für die kaufmännische Seite: Finanzplanung, Preisgestaltung und zusammen mit Kareem für die generelle Ausrichtung des Unternehmens. Er interessiert sich zudem für Digitalisierung und Betriebsorganisation und möchte CAFÉTÉ Schritt für Schritt zu einem stabilen, lokal verankerten Unternehmen aufbauen."
+    }
+  },
+  "shopTeaser": {
+    "label": "Shop",
+    "title": "Hol dir dein CAFÉTÉ",
+    "body": "33 cl Glasflasche, pasteurisiert, natürlich koffeinhaltig. Erhältlich als Einzelflasche oder im Vorratspack — Versand innerhalb der Schweiz.",
+    "packLabel": "Packungsgrösse",
+    "cta": "Zum Shop",
+    "fromPrice": "ab CHF 24.90"
+  },
+  "packs": {
+    "bottles": "{count, plural, =1 {# Flasche} other {# Flaschen}}",
+    "single": "Einzelflasche",
+    "six": "6er-Pack",
+    "twelve": "12er-Pack",
+    "twentyfour": "24er-Pack"
+  },
+  "event": {
+    "label": "Save the date",
+    "title": "CAFÉTÉ Launch Event",
+    "dateLine": "Samstag, 19. September 2026",
+    "timeLine": "13:00 – 17:00 Uhr",
+    "venue": "Restaurant Osso",
+    "address": "Zollstrasse 121, 8005 Zürich",
+    "body": "Wir feiern den Launch von CAFÉTÉ — mit Degustation, den Gründern und der Geschichte hinter der Kaffeefrucht. Der Eintritt ist frei, wir freuen uns über eine kurze Anmeldung.",
+    "addToCalendar": "Zum Kalender hinzufügen",
+    "openMap": "Auf der Karte öffnen",
+    "rsvpTitle": "Anmeldung",
+    "rsvpIntro": "Damit wir genug Flaschen kühl stellen.",
+    "rsvpName": "Name",
+    "rsvpEmail": "E-Mail",
+    "rsvpGuests": "Anzahl Personen",
+    "rsvpMessage": "Nachricht (optional)",
+    "rsvpSubmit": "Anmelden",
+    "rsvpSending": "Wird gesendet …",
+    "rsvpSuccess": "Danke! Deine Anmeldung ist bei uns eingetroffen.",
+    "rsvpError": "Das hat leider nicht funktioniert. Schreib uns direkt an {email} — wir nehmen dich gerne auf die Liste."
+  },
+  "product": {
+    "label": "Sparkling · Naturally energizing",
+    "title": "CAFÉTÉ",
+    "subtitle": "Kohlensäurehaltiges Erfrischungsgetränk mit Aufguss aus getrockneter Pulpe der Kaffeekirsche (Cascara aus Brasilien), pasteurisiert.",
+    "volumeLabel": "Inhalt",
+    "volumeValue": "33 cl Einweg-Glasflasche, recycelbar",
+    "extractLabel": "Extraktgehalt",
+    "extractValue": "mind. 2,8 g/L. Enthält natürlicherweise Koffein.",
+    "storageLabel": "Lagerung",
+    "storageValue": "Kühl und dunkel lagern. Hergestellt in der Schweiz.",
+    "ingredientsTitle": "Zutaten",
+    "ingredientsValue": "Wasser, Aufguss aus getrockneter Pulpe der Kaffeekirsche (Wasser, getrocknete Pulpe der Kaffeekirsche), Cranberrysaft (5,0 %), Rübenzucker, Holundersaft (1,0 %), Kohlensäure, Säuerungsmittel: Zitronensäure, Antioxidationsmittel: Ascorbinsäure.",
+    "nutritionTitle": "Nährwerte pro 100 ml",
+    "nutritionHeadNutrient": "Nährwert",
+    "nutritionHeadValue": "Pro 100 ml",
+    "nutrition": [
+      { "nutrient": "Energie", "value": "84,2 kJ / 20,3 kcal" },
+      { "nutrient": "Fett", "value": "< 0,5 g" },
+      { "nutrient": "davon gesättigte Fettsäuren", "value": "0,0 g" },
+      { "nutrient": "Kohlenhydrate", "value": "4,5 g" },
+      { "nutrient": "davon Zucker", "value": "4,5 g" },
+      { "nutrient": "Eiweiss", "value": "< 0,5 g" },
+      { "nutrient": "Salz", "value": "0,0 g" }
+    ],
+    "taglineLabel": "Auf dem Etikett",
+    "taglineValue": "Fruchtig. Spritzig. Leicht."
+  },
+  "shop": {
+    "title": "Shop",
+    "intro": "Der Onlineshop öffnet zum Launch am 19. September 2026. Melde dich für den Newsletter an und du erfährst es als Erste oder Erster.",
+    "packHeading": "Packungsgrössen",
+    "packBody": "CAFÉTÉ gibt es als Einzelflasche sowie im 6er-, 12er- und 24er-Pack. Einstiegspreis ab CHF 24.90.",
+    "notifyCta": "Zum Launch Event",
+    "priceTbd": "Preis folgt"
+  },
+  "cart": {
+    "title": "Warenkorb",
+    "empty": "Dein Warenkorb ist noch leer. Der Shop öffnet zum Launch am 19. September 2026.",
+    "continue": "Weiter zum Shop"
+  },
+  "faq": {
+    "label": "Häufige Fragen",
+    "title": "FAQ",
+    "items": [
+      {
+        "q": "Was ist die Kaffeefrucht — und schmeckt CAFÉTÉ nach Kaffee?",
+        "a": "Die Kaffeebohne ist der Kern einer Frucht. Das rote Fruchtfleisch darum herum nennt man Cascara. CAFÉTÉ wird aus einem echten Aufguss dieser getrockneten Frucht gemacht und schmeckt entsprechend nicht nach Kaffee, sondern fruchtig — im Abgang eher nach roten Beeren und Hagebutte."
+      },
+      {
+        "q": "Wie viel Koffein enthält CAFÉTÉ?",
+        "a": "CAFÉTÉ enthält natürlicherweise Koffein aus der Kaffeefrucht. Den exakten Wert pro 100 ml ergänzen wir hier, sobald die Laboranalyse final bestätigt ist."
+      },
+      {
+        "q": "Wie viel Zucker ist drin?",
+        "a": "4,5 g Zucker pro 100 ml — über 50 % weniger als herkömmliche Softdrinks. Gesüsst wird ausschliesslich mit etwas Rübenzucker sowie dem natürlichen Zucker aus Cranberry- und Holundersaft."
+      },
+      {
+        "q": "Ist CAFÉTÉ vegan?",
+        "a": "Ja. CAFÉTÉ enthält ausschliesslich pflanzliche Zutaten."
+      },
+      {
+        "q": "Wie soll ich CAFÉTÉ lagern?",
+        "a": "Kühl und dunkel. Gut gekühlt schmeckt CAFÉTÉ am besten — die Fruchtnoten und die Kohlensäure kommen dann am klarsten zur Geltung."
+      },
+      {
+        "q": "Wohin liefert ihr, und was kostet der Versand?",
+        "a": "Zum Start liefern wir innerhalb der Schweiz. Versandkosten und die Schwelle für kostenlosen Versand geben wir mit der Shop-Eröffnung bekannt."
+      },
+      {
+        "q": "Kann ich zurückgeben oder umtauschen?",
+        "a": "Ja. Die Details zum Widerrufsrecht findest du auf der Seite Widerruf. Falls eine Flasche beschädigt ankommt, melde dich einfach — wir ersetzen sie."
+      },
+      {
+        "q": "Gibt es CAFÉTÉ auch in der Gastronomie oder im Laden?",
+        "a": "Wir sind dabei, den Vertrieb aufzubauen. Bei Interesse als Gastronomiebetrieb oder Händler: schreib uns an {email}."
+      }
+    ]
+  },
+  "contact": {
+    "label": "Kontakt",
+    "title": "Schreib uns",
+    "intro": "Fragen zum Produkt, Interesse als Händler oder Gastronomiebetrieb, oder einfach Lust, Hallo zu sagen — wir antworten gerne.",
+    "emailLabel": "E-Mail",
+    "producerLabel": "Ein Produkt von",
+    "bottlerLabel": "Abgefüllt von",
+    "eventLabel": "Trefft uns",
+    "eventValue": "Am Launch Event vom 19. September 2026 im Restaurant Osso, Zürich."
+  },
+  "legal": {
+    "placeholderTitle": "Platzhalter — noch nicht rechtsverbindlich",
+    "placeholderBody": "Dieser Text ist ein Platzhalter und muss vor der Veröffentlichung durch eine geprüfte Fassung ersetzt werden.",
+    "imprint": {
+      "title": "Impressum",
+      "responsibleHeading": "Verantwortlich für den Inhalt",
+      "bottlerHeading": "Abgefüllt von",
+      "contactHeading": "Kontakt",
+      "uidHeading": "Handelsregister / UID",
+      "uidBody": "Firmenname und UID werden vor der Veröffentlichung ergänzt.",
+      "disclaimerHeading": "Haftungsausschluss",
+      "disclaimerBody": "Die Inhalte dieser Website werden mit Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen."
+    },
+    "terms": {
+      "title": "Allgemeine Geschäftsbedingungen",
+      "sections": [
+        { "heading": "1. Geltungsbereich", "body": "Diese Bedingungen gelten für alle Bestellungen über diesen Onlineshop." },
+        { "heading": "2. Preise", "body": "Alle Preise sind in Schweizer Franken und verstehen sich inklusive der gesetzlichen Mehrwertsteuer. Versandkosten werden im Checkout separat ausgewiesen." },
+        { "heading": "3. Lieferung", "body": "Die Lieferung erfolgt innerhalb der Schweiz. Angaben zu Lieferfristen und Versandkosten folgen mit der Shop-Eröffnung." },
+        { "heading": "4. Zahlung", "body": "Die Zahlung erfolgt über den Zahlungsdienstleister Stripe per Karte oder TWINT." },
+        { "heading": "5. Widerruf", "body": "Es gilt das auf der Seite Widerruf beschriebene Rückgaberecht." },
+        { "heading": "6. Gewährleistung", "body": "Bei beschädigt oder unvollständig eintreffenden Sendungen melde dich innerhalb von 14 Tagen; wir ersetzen die betroffene Ware." }
+      ]
+    },
+    "privacy": {
+      "title": "Datenschutzerklärung",
+      "sections": [
+        { "heading": "Verantwortliche Stelle", "body": "Verantwortlich für die Datenbearbeitung ist CAFÉTÉ, Neugasse 33, 8005 Zürich. Anfragen zum Datenschutz richtest du an info@drink-cafete.ch." },
+        { "heading": "Welche Daten wir bearbeiten", "body": "Wir bearbeiten Daten, die du uns aktiv übermittelst: Name und E-Mail-Adresse bei der Newsletter-Anmeldung oder der Event-Anmeldung, sowie Bestell- und Lieferdaten bei einem Kauf." },
+        { "heading": "Zweck", "body": "Wir verwenden diese Daten ausschliesslich, um deine Bestellung abzuwickeln, deine Anfrage zu beantworten oder dir — mit deiner Einwilligung — Neuigkeiten zu CAFÉTÉ zu senden." },
+        { "heading": "Auftragsbearbeiter", "body": "Für Zahlungen nutzen wir Stripe, für E-Mails Resend und für den Betrieb der Website unseren Hosting-Anbieter. Diese Dienste bearbeiten Daten in unserem Auftrag." },
+        { "heading": "Analyse", "body": "Wir setzen datenschutzfreundliche, cookiefreie Statistik ein und erstellen keine personenbezogenen Profile." },
+        { "heading": "Deine Rechte", "body": "Du hast das Recht auf Auskunft, Berichtigung und Löschung deiner Daten sowie darauf, eine Einwilligung jederzeit zu widerrufen. Es gilt das revidierte Schweizer Datenschutzgesetz (revDSG)." }
+      ]
+    },
+    "returns": {
+      "title": "Widerruf und Rückgabe",
+      "sections": [
+        { "heading": "Rückgaberecht", "body": "Du kannst ungeöffnete Ware innerhalb von 14 Tagen nach Erhalt zurückgeben. Melde die Rückgabe vorher kurz per E-Mail an." },
+        { "heading": "Lebensmittel", "body": "Geöffnete Flaschen können wir aus hygienischen Gründen nicht zurücknehmen." },
+        { "heading": "Beschädigte Sendung", "body": "Kommt eine Flasche beschädigt an, schicke uns ein Foto — wir ersetzen sie oder erstatten den Betrag, ohne Rücksendung." },
+        { "heading": "Rückerstattung", "body": "Die Rückerstattung erfolgt über das ursprüngliche Zahlungsmittel, in der Regel innerhalb von zehn Arbeitstagen nach Eingang der Rückgabe." }
+      ]
+    }
+  },
+  "notFound": {
+    "title": "Diese Seite gibt es nicht",
+    "body": "Die gesuchte Seite wurde verschoben oder existiert nicht. Zurück zum Start — dort wartet etwas Prickelndes.",
+    "cta": "Zur Startseite"
+  },
   "footer": {
     "tagline": "Entwickelt und abgefüllt in der Schweiz. Hergestellt aus der Kaffeefrucht. Natürlich koffeinhaltig.",
     "shopHeading": "Shop",
@@ -43,12 +279,9 @@
     "newsletterPlaceholder": "deine@email.ch",
     "newsletterLabel": "E-Mail-Adresse",
     "newsletterSubmit": "Anmelden",
+    "newsletterSuccess": "Danke! Du bist auf der Liste.",
+    "newsletterError": "Das hat nicht funktioniert. Schreib uns an {email}.",
     "copyright": "© {year} CAFÉTÉ. Alle Rechte vorbehalten."
-  },
-  "notFound": {
-    "title": "Diese Seite gibt es nicht",
-    "body": "Die gesuchte Seite wurde verschoben oder existiert nicht. Zurück zum Start — dort wartet etwas Prickelndes.",
-    "cta": "Zur Startseite"
   },
   "common": {
     "loading": "Wird geladen …",

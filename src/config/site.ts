@@ -51,6 +51,20 @@ export const launchEvent = {
   city: "8005 Zürich",
 } as const;
 
+/**
+ * Pack sizes. `stripePriceEnv` names the env var holding the Stripe Price ID —
+ * Phase 2 resolves it server-side. Prices are deliberately absent: Stripe is the
+ * source of truth and the per-pack pricing is still to be confirmed.
+ */
+export const packSizes = [
+  { bottles: 1, labelKey: "single", stripePriceEnv: "STRIPE_PRICE_PACK_1" },
+  { bottles: 6, labelKey: "six", stripePriceEnv: "STRIPE_PRICE_PACK_6" },
+  { bottles: 12, labelKey: "twelve", stripePriceEnv: "STRIPE_PRICE_PACK_12" },
+  { bottles: 24, labelKey: "twentyfour", stripePriceEnv: "STRIPE_PRICE_PACK_24" },
+] as const;
+
+export type PackSize = (typeof packSizes)[number];
+
 type NavItem = { href: StaticPathname; labelKey: string };
 
 export const mainNav: NavItem[] = [
