@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 
-import { site } from "@/config/site";
 import { getPathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { resolveRequestOrigin } from "@/lib/request-origin";
 import {
   getStripe,
   isStripeConfigured,
@@ -66,7 +66,10 @@ export async function POST(request: Request) {
   }
 
   // Build locale-correct return URLs from the slug map, so /en lands on /en/order.
-  const origin = new URL(request.url).origin || site.url;
+  // The origin must come from the forwarded headers, not request.url: behind
+  // Railway's proxy the latter is the container's own 0.0.0.0:8080 bind address,
+  // which sent the post-payment redirect to a dead host.
+  const origin = resolveRequestOrigin(request);
   const successPath = getPathname({
     locale,
     href: { pathname: "/bestellung/[id]", params: { id: "SESSION_ID" } },
