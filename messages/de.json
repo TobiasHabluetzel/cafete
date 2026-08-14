@@ -102,14 +102,13 @@
   "shopTeaser": {
     "label": "Shop",
     "title": "Hol dir dein CAFÉTÉ",
-    "body": "33 cl Glasflasche, pasteurisiert, natürlich koffeinhaltig. Erhältlich als Einzelflasche oder im Vorratspack — Versand innerhalb der Schweiz.",
+    "body": "33 cl Glasflasche, pasteurisiert, natürlich koffeinhaltig. Erhältlich im 6er-, 12er- und 24er-Pack — Versand innerhalb der Schweiz.",
     "packLabel": "Packungsgrösse",
     "cta": "Zum Shop",
     "fromPrice": "ab CHF 24.90"
   },
   "packs": {
     "bottles": "{count, plural, =1 {# Flasche} other {# Flaschen}}",
-    "single": "Einzelflasche",
     "six": "6er-Pack",
     "twelve": "12er-Pack",
     "twentyfour": "24er-Pack"
@@ -201,7 +200,7 @@
     "title": "Shop",
     "intro": "Der Onlineshop öffnet zum Launch am 19. September 2026. Melde dich für den Newsletter an und du erfährst es als Erste oder Erster.",
     "packHeading": "Packungsgrössen",
-    "packBody": "CAFÉTÉ gibt es als Einzelflasche sowie im 6er-, 12er- und 24er-Pack. Einstiegspreis ab CHF 24.90.",
+    "packBody": "CAFÉTÉ gibt es im 6er-, 12er- und 24er-Pack. Einstiegspreis ab CHF 24.90 für das 6er-Pack.",
     "notifyCta": "Zum Launch Event",
     "priceTbd": "Preis folgt"
   },

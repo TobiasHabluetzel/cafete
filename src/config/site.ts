@@ -52,12 +52,14 @@ export const launchEvent = {
 } as const;
 
 /**
- * Pack sizes. `stripePriceEnv` names the env var holding the Stripe Price ID —
- * Phase 2 resolves it server-side. Prices are deliberately absent: Stripe is the
- * source of truth and the per-pack pricing is still to be confirmed.
+ * Pack sizes. `stripePriceEnv` names the env var holding the Stripe Price ID,
+ * resolved server-side. Amounts are deliberately absent: Stripe is the source of
+ * truth for pricing.
+ *
+ * No single bottle — CAFÉTÉ sells in 6s, 12s and 24s only (Tobias, 2026-08-14),
+ * which makes the 6-pack the "ab CHF 24.90" entry price.
  */
 export const packSizes = [
-  { bottles: 1, labelKey: "single", stripePriceEnv: "STRIPE_PRICE_PACK_1" },
   { bottles: 6, labelKey: "six", stripePriceEnv: "STRIPE_PRICE_PACK_6" },
   { bottles: 12, labelKey: "twelve", stripePriceEnv: "STRIPE_PRICE_PACK_12" },
   { bottles: 24, labelKey: "twentyfour", stripePriceEnv: "STRIPE_PRICE_PACK_24" },

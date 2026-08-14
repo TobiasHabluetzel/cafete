@@ -102,14 +102,13 @@
   "shopTeaser": {
     "label": "Shop",
     "title": "Get your CAFÉTÉ",
-    "body": "33 cl glass bottle, pasteurised, naturally caffeinated. Available as a single bottle or by the pack — shipping within Switzerland.",
+    "body": "33 cl glass bottle, pasteurised, naturally caffeinated. Available in 6, 12 and 24-bottle packs — shipping within Switzerland.",
     "packLabel": "Pack size",
     "cta": "Go to shop",
     "fromPrice": "from CHF 24.90"
   },
   "packs": {
     "bottles": "{count, plural, =1 {# bottle} other {# bottles}}",
-    "single": "Single bottle",
     "six": "6-pack",
     "twelve": "12-pack",
     "twentyfour": "24-pack"
@@ -201,7 +200,7 @@
     "title": "Shop",
     "intro": "The online shop opens for the launch on 19 September 2026. Sign up for the newsletter and you’ll be the first to know.",
     "packHeading": "Pack sizes",
-    "packBody": "CAFÉTÉ comes as a single bottle and in 6, 12 and 24-bottle packs. Entry price from CHF 24.90.",
+    "packBody": "CAFÉTÉ comes in 6, 12 and 24-bottle packs. Entry price from CHF 24.90 for the 6-pack.",
     "notifyCta": "See the launch event",
     "priceTbd": "Price to follow"
   },

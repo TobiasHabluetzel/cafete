@@ -119,7 +119,7 @@ See `.env.local.example`. Summary:
 | `STRIPE_SECRET_KEY` | 2 | Server only |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | 2 | |
 | `STRIPE_WEBHOOK_SECRET` | 2 | From the Stripe webhook endpoint / `stripe listen` |
-| `STRIPE_PRICE_PACK_{1,6,12,24}` | 2 | Price IDs — never hardcode in source |
+| `STRIPE_PRICE_PACK_{6,12,24}` | 2 | Price IDs — never hardcode in source |
 | `RESEND_API_KEY`, `RESEND_FROM` | 2 | Order + RSVP confirmations |
 
 ## Deploying to Railway
@@ -176,17 +176,17 @@ set**, so you can go live one pack size at a time.
    complete business verification. TWINT is only offered on CH accounts.
 2. **Settings → Payment methods → enable TWINT** (and cards). TWINT is CHF-only;
    Checkout is already hardcoded to `currency: chf`.
-3. Decide the per-pack pricing. The dossier only states "ab CHF 24.90" and flags
-   that it probably maps to the 6-pack — confirm before creating Prices.
+3. Decide the per-pack pricing for the 6, 12 and 24-packs. "ab CHF 24.90" is the
+   6-pack.
 
 ### 2. Product and Prices (you)
 
 One **Product** ("CAFÉTÉ Coffee Fruit, 33 cl"), one **Price** per pack size, all
-in CHF, one-off (not recurring). Copy each `price_…` ID into the matching env var:
+in CHF, one-off (not recurring). There is **no single-bottle SKU** — the 6-pack is
+the "ab CHF 24.90" entry price. Copy each `price_…` ID into the matching env var:
 
 | Pack | Env var |
 | --- | --- |
-| 1 bottle | `STRIPE_PRICE_PACK_1` |
 | 6 bottles | `STRIPE_PRICE_PACK_6` |
 | 12 bottles | `STRIPE_PRICE_PACK_12` |
 | 24 bottles | `STRIPE_PRICE_PACK_24` |
