@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "siteName": "CAFÉTÉ",
+    "title": "CAFÉTÉ — Das koffeinhaltige Erfrischungsgetränk aus der Kaffeefrucht",
+    "description": "CAFÉTÉ ist ein prickelndes Erfrischungsgetränk aus der Kaffeefrucht. Fruchtig, spritzig, natürlich koffeinhaltig. Entwickelt und abgefüllt in der Schweiz.",
+    "localeName": "Deutsch",
+    "localeNameShort": "DE"
+  },
+  "nav": {
+    "home": "Start",
+    "product": "Produkt",
+    "shop": "Shop",
+    "about": "Über uns",
+    "event": "Launch Event",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "cart": "Warenkorb",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schliessen",
+    "menu": "Menü",
+    "switchLanguage": "Sprache wechseln",
+    "skipToContent": "Zum Inhalt springen"
+  },
+  "hero": {
+    "title": "CAFÉTÉ",
+    "subtitle": "Das koffeinhaltige Erfrischungsgetränk aus der Kaffeefrucht",
+    "slogan": "Fruity. Fizzy. Focus.",
+    "ctaPrimary": "Jetzt bestellen — ab CHF 24.90",
+    "ctaSecondary": "Launch Event"
+  },
+  "footer": {
+    "tagline": "Entwickelt und abgefüllt in der Schweiz. Hergestellt aus der Kaffeefrucht. Natürlich koffeinhaltig.",
+    "shopHeading": "Shop",
+    "brandHeading": "CAFÉTÉ",
+    "legalHeading": "Rechtliches",
+    "contactHeading": "Kontakt",
+    "imprint": "Impressum",
+    "terms": "AGB",
+    "privacy": "Datenschutz",
+    "returns": "Widerruf",
+    "newsletterHeading": "Bleib auf dem Laufenden",
+    "newsletterText": "Launch, Verfügbarkeit und Events — ein paar Mails pro Jahr, kein Spam.",
+    "newsletterPlaceholder": "deine@email.ch",
+    "newsletterLabel": "E-Mail-Adresse",
+    "newsletterSubmit": "Anmelden",
+    "copyright": "© {year} CAFÉTÉ. Alle Rechte vorbehalten."
+  },
+  "notFound": {
+    "title": "Diese Seite gibt es nicht",
+    "body": "Die gesuchte Seite wurde verschoben oder existiert nicht. Zurück zum Start — dort wartet etwas Prickelndes.",
+    "cta": "Zur Startseite"
+  },
+  "common": {
+    "loading": "Wird geladen …",
+    "comingSoon": "In Kürze verfügbar",
+    "placeholderNotice": "Dieser Abschnitt wird in einer der nächsten Phasen gebaut."
+  }
+}

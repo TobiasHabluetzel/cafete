@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "siteName": "CAFÉTÉ",
+    "title": "CAFÉTÉ — The caffeinated refreshment made from the coffee fruit",
+    "description": "CAFÉTÉ is a sparkling refreshment made from the coffee fruit. Fruity, fizzy, naturally caffeinated. Developed and bottled in Switzerland.",
+    "localeName": "English",
+    "localeNameShort": "EN"
+  },
+  "nav": {
+    "home": "Home",
+    "product": "Product",
+    "shop": "Shop",
+    "about": "About us",
+    "event": "Launch Event",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "cart": "Cart",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "menu": "Menu",
+    "switchLanguage": "Switch language",
+    "skipToContent": "Skip to content"
+  },
+  "hero": {
+    "title": "CAFÉTÉ",
+    "subtitle": "The caffeinated refreshment made from the coffee fruit",
+    "slogan": "Fruity. Fizzy. Focus.",
+    "ctaPrimary": "Order now — from CHF 24.90",
+    "ctaSecondary": "Launch Event"
+  },
+  "footer": {
+    "tagline": "Developed and bottled in Switzerland. Made from the coffee fruit. Naturally caffeinated.",
+    "shopHeading": "Shop",
+    "brandHeading": "CAFÉTÉ",
+    "legalHeading": "Legal",
+    "contactHeading": "Contact",
+    "imprint": "Imprint",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "returns": "Returns",
+    "newsletterHeading": "Stay in the loop",
+    "newsletterText": "Launch, availability and events — a few emails a year, no spam.",
+    "newsletterPlaceholder": "you@email.com",
+    "newsletterLabel": "Email address",
+    "newsletterSubmit": "Sign up",
+    "copyright": "© {year} CAFÉTÉ. All rights reserved."
+  },
+  "notFound": {
+    "title": "This page doesn't exist",
+    "body": "The page you were looking for has moved or never existed. Head back to the start — something fizzy is waiting.",
+    "cta": "Back to home"
+  },
+  "common": {
+    "loading": "Loading …",
+    "comingSoon": "Coming soon",
+    "placeholderNotice": "This section will be built in one of the next phases."
+  }
+}

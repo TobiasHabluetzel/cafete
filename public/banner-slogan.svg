@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  PLACEHOLDER ONLY — replace with the designer's "Fruity · Fizzy · Focus"
+  bubble-lettering banner (banner-slogan.png).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 140" width="900" height="140" role="img" aria-label="Fruity · Fizzy · Focus">
+  <text x="450" y="96" text-anchor="middle"
+        font-family="Baloo 2, Trebuchet MS, Verdana, sans-serif"
+        font-size="76" font-weight="800" letter-spacing="1"
+        fill="#14100E" stroke="#F7EEDD" stroke-width="8" paint-order="stroke">FRUITY · FIZZY · FOCUS</text>
+</svg>
