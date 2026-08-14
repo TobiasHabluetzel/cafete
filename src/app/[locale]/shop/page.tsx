@@ -12,6 +12,7 @@ import {
   resolvePageLocale,
   type LocaleParams,
 } from "@/lib/page";
+import { getEntryPrice } from "@/lib/pricing";
 import { configuredPacks, isStripeConfigured } from "@/lib/stripe";
 
 export const generateStaticParams = generateLocaleParams;
@@ -33,13 +34,20 @@ export default async function ShopPage({ params }: LocaleParams) {
   // exist that is none, and the page falls back to the teaser.
   const buyable = isStripeConfigured() ? configuredPacks() : [];
   const isOpen = buyable.length > 0;
+  const entryPrice = isOpen ? await getEntryPrice(locale) : null;
 
   return (
     <>
       <PageHeader
         label={tNav("shop")}
         title={t("title")}
-        intro={isOpen ? t("packBody") : t("intro")}
+        intro={
+          isOpen
+            ? [t("packBody"), entryPrice ? t("entryPriceLine", { price: entryPrice }) : null]
+                .filter(Boolean)
+                .join(" ")
+            : t("intro")
+        }
       >
         <div className="mt-7 flex flex-wrap gap-3">
           <Sticker tone="gold" className="-rotate-1">

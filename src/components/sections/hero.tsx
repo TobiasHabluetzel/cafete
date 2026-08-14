@@ -9,7 +9,7 @@ import { Link } from "@/i18n/navigation";
 
 import bottle from "../../../public/bottle-photo.jpg";
 
-export function Hero() {
+export function Hero({ entryPrice }: { entryPrice: string | null }) {
   const t = useTranslations("hero");
   const tBadges = useTranslations("badges");
 
@@ -77,7 +77,7 @@ export function Hero() {
 
           <div className="relative mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
             <Link href="/shop" className={ctaClass({ variant: "gold", size: "lg" })}>
-              {t("ctaPrimary")}
+              {entryPrice ? t("ctaPrimaryWithPrice", { price: entryPrice }) : t("ctaPrimary")}
             </Link>
             <Link
               href="/event"

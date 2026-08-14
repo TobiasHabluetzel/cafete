@@ -25,8 +25,9 @@
     "title": "CAFÉTÉ",
     "subtitle": "The caffeinated refreshment made from the coffee fruit",
     "slogan": "Fruity. Fizzy. Focus.",
-    "ctaPrimary": "Order now — from CHF 24.90",
-    "ctaSecondary": "Launch Event"
+    "ctaPrimary": "Order now",
+    "ctaSecondary": "Launch Event",
+    "ctaPrimaryWithPrice": "Order now — from {price}"
   },
   "badges": {
     "volume": "33 cl glass bottle",
@@ -105,7 +106,7 @@
     "body": "33 cl glass bottle, pasteurised, naturally caffeinated. Available in 6, 12 and 24-bottle packs — shipping within Switzerland.",
     "packLabel": "Pack size",
     "cta": "Go to shop",
-    "fromPrice": "from CHF 24.90"
+    "fromPrice": "from {price}"
   },
   "packs": {
     "bottles": "{count, plural, =1 {# bottle} other {# bottles}}",
@@ -200,9 +201,10 @@
     "title": "Shop",
     "intro": "The online shop opens for the launch on 19 September 2026. Sign up for the newsletter and you’ll be the first to know.",
     "packHeading": "Pack sizes",
-    "packBody": "CAFÉTÉ comes in 6, 12 and 24-bottle packs. Entry price from CHF 24.90 for the 6-pack.",
+    "packBody": "CAFÉTÉ comes in 6, 12 and 24-bottle packs.",
     "notifyCta": "See the launch event",
-    "priceTbd": "Price to follow"
+    "priceTbd": "Price to follow",
+    "entryPriceLine": "Entry price from {price} for the 6-pack."
   },
   "cart": {
     "title": "Cart",

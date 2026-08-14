@@ -25,8 +25,9 @@
     "title": "CAFÉTÉ",
     "subtitle": "Das koffeinhaltige Erfrischungsgetränk aus der Kaffeefrucht",
     "slogan": "Fruity. Fizzy. Focus.",
-    "ctaPrimary": "Jetzt bestellen — ab CHF 24.90",
-    "ctaSecondary": "Launch Event"
+    "ctaPrimary": "Jetzt bestellen",
+    "ctaSecondary": "Launch Event",
+    "ctaPrimaryWithPrice": "Jetzt bestellen — ab {price}"
   },
   "badges": {
     "volume": "33 cl Glasflasche",
@@ -105,7 +106,7 @@
     "body": "33 cl Glasflasche, pasteurisiert, natürlich koffeinhaltig. Erhältlich im 6er-, 12er- und 24er-Pack — Versand innerhalb der Schweiz.",
     "packLabel": "Packungsgrösse",
     "cta": "Zum Shop",
-    "fromPrice": "ab CHF 24.90"
+    "fromPrice": "ab {price}"
   },
   "packs": {
     "bottles": "{count, plural, =1 {# Flasche} other {# Flaschen}}",
@@ -200,9 +201,10 @@
     "title": "Shop",
     "intro": "Der Onlineshop öffnet zum Launch am 19. September 2026. Melde dich für den Newsletter an und du erfährst es als Erste oder Erster.",
     "packHeading": "Packungsgrössen",
-    "packBody": "CAFÉTÉ gibt es im 6er-, 12er- und 24er-Pack. Einstiegspreis ab CHF 24.90 für das 6er-Pack.",
+    "packBody": "CAFÉTÉ gibt es im 6er-, 12er- und 24er-Pack.",
     "notifyCta": "Zum Launch Event",
-    "priceTbd": "Preis folgt"
+    "priceTbd": "Preis folgt",
+    "entryPriceLine": "Einstiegspreis ab {price} für das 6er-Pack."
   },
   "cart": {
     "title": "Warenkorb",

@@ -8,10 +8,15 @@ import { Pillars } from "@/components/sections/pillars";
 import { ShopTeaser } from "@/components/sections/shop-teaser";
 import { Story } from "@/components/sections/story";
 import { routing } from "@/i18n/routing";
+import { getEntryPrice } from "@/lib/pricing";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
+
+// The entry price comes from Stripe, so the page is revalidated hourly rather
+// than frozen at build time. A price change shows up without a redeploy.
+export const revalidate = 3600;
 
 export default async function HomePage({
   params,
@@ -21,14 +26,16 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
+  const entryPrice = await getEntryPrice(locale);
+
   return (
     <>
-      <Hero />
+      <Hero entryPrice={entryPrice} />
       <SloganMarquee />
       <CoffeeFruit />
       <Pillars />
       <Story />
-      <ShopTeaser />
+      <ShopTeaser entryPrice={entryPrice} />
       <SloganMarquee />
       <EventBand />
     </>

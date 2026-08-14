@@ -10,7 +10,7 @@ import { Link } from "@/i18n/navigation";
 
 import bottle from "../../../public/bottle-photo.jpg";
 
-export function ShopTeaser() {
+export function ShopTeaser({ entryPrice }: { entryPrice: string | null }) {
   const t = useTranslations("shopTeaser");
   const tPacks = useTranslations("packs");
   const tBadges = useTranslations("badges");
@@ -63,9 +63,11 @@ export function ShopTeaser() {
             <Link href="/shop" className={ctaClass({ variant: "gold", size: "lg" })}>
               {t("cta")}
             </Link>
-            <span className="font-display text-gold text-lg font-bold">
-              {t("fromPrice")}
-            </span>
+            {entryPrice ? (
+              <span className="font-display text-gold text-lg font-bold">
+                {t("fromPrice", { price: entryPrice })}
+              </span>
+            ) : null}
           </div>
         </div>
       </div>
