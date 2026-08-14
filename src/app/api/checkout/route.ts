@@ -77,9 +77,19 @@ export async function POST(request: Request) {
     const session = await getStripe().checkout.sessions.create({
       mode: "payment",
       line_items: lineItems,
-      currency: "chf",
-      // TWINT is CHF-only and must be enabled on the Stripe account first.
-      payment_method_types: ["card", "twint"],
+      /*
+       * Payment methods and currency are both left unset on purpose.
+       *
+       * Hardcoding `payment_method_types: ["card", "twint"]` makes session
+       * creation fail outright until TWINT is activated on the account — the shop
+       * would be dead rather than card-only. Omitting it means Stripe uses the
+       * account's Dashboard payment-method settings and filters by eligibility,
+       * so cards work today and TWINT appears by itself once enabled.
+       *
+       * Currency comes from the Price. Passing it here as well only creates the
+       * chance of a mismatch error. Prices must be CHF regardless — TWINT is
+       * CHF-only.
+       */
       locale: locale === "de" ? "de" : "en",
       shipping_address_collection: { allowed_countries: shippingCountries() },
       billing_address_collection: "auto",

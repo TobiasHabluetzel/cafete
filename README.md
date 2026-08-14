@@ -174,8 +174,10 @@ set**, so you can go live one pack size at a time.
 
 1. Create/log in to Stripe, switch the account country to **Switzerland** and
    complete business verification. TWINT is only offered on CH accounts.
-2. **Settings → Payment methods → enable TWINT** (and cards). TWINT is CHF-only;
-   Checkout is already hardcoded to `currency: chf`.
+2. **Settings → Payment methods → enable TWINT** (and cards). Checkout does not
+   hardcode a payment-method list, so it uses whatever is enabled there and
+   filters by eligibility: cards work immediately, and TWINT starts appearing on
+   its own once activated. Prices must be in **CHF** — TWINT is CHF-only.
 3. Decide the per-pack pricing for the 6, 12 and 24-packs. "ab CHF 24.90" is the
    6-pack.
 
@@ -222,7 +224,9 @@ stripe trigger checkout.session.completed
 ### What the code already does
 
 - `POST /api/checkout` builds a Checkout Session from `{ bottles, quantity }`
-  pairs. **Prices are resolved server-side from the pack size** — the browser
+  pairs. Payment methods and currency are left to Stripe: hardcoding
+  `payment_method_types` would make session creation *fail* until TWINT was
+  activated, instead of falling back to card-only. **Prices are resolved server-side from the pack size** — the browser
   never sends an amount, so a tampered request cannot change what is charged.
   Quantity is capped at 20 per line. Return URLs are built from the locale slug
   map, so `/en` lands on `/en/order/…`.
