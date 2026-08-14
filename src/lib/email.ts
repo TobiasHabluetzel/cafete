@@ -18,6 +18,22 @@ export function isEmailConfigured() {
   return Boolean(process.env.RESEND_API_KEY);
 }
 
+/** Send to an explicit recipient — used for order confirmations. */
+export async function sendMail({
+  to,
+  subject,
+  text,
+  replyTo,
+}: {
+  to: string;
+  subject: string;
+  text: string;
+  replyTo?: string;
+}): Promise<SendResult> {
+  return send({ to, subject, text, replyTo });
+}
+
+/** Send to the shop's own inbox — used for signups and internal alerts. */
 export async function sendNotification({
   subject,
   text,
@@ -27,11 +43,29 @@ export async function sendNotification({
   text: string;
   replyTo?: string;
 }): Promise<SendResult> {
+  return send({
+    to: process.env.ORDER_NOTIFICATION_EMAIL ?? site.email,
+    subject,
+    text,
+    replyTo,
+  });
+}
+
+async function send({
+  to,
+  subject,
+  text,
+  replyTo,
+}: {
+  to: string;
+  subject: string;
+  text: string;
+  replyTo?: string;
+}): Promise<SendResult> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return { ok: false, reason: "not-configured" };
 
   const from = process.env.RESEND_FROM ?? `CAFÉTÉ <${site.email}>`;
-  const to = process.env.ORDER_NOTIFICATION_EMAIL ?? site.email;
 
   try {
     const response = await fetch("https://api.resend.com/emails", {

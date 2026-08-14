@@ -114,6 +114,20 @@
     "twelve": "12-pack",
     "twentyfour": "24-pack"
   },
+  "checkout": {
+    "addToCart": "Add to cart",
+    "added": "Added",
+    "quantity": "Quantity",
+    "remove": "Remove",
+    "lineTotalNote": "Prices and shipping are calculated at checkout.",
+    "goToCheckout": "Checkout",
+    "redirecting": "Redirecting to Stripe …",
+    "cartCount": "{count, plural, =0 {Cart empty} =1 {# item} other {# items}}",
+    "bottlesTotal": "{count, plural, =1 {# bottle} other {# bottles}} in total",
+    "notConfigured": "The shop opens for the launch on 19 September 2026. Until then you can sign up for the newsletter.",
+    "error": "Checkout could not be started. Please try again later or write to us at {email}.",
+    "securePayment": "Secure payment by card or TWINT via Stripe."
+  },
   "event": {
     "label": "Save the date",
     "title": "CAFÉTÉ Launch Event",
@@ -195,6 +209,19 @@
     "title": "Cart",
     "empty": "Your cart is still empty. The shop opens for the launch on 19 September 2026.",
     "continue": "Continue to the shop"
+  },
+  "order": {
+    "title": "Thanks for your order!",
+    "intro": "We've received your order and will be in touch as soon as your parcel is on its way.",
+    "emailNote": "A confirmation is on its way to {email}.",
+    "emailNoteFallback": "A confirmation is on its way by email.",
+    "summaryTitle": "Summary",
+    "total": "Total",
+    "reference": "Reference",
+    "shipTo": "Delivery address",
+    "continue": "Keep browsing",
+    "pending": "Your payment is still being processed. You'll get an email as soon as it is confirmed.",
+    "notFound": "We couldn't find this order. If you were charged, please write to us at {email}."
   },
   "faq": {
     "label": "Frequently asked",

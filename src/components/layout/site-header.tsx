@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import { LogoSticker } from "@/components/brand/wordmark";
 import { LocaleSwitcher } from "@/components/layout/locale-switcher";
+import { useCart } from "@/components/shop/use-cart";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -21,8 +22,10 @@ import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
   const t = useTranslations("nav");
+  const tCheckout = useTranslations("checkout");
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const { totalItems, ready } = useCart();
 
   return (
     /*
@@ -80,12 +83,23 @@ export function SiteHeader() {
           <Button
             variant="ghost"
             size="icon-lg"
-            aria-label={t("cart")}
+            aria-label={
+              totalItems > 0 ? `${t("cart")} — ${tCheckout("cartCount", { count: totalItems })}` : t("cart")
+            }
             nativeButton={false}
             render={<Link href="/warenkorb" />}
-            className="text-charcoal hover:bg-ink/10 hover:text-ink"
+            className="text-charcoal hover:bg-ink/10 hover:text-ink relative"
           >
             <ShoppingBag />
+            {/* `ready` gates this so the server markup and first paint agree. */}
+            {ready && totalItems > 0 ? (
+              <span
+                aria-hidden
+                className="bg-charcoal text-cream absolute -top-0.5 -right-0.5 flex size-4 items-center justify-center rounded-full text-[0.625rem] font-bold tabular-nums"
+              >
+                {totalItems > 9 ? "9+" : totalItems}
+              </span>
+            ) : null}
           </Button>
 
           <Sheet open={open} onOpenChange={setOpen}>

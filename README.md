@@ -10,8 +10,8 @@ coffee-fruit (cascara) refreshment. Bilingual (DE default / EN), Zurich-based.
 | Framework | Next.js 16 (App Router) + TypeScript, Turbopack |
 | Styling | Tailwind CSS v4 + shadcn/ui (Base UI) |
 | i18n | next-intl 4 — `de` (default) / `en`, locale-prefixed + localized slugs |
-| Payments | Stripe Checkout (card + TWINT) — Phase 2 |
-| Email | Resend — Phase 2 |
+| Payments | Stripe Checkout, hosted (card + TWINT) |
+| Email | Resend (order confirmations, RSVP, newsletter) |
 | Hosting | Railway (Docker, `output: "standalone"`) — EU West region |
 
 ## Getting started
@@ -164,14 +164,89 @@ docker run --rm -p 8099:8080 -e PORT=8080 cafete
 curl localhost:8099/api/health   # {"status":"ok"}
 ```
 
+## Connecting Stripe
+
+The code is done; what remains is account setup. Nothing here needs a code change —
+the shop reads Price IDs from env and **a pack only appears once its Price ID is
+set**, so you can go live one pack size at a time.
+
+### 1. Account (you)
+
+1. Create/log in to Stripe, switch the account country to **Switzerland** and
+   complete business verification. TWINT is only offered on CH accounts.
+2. **Settings → Payment methods → enable TWINT** (and cards). TWINT is CHF-only;
+   Checkout is already hardcoded to `currency: chf`.
+3. Decide the per-pack pricing. The dossier only states "ab CHF 24.90" and flags
+   that it probably maps to the 6-pack — confirm before creating Prices.
+
+### 2. Product and Prices (you)
+
+One **Product** ("CAFÉTÉ Coffee Fruit, 33 cl"), one **Price** per pack size, all
+in CHF, one-off (not recurring). Copy each `price_…` ID into the matching env var:
+
+| Pack | Env var |
+| --- | --- |
+| 1 bottle | `STRIPE_PRICE_PACK_1` |
+| 6 bottles | `STRIPE_PRICE_PACK_6` |
+| 12 bottles | `STRIPE_PRICE_PACK_12` |
+| 24 bottles | `STRIPE_PRICE_PACK_24` |
+
+### 3. Shipping and VAT (you)
+
+- **Shipping:** create a Shipping rate and set `STRIPE_SHIPPING_RATE`. Without it
+  Checkout still collects an address but charges no shipping.
+- **VAT:** `STRIPE_TAX_ENABLED` is deliberately **off** by default. Below the
+  CHF 100k turnover threshold CAFÉTÉ may not charge MwSt at all, so switching it
+  on before you are registered would be wrong. Confirm with the Treuhänder, then
+  enable Stripe Tax in the dashboard and set the var. Foodstuffs are the reduced
+  rate (currently 2.6%).
+- Ship-to countries default to **CH only**; override with
+  `STRIPE_SHIPPING_COUNTRIES=CH,LI`.
+
+### 4. Webhook (you)
+
+Add an endpoint at `https://drink-cafete.ch/api/webhook` subscribed to
+**`checkout.session.completed`**, and put its signing secret in
+`STRIPE_WEBHOOK_SECRET`. Also set `RESEND_API_KEY`, or orders will complete
+without a confirmation email being sent.
+
+Locally, instead of a dashboard endpoint:
+
+```bash
+brew install stripe/stripe-cli/stripe        # not currently installed
+stripe login
+stripe listen --forward-to localhost:3000/api/webhook   # prints a whsec_… to use
+stripe trigger checkout.session.completed
+```
+
+### What the code already does
+
+- `POST /api/checkout` builds a Checkout Session from `{ bottles, quantity }`
+  pairs. **Prices are resolved server-side from the pack size** — the browser
+  never sends an amount, so a tampered request cannot change what is charged.
+  Quantity is capped at 20 per line. Return URLs are built from the locale slug
+  map, so `/en` lands on `/en/order/…`.
+- `POST /api/webhook` verifies the signature against the raw body, then on
+  `checkout.session.completed` emails the customer a confirmation and the shop an
+  internal copy. It returns 500 on a handler failure so **Stripe retries** rather
+  than silently losing a confirmation, and 400 only for a bad signature.
+- `/bestellung/[id]` (`/en/order/[id]`) retrieves the session, shows the line
+  items, total, reference and delivery address, and clears the basket.
+- The cart is a `localStorage` store read via `useSyncExternalStore`, so it
+  survives reloads, syncs across tabs, and hydrates without flashing.
+- **Everything degrades gracefully unconfigured:** no `STRIPE_SECRET_KEY` means
+  the shop shows the pre-launch teaser and the API routes return 503 — the build
+  never needs secrets.
+
 ## Build phases
 
 - **Phase 0 — done:** scaffold, i18n, brand tokens, fonts, header + footer, hero.
 - **Phase 1:** homepage sections (coffee fruit, four pillars, story, shop teaser,
   launch-event band with RSVP + add-to-calendar) and the remaining routes
   including placeholder legal pages.
-- **Phase 2:** shop, pack selector (1/6/12/24), cart, Stripe Checkout,
-  webhook → Resend confirmation, `/bestellung/[id]` thank-you page, Stripe Tax.
+- **Phase 2 — done:** shop, pack selector, cart, Stripe Checkout, webhook →
+  Resend confirmation, `/bestellung/[id]` thank-you page. Needs the Stripe
+  account set up — see "Connecting Stripe" above.
 - **Phase 3:** SEO/OG images, `hreflang`, sitemap, robots, analytics, a11y pass.
 
 ## Before going live
