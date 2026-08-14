@@ -1,6 +1,6 @@
-import { Recycle, TrendingUp, Users, Zap } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { CherryMark } from "@/components/brand/sticker";
 import { Section, SectionHeader } from "@/components/layout/section";
 
 /**
@@ -12,39 +12,39 @@ import { Section, SectionHeader } from "@/components/layout/section";
  */
 export function Pillars() {
   const t = useTranslations("pillars");
-
-  const pillars = [
-    { key: "functional", Icon: Zap },
-    { key: "social", Icon: Users },
-    { key: "ecological", Icon: Recycle },
-    { key: "economic", Icon: TrendingUp },
-  ] as const;
+  const keys = ["functional", "social", "ecological", "economic"] as const;
 
   return (
-    <Section tone="charcoal">
+    <Section tone="sunset" className="relative isolate overflow-hidden">
+      <CherryMark className="absolute -top-8 -right-10 w-64 rotate-12 opacity-20 lg:w-96" />
+
       <SectionHeader
         label={t("label")}
         title={t("title")}
         align="center"
-        labelClassName="text-gold"
+        labelClassName="text-cherry-deep"
+        className="relative"
       />
 
-      <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {pillars.map(({ key, Icon }) => (
+      <ol className="relative mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {keys.map((key, index) => (
           <li
             key={key}
-            className="bg-charcoal-soft border-cream/10 flex flex-col rounded-lg border p-6"
+            className="reveal border-ink/85 bg-cream flex flex-col rounded-lg border-2 p-6 shadow-[5px_5px_0_rgba(0,0,0,0.45)]"
           >
-            <span className="bg-sunset-gradient mb-5 inline-flex size-11 items-center justify-center rounded-full text-white">
-              <Icon className="size-5" aria-hidden />
+            <span
+              aria-hidden
+              className="font-display text-numeral text-sunset-ink/25 font-extrabold tabular-nums"
+            >
+              {String(index + 1).padStart(2, "0")}
             </span>
-            <h3 className="text-gold text-h3">{t(`${key}.title`)}</h3>
-            <p className="text-cream/75 mt-3 text-sm leading-relaxed">
+            <h3 className="text-h3 text-charcoal mt-2">{t(`${key}.title`)}</h3>
+            <p className="text-charcoal/75 mt-3 text-sm leading-relaxed">
               {t(`${key}.body`)}
             </p>
           </li>
         ))}
-      </ul>
+      </ol>
     </Section>
   );
 }

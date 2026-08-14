@@ -12,6 +12,8 @@ import {
   type LocaleParams,
 } from "@/lib/page";
 
+import bottle from "../../../../public/bottle-photo.jpg";
+
 export const generateStaticParams = generateLocaleParams;
 export const generateMetadata = createMetadata("shop");
 
@@ -42,17 +44,17 @@ export default async function ShopPage({ params }: LocaleParams) {
               className="border-charcoal/10 shadow-brand flex flex-col items-center rounded-lg border bg-white p-6 text-center"
             >
               <Image
-                src="/bottle-mockup.svg"
+                src={bottle}
                 alt=""
-                width={260}
-                height={720}
-                className="h-40 w-auto"
+                sizes="18rem"
+                placeholder="blur"
+                className="border-ink/70 h-40 w-full rounded-md border-2 object-cover"
               />
               <h3 className="text-h3 mt-5">{tPacks(pack.labelKey)}</h3>
               <p className="text-charcoal/60 mt-1 text-sm">
                 {tPacks("bottles", { count: pack.bottles })}
               </p>
-              <p className="label-caps text-sunset-deep mt-4">{t("priceTbd")}</p>
+              <p className="label-caps text-sunset-ink mt-4">{t("priceTbd")}</p>
             </li>
           ))}
         </ul>

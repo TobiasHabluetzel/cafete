@@ -28,6 +28,15 @@
     "ctaPrimary": "Jetzt bestellen — ab CHF 24.90",
     "ctaSecondary": "Launch Event"
   },
+  "badges": {
+    "volume": "33 cl Glasflasche",
+    "lessSugar": "Über 50 % weniger Zucker",
+    "swissMade": "Entwickelt in der Schweiz",
+    "sparkling": "Sparkling",
+    "energizing": "Naturally energizing",
+    "noExtract": "Kein Extrakt, kein Aroma",
+    "cascara": "Cascara aus Brasilien"
+  },
   "coffeeFruit": {
     "label": "Die Kaffeefrucht",
     "title": "Die andere Hälfte des Kaffees",
@@ -142,13 +151,34 @@
     "nutritionHeadNutrient": "Nährwert",
     "nutritionHeadValue": "Pro 100 ml",
     "nutrition": [
-      { "nutrient": "Energie", "value": "84,2 kJ / 20,3 kcal" },
-      { "nutrient": "Fett", "value": "< 0,5 g" },
-      { "nutrient": "davon gesättigte Fettsäuren", "value": "0,0 g" },
-      { "nutrient": "Kohlenhydrate", "value": "4,5 g" },
-      { "nutrient": "davon Zucker", "value": "4,5 g" },
-      { "nutrient": "Eiweiss", "value": "< 0,5 g" },
-      { "nutrient": "Salz", "value": "0,0 g" }
+      {
+        "nutrient": "Energie",
+        "value": "84,2 kJ / 20,3 kcal"
+      },
+      {
+        "nutrient": "Fett",
+        "value": "< 0,5 g"
+      },
+      {
+        "nutrient": "davon gesättigte Fettsäuren",
+        "value": "0,0 g"
+      },
+      {
+        "nutrient": "Kohlenhydrate",
+        "value": "4,5 g"
+      },
+      {
+        "nutrient": "davon Zucker",
+        "value": "4,5 g"
+      },
+      {
+        "nutrient": "Eiweiss",
+        "value": "< 0,5 g"
+      },
+      {
+        "nutrient": "Salz",
+        "value": "0,0 g"
+      }
     ],
     "taglineLabel": "Auf dem Etikett",
     "taglineValue": "Fruchtig. Spritzig. Leicht."
@@ -230,32 +260,80 @@
     "terms": {
       "title": "Allgemeine Geschäftsbedingungen",
       "sections": [
-        { "heading": "1. Geltungsbereich", "body": "Diese Bedingungen gelten für alle Bestellungen über diesen Onlineshop." },
-        { "heading": "2. Preise", "body": "Alle Preise sind in Schweizer Franken und verstehen sich inklusive der gesetzlichen Mehrwertsteuer. Versandkosten werden im Checkout separat ausgewiesen." },
-        { "heading": "3. Lieferung", "body": "Die Lieferung erfolgt innerhalb der Schweiz. Angaben zu Lieferfristen und Versandkosten folgen mit der Shop-Eröffnung." },
-        { "heading": "4. Zahlung", "body": "Die Zahlung erfolgt über den Zahlungsdienstleister Stripe per Karte oder TWINT." },
-        { "heading": "5. Widerruf", "body": "Es gilt das auf der Seite Widerruf beschriebene Rückgaberecht." },
-        { "heading": "6. Gewährleistung", "body": "Bei beschädigt oder unvollständig eintreffenden Sendungen melde dich innerhalb von 14 Tagen; wir ersetzen die betroffene Ware." }
+        {
+          "heading": "1. Geltungsbereich",
+          "body": "Diese Bedingungen gelten für alle Bestellungen über diesen Onlineshop."
+        },
+        {
+          "heading": "2. Preise",
+          "body": "Alle Preise sind in Schweizer Franken und verstehen sich inklusive der gesetzlichen Mehrwertsteuer. Versandkosten werden im Checkout separat ausgewiesen."
+        },
+        {
+          "heading": "3. Lieferung",
+          "body": "Die Lieferung erfolgt innerhalb der Schweiz. Angaben zu Lieferfristen und Versandkosten folgen mit der Shop-Eröffnung."
+        },
+        {
+          "heading": "4. Zahlung",
+          "body": "Die Zahlung erfolgt über den Zahlungsdienstleister Stripe per Karte oder TWINT."
+        },
+        {
+          "heading": "5. Widerruf",
+          "body": "Es gilt das auf der Seite Widerruf beschriebene Rückgaberecht."
+        },
+        {
+          "heading": "6. Gewährleistung",
+          "body": "Bei beschädigt oder unvollständig eintreffenden Sendungen melde dich innerhalb von 14 Tagen; wir ersetzen die betroffene Ware."
+        }
       ]
     },
     "privacy": {
       "title": "Datenschutzerklärung",
       "sections": [
-        { "heading": "Verantwortliche Stelle", "body": "Verantwortlich für die Datenbearbeitung ist CAFÉTÉ, Neugasse 33, 8005 Zürich. Anfragen zum Datenschutz richtest du an info@drink-cafete.ch." },
-        { "heading": "Welche Daten wir bearbeiten", "body": "Wir bearbeiten Daten, die du uns aktiv übermittelst: Name und E-Mail-Adresse bei der Newsletter-Anmeldung oder der Event-Anmeldung, sowie Bestell- und Lieferdaten bei einem Kauf." },
-        { "heading": "Zweck", "body": "Wir verwenden diese Daten ausschliesslich, um deine Bestellung abzuwickeln, deine Anfrage zu beantworten oder dir — mit deiner Einwilligung — Neuigkeiten zu CAFÉTÉ zu senden." },
-        { "heading": "Auftragsbearbeiter", "body": "Für Zahlungen nutzen wir Stripe, für E-Mails Resend und für den Betrieb der Website unseren Hosting-Anbieter. Diese Dienste bearbeiten Daten in unserem Auftrag." },
-        { "heading": "Analyse", "body": "Wir setzen datenschutzfreundliche, cookiefreie Statistik ein und erstellen keine personenbezogenen Profile." },
-        { "heading": "Deine Rechte", "body": "Du hast das Recht auf Auskunft, Berichtigung und Löschung deiner Daten sowie darauf, eine Einwilligung jederzeit zu widerrufen. Es gilt das revidierte Schweizer Datenschutzgesetz (revDSG)." }
+        {
+          "heading": "Verantwortliche Stelle",
+          "body": "Verantwortlich für die Datenbearbeitung ist CAFÉTÉ, Neugasse 33, 8005 Zürich. Anfragen zum Datenschutz richtest du an info@drink-cafete.ch."
+        },
+        {
+          "heading": "Welche Daten wir bearbeiten",
+          "body": "Wir bearbeiten Daten, die du uns aktiv übermittelst: Name und E-Mail-Adresse bei der Newsletter-Anmeldung oder der Event-Anmeldung, sowie Bestell- und Lieferdaten bei einem Kauf."
+        },
+        {
+          "heading": "Zweck",
+          "body": "Wir verwenden diese Daten ausschliesslich, um deine Bestellung abzuwickeln, deine Anfrage zu beantworten oder dir — mit deiner Einwilligung — Neuigkeiten zu CAFÉTÉ zu senden."
+        },
+        {
+          "heading": "Auftragsbearbeiter",
+          "body": "Für Zahlungen nutzen wir Stripe, für E-Mails Resend und für den Betrieb der Website unseren Hosting-Anbieter. Diese Dienste bearbeiten Daten in unserem Auftrag."
+        },
+        {
+          "heading": "Analyse",
+          "body": "Wir setzen datenschutzfreundliche, cookiefreie Statistik ein und erstellen keine personenbezogenen Profile."
+        },
+        {
+          "heading": "Deine Rechte",
+          "body": "Du hast das Recht auf Auskunft, Berichtigung und Löschung deiner Daten sowie darauf, eine Einwilligung jederzeit zu widerrufen. Es gilt das revidierte Schweizer Datenschutzgesetz (revDSG)."
+        }
       ]
     },
     "returns": {
       "title": "Widerruf und Rückgabe",
       "sections": [
-        { "heading": "Rückgaberecht", "body": "Du kannst ungeöffnete Ware innerhalb von 14 Tagen nach Erhalt zurückgeben. Melde die Rückgabe vorher kurz per E-Mail an." },
-        { "heading": "Lebensmittel", "body": "Geöffnete Flaschen können wir aus hygienischen Gründen nicht zurücknehmen." },
-        { "heading": "Beschädigte Sendung", "body": "Kommt eine Flasche beschädigt an, schicke uns ein Foto — wir ersetzen sie oder erstatten den Betrag, ohne Rücksendung." },
-        { "heading": "Rückerstattung", "body": "Die Rückerstattung erfolgt über das ursprüngliche Zahlungsmittel, in der Regel innerhalb von zehn Arbeitstagen nach Eingang der Rückgabe." }
+        {
+          "heading": "Rückgaberecht",
+          "body": "Du kannst ungeöffnete Ware innerhalb von 14 Tagen nach Erhalt zurückgeben. Melde die Rückgabe vorher kurz per E-Mail an."
+        },
+        {
+          "heading": "Lebensmittel",
+          "body": "Geöffnete Flaschen können wir aus hygienischen Gründen nicht zurücknehmen."
+        },
+        {
+          "heading": "Beschädigte Sendung",
+          "body": "Kommt eine Flasche beschädigt an, schicke uns ein Foto — wir ersetzen sie oder erstatten den Betrag, ohne Rücksendung."
+        },
+        {
+          "heading": "Rückerstattung",
+          "body": "Die Rückerstattung erfolgt über das ursprüngliche Zahlungsmittel, in der Regel innerhalb von zehn Arbeitstagen nach Eingang der Rückgabe."
+        }
       ]
     }
   },

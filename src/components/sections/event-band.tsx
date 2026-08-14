@@ -2,6 +2,7 @@ import { CalendarDays, Clock, MapPin } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { ctaClass } from "@/components/brand/cta-button";
+import { CherryMark } from "@/components/brand/sticker";
 import { AddToCalendar } from "@/components/event/add-to-calendar";
 import { launchEvent } from "@/config/site";
 import { Link } from "@/i18n/navigation";
@@ -18,26 +19,28 @@ export function EventBand() {
   );
 
   return (
-    <section className="bg-sunset-gradient text-cream">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.2fr_1fr] lg:items-center lg:px-8 lg:py-20">
-        <div>
-          <p className="label-caps text-charcoal">{t("label")}</p>
-          <h2 className="text-h1 mt-3">{t("title")}</h2>
-          <p className="mt-5 max-w-xl text-lg leading-relaxed">{t("body")}</p>
+    <section className="bg-sunset text-charcoal relative isolate overflow-hidden">
+      <CherryMark className="absolute -bottom-14 right-[4%] w-64 rotate-[18deg] opacity-25 lg:w-80" />
+
+      <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:px-8 lg:py-20">
+        <div className="reveal">
+          <p className="label-caps text-cherry-deep">{t("label")}</p>
+          <h2 className="text-display text-sticker mt-4">{t("title")}</h2>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed">{t("body")}</p>
         </div>
 
-        <div className="bg-charcoal/25 border-cream/20 rounded-lg border p-6 backdrop-blur-sm">
+        <div className="reveal border-ink/85 bg-charcoal text-cream rounded-lg border-2 p-6 shadow-[6px_6px_0_rgba(0,0,0,0.45)]">
           <ul className="space-y-3 text-base">
             <li className="flex items-center gap-3">
-              <CalendarDays className="size-5 shrink-0" aria-hidden />
+              <CalendarDays className="text-gold size-5 shrink-0" aria-hidden />
               <span className="font-semibold">{t("dateLine")}</span>
             </li>
             <li className="flex items-center gap-3">
-              <Clock className="size-5 shrink-0" aria-hidden />
+              <Clock className="text-gold size-5 shrink-0" aria-hidden />
               <span>{t("timeLine")}</span>
             </li>
             <li className="flex items-start gap-3">
-              <MapPin className="mt-0.5 size-5 shrink-0" aria-hidden />
+              <MapPin className="text-gold mt-0.5 size-5 shrink-0" aria-hidden />
               <span>
                 <span className="font-semibold">{t("venue")}</span>
                 <br />
@@ -65,7 +68,7 @@ export function EventBand() {
               href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
               target="_blank"
               rel="noreferrer noopener"
-              className="text-cream/80 hover:text-cream text-sm underline underline-offset-4"
+              className="text-cream/75 hover:text-gold text-sm underline underline-offset-4"
             >
               {t("openMap")}
             </a>

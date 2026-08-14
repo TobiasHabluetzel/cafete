@@ -51,7 +51,7 @@ export default async function ImprintPage({ params }: LocaleParams) {
               <p className="mt-3">
                 <a
                   href={`mailto:${site.email}`}
-                  className="text-sunset-deep underline underline-offset-4"
+                  className="text-sunset-ink underline underline-offset-4"
                 >
                   {site.email}
                 </a>

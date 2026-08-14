@@ -24,10 +24,10 @@ export default async function ContactPage({ params }: LocaleParams) {
       <Section tone="cream">
         <div className="grid gap-10 lg:grid-cols-3">
           <div className="border-charcoal/10 shadow-brand rounded-lg border bg-white p-7">
-            <h2 className="label-caps text-sunset-deep">{t("emailLabel")}</h2>
+            <h2 className="label-caps text-sunset-ink">{t("emailLabel")}</h2>
             <a
               href={`mailto:${site.email}`}
-              className="font-display text-charcoal hover:text-sunset-deep mt-3 inline-flex items-center gap-2 text-lg font-extrabold break-all transition-colors"
+              className="font-display text-charcoal hover:text-sunset-ink mt-3 inline-flex items-center gap-2 text-lg font-extrabold break-all transition-colors"
             >
               <Mail className="size-5 shrink-0" aria-hidden />
               {site.email}
@@ -41,7 +41,7 @@ export default async function ContactPage({ params }: LocaleParams) {
           </div>
 
           <div className="border-charcoal/10 rounded-lg border bg-white/60 p-7">
-            <h2 className="label-caps text-sunset-deep">{t("producerLabel")}</h2>
+            <h2 className="label-caps text-sunset-ink">{t("producerLabel")}</h2>
             <address className="text-charcoal/80 mt-3 space-y-1 not-italic">
               <p className="font-semibold">{site.name}</p>
               <p>{site.producer.street}</p>
@@ -51,7 +51,7 @@ export default async function ContactPage({ params }: LocaleParams) {
           </div>
 
           <div className="border-charcoal/10 rounded-lg border bg-white/60 p-7">
-            <h2 className="label-caps text-sunset-deep">{t("bottlerLabel")}</h2>
+            <h2 className="label-caps text-sunset-ink">{t("bottlerLabel")}</h2>
             <address className="text-charcoal/80 mt-3 space-y-1 not-italic">
               <p className="font-semibold">{site.bottler.name}</p>
               <p>{site.bottler.street}</p>

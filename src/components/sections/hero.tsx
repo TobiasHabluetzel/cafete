@@ -2,36 +2,80 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import { ctaClass } from "@/components/brand/cta-button";
-import { SloganBanner, Wordmark } from "@/components/brand/wordmark";
+import { Sticker } from "@/components/brand/sticker";
+import { SunburstRays, WarmGlow } from "@/components/brand/sunburst";
+import { LogoSticker, SloganBanner } from "@/components/brand/wordmark";
 import { Link } from "@/i18n/navigation";
+
+import bottle from "../../../public/bottle-photo.jpg";
 
 export function Hero() {
   const t = useTranslations("hero");
+  const tBadges = useTranslations("badges");
 
   return (
-    <section className="bg-sunburst relative isolate overflow-hidden">
-      {/* Sunburst rays radiating behind the banner. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 -top-1/4 mx-auto aspect-square w-[140%] max-w-none opacity-25 [background:repeating-conic-gradient(from_0deg,rgba(255,255,255,0.55)_0deg_6deg,transparent_6deg_18deg)] [mask-image:radial-gradient(circle_at_50%_40%,black_25%,transparent_70%)]"
-      />
+    <section className="bg-night text-cream relative isolate overflow-hidden">
+      {/*
+       * The bottle shot bleeds off the right edge and dissolves leftwards. Filling
+       * the section top-to-bottom means the only boundary that could show is the
+       * left one, and that is what the mask removes — a radial fade would instead
+       * clip the top and bottom off a bottle this tall.
+       */}
+      <div className="relative h-[19rem] sm:h-[24rem] lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[54%]">
+        <Image
+          src={bottle}
+          alt=""
+          priority
+          sizes="(max-width: 1024px) 100vw, 54vw"
+          className="size-full object-cover object-center"
+          style={{
+            maskImage:
+              "linear-gradient(to bottom, black 0%, black 64%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, black 0%, black 64%, transparent 100%)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 hidden lg:block"
+          style={{
+            backdropFilter: "none",
+            background:
+              "linear-gradient(to right, var(--color-night) 0%, rgba(11,9,8,0.55) 26%, transparent 58%)",
+          }}
+        />
+      </div>
 
-      <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pt-14 pb-16 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-6 lg:px-8 lg:pt-20 lg:pb-24">
-        <div className="text-center lg:text-left">
-          <Wordmark
-            priority
-            width={520}
-            height={179}
-            className="mx-auto w-full max-w-[300px] drop-shadow-[0_6px_20px_rgba(20,16,14,0.28)] sm:max-w-[380px] lg:mx-0 lg:max-w-[440px]"
-          />
+      <div className="relative mx-auto max-w-7xl px-4 pt-4 pb-16 sm:px-6 lg:grid lg:min-h-[40rem] lg:grid-cols-[minmax(0,46%)_1fr] lg:items-center lg:px-8 lg:pt-16 lg:pb-24">
+        <div>
+          {/* Tobias' explicit ask: the logo and the slogan together as the
+              homepage banner. Two overlapping rotated stickers, with the burst
+              radiating from behind the wordmark exactly as in the artwork. */}
+          <div className="relative inline-block max-w-full">
+            <SunburstRays
+              size="w-[34rem] lg:w-[40rem]"
+              opacity="opacity-30"
+              className="-top-8"
+            />
+            <WarmGlow className="inset-0 m-auto size-[22rem] max-w-[85vw]" />
 
-          <SloganBanner className="mx-auto mt-5 max-w-[420px] drop-shadow-[0_4px_14px_rgba(20,16,14,0.25)] sm:max-w-[520px] lg:mx-0" />
+            <div className="relative">
+              <LogoSticker
+                priority
+                sizes="(max-width: 1024px) 62vw, 24rem"
+                className="w-[14rem] sm:w-[18rem] lg:w-[22rem]"
+              />
+              <div className="bg-sunset border-ink/80 -mt-6 ml-2 rotate-1 rounded-md border-2 px-4 py-2.5 shadow-[6px_6px_0_rgba(0,0,0,0.45)] sm:-mt-7 sm:px-6">
+                <SloganBanner priority className="max-w-[22rem] sm:max-w-[27rem]" />
+              </div>
+            </div>
+          </div>
 
-          <p className="text-cream mx-auto mt-7 max-w-xl text-lg leading-snug font-medium text-balance sm:text-xl lg:mx-0">
+          <p className="text-cream/85 relative mt-8 max-w-xl text-lg leading-snug font-medium text-balance sm:text-xl">
             {t("subtitle")}
           </p>
 
-          <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center lg:justify-start">
+          <div className="relative mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
             <Link href="/shop" className={ctaClass({ variant: "gold", size: "lg" })}>
               {t("ctaPrimary")}
             </Link>
@@ -46,21 +90,24 @@ export function Hero() {
               {t("ctaSecondary")}
             </Link>
           </div>
-        </div>
 
-        <div className="relative flex justify-center lg:justify-end">
-          <div
-            aria-hidden
-            className="bg-gold/25 absolute inset-0 m-auto aspect-square w-[78%] rounded-full blur-3xl"
-          />
-          <Image
-            src="/bottle-mockup.svg"
-            alt=""
-            width={260}
-            height={720}
-            priority
-            className="relative h-[46vh] max-h-[560px] w-auto drop-shadow-[0_24px_50px_rgba(20,16,14,0.38)] lg:h-[62vh]"
-          />
+          <ul className="relative mt-8 flex flex-wrap items-center gap-3">
+            <li>
+              <Sticker tone="cherry" className="-rotate-2">
+                {tBadges("volume")}
+              </Sticker>
+            </li>
+            <li>
+              <Sticker tone="gold" className="rotate-1">
+                {tBadges("lessSugar")}
+              </Sticker>
+            </li>
+            <li>
+              <Sticker tone="cream" className="-rotate-1">
+                {tBadges("swissMade")}
+              </Sticker>
+            </li>
+          </ul>
         </div>
       </div>
     </section>

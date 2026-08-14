@@ -1,9 +1,18 @@
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 
-import { Section, SectionHeader } from "@/components/layout/section";
+import { Sticker } from "@/components/brand/sticker";
 
+import cherryPhoto from "../../../public/coffee-cherry-photo.jpg";
+
+/**
+ * Full-bleed moody cherry photograph with the copy set over it. The photo is
+ * dramatically side-lit with a dark right half, so the text column sits there
+ * and a scrim guarantees contrast regardless of viewport crop.
+ */
 export function CoffeeFruit() {
   const t = useTranslations("coffeeFruit");
+  const tBadges = useTranslations("badges");
 
   const facts = [
     { title: t("tasteTitle"), body: t("tasteBody") },
@@ -12,34 +21,50 @@ export function CoffeeFruit() {
   ];
 
   return (
-    <Section tone="cream">
-      <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-        <div>
-          <SectionHeader
-            label={t("label")}
-            title={t("title")}
-            intro={t("intro")}
-          />
+    <section className="bg-night text-cream relative isolate">
+      <div className="relative">
+        <Image
+          src={cherryPhoto}
+          alt=""
+          sizes="100vw"
+          placeholder="blur"
+          className="absolute inset-0 size-full object-cover object-left"
+        />
+        <div aria-hidden className="photo-scrim absolute inset-0" />
 
-          {/* Decorative coffee-cherry illustration slot — swap in the
-              designer's coffee-cherry-photo.jpg here. */}
-          <div
-            aria-hidden
-            className="bg-sunburst shadow-brand mt-10 hidden aspect-[4/3] rounded-lg lg:block"
-          />
+        <div className="relative mx-auto max-w-7xl px-4 pt-56 pb-16 sm:px-6 sm:pt-72 lg:px-8 lg:pt-[26rem] lg:pb-24">
+          <div className="reveal max-w-2xl">
+            <p className="label-caps text-gold">{t("label")}</p>
+            <h2 className="text-display text-sticker mt-4 text-balance">
+              {t("title")}
+            </h2>
+            <p className="text-cream/85 mt-6 text-lg leading-relaxed text-balance">
+              {t("intro")}
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Sticker tone="cherry" className="-rotate-2">
+                {tBadges("cascara")}
+              </Sticker>
+              <Sticker tone="gold" className="rotate-1">
+                {tBadges("noExtract")}
+              </Sticker>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <dl className="space-y-8">
+      <div className="border-cream/10 border-t">
+        <dl className="mx-auto grid max-w-7xl gap-px px-4 sm:px-6 lg:grid-cols-3 lg:px-8">
           {facts.map((fact) => (
-            <div key={fact.title} className="border-charcoal/10 border-t pt-6">
-              <dt className="font-display text-h3 text-sunset-deep font-extrabold">
+            <div key={fact.title} className="reveal py-10 lg:pr-8">
+              <dt className="font-display text-gold text-h3 font-extrabold">
                 {fact.title}
               </dt>
-              <dd className="text-charcoal/80 mt-3 leading-relaxed">{fact.body}</dd>
+              <dd className="text-cream/75 mt-3 leading-relaxed">{fact.body}</dd>
             </div>
           ))}
         </dl>
       </div>
-    </Section>
+    </section>
   );
 }

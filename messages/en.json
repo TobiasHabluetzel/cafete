@@ -28,6 +28,15 @@
     "ctaPrimary": "Order now — from CHF 24.90",
     "ctaSecondary": "Launch Event"
   },
+  "badges": {
+    "volume": "33 cl glass bottle",
+    "lessSugar": "Over 50 % less sugar",
+    "swissMade": "Developed in Switzerland",
+    "sparkling": "Sparkling",
+    "energizing": "Naturally energizing",
+    "noExtract": "No extract, no flavouring",
+    "cascara": "Cascara from Brazil"
+  },
   "coffeeFruit": {
     "label": "The coffee fruit",
     "title": "The other half of coffee",
@@ -142,13 +151,34 @@
     "nutritionHeadNutrient": "Nutrient",
     "nutritionHeadValue": "Per 100 ml",
     "nutrition": [
-      { "nutrient": "Energy", "value": "84.2 kJ / 20.3 kcal" },
-      { "nutrient": "Fat", "value": "< 0.5 g" },
-      { "nutrient": "of which saturates", "value": "0.0 g" },
-      { "nutrient": "Carbohydrate", "value": "4.5 g" },
-      { "nutrient": "of which sugars", "value": "4.5 g" },
-      { "nutrient": "Protein", "value": "< 0.5 g" },
-      { "nutrient": "Salt", "value": "0.0 g" }
+      {
+        "nutrient": "Energy",
+        "value": "84.2 kJ / 20.3 kcal"
+      },
+      {
+        "nutrient": "Fat",
+        "value": "< 0.5 g"
+      },
+      {
+        "nutrient": "of which saturates",
+        "value": "0.0 g"
+      },
+      {
+        "nutrient": "Carbohydrate",
+        "value": "4.5 g"
+      },
+      {
+        "nutrient": "of which sugars",
+        "value": "4.5 g"
+      },
+      {
+        "nutrient": "Protein",
+        "value": "< 0.5 g"
+      },
+      {
+        "nutrient": "Salt",
+        "value": "0.0 g"
+      }
     ],
     "taglineLabel": "On the label",
     "taglineValue": "Fruity. Fizzy. Light."
@@ -230,32 +260,80 @@
     "terms": {
       "title": "Terms and conditions",
       "sections": [
-        { "heading": "1. Scope", "body": "These terms apply to all orders placed through this online shop." },
-        { "heading": "2. Prices", "body": "All prices are in Swiss francs and include statutory VAT. Shipping costs are shown separately at checkout." },
-        { "heading": "3. Delivery", "body": "We deliver within Switzerland. Details on delivery times and shipping costs follow when the shop opens." },
-        { "heading": "4. Payment", "body": "Payment is processed by Stripe, by card or TWINT." },
-        { "heading": "5. Withdrawal", "body": "The return policy described on the Returns page applies." },
-        { "heading": "6. Warranty", "body": "If a shipment arrives damaged or incomplete, contact us within 14 days and we will replace the affected goods." }
+        {
+          "heading": "1. Scope",
+          "body": "These terms apply to all orders placed through this online shop."
+        },
+        {
+          "heading": "2. Prices",
+          "body": "All prices are in Swiss francs and include statutory VAT. Shipping costs are shown separately at checkout."
+        },
+        {
+          "heading": "3. Delivery",
+          "body": "We deliver within Switzerland. Details on delivery times and shipping costs follow when the shop opens."
+        },
+        {
+          "heading": "4. Payment",
+          "body": "Payment is processed by Stripe, by card or TWINT."
+        },
+        {
+          "heading": "5. Withdrawal",
+          "body": "The return policy described on the Returns page applies."
+        },
+        {
+          "heading": "6. Warranty",
+          "body": "If a shipment arrives damaged or incomplete, contact us within 14 days and we will replace the affected goods."
+        }
       ]
     },
     "privacy": {
       "title": "Privacy policy",
       "sections": [
-        { "heading": "Controller", "body": "The controller for data processing is CAFÉTÉ, Neugasse 33, 8005 Zürich. Send privacy enquiries to info@drink-cafete.ch." },
-        { "heading": "What data we process", "body": "We process data you actively provide: name and email address when signing up for the newsletter or the event, plus order and delivery details when you buy." },
-        { "heading": "Purpose", "body": "We use this data solely to fulfil your order, answer your enquiry, or — with your consent — send you news about CAFÉTÉ." },
-        { "heading": "Processors", "body": "We use Stripe for payments, Resend for email, and our hosting provider to run the website. These services process data on our behalf." },
-        { "heading": "Analytics", "body": "We use privacy-friendly, cookie-free analytics and do not build personal profiles." },
-        { "heading": "Your rights", "body": "You have the right to access, correct and delete your data, and to withdraw consent at any time. The revised Swiss Data Protection Act (revFADP) applies." }
+        {
+          "heading": "Controller",
+          "body": "The controller for data processing is CAFÉTÉ, Neugasse 33, 8005 Zürich. Send privacy enquiries to info@drink-cafete.ch."
+        },
+        {
+          "heading": "What data we process",
+          "body": "We process data you actively provide: name and email address when signing up for the newsletter or the event, plus order and delivery details when you buy."
+        },
+        {
+          "heading": "Purpose",
+          "body": "We use this data solely to fulfil your order, answer your enquiry, or — with your consent — send you news about CAFÉTÉ."
+        },
+        {
+          "heading": "Processors",
+          "body": "We use Stripe for payments, Resend for email, and our hosting provider to run the website. These services process data on our behalf."
+        },
+        {
+          "heading": "Analytics",
+          "body": "We use privacy-friendly, cookie-free analytics and do not build personal profiles."
+        },
+        {
+          "heading": "Your rights",
+          "body": "You have the right to access, correct and delete your data, and to withdraw consent at any time. The revised Swiss Data Protection Act (revFADP) applies."
+        }
       ]
     },
     "returns": {
       "title": "Returns and withdrawal",
       "sections": [
-        { "heading": "Right of return", "body": "You may return unopened goods within 14 days of receipt. Please let us know by email before sending anything back." },
-        { "heading": "Foodstuffs", "body": "For hygiene reasons we cannot accept opened bottles." },
-        { "heading": "Damaged shipments", "body": "If a bottle arrives damaged, send us a photo — we’ll replace it or refund you, with no need to return it." },
-        { "heading": "Refunds", "body": "Refunds are issued to the original payment method, usually within ten working days of the return arriving." }
+        {
+          "heading": "Right of return",
+          "body": "You may return unopened goods within 14 days of receipt. Please let us know by email before sending anything back."
+        },
+        {
+          "heading": "Foodstuffs",
+          "body": "For hygiene reasons we cannot accept opened bottles."
+        },
+        {
+          "heading": "Damaged shipments",
+          "body": "If a bottle arrives damaged, send us a photo — we’ll replace it or refund you, with no need to return it."
+        },
+        {
+          "heading": "Refunds",
+          "body": "Refunds are issued to the original payment method, usually within ten working days of the return arriving."
+        }
       ]
     }
   },

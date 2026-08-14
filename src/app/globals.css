@@ -50,18 +50,29 @@
    (bg-sunset, text-gold-soft, rounded-lg, shadow-brand, …).
 --------------------------------------------------------------------------- */
 @theme {
-  --color-sunset: #f26b1a;
-  --color-sunset-deep: #c24e12;
-  --color-sunset-glow: #f59a3c;
+  /* Colour-picked from the designer's `Cafété Logo satt.png`: the artwork uses
+     exactly #FF751F orange, #FF3131 red, #FFDE59 gold and #000000 outlines.
+     These replace the approximations in the brand-tokens doc, which told us to
+     fine-tune from the real files. */
+  --color-sunset: #ff751f;
+  --color-sunset-glow: #ff9a52;
+  --color-sunset-deep: #d6540f;
+  /* Text-safe deep orange: 5.25:1 on cream, 6.05:1 on white. `sunset-deep` is
+     only 3.55:1 on cream, so it is for gradients and hovers, never body text. */
+  --color-sunset-ink: #aa4109;
 
-  --color-cherry: #e5391c;
-  --color-cherry-deep: #b82a15;
+  --color-cherry: #ff3131;
+  --color-cherry-deep: #c81e1e;
 
-  --color-gold: #f6c443;
-  --color-gold-soft: #fbd968;
+  --color-gold: #ffde59;
+  --color-gold-soft: #ffe98a;
 
   --color-charcoal: #14100e;
   --color-charcoal-soft: #2e2824;
+  /* Deepest surface, for the sections that carry the moody photography. */
+  --color-night: #0b0908;
+  /* The brand's outline black. */
+  --color-ink: #000000;
 
   --color-cream: #f7eedd;
 
@@ -89,6 +100,53 @@
   --text-h2--line-height: 1.15;
   --text-h3: 1.5rem;
   --text-h3--line-height: 1.25;
+  /* Oversized editorial numeral for the pillar cards. */
+  --text-numeral: 5rem;
+  --text-numeral--line-height: 0.8;
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-spin-rays: spin-rays 90s linear infinite;
+  --animate-bob: bob 7s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* Two identical copies sit side by side, so -50% loops seamlessly. */
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes spin-rays {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* ---------------------------------------------------------------------------
@@ -105,8 +163,10 @@
   --popover: #ffffff;
   --popover-foreground: #14100e;
 
-  --primary: #f26b1a; /* sunset */
-  --primary-foreground: #ffffff;
+  --primary: #ff751f; /* sunset */
+  /* Charcoal, not white: cream/white on this orange is only 2.3–2.7:1, while
+     charcoal is 7.0:1 — and black-on-orange is what the brand itself does. */
+  --primary-foreground: #14100e;
 
   --secondary: #14100e; /* charcoal */
   --secondary-foreground: #f7eedd;
@@ -114,19 +174,19 @@
   --muted: #f0e2ca;
   --muted-foreground: #6b5c4d;
 
-  --accent: #f6c443; /* gold */
+  --accent: #ffde59; /* gold */
   --accent-foreground: #14100e;
 
-  --destructive: #b82a15; /* cherry-deep */
+  --destructive: #c81e1e; /* cherry-deep */
 
   --border: #e2d2b6;
   --input: #d9c6a6;
-  --ring: #c24e12; /* sunset-deep — AA-contrast focus ring on cream */
+  --ring: #aa4109; /* sunset-ink — AA-contrast focus ring on cream */
 
-  --chart-1: #f26b1a;
-  --chart-2: #e5391c;
-  --chart-3: #f6c443;
-  --chart-4: #c24e12;
+  --chart-1: #ff751f;
+  --chart-2: #ff3131;
+  --chart-3: #ffde59;
+  --chart-4: #aa4109;
   --chart-5: #2e2824;
 
   --sidebar: #14100e;
@@ -148,7 +208,7 @@
   --popover: #2e2824;
   --popover-foreground: #f7eedd;
 
-  --primary: #f59a3c; /* sunset-glow reads better on charcoal */
+  --primary: #ff9a52; /* sunset-glow reads better on charcoal */
   --primary-foreground: #14100e;
 
   --secondary: #2e2824;
@@ -199,6 +259,69 @@
   font-weight: 700;
   font-size: 0.8125rem;
   line-height: 1;
+}
+
+/* Graffiti sticker lettering: gold fill, hard black outline and an offset drop —
+   the same treatment as the wordmark and the Fruity·Fizzy·Focus banner. */
+@utility text-sticker {
+  color: var(--color-gold);
+  text-shadow:
+    2px 0 0 var(--color-ink),
+    -2px 0 0 var(--color-ink),
+    0 2px 0 var(--color-ink),
+    0 -2px 0 var(--color-ink),
+    1.5px 1.5px 0 var(--color-ink),
+    -1.5px 1.5px 0 var(--color-ink),
+    1.5px -1.5px 0 var(--color-ink),
+    -1.5px -1.5px 0 var(--color-ink),
+    6px 6px 0 rgba(0, 0, 0, 0.35);
+  paint-order: stroke fill;
+}
+
+/* Radiating sunburst rays, matching the logo's flames. Sits behind content. */
+@utility rays {
+  background-image: repeating-conic-gradient(
+    from 0deg,
+    var(--color-cherry) 0deg 5deg,
+    transparent 5deg 15deg
+  );
+}
+
+/* Warm vignette so light text stays readable over the moody photography. */
+@utility photo-scrim {
+  background-image: linear-gradient(
+    to top,
+    rgba(11, 9, 8, 0.94) 0%,
+    rgba(11, 9, 8, 0.72) 38%,
+    rgba(11, 9, 8, 0.3) 72%,
+    rgba(11, 9, 8, 0.15) 100%
+  );
+}
+
+@layer utilities {
+  /*
+   * Scroll-driven reveal, progressive enhancement only: the default state is
+   * fully visible, and the animation is layered on when the browser supports
+   * scroll-linked timelines and the visitor has not asked for reduced motion.
+   * Browsers without support (currently Safari) simply show the content.
+   */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal {
+        animation: reveal-in linear both;
+        animation-timeline: view();
+        animation-range: entry 8% cover 30%;
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee,
+    .animate-spin-rays,
+    .animate-bob {
+      animation: none !important;
+    }
+  }
 }
 
 @layer base {

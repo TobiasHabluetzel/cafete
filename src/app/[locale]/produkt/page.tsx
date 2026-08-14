@@ -12,6 +12,8 @@ import {
   type LocaleParams,
 } from "@/lib/page";
 
+import bottle from "../../../../public/bottle-photo.jpg";
+
 export const generateStaticParams = generateLocaleParams;
 export const generateMetadata = createMetadata("nav", "product");
 
@@ -38,18 +40,14 @@ export default async function ProductPage({ params }: LocaleParams) {
 
       <Section tone="cream">
         <div className="grid gap-12 lg:grid-cols-[0.7fr_1fr] lg:gap-16">
-          <div className="relative flex justify-center lg:justify-start">
-            <div
-              aria-hidden
-              className="bg-sunset/20 absolute inset-0 m-auto aspect-square w-[70%] rounded-full blur-3xl"
-            />
+          <div className="relative mx-auto w-full max-w-sm lg:mx-0">
             <Image
-              src="/bottle-mockup.svg"
+              src={bottle}
               alt=""
-              width={260}
-              height={720}
               priority
-              className="relative h-[420px] w-auto drop-shadow-[0_18px_40px_rgba(20,16,14,0.22)]"
+              sizes="(max-width: 1024px) 80vw, 30vw"
+              placeholder="blur"
+              className="border-ink/80 h-auto w-full rounded-lg border-2 shadow-[6px_6px_0_rgba(0,0,0,0.35)]"
             />
           </div>
 

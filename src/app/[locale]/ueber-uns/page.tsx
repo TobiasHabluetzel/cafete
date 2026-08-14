@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 
 import { PageHeader, Section, SectionHeader } from "@/components/layout/section";
+import { CherryMark } from "@/components/brand/sticker";
 import { Story } from "@/components/sections/story";
 import {
   createMetadata,
@@ -43,13 +44,16 @@ export default async function AboutPage({ params }: LocaleParams) {
               key={founder}
               className="border-charcoal/10 shadow-brand rounded-lg border bg-white p-7"
             >
-              {/* Swap in founder-kareem.jpg / founder-hannes.jpg here. */}
+              {/* Placeholder until founder-kareem.jpg / founder-hannes.jpg
+                  arrive — the dossier lists them but they were not supplied. */}
               <div
                 aria-hidden
-                className="bg-sunburst mb-6 aspect-[4/3] w-full rounded-md"
-              />
+                className="bg-night mb-6 flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-md"
+              >
+                <CherryMark className="w-28 opacity-45" />
+              </div>
               <h3 className="text-h3">{tFounders(`${founder}.name`)}</h3>
-              <p className="label-caps text-sunset-deep mt-2">
+              <p className="label-caps text-sunset-ink mt-2">
                 {tFounders(`${founder}.role`)}
               </p>
               <p className="text-charcoal/80 mt-4 leading-relaxed">

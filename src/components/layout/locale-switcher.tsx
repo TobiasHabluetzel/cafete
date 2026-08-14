@@ -49,9 +49,9 @@ export function LocaleSwitcher({ className }: { className?: string }) {
             aria-current={isActive ? "true" : undefined}
             className={cn(
               "cursor-pointer rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-wider transition-colors",
-              "focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:outline-none",
+              "focus-visible:ring-gold focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:outline-none",
               isActive
-                ? "bg-charcoal text-cream"
+                ? "bg-gold text-ink"
                 : "text-current/70 hover:text-current",
             )}
           >

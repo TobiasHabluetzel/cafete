@@ -1,5 +1,6 @@
 import { setRequestLocale } from "next-intl/server";
 
+import { SloganMarquee } from "@/components/brand/marquee";
 import { CoffeeFruit } from "@/components/sections/coffee-fruit";
 import { EventBand } from "@/components/sections/event-band";
 import { Hero } from "@/components/sections/hero";
@@ -23,10 +24,12 @@ export default async function HomePage({
   return (
     <>
       <Hero />
+      <SloganMarquee />
       <CoffeeFruit />
       <Pillars />
       <Story />
       <ShopTeaser />
+      <SloganMarquee />
       <EventBand />
     </>
   );
