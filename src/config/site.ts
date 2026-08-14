@@ -1,9 +1,31 @@
 import type { StaticPathname } from "@/i18n/routing";
 
+const DEFAULT_SITE_URL = "https://drink-cafete.ch";
+
+/**
+ * Resolve the canonical origin from the environment.
+ *
+ * Docker/Railway turn an unset build ARG into an *empty string* rather than
+ * leaving it undefined, so `??` is not enough — an empty value must fall back
+ * too, or `new URL(site.url)` throws during prerendering. A value without a
+ * scheme (`drink-cafete.ch`) is also accepted and normalised.
+ */
+function resolveSiteUrl(): string {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (!raw) return DEFAULT_SITE_URL;
+
+  const candidate = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+  try {
+    return new URL(candidate).origin;
+  } catch {
+    return DEFAULT_SITE_URL;
+  }
+}
+
 export const site = {
   name: "CAFÉTÉ",
   domain: "drink-cafete.ch",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://drink-cafete.ch",
+  url: resolveSiteUrl(),
   email: "info@drink-cafete.ch",
   entryPriceCHF: 24.9,
   /** "Ein Produkt von" — see docs/cafete-content-pack.md §9. */

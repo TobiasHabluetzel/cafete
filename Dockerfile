@@ -17,9 +17,11 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Public (NEXT_PUBLIC_*) vars are inlined at build time, so they must be
-# present here — Railway passes them through as build args.
-ARG NEXT_PUBLIC_SITE_URL
-ARG NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+# present here — Railway passes them through as build args. The defaults matter:
+# an unset ARG expands to an empty string, and `ENV X=""` is worse than unset
+# because `??` fallbacks in the app no longer kick in.
+ARG NEXT_PUBLIC_SITE_URL="https://drink-cafete.ch"
+ARG NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=""
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 ENV NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=$NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 
