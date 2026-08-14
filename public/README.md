@@ -15,6 +15,8 @@ node scripts/process-assets.mjs "/Users/tobiashablutzel/Desktop/Cafeete"
 | `coffee-cherry-illustration.png` | `Kaffeekirsche.png` | Orange keyed out via border flood fill |
 | `coffee-cherry-photo.jpg` | `Kaffeekirsche für Post.png` | Resized, mozjpeg q84 |
 | `bottle-photo.jpg` | `Cafété Mockup.png` | Resized, mozjpeg q86 |
+| `founder-kareem.jpg` | `Kareem_F_009.jpeg` | 4:5 top crop, mozjpeg q84 |
+| `founder-hannes.jpg` | `Kareem_F_007.jpeg` | Pre-cropped to match Kareem's scale, then 4:5, q84 |
 
 ## Why the logo keeps its orange background
 
@@ -39,9 +41,23 @@ Consequence: the slogan is **black ink on transparent**, so it needs a light or
 orange surface behind it. It is invisible on charcoal. Both the hero banner and
 the marquee put it on an orange band.
 
+## Founder photos
+
+Both are named `Kareem_F_*` regardless of subject: **009 is Kareem, 007 is
+Hannes** (confirmed by Tobias). Two quirks worth knowing:
+
+- They are **TIFFs with a `.jpeg` extension** (2832×4240, ~36 MB each), which is
+  why they need `sharp` rather than a plain copy — and why some tools refuse to
+  open them.
+- They arrived in `~/Downloads` rather than the asset folder, so the script falls
+  back to searching there. It also accepts the `Kareem_F_009 2.jpeg` duplicate
+  name. Moving them into the asset folder alongside the others is tidier.
+
+Hannes was photographed further from the camera, so his source is pre-cropped
+(`region` in the script) to roughly match Kareem's scale before the shared 4:5
+crop. Adjust those fractions if the framing should change.
+
 ## Still missing from the designer
 
-- **Founder photos.** The dossier references `Kareem_F_009` / `Kareem_F_007`, but
-  they weren't supplied. `/[locale]/ueber-uns` shows a marked placeholder.
 - **A vector logo.** The source is only 570×451, so the header and hero render it
   below 2× on retina. An SVG or a ≥1500px PNG export would sharpen it.

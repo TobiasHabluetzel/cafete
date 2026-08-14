@@ -185,19 +185,53 @@ async function cutout({ src, out, resizeWidth, tol, feather }) {
   );
 }
 
-async function photo({ src, out, width, quality = 82 }) {
-  await sharp(src)
-    .resize({ width, withoutEnlargement: true })
+/**
+ * `region` optionally pre-crops the source, as fractions of its dimensions, so
+ * subjects photographed at different distances can be framed consistently.
+ */
+async function photo({ src, out, width, height, position, region, quality = 82 }) {
+  let pipeline = sharp(src).rotate(); // honour EXIF orientation before cropping
+
+  if (region) {
+    const meta = await sharp(src).rotate().metadata();
+    pipeline = pipeline.extract({
+      left: Math.round(region.left * meta.width),
+      top: Math.round(region.top * meta.height),
+      width: Math.round(region.width * meta.width),
+      height: Math.round(region.height * meta.height),
+    });
+  }
+
+  await pipeline
+    .resize({
+      width,
+      height,
+      position,
+      fit: height ? "cover" : "inside",
+      withoutEnlargement: true,
+    })
     .jpeg({ quality, mozjpeg: true })
     .toFile(path.join(OUT_DIR, out));
+
   const meta = await sharp(path.join(OUT_DIR, out)).metadata();
   console.log(`  ${out.padEnd(34)} ${String(meta.width).padStart(5)}x${String(meta.height).padEnd(5)}`);
 }
 
-const s = (name) => {
-  const full = path.join(SOURCE_DIR, name);
-  if (!existsSync(full)) throw new Error(`Missing source asset: ${full}`);
-  return full;
+/** Extra places to look — the founder photos arrived straight into Downloads. */
+const EXTRA_DIRS = [path.join(process.env.HOME ?? "", "Downloads")];
+
+/** Resolve a source file, accepting any of several candidate filenames. */
+const s = (...names) => {
+  for (const dir of [SOURCE_DIR, ...EXTRA_DIRS]) {
+    for (const name of names) {
+      const full = path.join(dir, name);
+      if (existsSync(full)) return full;
+    }
+  }
+  throw new Error(
+    `Missing source asset. Looked for ${names.join(" / ")} in:\n  ` +
+      [SOURCE_DIR, ...EXTRA_DIRS].join("\n  "),
+  );
 };
 
 console.log(`Processing brand assets from ${SOURCE_DIR}\n`);
@@ -240,6 +274,31 @@ await photo({
   out: "bottle-photo.jpg",
   width: 1086,
   quality: 86,
+});
+
+// Founder portraits. Delivered as 2832x4240 TIFFs despite the .jpeg extension,
+// which is why they need `sharp` rather than a plain copy. Cropped to 4:5 from
+// the top so the head and torso survive and the legs are trimmed.
+// Per Tobias: 009 is Kareem, 007 is Hannes.
+console.log("\nFounder portraits:");
+await photo({
+  src: s("Kareem_F_009.jpeg", "Kareem_F_009 2.jpeg"),
+  out: "founder-kareem.jpg",
+  width: 1200,
+  height: 1500,
+  position: "top",
+  quality: 84,
+});
+await photo({
+  src: s("Kareem_F_007.jpeg", "Kareem_F_007 2.jpeg"),
+  out: "founder-hannes.jpg",
+  // Hannes stands further from the camera, so without this he reads much
+  // smaller in frame than Kareem. Pre-crop to roughly match his scale.
+  region: { left: 0.21, top: 0.057, width: 0.58, height: 0.484 },
+  width: 1200,
+  height: 1500,
+  position: "top",
+  quality: 84,
 });
 
 console.log("\nDone.");

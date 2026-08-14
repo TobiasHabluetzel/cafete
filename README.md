@@ -177,7 +177,6 @@ curl localhost:8099/api/health   # {"status":"ok"}
 ## Before going live
 
 - Ask the designer for a **vector or ≥1500px logo** — the current source is 570px, so it renders below 2× on retina.
-- Ask for the **founder photos** (the dossier lists them but they were not supplied).
 - Replace the placeholder legal text (Impressum / AGB / Datenschutz / Widerruf).
 - Confirm the registered company name + UID for the Impressum.
 - Create the Stripe Product/Prices, set shipping rates and free-shipping
