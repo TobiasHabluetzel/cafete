@@ -31,7 +31,7 @@ export function LocaleSwitcher({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "inline-flex items-center rounded-full border border-current/20 p-0.5",
+        "border-ink/25 inline-flex items-center rounded-full border p-0.5",
         isPending && "opacity-60",
         className,
       )}
@@ -49,10 +49,12 @@ export function LocaleSwitcher({ className }: { className?: string }) {
             aria-current={isActive ? "true" : undefined}
             className={cn(
               "cursor-pointer rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-wider transition-colors",
-              "focus-visible:ring-gold focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:outline-none",
+              "focus-visible:ring-ink focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:outline-none",
+              // Charcoal pill on the orange bar: the fill reads at 7:1 against
+              // the bar and the cream label at 16:1 inside it.
               isActive
-                ? "bg-gold text-ink"
-                : "text-current/70 hover:text-current",
+                ? "bg-charcoal text-cream"
+                : "text-charcoal/70 hover:text-ink",
             )}
           >
             {locale}

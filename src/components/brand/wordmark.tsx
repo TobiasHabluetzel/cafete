@@ -16,18 +16,28 @@ export function LogoSticker({
   className,
   priority = false,
   rotate = true,
+  framed = true,
   sizes,
 }: {
   className?: string;
   priority?: boolean;
   rotate?: boolean;
+  /**
+   * Set `false` when the surface behind it is already `sunset` — the token and
+   * the artwork's background are both exactly #FF751F, so the tile disappears
+   * and the mark reads as if it were placed straight onto the surface. Only
+   * works on an opaque sunset background: any transparency would blend the
+   * surface with what is behind it and reveal the tile as a mismatched patch.
+   */
+  framed?: boolean;
   sizes?: string;
 }) {
   return (
     <span
       className={cn(
-        "ring-ink/80 inline-block overflow-hidden rounded-md ring-2",
-        "shadow-[6px_6px_0_rgba(0,0,0,0.45)]",
+        "inline-block overflow-hidden",
+        framed &&
+          "ring-ink/80 rounded-md ring-2 shadow-[6px_6px_0_rgba(0,0,0,0.45)]",
         rotate && "-rotate-2",
         className,
       )}

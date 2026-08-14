@@ -25,16 +25,30 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    // Dark header: every page now opens on a dark hero, so this reads as one
-    // surface instead of a pale bar stuck on top.
-    <header className="bg-night/85 text-cream border-cream/10 sticky top-0 z-50 border-b backdrop-blur-md">
+    /*
+     * Solid sunset bar, deliberately with no transparency or backdrop blur: the
+     * logo asset carries its own #FF751F background, so an exact colour match
+     * makes its tile invisible. Any alpha would blend the bar with the dark
+     * content scrolling underneath and the tile would show as a lighter patch.
+     *
+     * Text on orange is charcoal/ink — cream is only 2.3:1 here, and black on
+     * orange is what the artwork itself does.
+     */
+    <header className="bg-sunset text-charcoal border-ink/25 sticky top-0 z-50 border-b-2">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:h-20 lg:px-8">
-        <Link href="/" className="flex shrink-0 items-center" aria-label="CAFÉTÉ">
+        <Link
+          href="/"
+          className="focus-visible:ring-ink flex shrink-0 items-center rounded-sm focus-visible:ring-2 focus-visible:outline-none"
+          aria-label="CAFÉTÉ"
+        >
           <LogoSticker
             priority
             rotate={false}
-            sizes="7rem"
-            className="w-[4.5rem] rounded-sm shadow-none ring-1 lg:w-[5.25rem]"
+            framed={false}
+            sizes="8rem"
+            // Aspect is 570:451, so these keep the mark clear of the 64/80px
+            // bar edges without relying on the asset's own margin alone.
+            className="w-[4.5rem] lg:w-[5.75rem]"
           />
         </Link>
 
@@ -48,8 +62,10 @@ export function SiteHeader() {
                 aria-current={isActive ? "page" : undefined}
                 className={cn(
                   "rounded-full px-3 py-2 text-sm font-semibold tracking-wide uppercase transition-colors",
-                  "focus-visible:ring-gold focus-visible:ring-2 focus-visible:outline-none",
-                  isActive ? "text-gold" : "text-cream/75 hover:text-gold",
+                  "focus-visible:ring-ink focus-visible:ring-2 focus-visible:outline-none",
+                  isActive
+                    ? "text-ink underline decoration-2 underline-offset-4"
+                    : "text-charcoal/75 hover:text-ink",
                 )}
               >
                 {t(item.labelKey)}
@@ -67,7 +83,7 @@ export function SiteHeader() {
             aria-label={t("cart")}
             nativeButton={false}
             render={<Link href="/warenkorb" />}
-            className="text-cream hover:bg-cream/10 hover:text-gold"
+            className="text-charcoal hover:bg-ink/10 hover:text-ink"
           >
             <ShoppingBag />
           </Button>
@@ -79,7 +95,7 @@ export function SiteHeader() {
                   variant="ghost"
                   size="icon-lg"
                   aria-label={t("openMenu")}
-                  className="text-cream hover:bg-cream/10 hover:text-gold lg:hidden"
+                  className="text-charcoal hover:bg-ink/10 hover:text-ink lg:hidden"
                 >
                   <Menu />
                 </Button>
@@ -87,10 +103,12 @@ export function SiteHeader() {
             />
             <SheetContent
               side="right"
-              className="bg-night text-cream border-cream/10 w-[86vw] sm:max-w-sm"
+              className="bg-sunset text-charcoal border-ink/25 w-[86vw] border-l-2 sm:max-w-sm"
             >
               <SheetHeader>
-                <SheetTitle className="label-caps text-gold">{t("menu")}</SheetTitle>
+                <SheetTitle className="label-caps text-cherry-deep">
+                  {t("menu")}
+                </SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col gap-1 px-4 pb-8" aria-label={t("menu")}>
                 {mainNav.map((item) => (
@@ -100,10 +118,10 @@ export function SiteHeader() {
                       <Link
                         href={item.href}
                         className={cn(
-                          "font-display border-cream/10 border-b py-4 text-2xl font-extrabold",
+                          "font-display border-ink/20 border-b py-4 text-2xl font-extrabold",
                           pathname === item.href
-                            ? "text-gold"
-                            : "text-cream hover:text-gold",
+                            ? "text-ink underline decoration-2 underline-offset-4"
+                            : "text-charcoal hover:text-ink",
                         )}
                       >
                         {t(item.labelKey)}
