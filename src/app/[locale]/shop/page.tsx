@@ -12,7 +12,7 @@ import {
   resolvePageLocale,
   type LocaleParams,
 } from "@/lib/page";
-import { getEntryPrice, getPackPrices } from "@/lib/pricing";
+import { entryPriceFrom, getPackPrices } from "@/lib/pricing";
 import { configuredPacks, isStripeConfigured } from "@/lib/stripe";
 
 export const generateStaticParams = generateLocaleParams;
@@ -30,13 +30,18 @@ export default async function ShopPage({ params }: LocaleParams) {
   const tCheckout = await getTranslations({ locale, namespace: "checkout" });
   const tBadges = await getTranslations({ locale, namespace: "badges" });
 
-  // Only offer packs that actually have a price in Stripe. Before the Products
-  // exist that is none, and the page falls back to the teaser.
-  const buyable = isStripeConfigured() ? configuredPacks() : [];
+  /*
+   * A pack is only offered if Stripe holds an *active* price for it — not merely
+   * if its env var is set. Checking the env var alone meant the shop advertised a
+   * 6-pack whose price had been deactivated, and the customer only found out when
+   * Checkout rejected it. Never offer what Stripe will not accept.
+   */
+  const packPrices = isStripeConfigured() ? await getPackPrices() : [];
+  const buyable = configuredPacks().filter((pack) =>
+    packPrices.some((price) => price.bottles === pack.bottles),
+  );
   const isOpen = buyable.length > 0;
-  const [entryPrice, packPrices] = isOpen
-    ? await Promise.all([getEntryPrice(locale), getPackPrices()])
-    : [null, []];
+  const entryPrice = entryPriceFrom(packPrices, locale);
 
   return (
     <>

@@ -31,28 +31,53 @@ export async function getPackPrices(): Promise<PackPrice[]> {
   const packs = configuredPacks();
   if (packs.length === 0) return [];
 
-  try {
-    // Annotated because `packSizes` is `as const`, so `pack.bottles` is the
-    // literal union 6 | 12 | 24 and would not widen to PackPrice on its own.
-    const results: (PackPrice | null)[] = await Promise.all(
-      packs.map(async (pack) => {
-        const price = await getStripe().prices.retrieve(priceIdForPack(pack.bottles)!);
-        if (!price.active || typeof price.unit_amount !== "number") return null;
-        return {
-          bottles: pack.bottles,
-          amount: price.unit_amount,
-          currency: price.currency.toUpperCase(),
-        };
-      }),
-    );
+  // allSettled, not all: one unusable Price ID must only remove its own pack.
+  // With Promise.all, a single rejection wiped every price off the page.
+  const settled = await Promise.allSettled(
+    packs.map(async (pack): Promise<PackPrice | null> => {
+      const id = priceIdForPack(pack.bottles)!;
+      const price = await getStripe().prices.retrieve(id);
 
-    return results
-      .filter((price): price is PackPrice => price !== null)
-      .sort((a, b) => a.bottles - b.bottles);
-  } catch (error) {
-    console.error("[pricing] could not read pack prices from Stripe:", error);
-    return [];
-  }
+      // An inactive price is the important case: Checkout refuses it
+      // ("The price specified is inactive"), so a pack backed by one must not be
+      // offered at all rather than failing at the last step.
+      if (!price.active) {
+        console.warn(`[pricing] ${pack.stripePriceEnv} (${id}) is inactive — hiding the ${pack.bottles}-pack`);
+        return null;
+      }
+      if (typeof price.unit_amount !== "number") {
+        console.warn(`[pricing] ${pack.stripePriceEnv} (${id}) has no unit_amount — hiding the ${pack.bottles}-pack`);
+        return null;
+      }
+
+      return {
+        bottles: pack.bottles,
+        amount: price.unit_amount,
+        currency: price.currency.toUpperCase(),
+      };
+    }),
+  );
+
+  const prices: PackPrice[] = [];
+  settled.forEach((result, index) => {
+    if (result.status === "rejected") {
+      console.error(
+        `[pricing] could not read ${packs[index].stripePriceEnv}:`,
+        result.reason instanceof Error ? result.reason.message : result.reason,
+      );
+      return;
+    }
+    if (result.value) prices.push(result.value);
+  });
+
+  return prices.sort((a, b) => a.bottles - b.bottles);
+}
+
+/** The cheapest pack, formatted — for callers that already hold the prices. */
+export function entryPriceFrom(prices: PackPrice[], locale: string): string | null {
+  if (prices.length === 0) return null;
+  const cheapest = prices.reduce((min, p) => (p.amount < min.amount ? p : min));
+  return formatMoney(cheapest.amount, cheapest.currency, locale);
 }
 
 /**
@@ -60,9 +85,5 @@ export async function getPackPrices(): Promise<PackPrice[]> {
  * Null when unknown, so callers omit the figure rather than inventing one.
  */
 export async function getEntryPrice(locale: string): Promise<string | null> {
-  const prices = await getPackPrices();
-  if (prices.length === 0) return null;
-
-  const cheapest = prices.reduce((min, p) => (p.amount < min.amount ? p : min));
-  return formatMoney(cheapest.amount, cheapest.currency, locale);
+  return entryPriceFrom(await getPackPrices(), locale);
 }

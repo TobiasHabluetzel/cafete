@@ -130,7 +130,8 @@
     "perBottle": "{price} pro Flasche",
     "subtotal": "Zwischensumme",
     "priceTbd": "Preis folgt",
-    "bestValue": "Bester Preis pro Flasche"
+    "bestValue": "Bester Preis pro Flasche",
+    "unavailableLine": "Ein Artikel ist momentan nicht verfügbar. Bitte entferne ihn, um fortzufahren."
   },
   "event": {
     "label": "Save the date",

@@ -130,7 +130,8 @@
     "perBottle": "{price} per bottle",
     "subtotal": "Subtotal",
     "priceTbd": "Price to follow",
-    "bestValue": "Best per bottle"
+    "bestValue": "Best per bottle",
+    "unavailableLine": "One item is currently unavailable. Please remove it to continue."
   },
   "event": {
     "label": "Save the date",

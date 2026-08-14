@@ -167,13 +167,19 @@ export function CartView({ prices }: { prices: PackPrice[] }) {
       <button
         type="button"
         onClick={checkout}
-        disabled={status === "redirecting"}
+        disabled={status === "redirecting" || !allPriced}
         className={ctaClass({ size: "lg", className: "mt-8" })}
       >
         {status === "redirecting" ? t("redirecting") : t("goToCheckout")}
       </button>
 
-      <p className="text-charcoal/55 mt-3 text-sm">{t("securePayment")}</p>
+      {allPriced ? (
+        <p className="text-charcoal/55 mt-3 text-sm">{t("securePayment")}</p>
+      ) : (
+        <p role="alert" className="text-cherry-deep mt-3 max-w-prose text-sm">
+          {t("unavailableLine")}
+        </p>
+      )}
 
       {status === "unavailable" ? (
         <p role="status" className="text-charcoal/80 mt-4 max-w-prose text-sm">
