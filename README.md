@@ -253,6 +253,65 @@ stripe trigger checkout.session.completed
   account set up — see "Connecting Stripe" above.
 - **Phase 3:** SEO/OG images, `hreflang`, sitemap, robots, analytics, a11y pass.
 
+## Status — 17 August 2026
+
+Live at **https://cafete-production.up.railway.app** (Railway, sandbox Stripe keys).
+Custom domain `drink-cafete.ch` not yet pointed. Launch anchor: **19 September 2026**.
+
+Done: Phases 0–2. Bilingual marketing site with all routes, real brand assets and
+copy, and a working shop — pack selector → cart → Stripe Checkout → payment →
+thank-you page, verified end to end with a real test payment.
+
+### Blocking, in priority order
+
+1. **The 6-pack Stripe Price is inactive.** Checkout rejects it ("The price
+   specified is inactive"), so the shop hides that pack. Reactivate it, or create a
+   new Price and update `STRIPE_PRICE_PACK_6`. Editing a price in Stripe archives
+   the old one and mints a new ID — the env var must be updated when that happens.
+2. **No order confirmation emails are being sent.** `STRIPE_WEBHOOK_SECRET` and
+   `RESEND_API_KEY` are unset in Railway, so `checkout.session.completed` never
+   reaches us. Orders complete silently. Do this before showing anyone the site.
+3. **Confirm the pack prices.** They were provisional. Because the site reads them
+   live from Stripe, confirming them needs no code change.
+4. **Placeholder legal text** — Impressum, AGB, Datenschutz, Widerruf are all
+   drafts behind a visible warning. Also needs the registered company name + UID.
+5. **Live-mode Stripe.** Live mode is a separate world: recreate the Product and
+   Prices there, get new `price_…` IDs, swap the Railway variables. Until then the
+   public URL accepts test-card orders from anyone who finds it.
+
+### Worth doing, not blocking
+
+- **Enable TWINT** (Settings → Payment methods). It is not currently active, so
+  checkout is card-only. No code change needed — the payment-method list is not
+  hardcoded, precisely so this can be switched on independently.
+- **Trim payment methods.** Klarna, Amazon Pay and Link are on by default;
+  buy-now-pay-later on a CHF 25 soft drink is an odd fit.
+- **Rename the Stripe Products.** They read "6 Cafete" / "12 Cafete", and that text
+  appears on Checkout, the receipt and the thank-you page.
+- **Stripe Checkout branding** (Settings → Branding): set `#FF751F` and the logo so
+  the hosted page looks like the site. Cheapest possible win.
+- **Shipping rate.** `STRIPE_SHIPPING_RATE` is unset, so delivery is currently free.
+- Ask the designer for a **vector or ≥1500px logo** — the source is 570px, so the
+  header and hero render below 2× on retina.
+- **Phase 3** is untouched: OG images, `hreflang`, sitemap, robots, analytics.
+
+### Decisions taken, so they are not relitigated
+
+- **Hosted Stripe Checkout, not embedded.** `ui_mode: 'embedded_page'` exists and
+  is a contained change, but TWINT is a redirect/app-switch method that leaves the
+  page anyway — so embedding adds a client-side dependency and a new failure
+  surface to keep only card payers on-site. Revisit post-launch.
+- **Stripe is the sole source of truth for prices.** Nothing about money is
+  hardcoded. A hardcoded "ab CHF 24.90" had already drifted from the real 24.50
+  within a day of the first real price existing.
+- **Never offer a pack without an active Stripe Price.** Deriving the offer from
+  "is the env var set?" let the shop advertise something Checkout would refuse.
+- **No single-bottle SKU** — 6, 12 and 24 only; the 6-pack is the entry price.
+- **Four pillars** (Funktional / Sozial / Ökologisch / Ökonomisch), not the three
+  from the original brief. Brand-tokens v2 and the content pack supersede it.
+- **The logo keeps its orange tile**; the orange is structural. On the orange
+  header bar the tile is invisible because the hexes match exactly.
+
 ## Before going live
 
 - Ask the designer for a **vector or ≥1500px logo** — the current source is 570px, so it renders below 2× on retina.
