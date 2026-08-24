@@ -2,16 +2,15 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import { ctaClass } from "@/components/brand/cta-button";
-import { Sticker } from "@/components/brand/sticker";
 import { SunburstRays, WarmGlow } from "@/components/brand/sunburst";
 import { LogoSticker, SloganBanner } from "@/components/brand/wordmark";
+import { HeroBadges } from "@/components/sections/hero-badges";
 import { Link } from "@/i18n/navigation";
 
 import bottle from "../../../public/bottle-photo.jpg";
 
 export function Hero({ entryPrice }: { entryPrice: string | null }) {
   const t = useTranslations("hero");
-  const tBadges = useTranslations("badges");
 
   return (
     <section className="bg-night text-cream relative isolate overflow-hidden">
@@ -91,23 +90,7 @@ export function Hero({ entryPrice }: { entryPrice: string | null }) {
             </Link>
           </div>
 
-          <ul className="relative mt-8 flex flex-wrap items-center gap-3">
-            <li>
-              <Sticker tone="cherry" className="-rotate-2">
-                {tBadges("volume")}
-              </Sticker>
-            </li>
-            <li>
-              <Sticker tone="gold" className="rotate-1">
-                {tBadges("lessSugar")}
-              </Sticker>
-            </li>
-            <li>
-              <Sticker tone="cream" className="-rotate-1">
-                {tBadges("swissMade")}
-              </Sticker>
-            </li>
-          </ul>
+          <HeroBadges />
         </div>
       </div>
     </section>

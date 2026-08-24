@@ -36,7 +36,7 @@
     "sparkling": "Sparkling",
     "energizing": "Naturally energizing",
     "noExtract": "No extract, no flavouring",
-    "cascara": "Cascara from Brazil"
+    "cascara": "Coffee fruit from Brazil"
   },
   "coffeeFruit": {
     "label": "The coffee fruit",
@@ -402,7 +402,6 @@
     "placeholderNotice": "This section will be built in one of the next phases."
   },
   "sugar": {
-    "title": "About the sugar",
-    "body": "Cafété contains over 50 % less sugar than conventional soft drinks — 4.5 g per 100 ml."
+    "body": "Cafété contains over 50 % less sugar than conventional soft drinks, 59 % less sugar than conventional energy drinks and 20 % less sugar than common mate drinks."
   }
 }
