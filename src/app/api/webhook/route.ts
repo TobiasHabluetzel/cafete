@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import type Stripe from "stripe";
+import Stripe from "stripe";
 
 import { site } from "@/config/site";
 import { sendMail, sendNotification } from "@/lib/email";
@@ -53,10 +53,30 @@ async function handleCompletedCheckout(
   session: Stripe.Checkout.Session,
   stripe: Stripe,
 ) {
-  // The webhook payload's line_items are not expanded, so fetch them.
-  const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
-    limit: 100,
-  });
+  /*
+   * The webhook payload's line_items are not expanded, so fetch them.
+   *
+   * Stripe's "Send test webhook" button in the dashboard posts a synthetic event
+   * whose session does not exist, so this lookup 404s. That is worth tolerating:
+   * it lets the endpoint and its signing secret be verified from the dashboard
+   * without putting a real order through. Any other failure still throws, so
+   * Stripe retries and a genuine confirmation is never lost.
+   */
+  let lineItems: Stripe.ApiList<Stripe.LineItem>;
+  try {
+    lineItems = await stripe.checkout.sessions.listLineItems(session.id, { limit: 100 });
+  } catch (error) {
+    if (
+      error instanceof Stripe.errors.StripeInvalidRequestError &&
+      error.code === "resource_missing"
+    ) {
+      console.warn(
+        `[webhook] session ${session.id} does not exist — treating as a dashboard test event`,
+      );
+      return;
+    }
+    throw error;
+  }
 
   const currency = (session.currency ?? "chf").toUpperCase();
   const money = (amount: number | null | undefined) =>
