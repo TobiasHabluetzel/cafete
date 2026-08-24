@@ -338,22 +338,31 @@ console.log("\nFounder portraits:");
 await photo({
   src: s("Kareem_F_009.jpeg", "Kareem_F_009 2.jpeg"),
   out: "founder-kareem.jpg",
+  // Cropped in slightly so he fills the frame like Hannes does. Hannes' studio
+  // source is already tight, so it cannot be widened to match — the give has to
+  // come from Kareem's side, where there is plenty of canvas.
+  region: { left: 0.061, top: 0.0995, width: 0.878, height: 0.733 },
   width: 1200,
   height: 1500,
   position: "top",
   quality: 84,
 });
 await photo({
-  // Replaced 2026-08-24 at the owner's request: "Hannes Bild austauschen".
-  // The previous source was Kareem_F_007.jpeg (grey studio wall).
-  src: s("Hannes New.jpeg"),
+  /*
+   * Replaced 2026-08-24: the owner cut Hannes out of the river shot and placed
+   * him on a grey wall matching Kareem's studio backdrop, with a cast shadow.
+   *
+   * Note the source filenames in the dossier are misleading — every river shot
+   * of Hannes is named "Kareem_F_00x". This one was exported by hand.
+   */
+  src: s("Hannes Studio.jpg"),
   out: "founder-hannes.jpg",
-  // Framed to roughly match Kareem's scale — he stands further back here.
-  region: { left: 0.171, top: 0.175, width: 0.633, height: 0.528 },
+  // Full width; only the headroom is trimmed to a 4:5 frame.
+  region: { left: 0, top: 0.021, width: 1, height: 0.839 },
   width: 1200,
   height: 1500,
   position: "top",
-  quality: 84,
+  quality: 88,
 });
 
 console.log("\nDone.");
