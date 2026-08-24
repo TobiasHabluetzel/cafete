@@ -30,7 +30,6 @@ export default async function ProductPage({ params }: LocaleParams) {
     { label: t("volumeLabel"), value: t("volumeValue") },
     { label: t("extractLabel"), value: t("extractValue") },
     { label: t("storageLabel"), value: t("storageValue") },
-    { label: t("taglineLabel"), value: t("taglineValue") },
   ];
 
   return (
@@ -53,7 +52,9 @@ export default async function ProductPage({ params }: LocaleParams) {
           <div>
             <h2 className="text-h2">{tProject("title")}</h2>
             <p className="text-charcoal/80 mt-4 text-lg leading-relaxed">
-              {tProject("body")}
+              {tProject.rich("body", {
+                b: (chunks) => <strong className="text-charcoal font-bold">{chunks}</strong>,
+              })}
             </p>
 
             <dl className="mt-10 space-y-4">

@@ -63,6 +63,9 @@
 
   --color-cherry: #ff3131;
   --color-cherry-deep: #c81e1e;
+  /* Label text on an orange section. `cherry-deep` is only 2.1:1 on sunset and
+     fails AA; this is 5.1:1 there and 11.8:1 on cream. */
+  --color-cherry-ink: #5e0e0a;
 
   --color-gold: #ffde59;
   --color-gold-soft: #ffe98a;

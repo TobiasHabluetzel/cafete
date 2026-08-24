@@ -262,40 +262,45 @@ Done: Phases 0–2. Bilingual marketing site with all routes, real brand assets 
 copy, and a working shop — pack selector → cart → Stripe Checkout → payment →
 thank-you page, verified end to end with a real test payment.
 
-### Owner change round, 24 Aug — still open
+### Owner change round, 24 Aug
 
-Applied: sugar disclosure on the homepage, shortened coffee-fruit block, story
-teaser + button, "recyclebar" removed, no repeat of "Die andere Hälfte des
-Kaffees" on the product page, Über uns heading + jar illustration, new Hannes
-photo, transparent packshot on the shop cards, shipping now stated as included
-(FAQ + AGB §2 + §3 + checkout note).
+Applied: sugar disclosure now opens from the hero's "Über 50 % weniger Zucker"
+sticker (the standalone dropdown was a misunderstanding and is gone); shortened
+coffee-fruit block; "Cascara aus Brasilien" → "Kaffeefrüchte aus Brasilien";
+story teaser + button with Kareem folded into the Über uns prose at ~20 years;
+"recyclebar" and the whole "Auf dem Etikett" row removed; keywords bolded in the
+product text via `t.rich`; "Die andere Hälfte des Kaffees" no longer on the
+product page; Über uns heading + jar illustration; new Hannes photo; transparent
+packshot on the shop cards; shipping stated as included (FAQ + AGB §2/§3 +
+checkout note); Vision section moved to orange and its duplicated paragraph
+removed from the page header. No new Lieferkonditionen page, as instructed.
 
-Held pending the owner's verification — **do not ship these without sign-off**:
+Two bugs found while implementing, both fixed:
 
-- **"So viel Koffein wie ein Espresso."** ~200 mg/l in a 33 cl bottle, which is
-  over the 150 mg/l threshold that forces *"Erhöhter Koffeingehalt…"* onto the
-  label. Affects the bottle, not just the site. The old FAQ answer is still live.
-- **"59 % weniger als Energydrinks" / "20 % weniger als Mate".** The arithmetic
-  checks out against 4.5 g/100 ml, but comparative nutrition claims should be
-  within the same food category, and 20 % is under the 30 % a "reduced" claim
-  needs. Only the soft-drink comparison is live.
-- **The four new pillar titles.** No body copy was supplied and the existing
-  paragraphs do not match the new headings. Also "Nachhaltiger Anbau" implies
-  cultivation, when the actual USP is that no additional land is farmed —
-  "Ohne zusätzlichen Anbau" is truer and stronger.
-- **"Und der Süsse der Kaffeekirsche"** contradicts the declared ingredients
-  (Rübenzucker + Cranberry- und Holundersaft).
-- **Kareem "seit 2 Jahrzehnten"** vs the dossier's 16 years. The site uses 16.
-- **Buzzwords bold in the product text** — none of the five words appear in the
-  current copy, so this needs either new prose or a different treatment.
-- **24er-Pack price** — target unknown, and it is a Stripe change, not a code one.
-- **"Lieferkonditionen"** — there is no such page; shipping info lives in the FAQ
-  and the AGB. Confirm whether a dedicated page is wanted.
-- **"Vision farblich trennen"** — it is already its own charcoal section.
+- The vision paragraph rendered **twice** on Über uns — once as the page-header
+  intro and again in its own section.
+- `text-cherry-deep` on an orange background is only **2.1:1**, failing AA. It was
+  labelling the pillars, the event band and the mobile menu. Added
+  `cherry-ink` (#5E0E0A — 5.1:1 on orange, 11.8:1 on cream). Note the cart keeps
+  `cherry-deep` for error text, which is correct on cream.
 
-Also worth noting: the new Hannes photo is an outdoor river shot while Kareem's is
-a grey studio wall, so the pair no longer matches. And that photo brings a lot of
-green/teal into a palette that is otherwise strictly warm.
+Still waiting on the owner:
+
+- **The caffeine figure.** He supplied "So viel wie ein Espresso" with the amount
+  left as "(Menge einfügen)", so the answer ships without the mg value. Adding it
+  is a one-line change. The labelling point stands: espresso-level caffeine in a
+  33 cl bottle is ~200 mg/l, over the 150 mg/l that forces *"Erhöhter
+  Koffeingehalt…"* onto the bottle.
+- **"59 % weniger als Energydrinks" / "20 % weniger als Mate"** are now live in the
+  hero disclosure. Cross-category comparisons, and 20 % is below the 30 % a
+  "reduced" claim needs — still unverified.
+- **The four pillar titles** — no body copy supplied, and "Nachhaltiger Anbau"
+  implies cultivation when the USP is that none happens.
+- **24er-Pack price** — target unknown; a Stripe change, not a code one.
+- **A clean Hannes cutout.** He matched the studio grey (Kareem's backdrop is
+  #818594, graduating #797F8D → #8A8D9C) but the version sent has background
+  remnants on both shoulders and a halo over the scalp, and was never saved to
+  disk.
 
 ### Blocking, in priority order
 

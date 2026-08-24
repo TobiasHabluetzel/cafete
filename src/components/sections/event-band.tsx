@@ -24,7 +24,7 @@ export function EventBand() {
 
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:px-8 lg:py-20">
         <div className="reveal">
-          <p className="label-caps text-cherry-deep">{t("label")}</p>
+          <p className="label-caps text-cherry-ink">{t("label")}</p>
           <h2 className="text-display text-sticker mt-4">{t("title")}</h2>
           <p className="mt-6 max-w-xl text-lg leading-relaxed">{t("body")}</p>
         </div>

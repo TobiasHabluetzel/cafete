@@ -52,7 +52,7 @@
   "project": {
     "label": "The product",
     "title": "The project",
-    "body": "CAFÉTÉ is a sparkling drink based on the coffee fruit. Its base is a real infusion of dried coffee fruit — no extract, no flavouring. Added to that: cranberry and elderberry juice, a little beet sugar and carbonation. Bottled in a 33 cl glass bottle, pasteurised, developed and produced in Switzerland."
+    "body": "CAFÉTÉ is a sparkling drink based on the <b>coffee fruit</b>. Its base is a <b>real infusion</b> of dried coffee fruit — <b>no extract, no flavouring</b>. Added to that: cranberry and elderberry juice, a little beet sugar and carbonation. Bottled in a 33 cl glass bottle, pasteurised, developed and produced <b>in Switzerland</b>."
   },
   "pillars": {
     "label": "Why CAFÉTÉ",
@@ -200,9 +200,7 @@
         "nutrient": "Salt",
         "value": "0.0 g"
       }
-    ],
-    "taglineLabel": "On the label",
-    "taglineValue": "Fruity. Fizzy. Light."
+    ]
   },
   "shop": {
     "title": "Shop",
@@ -240,8 +238,8 @@
         "a": "The coffee bean is the seed of a fruit. The red pulp around it is called cascara. CAFÉTÉ is made from a real infusion of that dried fruit, so it doesn’t taste like coffee but fruity — the finish leans towards red berries and rosehip."
       },
       {
-        "q": "How much caffeine does CAFÉTÉ contain?",
-        "a": "CAFÉTÉ naturally contains caffeine from the coffee fruit. We’ll add the exact figure per 100 ml here as soon as the lab analysis is finally confirmed."
+        "q": "How much caffeine is in it?",
+        "a": "About as much as an espresso. CAFÉTÉ naturally contains caffeine from the coffee fruit."
       },
       {
         "q": "How much sugar is in it?",

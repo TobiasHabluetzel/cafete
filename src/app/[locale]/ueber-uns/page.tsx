@@ -30,11 +30,9 @@ export default async function AboutPage({ params }: LocaleParams) {
 
   return (
     <>
-      <PageHeader
-        label={tFounders("label")}
-        title={tNav("about")}
-        intro={tVision("body")}
-      />
+      {/* The vision paragraph belongs to its own section further down; having it
+          here as well printed the same text twice on one page. */}
+      <PageHeader label={tFounders("label")} title={tNav("about")} />
 
       <Story variant="full" />
 
@@ -94,13 +92,15 @@ export default async function AboutPage({ params }: LocaleParams) {
         </div>
       </Section>
 
-      <Section tone="charcoal">
+      {/* Orange, not charcoal: the footer directly below is charcoal, so a dark
+          Vision block merged into it instead of reading as its own section. */}
+      <Section tone="sunset">
         <SectionHeader
           label={tVision("label")}
           title={tVision("title")}
           intro={tVision("body")}
           align="center"
-          labelClassName="text-gold"
+          labelClassName="text-cherry-ink"
         />
       </Section>
     </>

@@ -52,7 +52,7 @@
   "project": {
     "label": "Das Produkt",
     "title": "Das Projekt",
-    "body": "CAFÉTÉ ist ein kohlensäurehaltiges Getränk auf Basis der Kaffeefrucht. Grundlage ist ein echter Aufguss aus getrockneten Kaffeefrüchten — kein Extrakt und kein Aroma. Dazu kommen Cranberry- und Holundersaft, etwas Rübenzucker und Kohlensäure. Abgefüllt in der 33-cl-Glasflasche, pasteurisiert, entwickelt und produziert in der Schweiz."
+    "body": "CAFÉTÉ ist ein kohlensäurehaltiges Getränk auf Basis der <b>Kaffeefrucht</b>. Grundlage ist ein <b>echter Aufguss</b> aus getrockneten Kaffeefrüchten — <b>kein Extrakt und kein Aroma</b>. Dazu kommen Cranberry- und Holundersaft, etwas Rübenzucker und Kohlensäure. Abgefüllt in der 33-cl-Glasflasche, pasteurisiert, entwickelt und produziert <b>in der Schweiz</b>."
   },
   "pillars": {
     "label": "Warum CAFÉTÉ",
@@ -200,9 +200,7 @@
         "nutrient": "Salz",
         "value": "0,0 g"
       }
-    ],
-    "taglineLabel": "Auf dem Etikett",
-    "taglineValue": "Fruchtig. Spritzig. Leicht."
+    ]
   },
   "shop": {
     "title": "Shop",
@@ -240,8 +238,8 @@
         "a": "Die Kaffeebohne ist der Kern einer Frucht. Das rote Fruchtfleisch darum herum nennt man Cascara. CAFÉTÉ wird aus einem echten Aufguss dieser getrockneten Frucht gemacht und schmeckt entsprechend nicht nach Kaffee, sondern fruchtig — im Abgang eher nach roten Beeren und Hagebutte."
       },
       {
-        "q": "Wie viel Koffein enthält CAFÉTÉ?",
-        "a": "CAFÉTÉ enthält natürlicherweise Koffein aus der Kaffeefrucht. Den exakten Wert pro 100 ml ergänzen wir hier, sobald die Laboranalyse final bestätigt ist."
+        "q": "Wie viel Koffein ist drin?",
+        "a": "So viel wie ein Espresso. CAFÉTÉ enthält natürlicherweise Koffein aus der Kaffeefrucht."
       },
       {
         "q": "Wie viel Zucker ist drin?",

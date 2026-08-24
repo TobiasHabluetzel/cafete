@@ -120,7 +120,7 @@ export function SiteHeader() {
               className="bg-sunset text-charcoal border-ink/25 w-[86vw] border-l-2 sm:max-w-sm"
             >
               <SheetHeader>
-                <SheetTitle className="label-caps text-cherry-deep">
+                <SheetTitle className="label-caps text-cherry-ink">
                   {t("menu")}
                 </SheetTitle>
               </SheetHeader>

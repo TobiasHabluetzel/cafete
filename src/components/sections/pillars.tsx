@@ -22,7 +22,7 @@ export function Pillars() {
         label={t("label")}
         title={t("title")}
         align="center"
-        labelClassName="text-cherry-deep"
+        labelClassName="text-cherry-ink"
         className="relative"
       />
 
