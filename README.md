@@ -302,6 +302,18 @@ Still waiting on the owner:
   remnants on both shoulders and a halo over the scalp, and was never saved to
   disk.
 
+### Shop is deliberately in pre-launch mode
+
+All three Prices carry `availability=coming_soon` metadata in Stripe, so the cards
+show **CHF 24.90 / 39.90 / 74.90** with per-bottle figures but render "Demnächst
+verfügbar" instead of add-to-cart, and `/api/checkout` returns 422. This is the
+intended state (confirmed by Tobias, 24 Aug) — **not a bug**.
+
+To put a pack on sale: delete the `availability` key from that Price in Stripe.
+Effective in seconds, no deploy. Stripe cannot enforce coming-soon itself — a
+flagged Price is valid and Stripe would charge for it — so the server-side check
+in `/api/checkout` is what actually prevents a sale.
+
 ### Blocking, in priority order
 
 1. **The 6-pack Stripe Price is inactive.** Checkout rejects it ("The price
