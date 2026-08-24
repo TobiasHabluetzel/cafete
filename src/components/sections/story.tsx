@@ -51,12 +51,9 @@ export function Story({ variant = "full" }: { variant?: "teaser" | "full" }) {
               <p className="font-display text-charcoal text-h3 max-w-prose font-extrabold">
                 {t("teaser")}
               </p>
-              <p className="text-charcoal/75 mt-5 max-w-prose leading-relaxed">
-                {t("founderNote")}
-              </p>
               <Link
                 href="/ueber-uns"
-                className={ctaClass({ variant: "dark", size: "md", className: "mt-8" })}
+                className={ctaClass({ variant: "dark", size: "md", className: "mt-7" })}
               >
                 {t("cta")}
               </Link>

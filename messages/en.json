@@ -77,12 +77,11 @@
   "story": {
     "label": "Our story",
     "title": "How it all began",
-    "p1": "CAFÉTÉ began three years ago in a claro shop, where Kareem — one of the two founders — spotted a large glass jar full of dried, reddish fruit. He couldn’t say what it was. When he asked, he learned: it’s part of the coffee plant. His curiosity was sparked — and since hardly anyone asked about it back then, he was given a handful to try.",
+    "p1": "CAFÉTÉ began three years ago in a claro shop, where Kareem — a passionate hospitality professional of some twenty years and one of the two founders — spotted a large glass jar full of dried, reddish fruit. He couldn’t say what it was. When he asked, he learned: it’s part of the coffee plant. His curiosity was sparked — and since hardly anyone asked about it back then, he was given a handful to try.",
     "p2": "At home he brewed his first infusion from it: fruity, slightly tart and surprisingly distinct. The more Kareem learned about the coffee fruit, the clearer it became that there was far more to it.",
     "p3": "Three years later, a handful of coffee fruit became CAFÉTÉ.",
     "teaser": "Within three years, a handful of coffee fruit became Cafété.",
-    "cta": "How it all began",
-    "founderNote": "Kareem, a passionate hospitality professional of 16 years and one of the founders."
+    "cta": "How it all began"
   },
   "vision": {
     "label": "The vision",
@@ -95,7 +94,7 @@
     "kareem": {
       "name": "Kareem Oueini",
       "role": "Recipe & product",
-      "bio": "Kareem Oueini is a trained chef and food craftsman by passion. He has worked in hospitality for 16 years, developing a fine instinct for taste, balance and quality. He brings that experience to CAFÉTÉ — especially in recipe development, where the interplay of aromas, sweetness, acidity and structure is decisive. A nature-loving and sporty person, he has also long been interested in nutrition, hydration and the quality of what we put into our bodies."
+      "bio": "Kareem Oueini is a trained chef and food craftsman by passion. He has worked in hospitality for some two decades, developing a fine instinct for taste, balance and quality. He brings that experience to CAFÉTÉ — especially in recipe development, where the interplay of aromas, sweetness, acidity and structure is decisive. A nature-loving and sporty person, he has also long been interested in nutrition, hydration and the quality of what we put into our bodies."
     },
     "hannes": {
       "name": "Hannes-Valentin Juon",

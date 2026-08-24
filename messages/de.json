@@ -77,12 +77,11 @@
   "story": {
     "label": "Unsere Geschichte",
     "title": "Wie alles begann",
-    "p1": "Angefangen hat CAFÉTÉ vor drei Jahren in einem claro-Laden. Dort entdeckte Kareem, einer der beiden Gründer, einen grossen Glasbehälter voll getrockneter, rötlicher Früchte. Was das war, konnte er nicht sagen. Auf Nachfrage erfuhr er: ein Teil der Kaffeepflanze. Das Interesse war geweckt — und weil damals kaum jemand danach fragte, bekam er eine Handvoll zum Probieren geschenkt.",
+    "p1": "Angefangen hat CAFÉTÉ vor drei Jahren in einem claro-Laden. Dort entdeckte Kareem, leidenschaftlicher Gastronom seit rund 20 Jahren und einer der beiden Gründer, einen grossen Glasbehälter voll getrockneter, rötlicher Früchte. Was das war, konnte er nicht sagen. Auf Nachfrage erfuhr er: ein Teil der Kaffeepflanze. Das Interesse war geweckt — und weil damals kaum jemand danach fragte, bekam er eine Handvoll zum Probieren geschenkt.",
     "p2": "Zuhause bereitete er daraus seinen ersten Aufguss zu: fruchtig, leicht säuerlich und überraschend eigenständig. Je mehr Kareem über die Kaffeefrucht lernte, desto klarer wurde ihm, dass in dieser Frucht weit mehr steckt.",
     "p3": "Drei Jahre später wurde aus einer Handvoll Kaffeefrüchten CAFÉTÉ.",
     "teaser": "Innerhalb von drei Jahren entwickelte sich aus einer Handvoll Kaffeefrüchten Cafété.",
-    "cta": "Wie alles begann",
-    "founderNote": "Kareem, leidenschaftlicher Gastronom seit 16 Jahren und einer der Gründer."
+    "cta": "Wie alles begann"
   },
   "vision": {
     "label": "Die Vision",
@@ -95,7 +94,7 @@
     "kareem": {
       "name": "Kareem Oueini",
       "role": "Rezeptur & Produkt",
-      "bio": "Kareem Oueini ist gelernter Koch und Lebensmittelveredler aus Leidenschaft. Seit 16 Jahren arbeitet er in der Gastronomie und hat dabei ein ausgeprägtes Feingefühl für Geschmack, Balance und Qualität entwickelt. Diese Erfahrung bringt er auch in das Projekt CAFÉTÉ ein — insbesondere bei der Rezeptentwicklung, wo das Zusammenspiel von Aromen, Süsse, Säure und Struktur entscheidend ist. Als naturverbundener und sportlicher Mensch beschäftigt er sich zudem seit längerem mit der Bedeutung von Ernährung, Hydration und der Qualität dessen, was wir unserem Körper zuführen."
+      "bio": "Kareem Oueini ist gelernter Koch und Lebensmittelveredler aus Leidenschaft. Seit rund zwei Jahrzehnten arbeitet er in der Gastronomie und hat dabei ein ausgeprägtes Feingefühl für Geschmack, Balance und Qualität entwickelt. Diese Erfahrung bringt er auch in das Projekt CAFÉTÉ ein — insbesondere bei der Rezeptentwicklung, wo das Zusammenspiel von Aromen, Süsse, Säure und Struktur entscheidend ist. Als naturverbundener und sportlicher Mensch beschäftigt er sich zudem seit längerem mit der Bedeutung von Ernährung, Hydration und der Qualität dessen, was wir unserem Körper zuführen."
     },
     "hannes": {
       "name": "Hannes-Valentin Juon",
