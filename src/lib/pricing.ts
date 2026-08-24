@@ -13,7 +13,16 @@ export type PackPrice = {
   bottles: number;
   amount: number;
   currency: string;
+  /**
+   * Set from the Price's `availability=coming_soon` metadata in Stripe: show the
+   * pack and its price, but do not sell it. Stripe cannot enforce this the way an
+   * inactive price can, so /api/checkout rejects these server-side.
+   */
+  comingSoon: boolean;
 };
+
+/** The metadata key/value the owner sets on a Price in the Stripe dashboard. */
+const COMING_SOON = { key: "availability", value: "coming_soon" } as const;
 
 /**
  * Read the live pack prices from Stripe.
@@ -54,6 +63,7 @@ export async function getPackPrices(): Promise<PackPrice[]> {
         bottles: pack.bottles,
         amount: price.unit_amount,
         currency: price.currency.toUpperCase(),
+        comingSoon: price.metadata?.[COMING_SOON.key] === COMING_SOON.value,
       };
     }),
   );
@@ -75,8 +85,10 @@ export async function getPackPrices(): Promise<PackPrice[]> {
 
 /** The cheapest pack, formatted — for callers that already hold the prices. */
 export function entryPriceFrom(prices: PackPrice[], locale: string): string | null {
-  if (prices.length === 0) return null;
-  const cheapest = prices.reduce((min, p) => (p.amount < min.amount ? p : min));
+  // Only quote a price someone can actually pay today.
+  const sellable = prices.filter((price) => !price.comingSoon);
+  if (sellable.length === 0) return null;
+  const cheapest = sellable.reduce((min, p) => (p.amount < min.amount ? p : min));
   return formatMoney(cheapest.amount, cheapest.currency, locale);
 }
 

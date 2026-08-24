@@ -3,6 +3,7 @@ import type Stripe from "stripe";
 
 import { getPathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { getPackPrices } from "@/lib/pricing";
 import { resolveRequestOrigin } from "@/lib/request-origin";
 import {
   getStripe,
@@ -42,6 +43,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "empty-cart" }, { status: 422 });
   }
 
+  /*
+   * The live prices decide what may be sold — not just what env vars exist.
+   * A pack flagged `availability=coming_soon` in Stripe has a perfectly valid
+   * price, so Stripe would happily charge for it; only this check stops a stale
+   * basket or a hand-crafted request going through.
+   */
+  const packPrices = await getPackPrices();
   const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
   for (const raw of items as IncomingItem[]) {
@@ -55,9 +63,17 @@ export async function POST(request: Request) {
     // Never trust a price from the client — resolve it server-side from the
     // pack size. The browser only ever tells us *which* pack and how many.
     const price = priceIdForPack(bottles);
-    if (!price) {
+    const livePrice = packPrices.find((p) => p.bottles === bottles);
+
+    if (!price || !livePrice) {
       return NextResponse.json(
         { error: "unknown-pack", bottles: raw?.bottles },
+        { status: 422 },
+      );
+    }
+    if (livePrice.comingSoon) {
+      return NextResponse.json(
+        { error: "pack-coming-soon", bottles },
         { status: 422 },
       );
     }

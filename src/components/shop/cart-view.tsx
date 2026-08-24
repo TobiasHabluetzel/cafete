@@ -28,6 +28,11 @@ export function CartView({ prices }: { prices: PackPrice[] }) {
   };
 
   const priceFor = (bottles: number) => prices.find((p) => p.bottles === bottles);
+  // A pack flagged coming_soon in Stripe has a price but must not be bought.
+  const sellable = (bottles: number) => {
+    const price = priceFor(bottles);
+    return Boolean(price && !price.comingSoon);
+  };
 
   // Indicative only — Stripe computes the authoritative total, including
   // shipping and any tax. Shown because a cart with no figures is worse.
@@ -36,7 +41,7 @@ export function CartView({ prices }: { prices: PackPrice[] }) {
     return price ? sum + price.amount * line.quantity : sum;
   }, 0);
   const currency = prices[0]?.currency ?? "CHF";
-  const allPriced = lines.every((line) => priceFor(line.bottles));
+  const allPriced = lines.every((line) => sellable(line.bottles));
 
   async function checkout() {
     setStatus("redirecting");

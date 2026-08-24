@@ -40,11 +40,13 @@ export function PackPicker({
   }
 
   // The cheapest per-bottle pack gets called out, which is the number that
-  // actually helps someone choose between 6, 12 and 24.
+  // actually helps someone choose between 6, 12 and 24. Only packs you can buy
+  // today are eligible — badging an unavailable pack "best value" is a tease.
   const perBottle = (price: PackPrice) => price.amount / price.bottles;
+  const sellable = prices.filter((price) => !price.comingSoon);
   const bestValue =
-    prices.length > 1
-      ? prices.reduce((min, p) => (perBottle(p) < perBottle(min) ? p : min)).bottles
+    sellable.length > 1
+      ? sellable.reduce((min, p) => (perBottle(p) < perBottle(min) ? p : min)).bottles
       : null;
 
   return (
@@ -101,27 +103,38 @@ export function PackPicker({
               )}
             </div>
 
-            <button
-              type="button"
-              onClick={() => onAdd(pack.bottles)}
-              aria-live="polite"
-              className={cn(
-                ctaClass({ variant: added ? "dark" : "solid", size: "md" }),
-                "mt-5 w-full",
-              )}
-            >
-              {added ? (
-                <>
-                  <Check className="size-5" aria-hidden />
-                  {t("added")}
-                </>
-              ) : (
-                <>
-                  <Plus className="size-5" aria-hidden />
-                  {t("addToCart")}
-                </>
-              )}
-            </button>
+            {price?.comingSoon ? (
+              <p
+                className={cn(
+                  ctaClass({ variant: "outline", size: "md" }),
+                  "text-charcoal/70 mt-5 w-full cursor-default border-charcoal/30",
+                )}
+              >
+                {t("comingSoon")}
+              </p>
+            ) : (
+              <button
+                type="button"
+                onClick={() => onAdd(pack.bottles)}
+                aria-live="polite"
+                className={cn(
+                  ctaClass({ variant: added ? "dark" : "solid", size: "md" }),
+                  "mt-5 w-full",
+                )}
+              >
+                {added ? (
+                  <>
+                    <Check className="size-5" aria-hidden />
+                    {t("added")}
+                  </>
+                ) : (
+                  <>
+                    <Plus className="size-5" aria-hidden />
+                    {t("addToCart")}
+                  </>
+                )}
+              </button>
+            )}
           </li>
         );
       })}

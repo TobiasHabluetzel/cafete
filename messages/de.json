@@ -133,7 +133,8 @@
     "subtotal": "Zwischensumme",
     "priceTbd": "Preis folgt",
     "bestValue": "Bester Preis pro Flasche",
-    "unavailableLine": "Ein Artikel ist momentan nicht verfügbar. Bitte entferne ihn, um fortzufahren."
+    "unavailableLine": "Ein Artikel ist momentan nicht verfügbar. Bitte entferne ihn, um fortzufahren.",
+    "comingSoon": "Demnächst verfügbar"
   },
   "event": {
     "label": "Save the date",
