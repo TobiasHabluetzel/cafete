@@ -314,6 +314,46 @@ Effective in seconds, no deploy. Stripe cannot enforce coming-soon itself — a
 flagged Price is valid and Stripe would charge for it — so the server-side check
 in `/api/checkout` is what actually prevents a sale.
 
+### Going live: DNS and mail (verified 24 Aug)
+
+Both domains are registered/served by **Infomaniak**, so DNS lives there — not at
+whatever registrar you might go looking for.
+
+```
+drink-cafete.ch        NS → nsany1/nsany2.infomaniak.com
+                       A  → 128.65.195.180   (Infomaniak Starter hosting)
+www.drink-cafete.ch    A  → 128.65.195.180
+                       MX → mta-gw.infomaniak.ch
+                       TXT→ v=spf1 include:spf.infomaniak.ch -all
+cafété.ch              same NS / A / MX — an accented IDN variant
+(xn--caft-dpab.ch)     that should just redirect at drink-cafete.ch
+```
+
+Zone editor: Infomaniak Manager → **Domains → drink-cafete.ch → DNS-Zone**
+(`/domain/<id>/dns/manage-zone/list`). The `Status der Domains` page under Hosting
+is read-only diagnostics, not the editor.
+
+**Do not touch the MX or the SPF TXT** when repointing the site — those are the
+founders' live mailboxes, and the same editor holds both.
+
+**The Infomaniak Starter hosting cannot run this app.** It is HTML/CSS only, 10 MB,
+FTP without SSH; even their paid tier is PHP/MySQL. It currently serves the
+"Ab dem 19. September 2026" placeholder at drink-cafete.ch. The site stays on
+Railway; Infomaniak is DNS and mail only.
+
+Two consequences worth expecting:
+
+- Infomaniak manages those A records as part of the hosting link, so a manual edit
+  may be reverted unless the domain is detached from the Starter site first.
+- Once the zone points at Railway, `Status der Domains` will report an anomaly.
+  That is normal — it only compares the zone against the Infomaniak website that
+  is no longer in use.
+
+For Resend, verify the **subdomain** `send.drink-cafete.ch`, never the root: only
+one SPF record per domain is valid and the existing one ends in `-all`, so editing
+it risks the founders' mail. A subdomain gets its own SPF and DKIM and leaves it
+alone.
+
 ### Blocking, in priority order
 
 1. **The 6-pack Stripe Price is inactive.** Checkout rejects it ("The price
