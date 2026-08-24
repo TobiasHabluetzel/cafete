@@ -3,7 +3,6 @@ import { getTranslations } from "next-intl/server";
 
 import { ctaClass } from "@/components/brand/cta-button";
 import { PageHeader, Section } from "@/components/layout/section";
-import { CoffeeFruit } from "@/components/sections/coffee-fruit";
 import { Link } from "@/i18n/navigation";
 import {
   createMetadata,
@@ -75,8 +74,6 @@ export default async function ProductPage({ params }: LocaleParams) {
           </div>
         </div>
       </Section>
-
-      <CoffeeFruit />
 
       <Section tone="white">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">

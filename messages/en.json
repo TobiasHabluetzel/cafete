@@ -41,13 +41,13 @@
   "coffeeFruit": {
     "label": "The coffee fruit",
     "title": "The other half of coffee",
-    "intro": "The coffee bean isn’t a bean at all — it’s the seed of a fruit. Around it grows red pulp with a character all its own. That’s exactly what CAFÉTÉ puts at the centre.",
+    "intro": "The other half of coffee is the pulp of the coffee cherry. That fruit is exactly what Cafété puts at the centre.",
     "tasteTitle": "What does CAFÉTÉ taste like?",
     "tasteBody": "Fruity notes, a delicate natural sweetness and a gentle acidity define the taste. The finish recalls red berries and rosehip — not classic coffee.",
     "traditionTitle": "Valued for generations",
     "traditionBody": "An infusion of dried coffee fruit has been enjoyed for generations across coffee-growing regions. CAFÉTÉ carries on that tradition and brings it into a new form.",
     "originTitle": "Origin",
-    "originBody": "Our coffee fruit comes from Brazil, a country with centuries of coffee tradition."
+    "originBody": "Our coffee fruit comes from Brazil."
   },
   "project": {
     "label": "The product",
@@ -79,7 +79,10 @@
     "title": "How it all began",
     "p1": "CAFÉTÉ began three years ago in a claro shop, where Kareem — one of the two founders — spotted a large glass jar full of dried, reddish fruit. He couldn’t say what it was. When he asked, he learned: it’s part of the coffee plant. His curiosity was sparked — and since hardly anyone asked about it back then, he was given a handful to try.",
     "p2": "At home he brewed his first infusion from it: fruity, slightly tart and surprisingly distinct. The more Kareem learned about the coffee fruit, the clearer it became that there was far more to it.",
-    "p3": "Three years later, a handful of coffee fruit became CAFÉTÉ."
+    "p3": "Three years later, a handful of coffee fruit became CAFÉTÉ.",
+    "teaser": "Within three years, a handful of coffee fruit became Cafété.",
+    "cta": "How it all began",
+    "founderNote": "Kareem, a passionate hospitality professional of 16 years and one of the founders."
   },
   "vision": {
     "label": "The vision",
@@ -88,7 +91,7 @@
   },
   "founders": {
     "label": "The founders",
-    "title": "Behind CAFÉTÉ",
+    "title": "The founders behind Cafété",
     "kareem": {
       "name": "Kareem Oueini",
       "role": "Recipe & product",
@@ -119,7 +122,7 @@
     "added": "Added",
     "quantity": "Quantity",
     "remove": "Remove",
-    "lineTotalNote": "Shipping is calculated at checkout.",
+    "lineTotalNote": "Shipping is included in the price.",
     "goToCheckout": "Checkout",
     "redirecting": "Redirecting to Stripe …",
     "cartCount": "{count, plural, =0 {Cart empty} =1 {# item} other {# items}}",
@@ -159,7 +162,7 @@
     "title": "CAFÉTÉ",
     "subtitle": "Sparkling refreshment with an infusion of dried coffee cherry pulp (cascara from Brazil), pasteurised.",
     "volumeLabel": "Volume",
-    "volumeValue": "33 cl single-use glass bottle, recyclable",
+    "volumeValue": "33 cl single-use glass bottle",
     "extractLabel": "Extract content",
     "extractValue": "min. 2.8 g/L. Naturally contains caffeine.",
     "storageLabel": "Storage",
@@ -243,7 +246,7 @@
       },
       {
         "q": "How much sugar is in it?",
-        "a": "4.5 g of sugar per 100 ml — over 50 % less than conventional soft drinks. The only sweetening comes from a little beet sugar plus the natural sugars in cranberry and elderberry juice."
+        "a": "Over 50 % less than in conventional soft drinks — 4.5 g per 100 ml."
       },
       {
         "q": "Is CAFÉTÉ vegan?",
@@ -254,8 +257,8 @@
         "a": "Cool and dark. CAFÉTÉ is at its best well chilled — that’s when the fruit notes and the carbonation come through most clearly."
       },
       {
-        "q": "Where do you ship, and what does it cost?",
-        "a": "At launch we ship within Switzerland. Shipping rates and the free-shipping threshold will be announced when the shop opens."
+        "q": "Where do you ship to?",
+        "a": "At launch we ship within Switzerland. Shipping is included in the price."
       },
       {
         "q": "Can I return or exchange an order?",
@@ -299,11 +302,11 @@
         },
         {
           "heading": "2. Prices",
-          "body": "All prices are in Swiss francs and include statutory VAT. Shipping costs are shown separately at checkout."
+          "body": "All prices are in Swiss francs and include statutory VAT. Shipping is included in the price."
         },
         {
           "heading": "3. Delivery",
-          "body": "We deliver within Switzerland. Details on delivery times and shipping costs follow when the shop opens."
+          "body": "We deliver within Switzerland. Shipping is included in the price. Details on delivery times follow when the shop opens."
         },
         {
           "heading": "4. Payment",
@@ -398,5 +401,9 @@
     "loading": "Loading …",
     "comingSoon": "Coming soon",
     "placeholderNotice": "This section will be built in one of the next phases."
+  },
+  "sugar": {
+    "title": "About the sugar",
+    "body": "Cafété contains over 50 % less sugar than conventional soft drinks — 4.5 g per 100 ml."
   }
 }

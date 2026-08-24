@@ -253,7 +253,7 @@ stripe trigger checkout.session.completed
   account set up — see "Connecting Stripe" above.
 - **Phase 3:** SEO/OG images, `hreflang`, sitemap, robots, analytics, a11y pass.
 
-## Status — 17 August 2026
+## Status — 24 August 2026
 
 Live at **https://cafete-production.up.railway.app** (Railway, sandbox Stripe keys).
 Custom domain `drink-cafete.ch` not yet pointed. Launch anchor: **19 September 2026**.
@@ -261,6 +261,41 @@ Custom domain `drink-cafete.ch` not yet pointed. Launch anchor: **19 September 2
 Done: Phases 0–2. Bilingual marketing site with all routes, real brand assets and
 copy, and a working shop — pack selector → cart → Stripe Checkout → payment →
 thank-you page, verified end to end with a real test payment.
+
+### Owner change round, 24 Aug — still open
+
+Applied: sugar disclosure on the homepage, shortened coffee-fruit block, story
+teaser + button, "recyclebar" removed, no repeat of "Die andere Hälfte des
+Kaffees" on the product page, Über uns heading + jar illustration, new Hannes
+photo, transparent packshot on the shop cards, shipping now stated as included
+(FAQ + AGB §2 + §3 + checkout note).
+
+Held pending the owner's verification — **do not ship these without sign-off**:
+
+- **"So viel Koffein wie ein Espresso."** ~200 mg/l in a 33 cl bottle, which is
+  over the 150 mg/l threshold that forces *"Erhöhter Koffeingehalt…"* onto the
+  label. Affects the bottle, not just the site. The old FAQ answer is still live.
+- **"59 % weniger als Energydrinks" / "20 % weniger als Mate".** The arithmetic
+  checks out against 4.5 g/100 ml, but comparative nutrition claims should be
+  within the same food category, and 20 % is under the 30 % a "reduced" claim
+  needs. Only the soft-drink comparison is live.
+- **The four new pillar titles.** No body copy was supplied and the existing
+  paragraphs do not match the new headings. Also "Nachhaltiger Anbau" implies
+  cultivation, when the actual USP is that no additional land is farmed —
+  "Ohne zusätzlichen Anbau" is truer and stronger.
+- **"Und der Süsse der Kaffeekirsche"** contradicts the declared ingredients
+  (Rübenzucker + Cranberry- und Holundersaft).
+- **Kareem "seit 2 Jahrzehnten"** vs the dossier's 16 years. The site uses 16.
+- **Buzzwords bold in the product text** — none of the five words appear in the
+  current copy, so this needs either new prose or a different treatment.
+- **24er-Pack price** — target unknown, and it is a Stripe change, not a code one.
+- **"Lieferkonditionen"** — there is no such page; shipping info lives in the FAQ
+  and the AGB. Confirm whether a dedicated page is wanted.
+- **"Vision farblich trennen"** — it is already its own charcoal section.
+
+Also worth noting: the new Hannes photo is an outdoor river shot while Kareem's is
+a grey studio wall, so the pair no longer matches. And that photo brings a lot of
+green/teal into a palette that is otherwise strictly warm.
 
 ### Blocking, in priority order
 

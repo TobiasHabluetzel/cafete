@@ -32,7 +32,7 @@ function dist2(data, i, [r, g, b]) {
  * `tol` of the background colour. Edge pixels between `tol` and `feather` get
  * partial alpha so anti-aliased outlines don't turn into a hard orange halo.
  */
-function keyBackground(data, width, height, channels, bg, tol = 42, feather = 78) {
+function keyBackground(data, width, height, channels, bg, tol = 42, feather = 78, globalClear = false) {
   const tol2 = tol * tol;
   const feather2 = feather * feather;
   const n = width * height;
@@ -85,6 +85,20 @@ function keyBackground(data, width, height, channels, bg, tol = 42, feather = 78
     const d2 = dist2(data, p * channels, bg);
     if (d2 >= feather2) continue;
     alpha[p] = Math.round(255 * Math.sqrt(d2 / feather2));
+  }
+
+  /*
+   * `globalClear` also clears background-coloured pixels the border fill could
+   * not reach — speckles of scanner noise enclosed by the artwork. Only safe when
+   * the artwork itself contains nothing near the background colour: true for the
+   * falling-cascara hand (orange hand, dark red fruit), false for the jar, whose
+   * glass is drawn in white and would be punched full of holes.
+   */
+  if (globalClear) {
+    for (let p = 0; p < n; p++) {
+      if (alpha[p] === 0) continue;
+      if (dist2(data, p * channels, bg) <= tol * tol) alpha[p] = 0;
+    }
   }
 
   let clearedCount = 0;
@@ -142,6 +156,17 @@ async function inkCutout({ src, out, resizeWidth, ink = [0, 0, 0] }) {
   );
 }
 
+/** Already-transparent artwork: just trim the empty margin and re-encode. */
+async function transparentArt({ src, out, resizeWidth }) {
+  let pipeline = sharp(src).ensureAlpha();
+  if (resizeWidth) pipeline = pipeline.resize({ width: resizeWidth, withoutEnlargement: true });
+  await pipeline.trim({ threshold: 1 }).png({ compressionLevel: 9 }).toFile(path.join(OUT_DIR, out));
+  const meta = await sharp(path.join(OUT_DIR, out)).metadata();
+  console.log(
+    `  ${out.padEnd(34)} ${String(meta.width).padStart(5)}x${String(meta.height).padEnd(5)} (alpha kept)`,
+  );
+}
+
 /** Straight re-encode: artwork whose background is part of the design. */
 async function asDesigned({ src, out, resizeWidth }) {
   let pipeline = sharp(src);
@@ -153,7 +178,7 @@ async function asDesigned({ src, out, resizeWidth }) {
   );
 }
 
-async function cutout({ src, out, resizeWidth, tol, feather }) {
+async function cutout({ src, out, resizeWidth, tol, feather, globalClear }) {
   let pipeline = sharp(src).ensureAlpha();
   if (resizeWidth) pipeline = pipeline.resize({ width: resizeWidth, withoutEnlargement: true });
 
@@ -168,6 +193,7 @@ async function cutout({ src, out, resizeWidth, tol, feather }) {
     bg,
     tol,
     feather,
+    globalClear,
   );
 
   // Trim the now-transparent margin so the asset has no dead space around it.
@@ -262,6 +288,34 @@ await cutout({
   feather: 60,
 });
 
+// Delivered on an off-white, slightly noisy background (~#FBFBFB varying to
+// #F3F3F1) rather than transparent, so they need the same border flood fill.
+await cutout({
+  src: s("1 Handvoll Cascara.png"),
+  out: "cascara-jar-hand.png",
+  resizeWidth: 1180,
+  tol: 26,
+  feather: 55,
+});
+await cutout({
+  src: s("Cascara fallend.png"),
+  out: "cascara-falling.png",
+  resizeWidth: 1400,
+  tol: 30,
+  feather: 55,
+  // Safe here: nothing in this drawing is near-white, so the leftover speckles
+  // that showed against the dark sections can all go.
+  globalClear: true,
+});
+
+console.log("\nAlready transparent:");
+// The packshot the owner asked for on the shop cards.
+await transparentArt({
+  src: s("cafete-bottle-transparent.png"),
+  out: "bottle-transparent.png",
+  resizeWidth: 1086,
+});
+
 console.log("\nPhotography:");
 await photo({
   src: s("Kaffeekirsche für Post.png"),
@@ -290,11 +344,12 @@ await photo({
   quality: 84,
 });
 await photo({
-  src: s("Kareem_F_007.jpeg", "Kareem_F_007 2.jpeg"),
+  // Replaced 2026-08-24 at the owner's request: "Hannes Bild austauschen".
+  // The previous source was Kareem_F_007.jpeg (grey studio wall).
+  src: s("Hannes New.jpeg"),
   out: "founder-hannes.jpg",
-  // Hannes stands further from the camera, so without this he reads much
-  // smaller in frame than Kareem. Pre-crop to roughly match his scale.
-  region: { left: 0.21, top: 0.057, width: 0.58, height: 0.484 },
+  // Framed to roughly match Kareem's scale — he stands further back here.
+  region: { left: 0.171, top: 0.175, width: 0.633, height: 0.528 },
   width: 1200,
   height: 1500,
   position: "top",

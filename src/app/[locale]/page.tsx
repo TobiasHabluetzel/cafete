@@ -7,6 +7,7 @@ import { Hero } from "@/components/sections/hero";
 import { Pillars } from "@/components/sections/pillars";
 import { ShopTeaser } from "@/components/sections/shop-teaser";
 import { Story } from "@/components/sections/story";
+import { SugarNote } from "@/components/sections/sugar-note";
 import { routing } from "@/i18n/routing";
 import { getEntryPrice } from "@/lib/pricing";
 
@@ -33,8 +34,9 @@ export default async function HomePage({
       <Hero entryPrice={entryPrice} />
       <SloganMarquee />
       <CoffeeFruit />
+      <SugarNote />
       <Pillars />
-      <Story />
+      <Story variant="teaser" />
       <ShopTeaser entryPrice={entryPrice} />
       <SloganMarquee />
       <EventBand />

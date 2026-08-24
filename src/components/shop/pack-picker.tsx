@@ -12,7 +12,7 @@ import type { PackPrice } from "@/lib/pricing";
 import { formatMoney } from "@/lib/format-money";
 import { cn } from "@/lib/utils";
 
-import bottle from "../../../public/bottle-photo.jpg";
+import bottle from "../../../public/bottle-transparent.png";
 
 /**
  * Pack selector. Prices come from Stripe via props — the same Prices Checkout
@@ -67,13 +67,17 @@ export function PackPicker({
               </Sticker>
             ) : null}
 
-            <Image
-              src={bottle}
-              alt=""
-              sizes="20rem"
-              placeholder="blur"
-              className="border-ink/20 h-44 w-full rounded-md border object-cover"
-            />
+            {/* Transparent packshot, so the bottle sits on the card rather than
+                inside a photo of a kitchen. */}
+            <div className="bg-cream/60 border-ink/15 flex h-44 items-center justify-center rounded-md border">
+              <Image
+                src={bottle}
+                alt=""
+                sizes="12rem"
+                placeholder="blur"
+                className="h-40 w-auto"
+              />
+            </div>
 
             <h3 className="text-h3 mt-5">{tPacks(pack.labelKey)}</h3>
             <p className="text-charcoal/60 mt-1 text-sm">

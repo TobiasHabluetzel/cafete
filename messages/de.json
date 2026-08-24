@@ -41,13 +41,13 @@
   "coffeeFruit": {
     "label": "Die Kaffeefrucht",
     "title": "Die andere Hälfte des Kaffees",
-    "intro": "Die Kaffeebohne ist keine Bohne, sondern der Kern einer Frucht. Um sie herum wächst rotes Fruchtfleisch mit eigenem Charakter. Genau das steht bei CAFÉTÉ im Mittelpunkt.",
+    "intro": "Die andere Hälfte des Kaffees ist das Fruchtfleisch der Kaffeekirsche. Genau diese Frucht steht bei Cafété im Mittelpunkt.",
     "tasteTitle": "Wie schmeckt CAFÉTÉ?",
     "tasteBody": "Fruchtige Noten, eine feine natürliche Süsse und eine dezente Säure prägen den Geschmack. Im Abgang erinnert CAFÉTÉ an rote Beeren und Hagebutte — nicht an klassischen Kaffee.",
     "traditionTitle": "Seit Generationen geschätzt",
     "traditionBody": "Ein Aufguss aus getrockneten Kaffeefrüchten wird in verschiedenen Kaffeeanbauregionen seit Generationen getrunken. CAFÉTÉ knüpft an diese Tradition an und bringt sie in eine neue Form.",
     "originTitle": "Herkunft",
-    "originBody": "Unsere Kaffeefrucht stammt aus Brasilien, einem Land mit einer jahrhundertelangen Kaffeetradition."
+    "originBody": "Unsere Kaffeefrüchte stammen aus Brasilien."
   },
   "project": {
     "label": "Das Produkt",
@@ -79,7 +79,10 @@
     "title": "Wie alles begann",
     "p1": "Angefangen hat CAFÉTÉ vor drei Jahren in einem claro-Laden. Dort entdeckte Kareem, einer der beiden Gründer, einen grossen Glasbehälter voll getrockneter, rötlicher Früchte. Was das war, konnte er nicht sagen. Auf Nachfrage erfuhr er: ein Teil der Kaffeepflanze. Das Interesse war geweckt — und weil damals kaum jemand danach fragte, bekam er eine Handvoll zum Probieren geschenkt.",
     "p2": "Zuhause bereitete er daraus seinen ersten Aufguss zu: fruchtig, leicht säuerlich und überraschend eigenständig. Je mehr Kareem über die Kaffeefrucht lernte, desto klarer wurde ihm, dass in dieser Frucht weit mehr steckt.",
-    "p3": "Drei Jahre später wurde aus einer Handvoll Kaffeefrüchten CAFÉTÉ."
+    "p3": "Drei Jahre später wurde aus einer Handvoll Kaffeefrüchten CAFÉTÉ.",
+    "teaser": "Innerhalb von drei Jahren entwickelte sich aus einer Handvoll Kaffeefrüchten Cafété.",
+    "cta": "Wie alles begann",
+    "founderNote": "Kareem, leidenschaftlicher Gastronom seit 16 Jahren und einer der Gründer."
   },
   "vision": {
     "label": "Die Vision",
@@ -88,7 +91,7 @@
   },
   "founders": {
     "label": "Die Gründer",
-    "title": "Hinter CAFÉTÉ",
+    "title": "Die Gründer hinter Cafété",
     "kareem": {
       "name": "Kareem Oueini",
       "role": "Rezeptur & Produkt",
@@ -119,7 +122,7 @@
     "added": "Hinzugefügt",
     "quantity": "Menge",
     "remove": "Entfernen",
-    "lineTotalNote": "Versandkosten werden im Checkout berechnet.",
+    "lineTotalNote": "Versandkosten sind im Preis inbegriffen.",
     "goToCheckout": "Zur Kasse",
     "redirecting": "Weiterleitung zu Stripe …",
     "cartCount": "{count, plural, =0 {Warenkorb leer} =1 {# Artikel} other {# Artikel}}",
@@ -159,7 +162,7 @@
     "title": "CAFÉTÉ",
     "subtitle": "Kohlensäurehaltiges Erfrischungsgetränk mit Aufguss aus getrockneter Pulpe der Kaffeekirsche (Cascara aus Brasilien), pasteurisiert.",
     "volumeLabel": "Inhalt",
-    "volumeValue": "33 cl Einweg-Glasflasche, recycelbar",
+    "volumeValue": "33 cl Einweg-Glasflasche",
     "extractLabel": "Extraktgehalt",
     "extractValue": "mind. 2,8 g/L. Enthält natürlicherweise Koffein.",
     "storageLabel": "Lagerung",
@@ -243,7 +246,7 @@
       },
       {
         "q": "Wie viel Zucker ist drin?",
-        "a": "4,5 g Zucker pro 100 ml — über 50 % weniger als herkömmliche Softdrinks. Gesüsst wird ausschliesslich mit etwas Rübenzucker sowie dem natürlichen Zucker aus Cranberry- und Holundersaft."
+        "a": "Über 50 % weniger als in herkömmlichen Softdrinks — 4,5 g pro 100 ml."
       },
       {
         "q": "Ist CAFÉTÉ vegan?",
@@ -254,8 +257,8 @@
         "a": "Kühl und dunkel. Gut gekühlt schmeckt CAFÉTÉ am besten — die Fruchtnoten und die Kohlensäure kommen dann am klarsten zur Geltung."
       },
       {
-        "q": "Wohin liefert ihr, und was kostet der Versand?",
-        "a": "Zum Start liefern wir innerhalb der Schweiz. Versandkosten und die Schwelle für kostenlosen Versand geben wir mit der Shop-Eröffnung bekannt."
+        "q": "Wohin liefert ihr?",
+        "a": "Zum Start liefern wir innerhalb der Schweiz. Die Versandkosten sind im Preis inbegriffen."
       },
       {
         "q": "Kann ich zurückgeben oder umtauschen?",
@@ -299,11 +302,11 @@
         },
         {
           "heading": "2. Preise",
-          "body": "Alle Preise sind in Schweizer Franken und verstehen sich inklusive der gesetzlichen Mehrwertsteuer. Versandkosten werden im Checkout separat ausgewiesen."
+          "body": "Alle Preise sind in Schweizer Franken und verstehen sich inklusive der gesetzlichen Mehrwertsteuer. Die Versandkosten sind im Preis inbegriffen."
         },
         {
           "heading": "3. Lieferung",
-          "body": "Die Lieferung erfolgt innerhalb der Schweiz. Angaben zu Lieferfristen und Versandkosten folgen mit der Shop-Eröffnung."
+          "body": "Die Lieferung erfolgt innerhalb der Schweiz. Die Versandkosten sind im Preis inbegriffen. Angaben zu Lieferfristen folgen mit der Shop-Eröffnung."
         },
         {
           "heading": "4. Zahlung",
@@ -398,5 +401,9 @@
     "loading": "Wird geladen …",
     "comingSoon": "In Kürze verfügbar",
     "placeholderNotice": "Dieser Abschnitt wird in einer der nächsten Phasen gebaut."
+  },
+  "sugar": {
+    "title": "Das mit Zucker",
+    "body": "Cafété enthält über 50 % weniger Zucker als herkömmliche Softdrinks — 4,5 g pro 100 ml."
   }
 }

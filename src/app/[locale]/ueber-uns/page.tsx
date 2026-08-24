@@ -36,7 +36,7 @@ export default async function AboutPage({ params }: LocaleParams) {
         intro={tVision("body")}
       />
 
-      <Story withLink={false} />
+      <Story variant="full" />
 
       <Section tone="cream">
         <SectionHeader
