@@ -46,6 +46,7 @@ export default async function ShopPage({ params }: LocaleParams) {
   return (
     <>
       <PageHeader
+        showLogo
         label={tNav("shop")}
         title={t("title")}
         intro={

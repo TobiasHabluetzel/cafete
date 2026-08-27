@@ -40,7 +40,9 @@ export function Pillars() {
             </span>
             <h3 className="text-h3 text-charcoal mt-2">{t(`${key}.title`)}</h3>
             <p className="text-charcoal/75 mt-3 text-sm leading-relaxed">
-              {t(`${key}.body`)}
+              {t.rich(`${key}.body`, {
+                b: (chunks) => <strong className="text-charcoal font-bold">{chunks}</strong>,
+              })}
             </p>
           </li>
         ))}

@@ -28,8 +28,17 @@ export const site = {
   url: resolveSiteUrl(),
   email: "info@drink-cafete.ch",
   entryPriceCHF: 24.9,
-  /** "Ein Produkt von" — see docs/cafete-content-pack.md §9. */
+  /**
+   * "Ein Produkt von" — see docs/cafete-content-pack.md §9.
+   *
+   * `legalName` supplied by the owner on 2026-08-27 as "Fine & Bold Taste
+   * Specialties KIG". Reproduced verbatim: it goes in the Impressum, so it must
+   * not be silently "corrected" — but note Swiss legal forms are AG, GmbH and
+   * KlG (Kollektivgesellschaft), so "KIG" may be a capital-I/lowercase-l mix-up.
+   * Confirm against the commercial register before publishing.
+   */
   producer: {
+    legalName: "Fine & Bold Taste Specialties KIG",
     street: "Neugasse 33",
     city: "8005 Zürich",
     country: "Schweiz",
@@ -59,9 +68,24 @@ export const launchEvent = {
  * No single bottle — CAFÉTÉ sells in 6s, 12s and 24s only (Tobias, 2026-08-14),
  * which makes the 6-pack the "ab CHF 24.90" entry price.
  */
-export const packSizes = [
+type PackDefinition = {
+  bottles: number;
+  labelKey: string;
+  stripePriceEnv: string;
+  badge?: "bestseller";
+};
+
+export const packSizes: readonly PackDefinition[] = [
   { bottles: 6, labelKey: "six", stripePriceEnv: "STRIPE_PRICE_PACK_6" },
-  { bottles: 12, labelKey: "twelve", stripePriceEnv: "STRIPE_PRICE_PACK_12" },
+  // `badge` is a marketing call, not data — kept here rather than in Stripe
+  // metadata so it needs no dashboard work. Move it to metadata if it starts
+  // changing often enough to want editing without a deploy.
+  {
+    bottles: 12,
+    labelKey: "twelve",
+    stripePriceEnv: "STRIPE_PRICE_PACK_12",
+    badge: "bestseller",
+  },
   { bottles: 24, labelKey: "twentyfour", stripePriceEnv: "STRIPE_PRICE_PACK_24" },
 ] as const;
 

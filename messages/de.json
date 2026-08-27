@@ -43,11 +43,11 @@
     "title": "Die andere Hälfte des Kaffees",
     "intro": "Die andere Hälfte des Kaffees ist das Fruchtfleisch der Kaffeekirsche. Genau diese Frucht steht bei Cafété im Mittelpunkt.",
     "tasteTitle": "Wie schmeckt CAFÉTÉ?",
-    "tasteBody": "Fruchtige Noten, eine feine natürliche Süsse und eine dezente Säure prägen den Geschmack. Im Abgang erinnert CAFÉTÉ an rote Beeren und Hagebutte — nicht an klassischen Kaffee.",
+    "tasteBody": "Fruchtige Noten, leichte florale Aromen, eine feine natürliche Süsse und eine dezente Säure prägen den Geschmack. Im Abgang erinnert CAFÉTÉ an rote Beeren und Hagebutte — nicht an klassischen Kaffee.",
     "traditionTitle": "Seit Generationen geschätzt",
     "traditionBody": "Ein Aufguss aus getrockneten Kaffeefrüchten wird in verschiedenen Kaffeeanbauregionen seit Generationen getrunken. CAFÉTÉ knüpft an diese Tradition an und bringt sie in eine neue Form.",
     "originTitle": "Herkunft",
-    "originBody": "Unsere Kaffeefrüchte stammen aus Brasilien."
+    "originBody": "Unsere Kaffeefrüchte stammen aus Brasilien – einem Land, dessen Kultur und Landwirtschaft seit fast 300 Jahren vom Kaffee geprägt werden."
   },
   "project": {
     "label": "Das Produkt",
@@ -59,29 +59,29 @@
     "title": "Die vier Säulen von CAFÉTÉ",
     "functional": {
       "title": "Funktional",
-      "body": "Für aktive Momente im Alltag — im Büro, unterwegs oder beim Sport. Prickelnd, erfrischend und mit natürlichem Koffein aus der Kaffeefrucht. Mit 4,5 g Zucker pro 100 ml enthält CAFÉTÉ über 50 % weniger Zucker als herkömmliche Softdrinks."
+      "body": "Für aktive Momente im Alltag — im Büro, unterwegs oder beim Sport. Prickelnd, erfrischend und mit <b>natürlichem Koffein</b> aus der Kaffeefrucht. Mit 4,5 g Zucker pro 100 ml enthält CAFÉTÉ <b>über 50 % weniger Zucker</b> als herkömmliche Softdrinks."
     },
     "social": {
       "title": "Sozial",
-      "body": "Weltweit werden jährlich rund 10 Millionen Tonnen Kaffeebohnen produziert. Entsprechend gross ist die Menge an Kaffeefrüchten, welche dabei anfällt. Ihre Verwertung schafft Wertschöpfung aus einem Teil der Ernte, der bisher kaum Erlös brachte und meist nur lokal genutzt werden konnte."
+      "body": "Weltweit werden jährlich rund <b>10 Millionen Tonnen</b> Kaffeebohnen produziert. Entsprechend gross ist die Menge an Kaffeefrüchten, welche dabei anfällt. Ihre Verwertung schafft <b>Wertschöpfung</b> aus einem Teil der Ernte, der bisher kaum Erlös brachte und meist nur lokal genutzt werden konnte."
     },
     "ecological": {
       "title": "Ökologisch",
-      "body": "Jedes Getränk braucht einen Rohstoff — und fast jeder Rohstoff braucht Anbaufläche. Die Kaffeefrucht nicht: Sie wächst ohnehin, pro Kilogramm Kaffeebohnen rund 2,0–2,3 kg. Für CAFÉTÉ wird keine zusätzliche Fläche bepflanzt, bewässert oder gedüngt. Wir arbeiten mit dem, was bereits da ist."
+      "body": "Jedes Getränk braucht einen Rohstoff — und fast jeder Rohstoff braucht Anbaufläche. Die Kaffeefrucht nicht: Sie wächst ohnehin, pro Kilogramm Kaffeebohnen rund 2,0–2,3 kg. Für CAFÉTÉ wird <b>keine zusätzliche Fläche</b> bepflanzt, bewässert oder gedüngt. Wir arbeiten mit dem, was bereits da ist."
     },
     "economic": {
       "title": "Ökonomisch",
-      "body": "Die Kaffeefrucht wird bis heute häufig unterschätzt. CAFÉTÉ macht aus ihr ein hochwertiges Getränk — und zeigt, dass in diesem Rohstoff ein eigener Markt steckt."
+      "body": "Die Kaffeefrucht wird bis heute häufig unterschätzt. CAFÉTÉ macht aus ihr ein <b>hochwertiges Getränk</b> — und zeigt, dass in diesem Rohstoff ein <b>eigener Markt</b> steckt."
     }
   },
   "story": {
     "label": "Unsere Geschichte",
     "title": "Wie alles begann",
-    "p1": "Angefangen hat CAFÉTÉ vor drei Jahren in einem claro-Laden. Dort entdeckte Kareem, leidenschaftlicher Gastronom seit rund 20 Jahren und einer der beiden Gründer, einen grossen Glasbehälter voll getrockneter, rötlicher Früchte. Was das war, konnte er nicht sagen. Auf Nachfrage erfuhr er: ein Teil der Kaffeepflanze. Das Interesse war geweckt — und weil damals kaum jemand danach fragte, bekam er eine Handvoll zum Probieren geschenkt.",
-    "p2": "Zuhause bereitete er daraus seinen ersten Aufguss zu: fruchtig, leicht säuerlich und überraschend eigenständig. Je mehr Kareem über die Kaffeefrucht lernte, desto klarer wurde ihm, dass in dieser Frucht weit mehr steckt.",
+    "p1": "Angefangen hat CAFÉTÉ vor drei Jahren in einem <b>claro-Laden</b>. Dort entdeckte Kareem, leidenschaftlicher Gastronom seit rund 20 Jahren und einer der beiden Gründer, einen grossen Glasbehälter voll getrockneter, rötlicher Früchte. Was das war, konnte er nicht sagen. Auf Nachfrage erfuhr er: <b>ein Teil der Kaffeepflanze</b>. Das Interesse war geweckt — und weil damals kaum jemand danach fragte, bekam er eine Handvoll zum Probieren geschenkt.",
+    "p2": "Zuhause bereitete er daraus seinen ersten Aufguss zu: <b>fruchtig, leicht säuerlich und überraschend eigenständig</b>. Je mehr Kareem über die Kaffeefrucht lernte, desto klarer wurde ihm, dass in dieser Frucht weit mehr steckt.",
     "p3": "Drei Jahre später wurde aus einer Handvoll Kaffeefrüchten CAFÉTÉ.",
     "teaser": "Innerhalb von drei Jahren entwickelte sich aus einer Handvoll Kaffeefrüchten Cafété.",
-    "cta": "Wie alles begann"
+    "cta": "Über uns"
   },
   "vision": {
     "label": "Die Vision",
@@ -93,7 +93,7 @@
     "title": "Die Gründer hinter Cafété",
     "kareem": {
       "name": "Kareem Oueini",
-      "role": "Rezeptur & Produkt",
+      "role": "Produkt- & Markenentwicklung",
       "bio": "Kareem Oueini ist gelernter Koch und Lebensmittelveredler aus Leidenschaft. Seit rund zwei Jahrzehnten arbeitet er in der Gastronomie und hat dabei ein ausgeprägtes Feingefühl für Geschmack, Balance und Qualität entwickelt. Diese Erfahrung bringt er auch in das Projekt CAFÉTÉ ein — insbesondere bei der Rezeptentwicklung, wo das Zusammenspiel von Aromen, Süsse, Säure und Struktur entscheidend ist. Als naturverbundener und sportlicher Mensch beschäftigt er sich zudem seit längerem mit der Bedeutung von Ernährung, Hydration und der Qualität dessen, was wir unserem Körper zuführen."
     },
     "hannes": {
@@ -134,7 +134,8 @@
     "priceTbd": "Preis folgt",
     "bestValue": "Bester Preis pro Flasche",
     "unavailableLine": "Ein Artikel ist momentan nicht verfügbar. Bitte entferne ihn, um fortzufahren.",
-    "comingSoon": "Demnächst verfügbar"
+    "comingSoon": "Erhältlich ab 19. September 2026!",
+    "bestseller": "Bestseller"
   },
   "event": {
     "label": "Save the date",
@@ -287,7 +288,7 @@
       "bottlerHeading": "Abgefüllt von",
       "contactHeading": "Kontakt",
       "uidHeading": "Handelsregister / UID",
-      "uidBody": "Firmenname und UID werden vor der Veröffentlichung ergänzt.",
+      "uidBody": "Die UID wird vor der Veröffentlichung ergänzt.",
       "disclaimerHeading": "Haftungsausschluss",
       "disclaimerBody": "Die Inhalte dieser Website werden mit Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen."
     },

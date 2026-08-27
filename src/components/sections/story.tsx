@@ -60,8 +60,16 @@ export function Story({ variant = "full" }: { variant?: "teaser" | "full" }) {
             </div>
           ) : (
             <div className="text-charcoal/80 mt-6 space-y-5 text-lg leading-relaxed">
-              <p className="reveal">{t("p1")}</p>
-              <p className="reveal">{t("p2")}</p>
+              <p className="reveal">
+                {t.rich("p1", {
+                  b: (chunks) => <strong className="text-charcoal font-bold">{chunks}</strong>,
+                })}
+              </p>
+              <p className="reveal">
+                {t.rich("p2", {
+                  b: (chunks) => <strong className="text-charcoal font-bold">{chunks}</strong>,
+                })}
+              </p>
               <p className="reveal border-sunset text-charcoal font-display text-h3 border-l-4 pl-5 font-extrabold">
                 {t("p3")}
               </p>

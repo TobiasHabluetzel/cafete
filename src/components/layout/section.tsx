@@ -1,6 +1,7 @@
 import type { ComponentProps, ReactNode } from "react";
 
 import { SunburstRays, WarmGlow } from "@/components/brand/sunburst";
+import { LogoSticker } from "@/components/brand/wordmark";
 import { cn } from "@/lib/utils";
 
 const tones = {
@@ -71,11 +72,14 @@ export function PageHeader({
   title,
   intro,
   children,
+  showLogo = false,
 }: {
   label?: ReactNode;
   title: ReactNode;
   intro?: ReactNode;
   children?: ReactNode;
+  /** Fills the empty dark space on the right — used on the shop. */
+  showLogo?: boolean;
 }) {
   return (
     <div className="bg-night text-cream relative isolate overflow-hidden">
@@ -85,6 +89,17 @@ export function PageHeader({
         opacity="opacity-20"
       />
       <WarmGlow className="top-[-6rem] left-[52%] size-[30rem] max-w-[80vw]" />
+
+      {showLogo ? (
+        // aria-hidden on the wrapper: the header already names the brand, so a
+        // second "CAFÉTÉ" from the image's alt text is just noise.
+        <span
+          aria-hidden
+          className="absolute top-1/2 right-6 hidden -translate-y-1/2 lg:block"
+        >
+          <LogoSticker sizes="16rem" className="lg:w-[13rem] xl:w-[15rem]" />
+        </span>
+      ) : null}
 
       <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
         {label ? <p className="label-caps text-gold">{label}</p> : null}

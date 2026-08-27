@@ -30,7 +30,7 @@ export default async function ImprintPage({ params }: LocaleParams) {
             <section>
               <h2 className="text-h3">{t("imprint.responsibleHeading")}</h2>
               <address className="text-charcoal/80 mt-3 space-y-1 not-italic">
-                <p className="font-semibold">{site.name}</p>
+                <p className="font-semibold">{site.producer.legalName}</p>
                 <p>{site.producer.street}</p>
                 <p>{site.producer.city}</p>
                 <p>{site.producer.country}</p>

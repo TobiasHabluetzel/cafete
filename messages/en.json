@@ -43,11 +43,11 @@
     "title": "The other half of coffee",
     "intro": "The other half of coffee is the pulp of the coffee cherry. That fruit is exactly what Cafété puts at the centre.",
     "tasteTitle": "What does CAFÉTÉ taste like?",
-    "tasteBody": "Fruity notes, a delicate natural sweetness and a gentle acidity define the taste. The finish recalls red berries and rosehip — not classic coffee.",
+    "tasteBody": "Fruity notes, light floral aromas, a delicate natural sweetness and a gentle acidity define the taste. The finish recalls red berries and rosehip — not classic coffee.",
     "traditionTitle": "Valued for generations",
     "traditionBody": "An infusion of dried coffee fruit has been enjoyed for generations across coffee-growing regions. CAFÉTÉ carries on that tradition and brings it into a new form.",
     "originTitle": "Origin",
-    "originBody": "Our coffee fruit comes from Brazil."
+    "originBody": "Our coffee fruit comes from Brazil – a country whose culture and agriculture have been shaped by coffee for almost 300 years."
   },
   "project": {
     "label": "The product",
@@ -59,29 +59,29 @@
     "title": "The four pillars of CAFÉTÉ",
     "functional": {
       "title": "Functional",
-      "body": "For active moments in everyday life — at the office, on the go or during sport. Sparkling, refreshing, with natural caffeine from the coffee fruit. At 4.5 g of sugar per 100 ml, CAFÉTÉ has over 50 % less sugar than conventional soft drinks."
+      "body": "For active moments in everyday life — at the office, on the go or during sport. Sparkling, refreshing, with <b>natural caffeine</b> from the coffee fruit. At 4.5 g of sugar per 100 ml, CAFÉTÉ has <b>over 50 % less sugar</b> than conventional soft drinks."
     },
     "social": {
       "title": "Social",
-      "body": "Around 10 million tonnes of coffee beans are produced worldwide each year — and with them a correspondingly huge amount of coffee fruit. Using it creates value from a part of the harvest that until now brought little return and could mostly only be used locally."
+      "body": "Around <b>10 million tonnes</b> of coffee beans are produced worldwide each year — and with them a correspondingly huge amount of coffee fruit. Using it <b>creates value</b> from a part of the harvest that until now brought little return and could mostly only be used locally."
     },
     "ecological": {
       "title": "Ecological",
-      "body": "Every drink needs a raw material — and almost every raw material needs land. The coffee fruit doesn’t: it grows anyway, about 2.0–2.3 kg per kilogram of coffee beans. For CAFÉTÉ, no additional land is planted, irrigated or fertilised. We work with what is already there."
+      "body": "Every drink needs a raw material — and almost every raw material needs land. The coffee fruit doesn’t: it grows anyway, about 2.0–2.3 kg per kilogram of coffee beans. For CAFÉTÉ, <b>no additional land</b> is planted, irrigated or fertilised. We work with what is already there."
     },
     "economic": {
       "title": "Economic",
-      "body": "The coffee fruit is still often underestimated. CAFÉTÉ turns it into a premium drink — and shows that this raw material holds a market of its own."
+      "body": "The coffee fruit is still often underestimated. CAFÉTÉ turns it into a <b>premium drink</b> — and shows that this raw material holds <b>a market of its own</b>."
     }
   },
   "story": {
     "label": "Our story",
     "title": "How it all began",
-    "p1": "CAFÉTÉ began three years ago in a claro shop, where Kareem — a passionate hospitality professional of some twenty years and one of the two founders — spotted a large glass jar full of dried, reddish fruit. He couldn’t say what it was. When he asked, he learned: it’s part of the coffee plant. His curiosity was sparked — and since hardly anyone asked about it back then, he was given a handful to try.",
-    "p2": "At home he brewed his first infusion from it: fruity, slightly tart and surprisingly distinct. The more Kareem learned about the coffee fruit, the clearer it became that there was far more to it.",
+    "p1": "CAFÉTÉ began three years ago in a <b>claro shop</b>, where Kareem — a passionate hospitality professional of some twenty years and one of the two founders — spotted a large glass jar full of dried, reddish fruit. He couldn’t say what it was. When he asked, he learned: it’s <b>part of the coffee plant</b>. His curiosity was sparked — and since hardly anyone asked about it back then, he was given a handful to try.",
+    "p2": "At home he brewed his first infusion from it: <b>fruity, slightly tart and surprisingly distinct</b>. The more Kareem learned about the coffee fruit, the clearer it became that there was far more to it.",
     "p3": "Three years later, a handful of coffee fruit became CAFÉTÉ.",
     "teaser": "Within three years, a handful of coffee fruit became Cafété.",
-    "cta": "How it all began"
+    "cta": "About us"
   },
   "vision": {
     "label": "The vision",
@@ -93,7 +93,7 @@
     "title": "The founders behind Cafété",
     "kareem": {
       "name": "Kareem Oueini",
-      "role": "Recipe & product",
+      "role": "Product & brand development",
       "bio": "Kareem Oueini is a trained chef and food craftsman by passion. He has worked in hospitality for some two decades, developing a fine instinct for taste, balance and quality. He brings that experience to CAFÉTÉ — especially in recipe development, where the interplay of aromas, sweetness, acidity and structure is decisive. A nature-loving and sporty person, he has also long been interested in nutrition, hydration and the quality of what we put into our bodies."
     },
     "hannes": {
@@ -134,7 +134,8 @@
     "priceTbd": "Price to follow",
     "bestValue": "Best per bottle",
     "unavailableLine": "One item is currently unavailable. Please remove it to continue.",
-    "comingSoon": "Coming soon"
+    "comingSoon": "Available from 19 September 2026!",
+    "bestseller": "Bestseller"
   },
   "event": {
     "label": "Save the date",
@@ -287,7 +288,7 @@
       "bottlerHeading": "Bottled by",
       "contactHeading": "Contact",
       "uidHeading": "Commercial register / UID",
-      "uidBody": "Company name and UID will be added before publication.",
+      "uidBody": "The UID will be added before publication.",
       "disclaimerHeading": "Disclaimer",
       "disclaimerBody": "The content of this website is compiled with care. We cannot, however, guarantee its accuracy, completeness or timeliness."
     },

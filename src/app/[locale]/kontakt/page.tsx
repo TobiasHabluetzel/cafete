@@ -43,7 +43,7 @@ export default async function ContactPage({ params }: LocaleParams) {
           <div className="border-charcoal/10 rounded-lg border bg-white/60 p-7">
             <h2 className="label-caps text-sunset-ink">{t("producerLabel")}</h2>
             <address className="text-charcoal/80 mt-3 space-y-1 not-italic">
-              <p className="font-semibold">{site.name}</p>
+              <p className="font-semibold">{site.producer.legalName}</p>
               <p>{site.producer.street}</p>
               <p>{site.producer.city}</p>
               <p>{site.producer.country}</p>

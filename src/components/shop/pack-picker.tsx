@@ -22,7 +22,7 @@ export function PackPicker({
   packs,
   prices,
 }: {
-  packs: { bottles: number; labelKey: string }[];
+  packs: { bottles: number; labelKey: string; badge?: "bestseller" }[];
   prices: PackPrice[];
 }) {
   const t = useTranslations("checkout");
@@ -39,14 +39,20 @@ export function PackPicker({
     }, 1600);
   }
 
-  // The cheapest per-bottle pack gets called out, which is the number that
-  // actually helps someone choose between 6, 12 and 24. Only packs you can buy
-  // today are eligible — badging an unavailable pack "best value" is a tease.
+  /*
+   * The cheapest per-bottle pack gets called out — the number that actually
+   * helps someone choose between 6, 12 and 24.
+   *
+   * This deliberately considers every priced pack, including coming-soon ones.
+   * It was briefly restricted to buyable packs on the theory that badging an
+   * unavailable pack is a tease, but with the whole shop pre-launch that removed
+   * the badge entirely. While nothing is buyable the badge is pure price
+   * information, which is what the owner wanted back.
+   */
   const perBottle = (price: PackPrice) => price.amount / price.bottles;
-  const sellable = prices.filter((price) => !price.comingSoon);
   const bestValue =
-    sellable.length > 1
-      ? sellable.reduce((min, p) => (perBottle(p) < perBottle(min) ? p : min)).bottles
+    prices.length > 1
+      ? prices.reduce((min, p) => (perBottle(p) < perBottle(min) ? p : min)).bottles
       : null;
 
   return (
@@ -67,17 +73,26 @@ export function PackPicker({
               >
                 {t("bestValue")}
               </Sticker>
+            ) : pack.badge === "bestseller" ? (
+              <Sticker
+                tone="gold"
+                className="absolute -top-3 right-4 -rotate-2 text-xs"
+              >
+                {t("bestseller")}
+              </Sticker>
             ) : null}
 
-            {/* Transparent packshot, so the bottle sits on the card rather than
-                inside a photo of a kitchen. */}
-            <div className="bg-cream/60 border-ink/15 flex h-44 items-center justify-center rounded-md border">
+            {/* The bottle sits straight on the card. It was inside a bordered
+                cream block, which at this aspect ratio left a thin bottle
+                swimming in empty space — removing the block and going taller
+                gives it the room the owner asked for. */}
+            <div className="flex h-64 items-center justify-center">
               <Image
                 src={bottle}
                 alt=""
-                sizes="12rem"
+                sizes="14rem"
                 placeholder="blur"
-                className="h-40 w-auto"
+                className="h-full w-auto drop-shadow-[0_10px_24px_rgba(20,16,14,0.25)]"
               />
             </div>
 
