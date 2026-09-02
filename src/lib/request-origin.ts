@@ -25,7 +25,20 @@ function isAllowedHost(host: string): boolean {
   if (/^[a-z0-9-]+\.up\.railway\.app$/i.test(host)) return true;
 
   try {
-    if (new URL(site.url).host === host) return true;
+    const canonical = new URL(site.url).host;
+    if (canonical === host) return true;
+    /*
+     * Accept the www variant of the canonical host too.
+     *
+     * Railway wants `CNAME @`, but a CNAME at the apex must be the only record
+     * at that name and drink-cafete.ch has NS, MX and SPF there — so the site may
+     * end up served at www with the bare domain redirecting. Either arrangement
+     * then produces correct Stripe return URLs instead of bouncing through a
+     * redirect.
+     */
+    if (canonical.startsWith("www.") ? canonical.slice(4) === host : `www.${canonical}` === host) {
+      return true;
+    }
   } catch {
     // site.url is validated at construction, so this should not happen.
   }
