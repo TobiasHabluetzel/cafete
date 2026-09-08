@@ -112,6 +112,13 @@ export function PackPicker({
                       price: formatMoney(perBottle(price), price.currency, locale),
                     })}
                   </p>
+                  {/* Sits directly under the price rather than in the small print
+                      below the grid, which is where it used to live. */}
+                  <p className="mt-2">
+                    <Sticker tone="cream" className="rotate-0 text-xs">
+                      {t("shippingIncluded")}
+                    </Sticker>
+                  </p>
                 </>
               ) : (
                 <p className="label-caps text-sunset-ink">{t("priceTbd")}</p>

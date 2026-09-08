@@ -135,7 +135,8 @@
     "bestValue": "Bester Preis pro Flasche",
     "unavailableLine": "Ein Artikel ist momentan nicht verfügbar. Bitte entferne ihn, um fortzufahren.",
     "comingSoon": "Erhältlich ab 19. September 2026!",
-    "bestseller": "Bestseller"
+    "bestseller": "Bestseller",
+    "shippingIncluded": "inkl. Versand"
   },
   "event": {
     "label": "Save the date",
@@ -403,5 +404,9 @@
   },
   "sugar": {
     "body": "Cafété enthält über 50 % weniger Zucker als herkömmliche Softdrinks, 59 % weniger Zucker als herkömmliche Energydrinks und 20 % weniger Zucker als gängige Mate-Getränke."
+  },
+  "video": {
+    "label": "Im Bewegtbild",
+    "title": "CAFÉTÉ in Aktion"
   }
 }

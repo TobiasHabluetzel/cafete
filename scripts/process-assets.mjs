@@ -355,10 +355,12 @@ await photo({
    * Note the source filenames in the dossier are misleading — every river shot
    * of Hannes is named "Kareem_F_00x". This one was exported by hand.
    */
-  src: s("Hannes Studio.jpg"),
+  // Replaced 2026-09-08: a proper landscape studio shot against concrete.
+  // Because the source is landscape, the 4:5 portrait frame has to come out of
+  // the middle — hence a narrow horizontal window at full height.
+  src: s("Hannes Suit.jpg"),
   out: "founder-hannes.jpg",
-  // Full width; only the headroom is trimmed to a 4:5 frame.
-  region: { left: 0, top: 0.021, width: 1, height: 0.839 },
+  region: { left: 0.284, top: 0, width: 0.532, height: 1 },
   width: 1200,
   height: 1500,
   position: "top",

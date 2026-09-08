@@ -7,6 +7,7 @@ import { Hero } from "@/components/sections/hero";
 import { Pillars } from "@/components/sections/pillars";
 import { ShopTeaser } from "@/components/sections/shop-teaser";
 import { Story } from "@/components/sections/story";
+import { VideoClip } from "@/components/sections/video-clip";
 import { routing } from "@/i18n/routing";
 import { getEntryPrice } from "@/lib/pricing";
 
@@ -32,6 +33,7 @@ export default async function HomePage({
     <>
       <Hero entryPrice={entryPrice} />
       <SloganMarquee />
+      <VideoClip />
       <CoffeeFruit />
       <Pillars />
       <Story variant="teaser" />

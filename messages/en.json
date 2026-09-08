@@ -135,7 +135,8 @@
     "bestValue": "Best per bottle",
     "unavailableLine": "One item is currently unavailable. Please remove it to continue.",
     "comingSoon": "Available from 19 September 2026!",
-    "bestseller": "Bestseller"
+    "bestseller": "Bestseller",
+    "shippingIncluded": "shipping included"
   },
   "event": {
     "label": "Save the date",
@@ -403,5 +404,9 @@
   },
   "sugar": {
     "body": "Cafété contains over 50 % less sugar than conventional soft drinks, 59 % less sugar than conventional energy drinks and 20 % less sugar than common mate drinks."
+  },
+  "video": {
+    "label": "Watch",
+    "title": "CAFÉTÉ in action"
   }
 }
