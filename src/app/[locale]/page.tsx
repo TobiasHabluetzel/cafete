@@ -9,11 +9,18 @@ import { ShopTeaser } from "@/components/sections/shop-teaser";
 import { Story } from "@/components/sections/story";
 import { VideoClip } from "@/components/sections/video-clip";
 import { routing } from "@/i18n/routing";
+import { createMetadata } from "@/lib/page";
 import { getEntryPrice } from "@/lib/pricing";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
+
+export const generateMetadata = createMetadata({
+  namespace: "meta",
+  descriptionKey: "home",
+  pathname: "/",
+});
 
 // The entry price comes from Stripe, so the page is revalidated hourly rather
 // than frozen at build time. A price change shows up without a redeploy.

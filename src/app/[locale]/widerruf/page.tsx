@@ -7,7 +7,7 @@ import {
 } from "@/lib/page";
 
 export const generateStaticParams = generateLocaleParams;
-export const generateMetadata = createMetadata("legal", "returns.title");
+export const generateMetadata = createMetadata({ namespace: "legal", titleKey: "returns.title", descriptionKey: "returns", pathname: "/widerruf" });
 
 export default async function Page({ params }: LocaleParams) {
   const locale = await resolvePageLocale(params);

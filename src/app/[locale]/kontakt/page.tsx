@@ -11,7 +11,7 @@ import {
 } from "@/lib/page";
 
 export const generateStaticParams = generateLocaleParams;
-export const generateMetadata = createMetadata("contact");
+export const generateMetadata = createMetadata({ namespace: "contact", descriptionKey: "contact", pathname: "/kontakt" });
 
 export default async function ContactPage({ params }: LocaleParams) {
   const locale = await resolvePageLocale(params);

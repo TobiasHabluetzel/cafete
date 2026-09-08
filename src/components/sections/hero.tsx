@@ -70,9 +70,15 @@ export function Hero({ entryPrice }: { entryPrice: string | null }) {
             </div>
           </div>
 
-          <p className="text-cream/85 relative mt-8 max-w-xl text-lg leading-snug font-medium text-balance sm:text-xl">
+          {/*
+            * The page's H1. The wordmark above it is an image, so without this the
+            * homepage had no text heading at all — invisible to search engines and
+            * to anyone navigating by headings. The subtitle is the natural
+            * candidate: real, descriptive copy rather than hidden keyword text.
+            */}
+          <h1 className="text-cream/85 relative mt-8 max-w-xl text-lg leading-snug font-medium text-balance sm:text-xl">
             {t("subtitle")}
-          </p>
+          </h1>
 
           <div className="relative mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
             <Link href="/shop" className={ctaClass({ variant: "gold", size: "lg" })}>

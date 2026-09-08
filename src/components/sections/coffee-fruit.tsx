@@ -25,7 +25,7 @@ export function CoffeeFruit() {
       <div className="relative">
         <Image
           src={cherryPhoto}
-          alt=""
+          alt={t("photoAlt")}
           sizes="100vw"
           placeholder="blur"
           className="absolute inset-0 size-full object-cover object-left"

@@ -47,7 +47,8 @@
     "traditionTitle": "Seit Generationen geschätzt",
     "traditionBody": "Ein Aufguss aus getrockneten Kaffeefrüchten wird in verschiedenen Kaffeeanbauregionen seit Generationen getrunken. CAFÉTÉ knüpft an diese Tradition an und bringt sie in eine neue Form.",
     "originTitle": "Herkunft",
-    "originBody": "Unsere Kaffeefrüchte stammen aus Brasilien – einem Land, dessen Kultur und Landwirtschaft seit fast 300 Jahren vom Kaffee geprägt werden."
+    "originBody": "Unsere Kaffeefrüchte stammen aus Brasilien – einem Land, dessen Kultur und Landwirtschaft seit fast 300 Jahren vom Kaffee geprägt werden.",
+    "photoAlt": "Getrocknete Kaffeekirschen in Nahaufnahme"
   },
   "project": {
     "label": "Das Produkt",
@@ -114,7 +115,8 @@
     "bottles": "{count, plural, =1 {# Flasche} other {# Flaschen}}",
     "six": "6er-Pack",
     "twelve": "12er-Pack",
-    "twentyfour": "24er-Pack"
+    "twentyfour": "24er-Pack",
+    "imageAlt": "{pack} CAFÉTÉ"
   },
   "checkout": {
     "addToCart": "In den Warenkorb",
@@ -203,7 +205,8 @@
         "nutrient": "Salz",
         "value": "0,0 g"
       }
-    ]
+    ],
+    "bottleAlt": "CAFÉTÉ 33-cl-Glasflasche mit orangem Etikett"
   },
   "shop": {
     "title": "Shop",
@@ -408,5 +411,19 @@
   "video": {
     "label": "Im Bewegtbild",
     "title": "CAFÉTÉ in Aktion"
+  },
+  "pageMeta": {
+    "home": "CAFÉTÉ ist das prickelnde Erfrischungsgetränk aus der Kaffeefrucht: fruchtig, natürlich koffeinhaltig und mit über 50 % weniger Zucker. Entwickelt in der Schweiz.",
+    "product": "Alle Fakten zu CAFÉTÉ: Zutaten, Nährwerte, Koffein und Geschmack. 33-cl-Glasflasche mit echtem Aufguss aus der Kaffeekirsche — kein Extrakt, kein Aroma.",
+    "shop": "CAFÉTÉ im 6er-, 12er- und 24er-Pack bestellen. Preise inklusive Versand innerhalb der Schweiz. Erhältlich ab dem 19. September 2026.",
+    "cart": "Dein Warenkorb bei CAFÉTÉ — prüfe deine Packungsgrössen und gehe zur sicheren Kasse mit Karte oder TWINT.",
+    "event": "CAFÉTÉ Launch Event am Samstag, 19. September 2026, 13–17 Uhr im Restaurant Osso in Zürich. Degustation, Gründer und Anmeldung.",
+    "faq": "Häufige Fragen zu CAFÉTÉ: Koffein, Zucker, Zutaten, Lagerung, Versand und Rückgabe — kurz und konkret beantwortet.",
+    "contact": "Kontakt zu CAFÉTÉ: Fragen zum Produkt, Anfragen von Händlern und Gastronomie, oder einfach Hallo sagen.",
+    "about": "Wie aus einer Handvoll Kaffeefrüchten CAFÉTÉ wurde — die Geschichte, die Gründer Kareem und Hannes und die Vision hinter der Kaffeefrucht.",
+    "imprint": "Impressum von CAFÉTÉ — Anbieterkennzeichnung, Kontakt und rechtliche Angaben.",
+    "terms": "Allgemeine Geschäftsbedingungen für Bestellungen im CAFÉTÉ Onlineshop: Preise, Lieferung, Zahlung und Gewährleistung.",
+    "privacy": "Datenschutzerklärung von CAFÉTÉ — welche Daten wir bearbeiten, zu welchem Zweck, und deine Rechte nach revDSG.",
+    "returns": "Widerruf und Rückgabe bei CAFÉTÉ: Rückgaberecht, beschädigte Sendungen und Rückerstattung."
   }
 }

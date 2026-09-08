@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { JsonLd } from "@/components/seo/json-ld";
 import { site } from "@/config/site";
 import {
   createMetadata,
@@ -16,7 +17,7 @@ import {
 } from "@/lib/page";
 
 export const generateStaticParams = generateLocaleParams;
-export const generateMetadata = createMetadata("faq");
+export const generateMetadata = createMetadata({ namespace: "faq", descriptionKey: "faq", pathname: "/faq" });
 
 type FaqItem = { q: string; a: string };
 
@@ -33,6 +34,18 @@ export default async function FaqPage({ params }: LocaleParams) {
 
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: items.map((item) => ({
+            "@type": "Question",
+            name: item.q,
+            acceptedAnswer: { "@type": "Answer", text: item.a },
+          })),
+        }}
+      />
+
       <PageHeader label={t("label")} title={t("title")} />
 
       <Section tone="cream">

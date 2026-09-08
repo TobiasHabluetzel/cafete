@@ -47,7 +47,8 @@
     "traditionTitle": "Valued for generations",
     "traditionBody": "An infusion of dried coffee fruit has been enjoyed for generations across coffee-growing regions. CAFÉTÉ carries on that tradition and brings it into a new form.",
     "originTitle": "Origin",
-    "originBody": "Our coffee fruit comes from Brazil – a country whose culture and agriculture have been shaped by coffee for almost 300 years."
+    "originBody": "Our coffee fruit comes from Brazil – a country whose culture and agriculture have been shaped by coffee for almost 300 years.",
+    "photoAlt": "Close-up of dried coffee cherries"
   },
   "project": {
     "label": "The product",
@@ -114,7 +115,8 @@
     "bottles": "{count, plural, =1 {# bottle} other {# bottles}}",
     "six": "6-pack",
     "twelve": "12-pack",
-    "twentyfour": "24-pack"
+    "twentyfour": "24-pack",
+    "imageAlt": "{pack} CAFÉTÉ"
   },
   "checkout": {
     "addToCart": "Add to cart",
@@ -203,7 +205,8 @@
         "nutrient": "Salt",
         "value": "0.0 g"
       }
-    ]
+    ],
+    "bottleAlt": "CAFÉTÉ 33 cl glass bottle with orange label"
   },
   "shop": {
     "title": "Shop",
@@ -408,5 +411,19 @@
   "video": {
     "label": "Watch",
     "title": "CAFÉTÉ in action"
+  },
+  "pageMeta": {
+    "home": "CAFÉTÉ is the sparkling refreshment made from the coffee fruit: fruity, naturally caffeinated and with over 50 % less sugar. Developed in Switzerland.",
+    "product": "Everything about CAFÉTÉ: ingredients, nutrition, caffeine and taste. A 33 cl glass bottle with a real coffee-cherry infusion — no extract, no flavouring.",
+    "shop": "Order CAFÉTÉ in 6, 12 and 24-bottle packs. Prices include shipping within Switzerland. Available from 19 September 2026.",
+    "cart": "Your CAFÉTÉ cart — review your pack sizes and continue to secure checkout by card or TWINT.",
+    "event": "CAFÉTÉ launch event on Saturday 19 September 2026, 13:00–17:00 at Restaurant Osso in Zürich. Tasting, the founders, and sign-up.",
+    "faq": "Frequently asked questions about CAFÉTÉ: caffeine, sugar, ingredients, storage, shipping and returns — answered plainly.",
+    "contact": "Get in touch with CAFÉTÉ: product questions, retailer and hospitality enquiries, or just to say hello.",
+    "about": "How a handful of coffee fruit became CAFÉTÉ — the story, founders Kareem and Hannes, and the vision behind the coffee fruit.",
+    "imprint": "CAFÉTÉ imprint — provider identification, contact and legal details.",
+    "terms": "Terms and conditions for orders in the CAFÉTÉ online shop: prices, delivery, payment and warranty.",
+    "privacy": "CAFÉTÉ privacy policy — what data we process, for what purpose, and your rights under the revised Swiss FADP.",
+    "returns": "Returns and withdrawal at CAFÉTÉ: right of return, damaged shipments and refunds."
   }
 }

@@ -6,10 +6,12 @@ import { PageHeader, Section } from "@/components/layout/section";
 import { ClearCartOnMount } from "@/components/shop/clear-cart-on-mount";
 import { site } from "@/config/site";
 import { Link } from "@/i18n/navigation";
-import { createMetadata, resolvePageLocale } from "@/lib/page";
+import { resolvePageLocale } from "@/lib/page";
 import { getStripe, isStripeConfigured } from "@/lib/stripe";
 
-export const generateMetadata = createMetadata("order");
+// No canonical or hreflang: an order confirmation is per-session and must not
+// be indexed.
+export const metadata = { robots: { index: false, follow: false } };
 
 // Depends on a live Stripe lookup, so never prerendered or cached.
 export const dynamic = "force-dynamic";

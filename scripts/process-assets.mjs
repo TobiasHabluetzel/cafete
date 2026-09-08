@@ -367,4 +367,52 @@ await photo({
   quality: 88,
 });
 
+/*
+ * Open Graph image, 1200x630 — what WhatsApp, LinkedIn and Facebook show when the
+ * link is shared. There was none, so shared links rendered with no preview at all.
+ *
+ * Composed from the real assets rather than generated at runtime: the logo already
+ * carries the exact #FF751F background, so on an orange canvas its tile vanishes
+ * and the mark reads as if placed straight on. Legibility as a small thumbnail is
+ * the only real design constraint, which is why it is the logo and slogan rather
+ * than any of the moody photography.
+ */
+console.log("\nOpen Graph image:");
+{
+  const W = 1200;
+  const H = 630;
+  const canvas = sharp({
+    create: { width: W, height: H, channels: 4, background: "#FF751F" },
+  });
+
+  const logo = await sharp(path.join(OUT_DIR, "logo-cafete.png"))
+    .resize({ width: 520 })
+    .toBuffer();
+  const sloganImg = await sharp(path.join(OUT_DIR, "banner-slogan.png"))
+    .resize({ width: 560 })
+    .toBuffer();
+  const bottleImg = await sharp(path.join(OUT_DIR, "bottle-transparent.png"))
+    .resize({ height: 600 })
+    .toBuffer();
+
+  const logoMeta = await sharp(logo).metadata();
+  const bottleMeta = await sharp(bottleImg).metadata();
+
+  await canvas
+    .composite([
+      { input: bottleImg, left: W - bottleMeta.width - 60, top: H - bottleMeta.height },
+      { input: logo, left: 70, top: Math.round(H / 2 - logoMeta.height / 2 - 40) },
+      {
+        input: sloganImg,
+        left: 70,
+        top: Math.round(H / 2 + logoMeta.height / 2 - 40 + 24),
+      },
+    ])
+    .jpeg({ quality: 88, mozjpeg: true })
+    .toFile(path.join(OUT_DIR, "og-image.jpg"));
+
+  const meta = await sharp(path.join(OUT_DIR, "og-image.jpg")).metadata();
+  console.log(`  og-image.jpg                       ${meta.width}x${meta.height}`);
+}
+
 console.log("\nDone.");

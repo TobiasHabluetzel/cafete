@@ -3,6 +3,8 @@ import { getTranslations } from "next-intl/server";
 
 import { ctaClass } from "@/components/brand/cta-button";
 import { PageHeader, Section } from "@/components/layout/section";
+import { JsonLd } from "@/components/seo/json-ld";
+import { site } from "@/config/site";
 import { Link } from "@/i18n/navigation";
 import {
   createMetadata,
@@ -10,11 +12,12 @@ import {
   resolvePageLocale,
   type LocaleParams,
 } from "@/lib/page";
+import { getPackPrices } from "@/lib/pricing";
 
 import bottle from "../../../../public/bottle-photo.jpg";
 
 export const generateStaticParams = generateLocaleParams;
-export const generateMetadata = createMetadata("nav", "product");
+export const generateMetadata = createMetadata({ namespace: "nav", titleKey: "product", descriptionKey: "product", pathname: "/produkt" });
 
 type NutritionRow = { nutrient: string; value: string };
 
@@ -25,6 +28,7 @@ export default async function ProductPage({ params }: LocaleParams) {
   const tShop = await getTranslations({ locale, namespace: "shopTeaser" });
 
   const nutrition = t.raw("nutrition") as NutritionRow[];
+  const packPrices = await getPackPrices();
 
   const specs = [
     { label: t("volumeLabel"), value: t("volumeValue") },
@@ -34,6 +38,33 @@ export default async function ProductPage({ params }: LocaleParams) {
 
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: `${site.name} — ${t("volumeValue")}`,
+          description: t("subtitle"),
+          image: `${site.url}/og-image.jpg`,
+          brand: { "@type": "Brand", name: site.name },
+          // One offer per pack, priced from Stripe. Coming-soon packs are declared
+          // PreOrder rather than InStock, which is what they actually are.
+          ...(packPrices.length > 0
+            ? {
+                offers: packPrices.map((price) => ({
+                  "@type": "Offer",
+                  name: `${price.bottles}\u00d7 33 cl`,
+                  price: (price.amount / 100).toFixed(2),
+                  priceCurrency: price.currency,
+                  availability: price.comingSoon
+                    ? "https://schema.org/PreOrder"
+                    : "https://schema.org/InStock",
+                  url: `${site.url}/de/shop`,
+                })),
+              }
+            : {}),
+        }}
+      />
+
       <PageHeader label={t("label")} title={t("title")} intro={t("subtitle")} />
 
       <Section tone="cream">
@@ -41,7 +72,7 @@ export default async function ProductPage({ params }: LocaleParams) {
           <div className="relative mx-auto w-full max-w-sm lg:mx-0">
             <Image
               src={bottle}
-              alt=""
+              alt={t("bottleAlt")}
               priority
               sizes="(max-width: 1024px) 80vw, 30vw"
               placeholder="blur"

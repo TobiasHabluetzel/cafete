@@ -4,7 +4,8 @@ import { getTranslations } from "next-intl/server";
 import { AddToCalendar } from "@/components/event/add-to-calendar";
 import { RsvpForm } from "@/components/event/rsvp-form";
 import { PageHeader, Section } from "@/components/layout/section";
-import { launchEvent } from "@/config/site";
+import { JsonLd } from "@/components/seo/json-ld";
+import { launchEvent, site } from "@/config/site";
 import {
   createMetadata,
   generateLocaleParams,
@@ -13,7 +14,7 @@ import {
 } from "@/lib/page";
 
 export const generateStaticParams = generateLocaleParams;
-export const generateMetadata = createMetadata("event");
+export const generateMetadata = createMetadata({ namespace: "event", descriptionKey: "event", pathname: "/event" });
 
 export default async function EventPage({ params }: LocaleParams) {
   const locale = await resolvePageLocale(params);
@@ -31,6 +32,40 @@ export default async function EventPage({ params }: LocaleParams) {
 
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Event",
+          name: t("title"),
+          description: t("body"),
+          startDate: launchEvent.start,
+          endDate: launchEvent.end,
+          eventStatus: "https://schema.org/EventScheduled",
+          eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+          image: `${site.url}/og-image.jpg`,
+          location: {
+            "@type": "Place",
+            name: launchEvent.venue,
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: launchEvent.street,
+              postalCode: launchEvent.city.split(" ")[0],
+              addressLocality: launchEvent.city.split(" ").slice(1).join(" "),
+              addressCountry: "CH",
+            },
+          },
+          organizer: { "@type": "Organization", name: site.name, url: site.url },
+          // Entry is free, per the event copy.
+          offers: {
+            "@type": "Offer",
+            price: 0,
+            priceCurrency: "CHF",
+            availability: "https://schema.org/InStock",
+            url: `${site.url}/de/event`,
+          },
+        }}
+      />
+
       <PageHeader label={t("label")} title={t("title")} intro={t("body")} />
 
       <Section tone="cream">

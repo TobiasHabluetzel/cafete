@@ -11,7 +11,7 @@ import {
 import { getPackPrices } from "@/lib/pricing";
 
 export const generateStaticParams = generateLocaleParams;
-export const generateMetadata = createMetadata("cart");
+export const generateMetadata = createMetadata({ namespace: "cart", descriptionKey: "cart", pathname: "/warenkorb" });
 
 // Prices are read from Stripe per request, so this cannot be baked at build time.
 export const dynamic = "force-dynamic";

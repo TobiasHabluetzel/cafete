@@ -89,7 +89,7 @@ export function PackPicker({
             <div className="flex h-64 items-center justify-center">
               <Image
                 src={bottle}
-                alt=""
+                alt={tPacks("imageAlt", { pack: tPacks(pack.labelKey) })}
                 sizes="14rem"
                 placeholder="blur"
                 className="h-full w-auto drop-shadow-[0_10px_24px_rgba(20,16,14,0.25)]"

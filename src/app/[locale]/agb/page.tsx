@@ -7,7 +7,7 @@ import {
 } from "@/lib/page";
 
 export const generateStaticParams = generateLocaleParams;
-export const generateMetadata = createMetadata("legal", "terms.title");
+export const generateMetadata = createMetadata({ namespace: "legal", titleKey: "terms.title", descriptionKey: "terms", pathname: "/agb" });
 
 export default async function Page({ params }: LocaleParams) {
   const locale = await resolvePageLocale(params);

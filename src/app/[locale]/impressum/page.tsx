@@ -10,7 +10,7 @@ import {
 } from "@/lib/page";
 
 export const generateStaticParams = generateLocaleParams;
-export const generateMetadata = createMetadata("legal", "imprint.title");
+export const generateMetadata = createMetadata({ namespace: "legal", titleKey: "imprint.title", descriptionKey: "imprint", pathname: "/impressum" });
 
 export default async function ImprintPage({ params }: LocaleParams) {
   const locale = await resolvePageLocale(params);

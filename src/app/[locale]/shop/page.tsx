@@ -16,7 +16,7 @@ import { entryPriceFrom, getPackPrices } from "@/lib/pricing";
 import { configuredPacks, isStripeConfigured } from "@/lib/stripe";
 
 export const generateStaticParams = generateLocaleParams;
-export const generateMetadata = createMetadata("shop");
+export const generateMetadata = createMetadata({ namespace: "shop", descriptionKey: "shop", pathname: "/shop" });
 
 // Which packs are buyable depends on runtime env — which Stripe Price IDs are
 // set — so this page must not be baked at build time.

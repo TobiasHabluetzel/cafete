@@ -5,10 +5,12 @@ import { notFound } from "next/navigation";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { JsonLd } from "@/components/seo/json-ld";
 import { Toaster } from "@/components/ui/sonner";
 import { site } from "@/config/site";
 import { routing } from "@/i18n/routing";
 import { fontVariables } from "@/lib/fonts";
+import { buildOpenGraph, OG_IMAGE } from "@/lib/page";
 
 import "../globals.css";
 
@@ -31,12 +33,16 @@ export async function generateMetadata({
       template: `%s — ${site.name}`,
     },
     description: t("description"),
-    openGraph: {
+    openGraph: buildOpenGraph({
       title: t("title"),
       description: t("description"),
-      siteName: site.name,
-      locale: locale === "de" ? "de_CH" : "en_GB",
-      type: "website",
+      locale,
+    }),
+    twitter: {
+      card: "summary_large_image",
+      title: t("title"),
+      description: t("description"),
+      images: [OG_IMAGE],
     },
   };
 }
@@ -59,6 +65,24 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${fontVariables} h-full`} suppressHydrationWarning>
       <body className="flex min-h-full flex-col antialiased">
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: site.name,
+            legalName: site.producer.legalName,
+            url: site.url,
+            logo: `${site.url}/logo-cafete.png`,
+            email: site.email,
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: site.producer.street,
+              postalCode: site.producer.city.split(" ")[0],
+              addressLocality: site.producer.city.split(" ").slice(1).join(" "),
+              addressCountry: "CH",
+            },
+          }}
+        />
         <NextIntlClientProvider>
           <a
             href="#main"

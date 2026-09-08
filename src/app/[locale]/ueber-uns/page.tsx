@@ -15,7 +15,7 @@ import hannesPhoto from "../../../../public/founder-hannes.jpg";
 import kareemPhoto from "../../../../public/founder-kareem.jpg";
 
 export const generateStaticParams = generateLocaleParams;
-export const generateMetadata = createMetadata("nav", "about");
+export const generateMetadata = createMetadata({ namespace: "nav", titleKey: "about", descriptionKey: "about", pathname: "/ueber-uns" });
 
 export default async function AboutPage({ params }: LocaleParams) {
   const locale = await resolvePageLocale(params);
