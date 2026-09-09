@@ -97,6 +97,7 @@ export const mainNav: NavItem[] = [
   { href: "/produkt", labelKey: "product" },
   { href: "/shop", labelKey: "shop" },
   { href: "/ueber-uns", labelKey: "about" },
+  { href: "/monatsportraets", labelKey: "portraits" },
   { href: "/event", labelKey: "event" },
   { href: "/faq", labelKey: "faq" },
   { href: "/kontakt", labelKey: "contact" },

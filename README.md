@@ -314,6 +314,29 @@ Effective in seconds, no deploy. Stripe cannot enforce coming-soon itself — a
 flagged Price is valid and Stripe would charge for it — so the server-side check
 in `/api/checkout` is what actually prevents a sale.
 
+### Monatsporträts — "Die andere Hälfte der Geschichte"
+
+A monthly portrait series at `/de/monatsportraets` and `/en/monthly-portraits`.
+
+**Rotation is derived, not manual.** `src/content/portraits.ts` holds one entry per
+portrait with a `month` of `"YYYY-MM"`. The newest entry whose month has arrived is
+the current portrait; everything older is archive. So adding October's entry moves
+September's back by itself — there is no step anyone can forget. The index
+revalidates daily, which is ample for a monthly rotation.
+
+**A portrait's URL is permanent.** `/monatsportraets/<slug>` is the same address
+whether it is current or archived, which is why rotation is keyed on the month
+rather than the route. Never change a slug once published.
+
+To add one: append to `portraits`, drop the image and video into `public/` (or set
+`video` to an absolute URL — see below), and add WebVTT caption files.
+
+**Interview videos should not live in the repo.** The homepage clip is 4.5 MB and
+tolerable. A 3–5 minute interview is 30–60 MB, twelve a year, committed forever
+into git history and into every Docker image, served by Railway with no CDN in
+front. Put them on object storage or a streaming host and set `video` to the
+absolute URL — the component already accepts one.
+
 ### Going live: DNS and mail (verified 24 Aug)
 
 Both domains are registered/served by **Infomaniak**, so DNS lives there — not at

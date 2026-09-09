@@ -19,7 +19,8 @@
     "closeMenu": "Menü schliessen",
     "menu": "Menü",
     "switchLanguage": "Sprache wechseln",
-    "skipToContent": "Zum Inhalt springen"
+    "skipToContent": "Zum Inhalt springen",
+    "portraits": "Monatsporträts"
   },
   "hero": {
     "title": "CAFÉTÉ",
@@ -424,6 +425,28 @@
     "imprint": "Impressum von CAFÉTÉ — Anbieterkennzeichnung, Kontakt und rechtliche Angaben.",
     "terms": "Allgemeine Geschäftsbedingungen für Bestellungen im CAFÉTÉ Onlineshop: Preise, Lieferung, Zahlung und Gewährleistung.",
     "privacy": "Datenschutzerklärung von CAFÉTÉ — welche Daten wir bearbeiten, zu welchem Zweck, und deine Rechte nach revDSG.",
-    "returns": "Widerruf und Rückgabe bei CAFÉTÉ: Rückgaberecht, beschädigte Sendungen und Rückerstattung."
+    "returns": "Widerruf und Rückgabe bei CAFÉTÉ: Rückgaberecht, beschädigte Sendungen und Rückerstattung.",
+    "portraits": "Die andere Hälfte der Geschichte — jeden Monat ein Porträt von Menschen und Projekten, die sonst wenig Raum bekommen. Von CAFÉTÉ."
+  },
+  "portraits": {
+    "label": "Die Porträtreihe",
+    "title": "Die andere Hälfte der Geschichte",
+    "intro": [
+      "Die Kaffeebohne hat einen Namen, eine Herkunft und einen Wert. Sie wird ausgewählt, bewertet, geröstet und gefeiert.",
+      "Die Kaffeefrucht, in der sie wächst, wird meistens entfernt, bevor überhaupt jemand nach ihr fragt.",
+      "Wenn man unsere Gesellschaft mit einer Kaffeepflanze vergleicht, gibt es viel Gesehenes, Geteiltes, Ausgesprochenes und Beschlossenes. Doch ebenso gibt es Ungesehenes, Ungeteiltes und Unausgesprochenes – und Entscheidungen, die getroffen werden müssten, aber nie zum Thema werden.",
+      "Unsere Gesellschaft richtet ihren Blick meist auf das, was bereits sichtbar ist: auf bekannte Namen, grosse Bühnen und erfolgreiche Geschichten. Weniger erfahren wir über jene, die noch am Anfang stehen, im Hintergrund arbeiten, gescheitert sind, neu begonnen haben oder deren Bedürfnisse bisher kaum Raum bekommen.",
+      "«Die andere Hälfte der Geschichte» gibt Menschen und Projekten genau diesen Raum. Jeden Monat. Monat für Monat.",
+      "Die eine Hälfte der Geschichte kennen wir bereits. Hier erfahrt ihr die andere."
+    ],
+    "closing": "Denn unsere Bühne gehört den Kaffeefrüchten – nicht den Kaffeebohnen.",
+    "currentLabel": "Aktuelles Porträt",
+    "archiveLabel": "Archiv",
+    "archiveIntro": "Alle bisherigen Porträts — jedes bleibt unter seiner eigenen Adresse erreichbar.",
+    "empty": "Das erste Porträt erscheint in Kürze. Melde dich für den Newsletter an, wenn du es nicht verpassen willst.",
+    "readMore": "Porträt lesen",
+    "backToOverview": "Alle Monatsporträts",
+    "videoHeading": "Das Gespräch",
+    "captionsHint": "Untertitel lassen sich im Player zuschalten."
   }
 }

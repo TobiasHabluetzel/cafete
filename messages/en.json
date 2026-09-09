@@ -19,7 +19,8 @@
     "closeMenu": "Close menu",
     "menu": "Menu",
     "switchLanguage": "Switch language",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "portraits": "Monthly portraits"
   },
   "hero": {
     "title": "CAFÉTÉ",
@@ -424,6 +425,28 @@
     "imprint": "CAFÉTÉ imprint — provider identification, contact and legal details.",
     "terms": "Terms and conditions for orders in the CAFÉTÉ online shop: prices, delivery, payment and warranty.",
     "privacy": "CAFÉTÉ privacy policy — what data we process, for what purpose, and your rights under the revised Swiss FADP.",
-    "returns": "Returns and withdrawal at CAFÉTÉ: right of return, damaged shipments and refunds."
+    "returns": "Returns and withdrawal at CAFÉTÉ: right of return, damaged shipments and refunds.",
+    "portraits": "The other half of the story — a monthly portrait of people and projects that usually get little room. By CAFÉTÉ."
+  },
+  "portraits": {
+    "label": "The portrait series",
+    "title": "The other half of the story",
+    "intro": [
+      "The coffee bean has a name, an origin and a value. It is selected, graded, roasted and celebrated.",
+      "The coffee fruit it grows in is usually removed before anyone even asks about it.",
+      "If you compare our society to a coffee plant, there is a great deal that is seen, shared, said and decided. But there is just as much that goes unseen, unshared and unsaid — and decisions that ought to be made but never become a topic at all.",
+      "Our society tends to look at what is already visible: known names, big stages, successful stories. We hear less about those who are still at the beginning, who work in the background, who have failed, who have started again, or whose needs have so far been given little room.",
+      "“The other half of the story” gives people and projects exactly that room. Every month. Month after month.",
+      "We already know one half of the story. Here you will find the other."
+    ],
+    "closing": "Because our stage belongs to the coffee fruit — not the coffee bean.",
+    "currentLabel": "Current portrait",
+    "archiveLabel": "Archive",
+    "archiveIntro": "Every portrait so far — each stays reachable at its own address.",
+    "empty": "The first portrait is coming shortly. Sign up for the newsletter if you don’t want to miss it.",
+    "readMore": "Read the portrait",
+    "backToOverview": "All monthly portraits",
+    "videoHeading": "The conversation",
+    "captionsHint": "Subtitles can be switched on in the player."
   }
 }

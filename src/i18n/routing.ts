@@ -20,6 +20,13 @@ export const routing = defineRouting({
     "/warenkorb": { de: "/warenkorb", en: "/cart" },
     "/event": { de: "/event", en: "/event" },
     "/ueber-uns": { de: "/ueber-uns", en: "/about" },
+    "/monatsportraets": { de: "/monatsportraets", en: "/monthly-portraits" },
+    // The portrait's own URL must survive the move into the archive, so the slug
+    // is the permanent address — nothing about it encodes "current".
+    "/monatsportraets/[slug]": {
+      de: "/monatsportraets/[slug]",
+      en: "/monthly-portraits/[slug]",
+    },
     "/kontakt": { de: "/kontakt", en: "/contact" },
     "/faq": { de: "/faq", en: "/faq" },
     "/bestellung/[id]": { de: "/bestellung/[id]", en: "/order/[id]" },
