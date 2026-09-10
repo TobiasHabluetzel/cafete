@@ -308,6 +308,28 @@ await cutout({
   globalClear: true,
 });
 
+/*
+ * Pack shots for the shop cards: 6, 12 and 24 bottles.
+ *
+ * Shot on pure black, so the same border flood fill applies. tol 30 is enough —
+ * verified against tol 55, which cleared only 0.5% more and risks eating into the
+ * bottles, whose darkest glass is close to the background.
+ *
+ * The sources arrive as "WhatsApp Image …(1)/(2).jpeg" with nothing to say which
+ * is which; they are copied to pack-6/12/24 first so the mapping lives in the
+ * filename rather than in someone's memory.
+ */
+console.log("\nPack shots (black keyed out):");
+for (const count of [6, 12, 24]) {
+  await cutout({
+    src: s(`bottles/pack-${count}.jpeg`),
+    out: `pack-${count}.png`,
+    resizeWidth: 1000,
+    tol: 30,
+    feather: 60,
+  });
+}
+
 console.log("\nAlready transparent:");
 // The packshot the owner asked for on the shop cards.
 await transparentArt({

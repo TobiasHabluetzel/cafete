@@ -13,6 +13,20 @@ import { formatMoney } from "@/lib/format-money";
 import { cn } from "@/lib/utils";
 
 import bottle from "../../../public/bottle-transparent.png";
+import pack6 from "../../../public/pack-6.png";
+import pack12 from "../../../public/pack-12.png";
+import pack24 from "../../../public/pack-24.png";
+
+/**
+ * The actual pack quantities, as the owner asked — a 6-pack card now shows six
+ * bottles rather than one. Falls back to the single transparent packshot for any
+ * pack size that has no photograph yet.
+ */
+const PACK_IMAGES: Record<number, typeof bottle> = {
+  6: pack6,
+  12: pack12,
+  24: pack24,
+};
 
 /**
  * Pack selector. Prices come from Stripe via props — the same Prices Checkout
@@ -82,17 +96,16 @@ export function PackPicker({
               </Sticker>
             ) : null}
 
-            {/* The bottle sits straight on the card. It was inside a bordered
-                cream block, which at this aspect ratio left a thin bottle
-                swimming in empty space — removing the block and going taller
-                gives it the room the owner asked for. */}
-            <div className="flex h-64 items-center justify-center">
+            {/* The pack shots are landscape while the single bottle is tall, so
+                the box is fixed and the image is contained rather than sized by
+                height — otherwise a 6-bottle group would run off the card. */}
+            <div className="flex h-52 items-center justify-center">
               <Image
-                src={bottle}
+                src={PACK_IMAGES[pack.bottles] ?? bottle}
                 alt={tPacks("imageAlt", { pack: tPacks(pack.labelKey) })}
-                sizes="14rem"
+                sizes="(max-width: 1024px) 80vw, 20rem"
                 placeholder="blur"
-                className="h-full w-auto drop-shadow-[0_10px_24px_rgba(20,16,14,0.25)]"
+                className="max-h-full w-auto max-w-full object-contain drop-shadow-[0_10px_24px_rgba(20,16,14,0.25)]"
               />
             </div>
 
