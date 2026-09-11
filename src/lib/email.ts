@@ -142,11 +142,21 @@ async function sendViaSmtp({
       port,
       // 465 is implicit TLS; 587 starts plaintext and upgrades via STARTTLS.
       secure: port === 465,
+      /*
+       * On 587, refuse to continue if STARTTLS is not offered. Without this
+       * nodemailer falls back to plaintext and sends the mailbox password in the
+       * clear — and a mailbox password reads mail as well as sends it. Better a
+       * failed registration than a leaked credential.
+       */
+      requireTLS: port !== 465,
       auth: {
         user: user as string,
         pass: process.env.SMTP_PASSWORD as string,
       },
-      // Fail fast rather than hanging a request if the port is blocked.
+      // Fail fast rather than hanging a request if the port is blocked. A stall
+      // that runs the full socketTimeout, rather than a fast 5xx, is itself the
+      // signal: it means the connection came up and then the TLS upgrade or the
+      // auth exchange went quiet, not that the server said no.
       connectionTimeout: 10_000,
       greetingTimeout: 10_000,
       socketTimeout: 20_000,
