@@ -415,11 +415,10 @@
   },
   "qr": {
     "label": "Just scanned",
-    "title": "Coffee, but sparkling.",
+    "title": "The other half of coffee.",
     "lead": "CAFÉTÉ turns the coffee fruit into a soft drink: fruity, fizzy, naturally caffeinated — and with over 50 % less sugar than a conventional soft drink.",
     "ctaShop": "Go to shop",
     "ctaShopWithPrice": "Go to shop — from {price}",
-    "ctaEvent": "Launch event on 19 September",
     "factsLabel": "In three sentences",
     "factOneTitle": "From the fruit, not the lab",
     "factOneBody": "A real infusion of the coffee cherry. No extract, no flavouring.",
@@ -430,7 +429,6 @@
     "closingTitle": "Give it a try.",
     "closingBody": "33 cl glass bottle, in packs of 6, 12 or 24. Shipping within Switzerland included.",
     "fromPrice": "from {price}",
-    "launchNote": "Orderable from 19 September 2026.",
     "more": "All the product facts"
   },
   "pageMeta": {

@@ -101,6 +101,11 @@ what each one is and two non-obvious constraints: the **logo keeps its orange
 background** (the orange is structural), and the **slogan banner is black ink on
 transparent** so it needs a light or orange surface behind it.
 
+A missing source file is now a warning, not an error: the owner sends assets a few
+at a time and tidies them off the desktop afterwards, so on any given day some are
+absent, and one gone file must not stop the rest of `public/` being regenerated.
+Every skip is listed at the end of the run, so a mistyped filename still shows up.
+
 ## i18n
 
 - Copy lives only in `messages/de.json` and `messages/en.json`.
@@ -336,6 +341,12 @@ Four decisions behind that, so they are not undone by accident:
   homepage's pitch rewritten shorter, and two pages competing for the same query
   only splits their ranking. It is deliberately *not* disallowed in `robots.txt` —
   a crawler has to be able to fetch it to see the `noindex` at all.
+- **It says nothing about the launch event, and should not.** The owner's call on
+  11 Sept: the page is used independently of the launch, and the stickers only
+  arrive the week *after* it — so a launch date printed here would already be in
+  the past by the time anyone scans one. Where a pack cannot be bought yet the
+  page shows the generic `common.comingSoon` rather than a date, which clears
+  itself when the `coming_soon` metadata comes off the Stripe Prices.
 
 The page itself (`src/app/[locale]/entdecken/page.tsx`) assumes about ten seconds
 of attention: hook, three facts, shop. The first call to action is above the fold

@@ -415,11 +415,10 @@
   },
   "qr": {
     "label": "Frisch gescannt",
-    "title": "Kaffee, aber prickelnd.",
+    "title": "Die andere Hälfte des Kaffees.",
     "lead": "CAFÉTÉ macht aus der Kaffeefrucht ein Erfrischungsgetränk: fruchtig, spritzig, natürlich koffeinhaltig — und mit über 50 % weniger Zucker als ein herkömmlicher Softdrink.",
     "ctaShop": "Zum Shop",
     "ctaShopWithPrice": "Zum Shop — ab {price}",
-    "ctaEvent": "Launch Event am 19. September",
     "factsLabel": "In drei Sätzen",
     "factOneTitle": "Aus der Frucht, nicht aus dem Labor",
     "factOneBody": "Echter Aufguss aus der Kaffeekirsche. Kein Extrakt, kein Aroma.",
@@ -430,7 +429,6 @@
     "closingTitle": "Probier's aus.",
     "closingBody": "33 cl Glasflasche, im 6er-, 12er- oder 24er-Pack. Versand innerhalb der Schweiz inklusive.",
     "fromPrice": "ab {price}",
-    "launchNote": "Bestellbar ab dem 19. September 2026.",
     "more": "Alle Fakten zum Produkt"
   },
   "pageMeta": {

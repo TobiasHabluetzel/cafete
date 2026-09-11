@@ -7,7 +7,6 @@ import { ctaClass } from "@/components/brand/cta-button";
 import { SloganMarquee } from "@/components/brand/marquee";
 import { Sticker } from "@/components/brand/sticker";
 import { SunburstRays, WarmGlow } from "@/components/brand/sunburst";
-import { LogoSticker } from "@/components/brand/wordmark";
 import { Section } from "@/components/layout/section";
 import { Link } from "@/i18n/navigation";
 import {
@@ -20,6 +19,7 @@ import { getPackPrices, lowestPriceFrom } from "@/lib/pricing";
 
 import bottlePhoto from "../../../../public/bottle-photo.jpg";
 import bottle from "../../../../public/bottle-transparent.png";
+import pack6 from "../../../../public/pack-6.png";
 
 export const generateStaticParams = generateLocaleParams;
 
@@ -55,11 +55,18 @@ export const revalidate = 3600;
  * order, with the first call to action above the fold on a phone. Everything
  * deeper (ingredients, the founders, the story) is a link away rather than on
  * the page.
+ *
+ * Deliberately says nothing about the launch event. The owner's call on 11 Sept:
+ * the page outlives the launch, and the stickers themselves only arrive the week
+ * after it — so a launch date printed here would already be in the past by the
+ * time anyone scans one.
  */
 export default async function DiscoverPage({ params }: LocaleParams) {
   const locale = await resolvePageLocale(params);
   const t = await getTranslations({ locale, namespace: "qr" });
   const tBadges = await getTranslations({ locale, namespace: "badges" });
+  const tCommon = await getTranslations({ locale, namespace: "common" });
+  const tPacks = await getTranslations({ locale, namespace: "packs" });
 
   const price = lowestPriceFrom(await getPackPrices(), locale);
 
@@ -86,13 +93,19 @@ export default async function DiscoverPage({ params }: LocaleParams) {
         <SunburstRays className="-top-28" size="w-[38rem]" opacity="opacity-20" />
         <WarmGlow className="top-[-7rem] left-[52%] size-[26rem] max-w-[80vw]" />
 
-        <div className="relative mx-auto max-w-3xl px-4 pt-9 pb-14 text-center sm:px-6 sm:pt-14 sm:pb-20">
+        <div className="relative mx-auto max-w-3xl px-4 pt-7 pb-14 text-center sm:px-6 sm:pt-14 sm:pb-20">
           <p className="label-caps text-gold">{t("label")}</p>
 
-          <LogoSticker
+          {/* The 6-pack rather than the logo, as the owner asked: someone who has
+              just scanned a sticker should see the product, and the site header
+              directly above is already carrying the mark. */}
+          <Image
+            src={pack6}
+            alt={tPacks("imageAlt", { pack: tPacks("six") })}
             priority
-            sizes="(max-width: 640px) 45vw, 12rem"
-            className="mt-5 w-[9rem] sm:w-[11rem]"
+            sizes="(max-width: 640px) 75vw, 20rem"
+            placeholder="blur"
+            className="mx-auto mt-4 h-auto w-[14rem] drop-shadow-[0_16px_32px_rgba(0,0,0,0.55)] sm:w-[18rem]"
           />
 
           {/* The page's H1. Short enough to stay one or two lines on a phone,
@@ -104,6 +117,31 @@ export default async function DiscoverPage({ params }: LocaleParams) {
           <p className="text-cream/85 mx-auto mt-5 max-w-xl text-lg leading-relaxed text-balance">
             {t("lead")}
           </p>
+
+          {/*
+            * The button comes before the stickers, which is also how the homepage
+            * hero is ordered. It matters more here: at 390 px the three stickers
+            * stack into three rows, and with them above the button the button's
+            * bottom edge landed exactly on the 844 px fold — which on a real phone,
+            * once the address bar takes its ~90 px, is below it. Measured in a
+            * 390 px iframe, since Chrome on macOS clamps a window to 480.
+            *
+            * The CTA label is nowrap, so horizontal padding is reduced on the
+            * narrowest phones to keep "Zum Shop — ab CHF 24.50" inside the pill.
+            */}
+          <div className="mt-7">
+            <Link
+              href="/shop"
+              className={ctaClass({
+                variant: "gold",
+                size: "lg",
+                className: "w-full px-6 sm:w-auto sm:px-8",
+              })}
+            >
+              {price ? t("ctaShopWithPrice", { price: price.formatted }) : t("ctaShop")}
+              <ArrowRight className="size-5" aria-hidden />
+            </Link>
+          </div>
 
           <ul className="mt-7 flex flex-wrap justify-center gap-2.5">
             <li>
@@ -122,33 +160,6 @@ export default async function DiscoverPage({ params }: LocaleParams) {
               </Sticker>
             </li>
           </ul>
-
-          {/* The CTA label is nowrap, so the horizontal padding is reduced on the
-              narrowest phones to keep "Zum Shop — ab CHF 24.50" inside the pill. */}
-          <div className="mt-8">
-            <Link
-              href="/shop"
-              className={ctaClass({
-                variant: "gold",
-                size: "lg",
-                className: "w-full px-6 sm:w-auto sm:px-8",
-              })}
-            >
-              {price ? t("ctaShopWithPrice", { price: price.formatted }) : t("ctaShop")}
-              <ArrowRight className="size-5" aria-hidden />
-            </Link>
-          </div>
-
-          {/* A text link, not a second pill: the event line is too long to fit a
-              nowrap button on a phone, and it is genuinely the lesser action. */}
-          <p className="mt-5">
-            <Link
-              href="/event"
-              className="text-gold hover:text-gold-soft font-semibold underline decoration-2 underline-offset-4"
-            >
-              {t("ctaEvent")}
-            </Link>
-          </p>
         </div>
       </section>
 
@@ -197,10 +208,15 @@ export default async function DiscoverPage({ params }: LocaleParams) {
                   {t("fromPrice", { price: price.formatted })}
                 </span>
               ) : null}
-              {/* Shown whenever nothing is buyable yet — including when no price
-                  is available at all, where the date is the only honest answer. */}
+              {/*
+                * Shown whenever nothing is buyable yet, so the page never quotes
+                * a price for something you cannot order. Generic on purpose
+                * rather than naming a date: it clears itself the moment the
+                * `coming_soon` metadata comes off the Stripe Prices, with no
+                * edit here and nothing left to go stale.
+                */}
               {!price || price.comingSoon ? (
-                <span className="text-cream/60 text-sm">{t("launchNote")}</span>
+                <span className="text-cream/60 text-sm">{tCommon("comingSoon")}</span>
               ) : null}
             </p>
 

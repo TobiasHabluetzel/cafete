@@ -134,6 +134,7 @@ function axisKey(data, width, height, channels, ink, bg) {
 }
 
 async function inkCutout({ src, out, resizeWidth, ink = [0, 0, 0] }) {
+  if (missing(src, out)) return;
   let pipeline = sharp(src).ensureAlpha();
   if (resizeWidth) pipeline = pipeline.resize({ width: resizeWidth, withoutEnlargement: true });
 
@@ -156,19 +157,16 @@ async function inkCutout({ src, out, resizeWidth, ink = [0, 0, 0] }) {
   );
 }
 
-/** Already-transparent artwork: just trim the empty margin and re-encode. */
-async function transparentArt({ src, out, resizeWidth }) {
-  let pipeline = sharp(src).ensureAlpha();
-  if (resizeWidth) pipeline = pipeline.resize({ width: resizeWidth, withoutEnlargement: true });
-  await pipeline.trim({ threshold: 1 }).png({ compressionLevel: 9 }).toFile(path.join(OUT_DIR, out));
-  const meta = await sharp(path.join(OUT_DIR, out)).metadata();
-  console.log(
-    `  ${out.padEnd(34)} ${String(meta.width).padStart(5)}x${String(meta.height).padEnd(5)} (alpha kept)`,
-  );
-}
+/*
+ * There used to be a `transparentArt()` helper here for sources that already had
+ * an alpha channel — just trim and re-encode. Its only caller was the old bottle
+ * mockup, now replaced by a keyed studio shot, so it went with it. Recover it
+ * from git history if a delivery ever arrives pre-cut again.
+ */
 
 /** Straight re-encode: artwork whose background is part of the design. */
 async function asDesigned({ src, out, resizeWidth }) {
+  if (missing(src, out)) return;
   let pipeline = sharp(src);
   if (resizeWidth) pipeline = pipeline.resize({ width: resizeWidth, withoutEnlargement: true });
   await pipeline.png({ compressionLevel: 9 }).toFile(path.join(OUT_DIR, out));
@@ -179,6 +177,7 @@ async function asDesigned({ src, out, resizeWidth }) {
 }
 
 async function cutout({ src, out, resizeWidth, tol, feather, globalClear }) {
+  if (missing(src, out)) return;
   let pipeline = sharp(src).ensureAlpha();
   if (resizeWidth) pipeline = pipeline.resize({ width: resizeWidth, withoutEnlargement: true });
 
@@ -216,6 +215,7 @@ async function cutout({ src, out, resizeWidth, tol, feather, globalClear }) {
  * subjects photographed at different distances can be framed consistently.
  */
 async function photo({ src, out, width, height, position, region, quality = 82 }) {
+  if (missing(src, out)) return;
   let pipeline = sharp(src).rotate(); // honour EXIF orientation before cropping
 
   if (region) {
@@ -246,7 +246,18 @@ async function photo({ src, out, width, height, position, region, quality = 82 }
 /** Extra places to look — the founder photos arrived straight into Downloads. */
 const EXTRA_DIRS = [path.join(process.env.HOME ?? "", "Downloads")];
 
-/** Resolve a source file, accepting any of several candidate filenames. */
+const skipped = [];
+
+/**
+ * Resolve a source file, accepting any of several candidate filenames.
+ *
+ * Returns `null` rather than throwing when nothing matches, and the four
+ * processing helpers no-op on a null source. The sources arrive from the owner a
+ * few at a time and get tidied off the desktop afterwards, so on any given day
+ * some are missing — and one absent file must not stop the rest of `public/`
+ * from being regenerated. Every skip is listed at the end so a typo in a
+ * filename still gets noticed.
+ */
 const s = (...names) => {
   for (const dir of [SOURCE_DIR, ...EXTRA_DIRS]) {
     for (const name of names) {
@@ -254,11 +265,16 @@ const s = (...names) => {
       if (existsSync(full)) return full;
     }
   }
-  throw new Error(
-    `Missing source asset. Looked for ${names.join(" / ")} in:\n  ` +
-      [SOURCE_DIR, ...EXTRA_DIRS].join("\n  "),
-  );
+  skipped.push(names[0]);
+  return null;
 };
+
+/** True when there is no source to work from — the caller should return early. */
+function missing(src, out) {
+  if (src) return false;
+  console.log(`  ${out.padEnd(34)} skipped — no source`);
+  return true;
+}
 
 console.log(`Processing brand assets from ${SOURCE_DIR}\n`);
 
@@ -330,12 +346,23 @@ for (const count of [6, 12, 24]) {
   });
 }
 
-console.log("\nAlready transparent:");
-// The packshot the owner asked for on the shop cards.
-await transparentArt({
-  src: s("cafete-bottle-transparent.png"),
+/*
+ * The single bottle, from the same studio session as the pack shots above and on
+ * the same pure black, so it gets the same treatment and the same numbers.
+ *
+ * This replaces an earlier mockup render (`cafete-bottle-transparent.png`) that
+ * was cropped tight enough to clip the cap and the base and was covered in
+ * condensation. The owner asked for "die einzelne richtige" — the proper single
+ * bottle — on 11 Sept, and it matches the pack shots, which the mockup did not.
+ * The output filename is unchanged so every use of it picks this up.
+ */
+console.log("\nSingle bottle (black keyed out):");
+await cutout({
+  src: s("bottles/bottle-single.jpeg"),
   out: "bottle-transparent.png",
-  resizeWidth: 1086,
+  resizeWidth: 1000,
+  tol: 30,
+  feather: 60,
 });
 
 console.log("\nPhotography:");
@@ -435,6 +462,14 @@ console.log("\nOpen Graph image:");
 
   const meta = await sharp(path.join(OUT_DIR, "og-image.jpg")).metadata();
   console.log(`  og-image.jpg                       ${meta.width}x${meta.height}`);
+}
+
+if (skipped.length > 0) {
+  console.log(
+    `\n${skipped.length} source(s) not found, so those assets in public/ were left as they are:`,
+  );
+  for (const name of skipped) console.log(`  ${name}`);
+  console.log(`Looked in:\n  ${[SOURCE_DIR, ...EXTRA_DIRS].join("\n  ")}`);
 }
 
 console.log("\nDone.");
