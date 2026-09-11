@@ -50,7 +50,9 @@ export async function POST(request: Request) {
   });
 
   if (!result.ok) {
-    console.error("[rsvp] not delivered:", result.reason, result.detail ?? "");
+    console.error(
+      `[rsvp] not delivered: ${result.reason} via=${result.via ?? "none"} ${result.detail ?? ""}`,
+    );
     return NextResponse.json({ error: result.reason }, { status: 503 });
   }
 

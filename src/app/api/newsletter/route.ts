@@ -24,7 +24,9 @@ export async function POST(request: Request) {
   if (!result.ok) {
     // 503 keeps the client honest: the form shows the "email us directly"
     // fallback instead of claiming success.
-    console.error("[newsletter] not delivered:", result.reason, result.detail ?? "");
+    console.error(
+      `[newsletter] not delivered: ${result.reason} via=${result.via ?? "none"} ${result.detail ?? ""}`,
+    );
     return NextResponse.json({ error: result.reason }, { status: 503 });
   }
 

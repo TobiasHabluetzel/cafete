@@ -153,9 +153,11 @@ async function handleCompletedCheckout(
       // Not configured is expected before RESEND_API_KEY is set; a send failure
       // is not, and should bubble up so Stripe retries.
       if (result.reason === "send-failed") {
-        throw new Error(`confirmation email failed: ${result.detail ?? "unknown"}`);
+        throw new Error(
+          `confirmation email failed via ${result.via ?? "none"}: ${result.detail ?? "unknown"}`,
+        );
       }
-      console.warn("[webhook] confirmation email skipped: Resend not configured");
+      console.warn("[webhook] confirmation email skipped: no mail transport configured");
     }
   }
 
