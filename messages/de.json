@@ -413,6 +413,26 @@
     "label": "Im Bewegtbild",
     "title": "CAFÉTÉ in Aktion"
   },
+  "qr": {
+    "label": "Frisch gescannt",
+    "title": "Kaffee, aber prickelnd.",
+    "lead": "CAFÉTÉ macht aus der Kaffeefrucht ein Erfrischungsgetränk: fruchtig, spritzig, natürlich koffeinhaltig — und mit über 50 % weniger Zucker als ein herkömmlicher Softdrink.",
+    "ctaShop": "Zum Shop",
+    "ctaShopWithPrice": "Zum Shop — ab {price}",
+    "ctaEvent": "Launch Event am 19. September",
+    "factsLabel": "In drei Sätzen",
+    "factOneTitle": "Aus der Frucht, nicht aus dem Labor",
+    "factOneBody": "Echter Aufguss aus der Kaffeekirsche. Kein Extrakt, kein Aroma.",
+    "factTwoTitle": "Wach, ohne Zuckerschock",
+    "factTwoBody": "Natürliches Koffein aus der Frucht, 4,5 g Zucker pro 100 ml.",
+    "factThreeTitle": "Nichts zusätzlich angebaut",
+    "factThreeBody": "Die Kaffeefrucht fällt bei jeder Ernte ohnehin an. Wir verwerten, was schon da ist.",
+    "closingTitle": "Probier's aus.",
+    "closingBody": "33 cl Glasflasche, im 6er-, 12er- oder 24er-Pack. Versand innerhalb der Schweiz inklusive.",
+    "fromPrice": "ab {price}",
+    "launchNote": "Bestellbar ab dem 19. September 2026.",
+    "more": "Alle Fakten zum Produkt"
+  },
   "pageMeta": {
     "home": "CAFÉTÉ ist das prickelnde Erfrischungsgetränk aus der Kaffeefrucht: fruchtig, natürlich koffeinhaltig und mit über 50 % weniger Zucker. Entwickelt in der Schweiz.",
     "product": "Alle Fakten zu CAFÉTÉ: Zutaten, Nährwerte, Koffein und Geschmack. 33-cl-Glasflasche mit echtem Aufguss aus der Kaffeekirsche — kein Extrakt, kein Aroma.",
@@ -426,7 +446,8 @@
     "terms": "Allgemeine Geschäftsbedingungen für Bestellungen im CAFÉTÉ Onlineshop: Preise, Lieferung, Zahlung und Gewährleistung.",
     "privacy": "Datenschutzerklärung von CAFÉTÉ — welche Daten wir bearbeiten, zu welchem Zweck, und deine Rechte nach revDSG.",
     "returns": "Widerruf und Rückgabe bei CAFÉTÉ: Rückgaberecht, beschädigte Sendungen und Rückerstattung.",
-    "portraits": "Die andere Hälfte der Geschichte — jeden Monat ein Porträt von Menschen und Projekten, die sonst wenig Raum bekommen. Von CAFÉTÉ."
+    "portraits": "Die andere Hälfte der Geschichte — jeden Monat ein Porträt von Menschen und Projekten, die sonst wenig Raum bekommen. Von CAFÉTÉ.",
+    "discover": "CAFÉTÉ in dreissig Sekunden: das prickelnde Erfrischungsgetränk aus der Kaffeefrucht — und direkt weiter in den Shop."
   },
   "portraits": {
     "label": "Die Porträtreihe",

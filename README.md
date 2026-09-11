@@ -47,7 +47,9 @@ src/
 messages/{de,en}.json           # ALL user-facing copy — no hardcoded strings
 docs/                           # brief, brand tokens, content pack (source of truth)
 public/                         # processed brand assets (see public/README.md)
+print/                          # QR codes for flyers/stickers (see print/README.md)
 scripts/process-assets.mjs      # regenerates public/ from the designer's sources
+scripts/generate-qr.mjs         # regenerates print/ — `npm run qr`
 ```
 
 ## Brand tokens
@@ -313,6 +315,36 @@ To put a pack on sale: delete the `availability` key from that Price in Stripe.
 Effective in seconds, no deploy. Stripe cannot enforce coming-soon itself — a
 flagged Price is valid and Stripe would charge for it — so the server-side check
 in `/api/checkout` is what actually prevents a sale.
+
+### The QR landing page and the `/qr` short URL
+
+For the flyers and stickers. A scan hits **`https://www.drink-cafete.ch/qr`**,
+which `src/proxy.ts` turns into a 307 to `/de/entdecken` or `/en/discover`.
+
+Four decisions behind that, so they are not undone by accident:
+
+- **The short path exists for the QR code's sake, not for tidiness.** A shorter
+  payload is fewer modules — 33×33 here — which means bigger modules at a given
+  sticker size, and a scan that survives being stuck round a corner and rained on.
+- **The redirect is a 307, not a 308.** The target of a code already printed on
+  paper has to stay changeable; a permanent redirect would be cached in every
+  phone that ever scanned it.
+- **The locale is negotiated in the proxy**, from the `NEXT_LOCALE` cookie, then
+  `Accept-Language`, then German. A printed code carries no locale, so this is the
+  one place on the site that has to guess.
+- **The page is `noindex, follow`** and is not in the sitemap: it is the
+  homepage's pitch rewritten shorter, and two pages competing for the same query
+  only splits their ranking. It is deliberately *not* disallowed in `robots.txt` —
+  a crawler has to be able to fetch it to see the `noindex` at all.
+
+The page itself (`src/app/[locale]/entdecken/page.tsx`) assumes about ten seconds
+of attention: hook, three facts, shop. The first call to action is above the fold
+on a phone, which is why the H1 is kept short enough not to wrap past two lines.
+Anything deeper is a link, not a section.
+
+Regenerate the print files with `npm run qr`. See `print/README.md` for which file
+to hand to a printer and the rules for placing it — in particular, **the
+whitespace around the code is part of the code** and must not be cropped.
 
 ### Monatsporträts — "Die andere Hälfte der Geschichte"
 

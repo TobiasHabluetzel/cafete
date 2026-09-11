@@ -27,6 +27,9 @@ export const routing = defineRouting({
       de: "/monatsportraets/[slug]",
       en: "/monthly-portraits/[slug]",
     },
+    // The QR-code landing page for flyers and stickers. Reached through the short
+    // `/qr` shortcut handled in `proxy.ts`, not from the navigation.
+    "/entdecken": { de: "/entdecken", en: "/discover" },
     "/kontakt": { de: "/kontakt", en: "/contact" },
     "/faq": { de: "/faq", en: "/faq" },
     "/bestellung/[id]": { de: "/bestellung/[id]", en: "/order/[id]" },

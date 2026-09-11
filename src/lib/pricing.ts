@@ -93,6 +93,27 @@ export function entryPriceFrom(prices: PackPrice[], locale: string): string | nu
 }
 
 /**
+ * The cheapest pack of all that carry a price, whether or not it can be bought.
+ *
+ * Deliberately different from `entryPriceFrom`, which refuses to quote a pack
+ * nobody can order yet — right for a "jetzt bestellen ab …" button, wrong for a
+ * page whose job is to tell someone what CAFÉTÉ will cost. The shop cards already
+ * show pre-launch prices this way; `comingSoon` comes back so the caller can
+ * caption the figure honestly instead of implying it is on sale.
+ */
+export function lowestPriceFrom(
+  prices: PackPrice[],
+  locale: string,
+): { formatted: string; comingSoon: boolean } | null {
+  if (prices.length === 0) return null;
+  const cheapest = prices.reduce((min, p) => (p.amount < min.amount ? p : min));
+  return {
+    formatted: formatMoney(cheapest.amount, cheapest.currency, locale),
+    comingSoon: cheapest.comingSoon,
+  };
+}
+
+/**
  * The "from CHF x" figure on the hero and shop teaser — the cheapest pack.
  * Null when unknown, so callers omit the figure rather than inventing one.
  */
