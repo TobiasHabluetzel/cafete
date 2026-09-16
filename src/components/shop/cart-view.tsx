@@ -178,6 +178,35 @@ export function CartView({ prices }: { prices: PackPrice[] }) {
         {status === "redirecting" ? t("redirecting") : t("goToCheckout")}
       </button>
 
+      {/*
+        * The terms have to be available *before* the order is placed, and this is
+        * the last page we control — after this button the customer is on Stripe's
+        * domain. Stripe also shows a required terms checkbox, but that only links
+        * the one URL set in its Dashboard, so the withdrawal and privacy pages are
+        * linked here where all three fit.
+        */}
+      {allPriced ? (
+        <p className="text-charcoal/60 mt-4 max-w-prose text-sm leading-relaxed">
+          {t.rich("legalNote", {
+            terms: (chunks) => (
+              <Link href="/agb" className="text-sunset-ink underline underline-offset-2">
+                {chunks}
+              </Link>
+            ),
+            returns: (chunks) => (
+              <Link href="/widerruf" className="text-sunset-ink underline underline-offset-2">
+                {chunks}
+              </Link>
+            ),
+            privacy: (chunks) => (
+              <Link href="/datenschutz" className="text-sunset-ink underline underline-offset-2">
+                {chunks}
+              </Link>
+            ),
+          })}
+        </p>
+      ) : null}
+
       {allPriced ? (
         <p className="text-charcoal/55 mt-3 text-sm">{t("securePayment")}</p>
       ) : (

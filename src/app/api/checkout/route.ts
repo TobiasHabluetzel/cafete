@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getTranslations } from "next-intl/server";
 import type Stripe from "stripe";
 
 import { getPathname } from "@/i18n/navigation";
@@ -15,6 +16,39 @@ import {
 type IncomingItem = { bottles?: unknown; quantity?: unknown };
 
 const MAX_QUANTITY_PER_LINE = 20;
+
+/**
+ * Create the Checkout Session, retrying without the terms-acceptance checkbox if
+ * Stripe rejects it.
+ *
+ * `consent_collection.terms_of_service: "required"` needs a terms of service URL
+ * configured under Settings → Public details, and Stripe fails the *whole*
+ * request when it is missing. On a live shop that would turn an unset Dashboard
+ * field into a dead checkout button and lost orders, so the requirement degrades
+ * to the links on the cart page and says loudly in the log what to go and set.
+ *
+ * The retry drops only the two fields being asked for, so a genuine error — a bad
+ * price, a currency mismatch — still surfaces on the second attempt.
+ */
+async function createSession(params: Stripe.Checkout.SessionCreateParams) {
+  const stripe = getStripe();
+
+  try {
+    return await stripe.checkout.sessions.create(params);
+  } catch (error) {
+    if (!params.consent_collection) throw error;
+
+    console.error(
+      "[checkout] terms checkbox refused, retrying without it — set a terms of service URL at " +
+        `https://dashboard.stripe.com/settings/public: ${error instanceof Error ? error.message : String(error)}`,
+    );
+
+    const retry = { ...params };
+    delete retry.consent_collection;
+    delete retry.custom_text;
+    return stripe.checkout.sessions.create(retry);
+  }
+}
 
 export async function POST(request: Request) {
   if (!isStripeConfigured()) {
@@ -92,10 +126,21 @@ export async function POST(request: Request) {
   });
   const cancelPath = getPathname({ locale, href: "/warenkorb" });
 
+  // Swiss distance selling requires the terms to be available before the order is
+  // placed. The cart page links all three documents; this adds Stripe's own
+  // mandatory checkbox, which links the terms URL from Settings → Public details.
+  const tCheckout = await getTranslations({ locale, namespace: "checkout" });
+
   try {
-    const session = await getStripe().checkout.sessions.create({
+    const session = await createSession({
       mode: "payment",
       line_items: lineItems,
+      consent_collection: { terms_of_service: "required" },
+      custom_text: {
+        // Plain text — the field takes no markup, so the documents are named
+        // rather than linked. The checkbox itself carries the link to the AGB.
+        terms_of_service_acceptance: { message: tCheckout("stripeTerms") },
+      },
       /*
        * Payment methods and currency are both left unset on purpose.
        *

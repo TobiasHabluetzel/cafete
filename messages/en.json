@@ -139,7 +139,9 @@
     "unavailableLine": "One item is currently unavailable. Please remove it to continue.",
     "comingSoon": "Available from 19 September 2026!",
     "bestseller": "Bestseller",
-    "shippingIncluded": "shipping included"
+    "shippingIncluded": "shipping included",
+    "legalNote": "By placing your order you confirm that you have read the <terms>Terms and Conditions</terms>, and acknowledge that correctly delivered food and beverages carry <returns>no general right of withdrawal</returns>. How we handle your data is set out in the <privacy>Privacy Policy</privacy>.",
+    "stripeTerms": "CAFÉTÉ's Terms and Conditions apply. Correctly delivered food and beverages carry no general right of withdrawal; claims for damaged or incorrectly delivered goods remain reserved."
   },
   "event": {
     "label": "Save the date",

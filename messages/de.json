@@ -139,7 +139,9 @@
     "unavailableLine": "Ein Artikel ist momentan nicht verfügbar. Bitte entferne ihn, um fortzufahren.",
     "comingSoon": "Erhältlich ab 19. September 2026!",
     "bestseller": "Bestseller",
-    "shippingIncluded": "inkl. Versand"
+    "shippingIncluded": "inkl. Versand",
+    "legalNote": "Mit dem Absenden der Bestellung bestätigst du, die <terms>AGB</terms> gelesen zu haben, und erkennst an, dass für korrekt gelieferte Lebensmittel <returns>kein allgemeines Widerrufsrecht</returns> besteht. Wie wir deine Daten bearbeiten, steht in der <privacy>Datenschutzerklärung</privacy>.",
+    "stripeTerms": "Es gelten die AGB von CAFÉTÉ. Für korrekt gelieferte Lebensmittel und Getränke besteht kein allgemeines Widerrufsrecht; Ansprüche bei beschädigter oder falsch gelieferter Ware bleiben vorbehalten."
   },
   "event": {
     "label": "Save the date",
