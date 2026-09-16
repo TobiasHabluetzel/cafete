@@ -9,21 +9,34 @@ import { site } from "@/config/site";
 /**
  * Outbound mail: event registrations, newsletter signups, order confirmations.
  *
- * Two transports, chosen by which environment variables are present:
+ * Two transports. **On Railway, use Resend** — SMTP does not work there at all.
  *
- * 1. **SMTP** (preferred). CAFÉTÉ's mailboxes already live at Infomaniak, so
- *    sending through them needs no DNS work — the domain's SPF already authorises
- *    it — costs nothing extra, sends from the real `info@drink-cafete.ch`, keeps a
- *    third-party processor out of the privacy policy, and belongs to the founders
- *    rather than to an agency account that would later need handing over.
- * 2. **Resend** as a fallback, if only `RESEND_API_KEY` is configured.
+ * 1. **Resend**, over HTTPS. Not the first choice on the merits: it puts a third
+ *    party in the privacy policy and needs its own verified sending domain. But
+ *    Railway blocks outbound SMTP, so it is the only one that delivers.
+ * 2. **SMTP** through Infomaniak, where CAFÉTÉ's mailboxes already live. Needs no
+ *    DNS work, costs nothing, sends from the real address and belongs to the
+ *    founders. Verified working from a normal network — and verified *not* working
+ *    from Railway, where ports 465, 587 and 2525 all time out on TCP connect
+ *    (checked 16 Sept 2026). Keep it for a future move off Railway, or for
+ *    running the app anywhere with open SMTP egress.
+ *
+ * SMTP is still tried first when its variables are set, with Resend picking up
+ * anything it drops — see `send()`. If both are configured the SMTP timeout is
+ * paid on every message, so unset the `SMTP_*` variables on Railway.
  *
  * Use a dedicated mailbox for `SMTP_USER`, not `info@`: a mailbox password can
  * *read* mail, unlike an API key, so the credential in the environment should be
- * able to do as little as possible.
+ * able to do as little as possible. Infomaniak additionally requires an
+ * application-specific password ("Gerätepasswort") rather than the login one.
  */
 export type SendResult =
-  | { ok: true; via: "smtp" | "resend" }
+  | {
+      ok: true;
+      via: "smtp" | "resend";
+      /** Set when the first transport failed and this one picked it up. */
+      recoveredFrom?: { via: "smtp"; detail?: string };
+    }
   | {
       ok: false;
       reason: "not-configured" | "send-failed";
@@ -83,16 +96,31 @@ export async function sendNotification(args: {
 }
 
 /**
- * The From address.
+ * The From address, which depends on which transport is carrying the message —
+ * the two do not accept the same senders.
  *
- * `fallback` is the SMTP transport's authenticated mailbox, and it matters: most
- * providers, Infomaniak included, reject a message whose From is an address the
- * session did not log in as. Defaulting to `info@` while authenticated as
- * `noreply@` therefore fails the send outright rather than sending from the wrong
- * name — which is why `MAIL_FROM` being unset used to break SMTP entirely.
+ * Over SMTP, `fallback` is the authenticated mailbox. Most providers, Infomaniak
+ * included, reject a message whose From is an address the session did not log in
+ * as, so defaulting to `info@` while authenticated as `noreply@` fails the send
+ * outright rather than merely sending from the wrong name.
+ *
+ * Over Resend, only a verified domain may send, and that is the `send.`
+ * subdomain — the root must not be verified there, because a domain gets one SPF
+ * record and the root's already ends in `-all` and carries the founders' live
+ * mail. So `RESEND_FROM` wins over `MAIL_FROM` on that path; taking them in the
+ * other order would hand Resend a root-domain sender it will refuse.
  */
-function fromAddress(fallback?: string) {
-  const configured = env("MAIL_FROM") ?? env("RESEND_FROM");
+function fromAddress({
+  transport,
+  fallback,
+}: {
+  transport: "smtp" | "resend";
+  fallback?: string;
+}) {
+  const configured =
+    transport === "resend"
+      ? (env("RESEND_FROM") ?? env("MAIL_FROM"))
+      : (env("MAIL_FROM") ?? env("RESEND_FROM"));
   if (configured) return configured;
   return `${site.name} <${fallback ?? site.email}>`;
 }
@@ -108,8 +136,32 @@ async function send({
   text: string;
   replyTo?: string;
 }): Promise<SendResult> {
-  if (smtpConfigured()) return sendViaSmtp({ to, subject, text, replyTo });
-  if (process.env.RESEND_API_KEY) return sendViaResend({ to, subject, text, replyTo });
+  const resendConfigured = Boolean(env("RESEND_API_KEY"));
+
+  if (smtpConfigured()) {
+    const smtp = await sendViaSmtp({ to, subject, text, replyTo });
+    if (smtp.ok || !resendConfigured) return smtp;
+
+    /*
+     * SMTP failed and there is an HTTP transport available, so use it rather than
+     * losing the message. This matters because Railway blocks outbound SMTP
+     * entirely — 465, 587 and 2525 all time out on connect — so a deployment that
+     * still has the SMTP_* variables set would otherwise silently deliver nothing.
+     *
+     * The cost is the SMTP connection timeout before the retry, which is only
+     * ever paid when SMTP is misconfigured — exactly the case where it saves the
+     * mail. Remove the SMTP_* variables to skip it entirely. The failure is still
+     * carried on the result so a broken transport cannot hide behind a working
+     * fallback.
+     */
+    const viaHttp = await sendViaResend({ to, subject, text, replyTo });
+    if (viaHttp.ok) {
+      return { ...viaHttp, recoveredFrom: { via: "smtp", detail: smtp.detail } };
+    }
+    return viaHttp;
+  }
+
+  if (resendConfigured) return sendViaResend({ to, subject, text, replyTo });
   return { ok: false, reason: "not-configured" };
 }
 
@@ -162,7 +214,7 @@ async function sendViaSmtp({
   const host = env("SMTP_HOST");
   const user = env("SMTP_USER");
   const port = Number(env("SMTP_PORT") ?? 587);
-  const from = fromAddress(user);
+  const from = fromAddress({ transport: "smtp", fallback: user });
 
   if (!Number.isInteger(port) || port < 1 || port > 65535) {
     return { ok: false, reason: "send-failed", via: "smtp", detail: `bad SMTP_PORT` };
@@ -240,7 +292,7 @@ async function sendViaResend({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: fromAddress(),
+        from: fromAddress({ transport: "resend" }),
         to: [to],
         subject,
         text,

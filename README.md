@@ -127,7 +127,8 @@ See `.env.local.example`. Summary:
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | 2 | |
 | `STRIPE_WEBHOOK_SECRET` | 2 | From the Stripe webhook endpoint / `stripe listen` |
 | `STRIPE_PRICE_PACK_{6,12,24}` | 2 | Price IDs — never hardcode in source |
-| `RESEND_API_KEY`, `RESEND_FROM` | 2 | Order + RSVP confirmations |
+| `RESEND_API_KEY`, `RESEND_FROM` | 2 | Order + RSVP confirmations. **The working transport on Railway** |
+| `SMTP_*`, `MAIL_FROM` | 2 | Infomaniak SMTP. Leave unset on Railway — outbound SMTP is blocked |
 
 ## Deploying to Railway
 
@@ -419,6 +420,32 @@ For Resend, verify the **subdomain** `send.drink-cafete.ch`, never the root: onl
 one SPF record per domain is valid and the existing one ends in `-all`, so editing
 it risks the founders' mail. A subdomain gets its own SPF and DKIM and leaves it
 alone.
+
+### Railway blocks outbound SMTP — mail has to go over HTTPS
+
+Settled on 16 Sept 2026 after three rounds of debugging, so it does not get
+re-litigated: **you cannot send mail over SMTP from this deployment.** Ports 465,
+587 and 2525 to `mail.infomaniak.com` all time out on TCP connect from inside the
+container. All three answer in ~1.1 s from a normal network, complete TLS and
+reach AUTH, so it is the platform's egress, not Infomaniak and not credentials.
+
+Two earlier readings were wrong and are recorded here so nobody repeats them:
+
+- A 20-second failure looked like a stalled STARTTLS upgrade. It was not. Moving
+  to port 465 changed nothing, because the port was never involved.
+- The actual first bug was `ENETUNREACH` on Infomaniak's IPv6 address. nodemailer
+  resolves A and AAAA records itself and then picks **at random**, and Railway's
+  containers have an IPv6 address but no IPv6 route. `src/lib/email.ts` pins the
+  connection to IPv4, which fixed that — and exposed the egress block underneath.
+
+So Resend (or any HTTPS sender) is the transport on Railway. `SMTP_*` is kept for
+a future move to a host with open SMTP egress; **leave those variables unset
+here**, because when both are configured every message pays the SMTP connection
+timeout before falling through.
+
+`MAIL_FROM` applies to SMTP and `RESEND_FROM` to Resend, and they are not
+interchangeable: Resend may only send from the verified `send.` subdomain, so a
+root-domain `MAIL_FROM` left in place would have every Resend send refused.
 
 ### Blocking, in priority order
 

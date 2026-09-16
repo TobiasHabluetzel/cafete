@@ -30,5 +30,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: result.reason }, { status: 503 });
   }
 
+  if (result.recoveredFrom) {
+    console.warn(
+      `[newsletter] delivered via=${result.via} after ${result.recoveredFrom.via} failed: ${result.recoveredFrom.detail ?? ""}`,
+    );
+  }
+
   return NextResponse.json({ ok: true });
 }

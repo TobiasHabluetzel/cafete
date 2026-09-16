@@ -56,5 +56,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: result.reason }, { status: 503 });
   }
 
+  // Delivered, but only on the second attempt — the primary transport is broken
+  // and needs fixing even though nothing was lost.
+  if (result.recoveredFrom) {
+    console.warn(
+      `[rsvp] delivered via=${result.via} after ${result.recoveredFrom.via} failed: ${result.recoveredFrom.detail ?? ""}`,
+    );
+  }
+
   return NextResponse.json({ ok: true });
 }

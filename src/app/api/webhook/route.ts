@@ -158,6 +158,10 @@ async function handleCompletedCheckout(
         );
       }
       console.warn("[webhook] confirmation email skipped: no mail transport configured");
+    } else if (result.recoveredFrom) {
+      console.warn(
+        `[webhook] confirmation sent via=${result.via} after ${result.recoveredFrom.via} failed: ${result.recoveredFrom.detail ?? ""}`,
+      );
     }
   }
 
