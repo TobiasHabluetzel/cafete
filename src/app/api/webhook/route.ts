@@ -114,6 +114,14 @@ async function handleCompletedCheckout(
   if (email) {
     const result = await sendMail({
       to: email,
+      /*
+       * Replies must reach a real mailbox. The message is sent from
+       * `noreply@send.drink-cafete.ch` — an address that exists only as a
+       * Resend-verified sending domain, with no mailbox behind it — while the body
+       * says "Antworte einfach auf diese Mail". Without this header that reply
+       * bounces. `info@` is the one mailbox CAFÉTÉ actually has.
+       */
+      replyTo: site.email,
       subject: isGerman
         ? "Deine CAFÉTÉ Bestellung — vielen Dank!"
         : "Your CAFÉTÉ order — thank you!",
