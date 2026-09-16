@@ -266,7 +266,7 @@
       },
       {
         "q": "Can I return or exchange an order?",
-        "a": "Yes. You’ll find the details on the Returns page. If a bottle arrives damaged, just let us know — we’ll replace it."
+        "a": "We do not take back correctly delivered food and beverages — Swiss law provides no general right of withdrawal for them. If a delivery arrives damaged, defective or incorrect, do get in touch: we will look into it and, where a complaint is justified, arrange an appropriate solution. The details are on the Returns & Withdrawal page."
       },
       {
         "q": "Is CAFÉTÉ available in bars, restaurants or shops?",
@@ -285,96 +285,380 @@
     "eventValue": "At the launch event on 19 September 2026 at Restaurant Osso, Zürich."
   },
   "legal": {
-    "placeholderTitle": "Placeholder — not yet legally binding",
-    "placeholderBody": "This text is a placeholder and must be replaced with a reviewed version before publication.",
+    "germanBinding": "This is a translation provided for convenience. Only the German version is legally binding.",
     "imprint": {
       "title": "Imprint",
-      "responsibleHeading": "Responsible for the content",
-      "bottlerHeading": "Bottled by",
-      "contactHeading": "Contact",
-      "uidHeading": "Commercial register / UID",
-      "uidBody": "The UID will be added before publication.",
-      "disclaimerHeading": "Disclaimer",
-      "disclaimerBody": "The content of this website is compiled with care. We cannot, however, guarantee its accuracy, completeness or timeliness."
+      "sections": [
+        {
+          "heading": "Provider and responsible for the content",
+          "blocks": [
+            {
+              "type": "address",
+              "lines": [
+                "Fine & Bold Taste Specialties KIG",
+                "Neugasse 33",
+                "8005 Zürich",
+                "Switzerland",
+                "Email: info@drink-cafete.ch"
+              ]
+            }
+          ]
+        },
+        {
+          "heading": "Bottling",
+          "blocks": [
+            {
+              "type": "address",
+              "lines": [
+                "Creative Food and Beverage Company AG",
+                "Alte Brauerei Villa",
+                "Gurtenbrauerei 14",
+                "3084 Wabern",
+                "Switzerland"
+              ]
+            }
+          ]
+        },
+        {
+          "heading": "Note",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The content of this website has been compiled with care. To the extent permitted by law, no warranty is given as to its accuracy, completeness or currency."
+            }
+          ]
+        }
+      ]
     },
     "terms": {
-      "title": "Terms and conditions",
+      "title": "Terms and Conditions",
       "sections": [
         {
           "heading": "1. Scope",
-          "body": "These terms apply to all orders placed through this online shop."
+          "blocks": [
+            {
+              "type": "p",
+              "text": "These terms and conditions apply to orders placed through the online shop of:"
+            },
+            {
+              "type": "address",
+              "lines": [
+                "Fine & Bold Taste Specialties KIG",
+                "Neugasse 33",
+                "8005 Zürich",
+                "Switzerland",
+                "Email: info@drink-cafete.ch"
+              ]
+            },
+            {
+              "type": "p",
+              "text": "Referred to below as “Cafété”."
+            }
+          ]
         },
         {
-          "heading": "2. Prices",
-          "body": "All prices are in Swiss francs and include statutory VAT. Shipping is included in the price."
+          "heading": "2. Offer and conclusion of contract",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The presentation of products in the online shop constitutes an invitation to order. By submitting an order, the customer places a binding order."
+            },
+            {
+              "type": "p",
+              "text": "An electronic order confirmation is sent once the order has been received."
+            }
+          ]
         },
         {
-          "heading": "3. Delivery",
-          "body": "We deliver within Switzerland. Shipping is included in the price. Details on delivery times follow when the shop opens."
+          "heading": "3. Prices",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "All prices are stated in Swiss francs (CHF). Any shipping costs are shown before the order is completed."
+            },
+            {
+              "type": "p",
+              "text": "Where legally required, the prices stated include value added tax."
+            }
+          ]
         },
         {
           "heading": "4. Payment",
-          "body": "Payment is processed by Stripe, by card or TWINT."
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The payment methods available in the online shop are shown during the order process. Payment may be processed by external payment service providers."
+            }
+          ]
         },
         {
-          "heading": "5. Withdrawal",
-          "body": "The return policy described on the Returns page applies."
+          "heading": "5. Delivery",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Delivery is made to the delivery address given with the order, within the areas we serve."
+            },
+            {
+              "type": "p",
+              "text": "Stated delivery times are approximate. Delays due to circumstances outside our control cannot be entirely ruled out."
+            }
+          ]
         },
         {
-          "heading": "6. Warranty",
-          "body": "If a shipment arrives damaged or incomplete, contact us within 14 days and we will replace the affected goods."
+          "heading": "6. Damaged or incorrectly delivered goods",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Customers are asked to report damaged, defective or incorrectly delivered goods as soon as possible after receipt to info@drink-cafete.ch."
+            },
+            {
+              "type": "p",
+              "text": "Statutory warranty rights remain reserved."
+            }
+          ]
+        },
+        {
+          "heading": "7. Returns and withdrawal",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Swiss law provides no general statutory right of withdrawal for ordinary online purchases. Unless expressly agreed otherwise, correctly delivered food and beverages can therefore not simply be returned or exchanged."
+            },
+            {
+              "type": "p",
+              "text": "Claims arising from defective or incorrectly delivered goods remain reserved."
+            },
+            {
+              "type": "note",
+              "text": "Source: State Secretariat for Economic Affairs (SECO)"
+            }
+          ]
+        },
+        {
+          "heading": "8. Liability",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Cafété is liable within the scope of mandatory statutory provisions. Any further liability is excluded to the extent permitted by law."
+            }
+          ]
+        },
+        {
+          "heading": "9. Data protection",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Information on the processing of personal data can be found in our privacy policy."
+            }
+          ]
+        },
+        {
+          "heading": "10. Applicable law",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Swiss law applies. Mandatory statutory provisions, in particular those protecting consumers, remain reserved."
+            }
+          ]
         }
-      ]
+      ],
+      "updated": "Last updated: September 2026"
     },
     "privacy": {
-      "title": "Privacy policy",
+      "title": "Privacy Policy",
       "sections": [
         {
-          "heading": "Controller",
-          "body": "The controller for data processing is CAFÉTÉ, Neugasse 33, 8005 Zürich. Send privacy enquiries to info@drink-cafete.ch."
+          "heading": "1. Controller",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The party responsible for processing personal data on this website is:"
+            },
+            {
+              "type": "address",
+              "lines": [
+                "Fine & Bold Taste Specialties KIG",
+                "Neugasse 33",
+                "8005 Zürich",
+                "Switzerland",
+                "Email: info@drink-cafete.ch"
+              ]
+            }
+          ]
         },
         {
-          "heading": "What data we process",
-          "body": "We process data you actively provide: name and email address when signing up for the newsletter or the event, plus order and delivery details when you buy."
+          "heading": "2. Processing of personal data",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "We process personal data that arises when you visit our website, contact us, or place an order through our online shop."
+            },
+            {
+              "type": "p",
+              "text": "This may include in particular:"
+            },
+            {
+              "type": "p",
+              "text": "First and last name, billing and delivery address, email address, order and payment information, and technical data arising when you visit our website."
+            }
+          ]
         },
         {
-          "heading": "Purpose",
-          "body": "We use this data solely to fulfil your order, answer your enquiry, or — with your consent — send you news about CAFÉTÉ."
+          "heading": "3. Purposes of processing",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "We process personal data in particular for:"
+            },
+            {
+              "type": "p",
+              "text": "Processing orders and payments, delivering our products, communicating with customers, handling enquiries, securing and improving our website, and meeting legal obligations."
+            }
+          ]
         },
         {
-          "heading": "Processors",
-          "body": "We use Stripe for payments, Resend for email, and our hosting provider to run the website. These services process data on our behalf."
+          "heading": "4. Disclosure to third parties",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Where necessary for the operation of our online shop, personal data may be passed to service providers."
+            },
+            {
+              "type": "p",
+              "text": "These may include, in particular, hosting, payment, shipping, IT and analytics providers."
+            },
+            {
+              "type": "p",
+              "text": "They receive only the data required for the service concerned."
+            }
+          ]
         },
         {
-          "heading": "Analytics",
-          "body": "We use privacy-friendly, cookie-free analytics and do not build personal profiles."
+          "heading": "5. Payment processing",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "For an online payment, the data required to process the payment is transmitted to the payment service provider used."
+            },
+            {
+              "type": "p",
+              "text": "As a rule we receive only the payment information required to process the order and match it to your purchase."
+            }
+          ]
         },
         {
-          "heading": "Your rights",
-          "body": "You have the right to access, correct and delete your data, and to withdraw consent at any time. The revised Swiss Data Protection Act (revFADP) applies."
+          "heading": "6. Hosting and technical data",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "When you visit our website, technical information such as IP address, time of access, browser and device information, and pages viewed may be processed."
+            },
+            {
+              "type": "p",
+              "text": "This data serves in particular the secure and reliable operation of the website."
+            }
+          ]
+        },
+        {
+          "heading": "7. Cookies and analytics",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Our website may use cookies and comparable technologies that are necessary for the operation of the website or — where used and necessary — serve to analyse and improve what we offer."
+            },
+            {
+              "type": "p",
+              "text": "We will inform you separately where appropriate about any additional analytics or marketing technologies."
+            }
+          ]
+        },
+        {
+          "heading": "8. Retention",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Personal data is retained only for as long as is necessary for the purposes concerned, or as long as statutory retention obligations apply."
+            }
+          ]
+        },
+        {
+          "heading": "9. Rights of data subjects",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Within the scope of applicable data protection law, data subjects may in particular request information about the personal data processed about them and, where applicable, request its correction or deletion."
+            },
+            {
+              "type": "p",
+              "text": "Requests can be sent to info@drink-cafete.ch."
+            }
+          ]
+        },
+        {
+          "heading": "10. Changes",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "We may amend this privacy policy if our data processing or the legal requirements change."
+            }
+          ]
         }
-      ]
+      ],
+      "updated": "Last updated: September 2026"
     },
     "returns": {
-      "title": "Returns and withdrawal",
+      "title": "Returns & Withdrawal",
       "sections": [
         {
-          "heading": "Right of return",
-          "body": "You may return unopened goods within 14 days of receipt. Please let us know by email before sending anything back."
+          "heading": "No general right of withdrawal",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Swiss law provides no general statutory right of withdrawal for ordinary online purchases."
+            },
+            {
+              "type": "note",
+              "text": "Source: State Secretariat for Economic Affairs (SECO)"
+            },
+            {
+              "type": "p",
+              "text": "Orders placed through our online shop are therefore binding as a matter of principle. No voluntary general right of return or exchange is granted for correctly delivered food and beverages."
+            }
+          ]
         },
         {
-          "heading": "Foodstuffs",
-          "body": "For hygiene reasons we cannot accept opened bottles."
-        },
-        {
-          "heading": "Damaged shipments",
-          "body": "If a bottle arrives damaged, send us a photo — we’ll replace it or refund you, with no need to return it."
-        },
-        {
-          "heading": "Refunds",
-          "body": "Refunds are issued to the original payment method, usually within ten working days of the return arriving."
+          "heading": "Damaged or incorrect delivery",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "If a delivery is damaged or defective, or the wrong product has been delivered, please contact us as soon as possible at:"
+            },
+            {
+              "type": "p",
+              "text": "info@drink-cafete.ch"
+            },
+            {
+              "type": "p",
+              "text": "Please quote your order number and, where damage is visible, include a photo if you can."
+            },
+            {
+              "type": "p",
+              "text": "We will look into it and, where a complaint is justified, arrange an appropriate solution."
+            },
+            {
+              "type": "p",
+              "text": "Statutory rights in respect of defective goods remain reserved."
+            }
+          ]
         }
-      ]
+      ],
+      "signature": [
+        "Fine & Bold Taste Specialties KIG",
+        "Neugasse 33",
+        "8005 Zürich",
+        "Switzerland"
+      ],
+      "updated": "Last updated: September 2026"
     }
   },
   "notFound": {
@@ -443,7 +727,7 @@
     "imprint": "CAFÉTÉ imprint — provider identification, contact and legal details.",
     "terms": "Terms and conditions for orders in the CAFÉTÉ online shop: prices, delivery, payment and warranty.",
     "privacy": "CAFÉTÉ privacy policy — what data we process, for what purpose, and your rights under the revised Swiss FADP.",
-    "returns": "Returns and withdrawal at CAFÉTÉ: right of return, damaged shipments and refunds.",
+    "returns": "Returns and withdrawal at CAFÉTÉ: Swiss law gives no general right of withdrawal — and how we handle damaged or incorrectly delivered goods.",
     "portraits": "The other half of the story — a monthly portrait of people and projects that usually get little room. By CAFÉTÉ.",
     "discover": "CAFÉTÉ in thirty seconds: the sparkling refreshment made from the coffee fruit — and straight on to the shop."
   },

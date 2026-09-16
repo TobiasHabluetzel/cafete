@@ -266,7 +266,7 @@
       },
       {
         "q": "Kann ich zurückgeben oder umtauschen?",
-        "a": "Ja. Die Details zum Widerrufsrecht findest du auf der Seite Widerruf. Falls eine Flasche beschädigt ankommt, melde dich einfach — wir ersetzen sie."
+        "a": "Korrekt gelieferte Lebensmittel und Getränke nehmen wir nicht zurück — das Schweizer Recht sieht dafür kein allgemeines Widerrufsrecht vor. Kommt eine Lieferung beschädigt, fehlerhaft oder falsch an, melde dich aber unbedingt: wir prüfen den Fall und sorgen bei berechtigter Beanstandung für eine angemessene Lösung. Die Details stehen auf der Seite Rückgabe & Widerruf."
       },
       {
         "q": "Gibt es CAFÉTÉ auch in der Gastronomie oder im Laden?",
@@ -285,96 +285,380 @@
     "eventValue": "Am Launch Event vom 19. September 2026 im Restaurant Osso, Zürich."
   },
   "legal": {
-    "placeholderTitle": "Platzhalter — noch nicht rechtsverbindlich",
-    "placeholderBody": "Dieser Text ist ein Platzhalter und muss vor der Veröffentlichung durch eine geprüfte Fassung ersetzt werden.",
+    "germanBinding": "Verbindlich ist die deutsche Fassung.",
     "imprint": {
       "title": "Impressum",
-      "responsibleHeading": "Verantwortlich für den Inhalt",
-      "bottlerHeading": "Abgefüllt von",
-      "contactHeading": "Kontakt",
-      "uidHeading": "Handelsregister / UID",
-      "uidBody": "Die UID wird vor der Veröffentlichung ergänzt.",
-      "disclaimerHeading": "Haftungsausschluss",
-      "disclaimerBody": "Die Inhalte dieser Website werden mit Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen."
+      "sections": [
+        {
+          "heading": "Anbieter und verantwortlich für den Inhalt",
+          "blocks": [
+            {
+              "type": "address",
+              "lines": [
+                "Fine & Bold Taste Specialties KIG",
+                "Neugasse 33",
+                "8005 Zürich",
+                "Schweiz",
+                "E-Mail: info@drink-cafete.ch"
+              ]
+            }
+          ]
+        },
+        {
+          "heading": "Abfüllung",
+          "blocks": [
+            {
+              "type": "address",
+              "lines": [
+                "Creative Food and Beverage Company AG",
+                "Alte Brauerei Villa",
+                "Gurtenbrauerei 14",
+                "3084 Wabern",
+                "Schweiz"
+              ]
+            }
+          ]
+        },
+        {
+          "heading": "Hinweis",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Die Inhalte dieser Website wurden mit Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte wird im gesetzlich zulässigen Umfang keine Gewähr übernommen."
+            }
+          ]
+        }
+      ]
     },
     "terms": {
       "title": "Allgemeine Geschäftsbedingungen",
       "sections": [
         {
           "heading": "1. Geltungsbereich",
-          "body": "Diese Bedingungen gelten für alle Bestellungen über diesen Onlineshop."
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Diese Allgemeinen Geschäftsbedingungen gelten für Bestellungen über den Onlineshop von:"
+            },
+            {
+              "type": "address",
+              "lines": [
+                "Fine & Bold Taste Specialties KIG",
+                "Neugasse 33",
+                "8005 Zürich",
+                "Schweiz",
+                "E-Mail: info@drink-cafete.ch"
+              ]
+            },
+            {
+              "type": "p",
+              "text": "Nachfolgend «Cafété» genannt."
+            }
+          ]
         },
         {
-          "heading": "2. Preise",
-          "body": "Alle Preise sind in Schweizer Franken und verstehen sich inklusive der gesetzlichen Mehrwertsteuer. Die Versandkosten sind im Preis inbegriffen."
+          "heading": "2. Angebot und Vertragsabschluss",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Die Darstellung der Produkte im Onlineshop stellt eine Einladung zur Bestellung dar. Mit dem Absenden der Bestellung gibt die Kundin oder der Kunde eine verbindliche Bestellung ab."
+            },
+            {
+              "type": "p",
+              "text": "Nach Eingang der Bestellung wird eine elektronische Bestellbestätigung versendet."
+            }
+          ]
         },
         {
-          "heading": "3. Lieferung",
-          "body": "Die Lieferung erfolgt innerhalb der Schweiz. Die Versandkosten sind im Preis inbegriffen. Angaben zu Lieferfristen folgen mit der Shop-Eröffnung."
+          "heading": "3. Preise",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Alle Preise werden in Schweizer Franken (CHF) angegeben. Allfällige Versandkosten werden vor Abschluss der Bestellung angezeigt."
+            },
+            {
+              "type": "p",
+              "text": "Sofern gesetzlich erforderlich, verstehen sich die angegebenen Preise inklusive Mehrwertsteuer."
+            }
+          ]
         },
         {
           "heading": "4. Zahlung",
-          "body": "Die Zahlung erfolgt über den Zahlungsdienstleister Stripe per Karte oder TWINT."
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Die im Onlineshop verfügbaren Zahlungsmöglichkeiten werden während des Bestellvorgangs angezeigt. Die Zahlungsabwicklung kann über externe Zahlungsdienstleister erfolgen."
+            }
+          ]
         },
         {
-          "heading": "5. Widerruf",
-          "body": "Es gilt das auf der Seite Widerruf beschriebene Rückgaberecht."
+          "heading": "5. Lieferung",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Die Lieferung erfolgt an die bei der Bestellung angegebene Lieferadresse innerhalb der von uns belieferten Gebiete."
+            },
+            {
+              "type": "p",
+              "text": "Die angegebenen Lieferzeiten sind Richtwerte. Verzögerungen aufgrund von Umständen ausserhalb unseres Einflussbereichs können nicht vollständig ausgeschlossen werden."
+            }
+          ]
         },
         {
-          "heading": "6. Gewährleistung",
-          "body": "Bei beschädigt oder unvollständig eintreffenden Sendungen melde dich innerhalb von 14 Tagen; wir ersetzen die betroffene Ware."
+          "heading": "6. Beschädigte oder falsch gelieferte Ware",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Die Kundin oder der Kunde wird gebeten, beschädigte, fehlerhafte oder falsch gelieferte Ware möglichst rasch nach Erhalt unter info@drink-cafete.ch zu melden."
+            },
+            {
+              "type": "p",
+              "text": "Die gesetzlichen Gewährleistungsrechte bleiben vorbehalten."
+            }
+          ]
+        },
+        {
+          "heading": "7. Rückgabe und Widerruf",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Das Schweizer Recht sieht für gewöhnliche Onlinekäufe kein allgemeines gesetzliches Widerrufsrecht vor. Soweit nicht ausdrücklich anders vereinbart, können korrekt gelieferte Lebensmittel und Getränke daher nicht ohne Weiteres zurückgegeben oder umgetauscht werden."
+            },
+            {
+              "type": "p",
+              "text": "Ansprüche aufgrund mangelhafter oder falsch gelieferter Ware bleiben vorbehalten."
+            },
+            {
+              "type": "note",
+              "text": "Quelle: Staatssekretariat für Wirtschaft (SECO)"
+            }
+          ]
+        },
+        {
+          "heading": "8. Haftung",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Cafété haftet im Rahmen der zwingenden gesetzlichen Bestimmungen. Eine weitergehende Haftung wird, soweit gesetzlich zulässig, ausgeschlossen."
+            }
+          ]
+        },
+        {
+          "heading": "9. Datenschutz",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Informationen zur Bearbeitung von Personendaten befinden sich in unserer Datenschutzerklärung."
+            }
+          ]
+        },
+        {
+          "heading": "10. Anwendbares Recht",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Es gilt Schweizer Recht. Zwingende gesetzliche Bestimmungen, insbesondere zum Schutz von Konsumentinnen und Konsumenten, bleiben vorbehalten."
+            }
+          ]
         }
-      ]
+      ],
+      "updated": "Stand: September 2026"
     },
     "privacy": {
       "title": "Datenschutzerklärung",
       "sections": [
         {
-          "heading": "Verantwortliche Stelle",
-          "body": "Verantwortlich für die Datenbearbeitung ist CAFÉTÉ, Neugasse 33, 8005 Zürich. Anfragen zum Datenschutz richtest du an info@drink-cafete.ch."
+          "heading": "1. Verantwortliche Stelle",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Verantwortlich für die Bearbeitung von Personendaten auf dieser Website ist:"
+            },
+            {
+              "type": "address",
+              "lines": [
+                "Fine & Bold Taste Specialties KIG",
+                "Neugasse 33",
+                "8005 Zürich",
+                "Schweiz",
+                "E-Mail: info@drink-cafete.ch"
+              ]
+            }
+          ]
         },
         {
-          "heading": "Welche Daten wir bearbeiten",
-          "body": "Wir bearbeiten Daten, die du uns aktiv übermittelst: Name und E-Mail-Adresse bei der Newsletter-Anmeldung oder der Event-Anmeldung, sowie Bestell- und Lieferdaten bei einem Kauf."
+          "heading": "2. Bearbeitung von Personendaten",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Wir bearbeiten Personendaten, die beim Besuch unserer Website, bei einer Kontaktaufnahme oder bei einer Bestellung über unseren Onlineshop anfallen."
+            },
+            {
+              "type": "p",
+              "text": "Dazu können insbesondere gehören:"
+            },
+            {
+              "type": "p",
+              "text": "Name und Vorname, Rechnungs- und Lieferadresse, E-Mail-Adresse, Bestell- und Zahlungsinformationen sowie technische Daten, die beim Besuch unserer Website anfallen."
+            }
+          ]
         },
         {
-          "heading": "Zweck",
-          "body": "Wir verwenden diese Daten ausschliesslich, um deine Bestellung abzuwickeln, deine Anfrage zu beantworten oder dir — mit deiner Einwilligung — Neuigkeiten zu CAFÉTÉ zu senden."
+          "heading": "3. Zwecke der Datenbearbeitung",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Wir bearbeiten Personendaten insbesondere zur:"
+            },
+            {
+              "type": "p",
+              "text": "Abwicklung von Bestellungen und Zahlungen, Lieferung unserer Produkte, Kommunikation mit Kundinnen und Kunden, Bearbeitung von Anfragen, Sicherstellung und Verbesserung unserer Website sowie Erfüllung gesetzlicher Verpflichtungen."
+            }
+          ]
         },
         {
-          "heading": "Auftragsbearbeiter",
-          "body": "Für Zahlungen nutzen wir Stripe, für E-Mails Resend und für den Betrieb der Website unseren Hosting-Anbieter. Diese Dienste bearbeiten Daten in unserem Auftrag."
+          "heading": "4. Weitergabe an Dritte",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Soweit dies für den Betrieb unseres Onlineshops erforderlich ist, können Personendaten an Dienstleister weitergegeben werden."
+            },
+            {
+              "type": "p",
+              "text": "Dazu können insbesondere Hosting-, Zahlungs-, Versand-, IT- und Analysedienstleister gehören."
+            },
+            {
+              "type": "p",
+              "text": "Diese erhalten nur diejenigen Daten, die für die jeweilige Dienstleistung erforderlich sind."
+            }
+          ]
         },
         {
-          "heading": "Analyse",
-          "body": "Wir setzen datenschutzfreundliche, cookiefreie Statistik ein und erstellen keine personenbezogenen Profile."
+          "heading": "5. Zahlungsabwicklung",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Bei einer Onlinezahlung werden die für die Zahlungsabwicklung erforderlichen Daten an den jeweils verwendeten Zahlungsdienstleister übermittelt."
+            },
+            {
+              "type": "p",
+              "text": "Wir erhalten grundsätzlich nur diejenigen Zahlungsinformationen, die für die Abwicklung und Zuordnung der Bestellung erforderlich sind."
+            }
+          ]
         },
         {
-          "heading": "Deine Rechte",
-          "body": "Du hast das Recht auf Auskunft, Berichtigung und Löschung deiner Daten sowie darauf, eine Einwilligung jederzeit zu widerrufen. Es gilt das revidierte Schweizer Datenschutzgesetz (revDSG)."
+          "heading": "6. Hosting und technische Daten",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Beim Besuch unserer Website können technische Informationen wie IP-Adresse, Zeitpunkt des Zugriffs, Browser- und Geräteinformationen sowie aufgerufene Seiten verarbeitet werden."
+            },
+            {
+              "type": "p",
+              "text": "Diese Daten dienen insbesondere dem sicheren und zuverlässigen Betrieb der Website."
+            }
+          ]
+        },
+        {
+          "heading": "7. Cookies und Analyse",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Unsere Website kann Cookies und vergleichbare Technologien verwenden, die für den Betrieb der Website erforderlich sind oder – soweit eingesetzt und erforderlich – der Analyse und Verbesserung unseres Angebots dienen."
+            },
+            {
+              "type": "p",
+              "text": "Über zusätzliche Analyse- oder Marketingtechnologien informieren wir gegebenenfalls gesondert."
+            }
+          ]
+        },
+        {
+          "heading": "8. Aufbewahrung",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Personendaten werden nur so lange aufbewahrt, wie dies für die jeweiligen Zwecke erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen."
+            }
+          ]
+        },
+        {
+          "heading": "9. Rechte betroffener Personen",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Betroffene Personen können im Rahmen des anwendbaren Datenschutzrechts insbesondere Auskunft über ihre bearbeiteten Personendaten verlangen und gegebenenfalls deren Berichtigung oder Löschung verlangen."
+            },
+            {
+              "type": "p",
+              "text": "Anfragen können an info@drink-cafete.ch gerichtet werden."
+            }
+          ]
+        },
+        {
+          "heading": "10. Änderungen",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Wir können diese Datenschutzerklärung anpassen, wenn sich unsere Datenbearbeitung oder die rechtlichen Anforderungen ändern."
+            }
+          ]
         }
-      ]
+      ],
+      "updated": "Stand: September 2026"
     },
     "returns": {
-      "title": "Widerruf und Rückgabe",
+      "title": "Rückgabe & Widerruf",
       "sections": [
         {
-          "heading": "Rückgaberecht",
-          "body": "Du kannst ungeöffnete Ware innerhalb von 14 Tagen nach Erhalt zurückgeben. Melde die Rückgabe vorher kurz per E-Mail an."
+          "heading": "Kein allgemeines Widerrufsrecht",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Das Schweizer Recht sieht bei gewöhnlichen Onlinekäufen kein allgemeines gesetzliches Widerrufsrecht vor."
+            },
+            {
+              "type": "note",
+              "text": "Quelle: Staatssekretariat für Wirtschaft (SECO)"
+            },
+            {
+              "type": "p",
+              "text": "Bestellungen über unseren Onlineshop sind daher grundsätzlich verbindlich. Ein freiwilliges allgemeines Rückgabe- oder Umtauschrecht für korrekt gelieferte Lebensmittel und Getränke wird nicht eingeräumt."
+            }
+          ]
         },
         {
-          "heading": "Lebensmittel",
-          "body": "Geöffnete Flaschen können wir aus hygienischen Gründen nicht zurücknehmen."
-        },
-        {
-          "heading": "Beschädigte Sendung",
-          "body": "Kommt eine Flasche beschädigt an, schicke uns ein Foto — wir ersetzen sie oder erstatten den Betrag, ohne Rücksendung."
-        },
-        {
-          "heading": "Rückerstattung",
-          "body": "Die Rückerstattung erfolgt über das ursprüngliche Zahlungsmittel, in der Regel innerhalb von zehn Arbeitstagen nach Eingang der Rückgabe."
+          "heading": "Beschädigte oder falsche Lieferung",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Ist eine Lieferung beschädigt, fehlerhaft oder wurde ein falsches Produkt geliefert, kontaktiere uns bitte möglichst rasch unter:"
+            },
+            {
+              "type": "p",
+              "text": "info@drink-cafete.ch"
+            },
+            {
+              "type": "p",
+              "text": "Bitte gib deine Bestellnummer an und sende bei sichtbaren Schäden nach Möglichkeit ein Foto mit."
+            },
+            {
+              "type": "p",
+              "text": "Wir prüfen den Fall und sorgen bei berechtigter Beanstandung für eine angemessene Lösung."
+            },
+            {
+              "type": "p",
+              "text": "Die gesetzlichen Rechte bei mangelhafter Ware bleiben vorbehalten."
+            }
+          ]
         }
-      ]
+      ],
+      "signature": [
+        "Fine & Bold Taste Specialties KIG",
+        "Neugasse 33",
+        "8005 Zürich",
+        "Schweiz"
+      ],
+      "updated": "Stand: September 2026"
     }
   },
   "notFound": {
@@ -391,7 +675,7 @@
     "imprint": "Impressum",
     "terms": "AGB",
     "privacy": "Datenschutz",
-    "returns": "Widerruf",
+    "returns": "Rückgabe",
     "newsletterHeading": "Bleib auf dem Laufenden",
     "newsletterText": "Launch, Verfügbarkeit und Events — ein paar Mails pro Jahr, kein Spam.",
     "newsletterPlaceholder": "deine@email.ch",
@@ -443,7 +727,7 @@
     "imprint": "Impressum von CAFÉTÉ — Anbieterkennzeichnung, Kontakt und rechtliche Angaben.",
     "terms": "Allgemeine Geschäftsbedingungen für Bestellungen im CAFÉTÉ Onlineshop: Preise, Lieferung, Zahlung und Gewährleistung.",
     "privacy": "Datenschutzerklärung von CAFÉTÉ — welche Daten wir bearbeiten, zu welchem Zweck, und deine Rechte nach revDSG.",
-    "returns": "Widerruf und Rückgabe bei CAFÉTÉ: Rückgaberecht, beschädigte Sendungen und Rückerstattung.",
+    "returns": "Rückgabe und Widerruf bei CAFÉTÉ: kein allgemeines Widerrufsrecht nach Schweizer Recht — und wie wir beschädigte oder falsch gelieferte Ware lösen.",
     "portraits": "Die andere Hälfte der Geschichte — jeden Monat ein Porträt von Menschen und Projekten, die sonst wenig Raum bekommen. Von CAFÉTÉ.",
     "discover": "CAFÉTÉ in dreissig Sekunden: das prickelnde Erfrischungsgetränk aus der Kaffeefrucht — und direkt weiter in den Shop."
   },

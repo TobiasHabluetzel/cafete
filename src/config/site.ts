@@ -31,11 +31,13 @@ export const site = {
   /**
    * "Ein Produkt von" — see docs/cafete-content-pack.md §9.
    *
-   * `legalName` supplied by the owner on 2026-08-27 as "Fine & Bold Taste
-   * Specialties KIG". Reproduced verbatim: it goes in the Impressum, so it must
-   * not be silently "corrected" — but note Swiss legal forms are AG, GmbH and
-   * KlG (Kollektivgesellschaft), so "KIG" may be a capital-I/lowercase-l mix-up.
-   * Confirm against the commercial register before publishing.
+   * `legalName` reproduced verbatim from the owner's own Impressum and AGB, which
+   * both spell it "Fine & Bold Taste Specialties KIG" (supplied 2026-08-27, sent
+   * again unchanged with the final legal texts on 2026-09-16). Swiss legal forms
+   * are AG, GmbH and KlG (Kollektivgesellschaft), so "KIG" could be a
+   * capital-I/lowercase-l mix-up — but it has now been supplied identically
+   * twice, so it stands as given. Never silently "correct" it: it is the
+   * contracting party's name on binding documents.
    */
   producer: {
     legalName: "Fine & Bold Taste Specialties KIG",
@@ -43,11 +45,17 @@ export const site = {
     city: "8005 Zürich",
     country: "Schweiz",
   },
-  /** "Abgefüllt von". */
+  /**
+   * "Abfüllung". Four address lines because that is how the owner's Impressum
+   * sets it out: the building name is its own line, and the postcode carries no
+   * "CH-" prefix now that the country is spelled out.
+   */
   bottler: {
     name: "Creative Food and Beverage Company AG",
-    street: "Alte Brauerei Villa, Gurtenbrauerei 14",
-    city: "CH-3084 Wabern",
+    building: "Alte Brauerei Villa",
+    street: "Gurtenbrauerei 14",
+    city: "3084 Wabern",
+    country: "Schweiz",
   },
 } as const;
 

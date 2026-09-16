@@ -54,8 +54,10 @@ export default async function ContactPage({ params }: LocaleParams) {
             <h2 className="label-caps text-sunset-ink">{t("bottlerLabel")}</h2>
             <address className="text-charcoal/80 mt-3 space-y-1 not-italic">
               <p className="font-semibold">{site.bottler.name}</p>
+              <p>{site.bottler.building}</p>
               <p>{site.bottler.street}</p>
               <p>{site.bottler.city}</p>
+              <p>{site.bottler.country}</p>
             </address>
           </div>
         </div>

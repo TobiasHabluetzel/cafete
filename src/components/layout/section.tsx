@@ -117,21 +117,9 @@ export function PageHeader({
   );
 }
 
-/** Yellow-bordered notice used to flag placeholder legal text. */
-export function PlaceholderNotice({
-  title,
-  children,
-}: {
-  title: ReactNode;
-  children: ReactNode;
-}) {
-  return (
-    <div
-      role="note"
-      className="border-cherry-deep/30 bg-gold/25 text-charcoal rounded-lg border-l-4 p-5"
-    >
-      <p className="font-display text-base font-extrabold">{title}</p>
-      <p className="mt-1.5 text-sm leading-relaxed">{children}</p>
-    </div>
-  );
-}
+/*
+ * `PlaceholderNotice` lived here — a yellow-bordered banner warning that a legal
+ * text was not yet binding. All four legal pages carry the owner's reviewed texts
+ * as of 2026-09-16, so it has no callers and is gone. Recover it from git history
+ * if a page ever needs that warning again.
+ */
