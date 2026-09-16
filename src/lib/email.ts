@@ -1,5 +1,7 @@
 import "server-only";
 
+import { promises as dns } from "node:dns";
+
 import nodemailer from "nodemailer";
 
 import { site } from "@/config/site";
@@ -112,6 +114,36 @@ async function send({
 }
 
 /**
+ * Resolve the SMTP host to one IPv4 address.
+ *
+ * nodemailer does its own DNS work: it calls `resolve4` and `resolve6`, glues the
+ * two lists together and then picks an address **at random** (`formatDNSValue` in
+ * `nodemailer/dist/esm/shared/index.js`). Railway's containers have an IPv6
+ * address on the interface — so nodemailer believes IPv6 is usable — but no IPv6
+ * route off the box. `mail.infomaniak.com` publishes both, so roughly every other
+ * send drew the AAAA record and died with `ENETUNREACH` before a single SMTP byte
+ * moved. Intermittent, which is exactly why it first looked like a TLS stall.
+ *
+ * Handing nodemailer a literal address makes it skip its own lookup, so the
+ * address family stops being a coin flip. `servername` then has to be passed
+ * explicitly, because nodemailer only infers it from `host` when that is not an
+ * IP — without it there is no SNI and no certificate hostname to check against.
+ *
+ * `NODE_OPTIONS=--dns-result-order=ipv4first` would not have helped: that changes
+ * `dns.lookup`, which nodemailer never calls.
+ */
+async function ipv4Endpoint(host: string) {
+  try {
+    const [address] = await dns.resolve4(host);
+    if (address) return { host: address, servername: host };
+  } catch {
+    // Not fatal. Fall back to the hostname and let nodemailer resolve it; a
+    // random pick that might work beats refusing to try at all.
+  }
+  return { host, servername: undefined };
+}
+
+/**
  * A fresh transport per send. These are a handful of messages a day, so pooling
  * buys nothing, and a long-lived connection in a container that may be paused
  * between requests is more likely to be stale than useful.
@@ -136,9 +168,13 @@ async function sendViaSmtp({
     return { ok: false, reason: "send-failed", via: "smtp", detail: `bad SMTP_PORT` };
   }
 
+  const endpoint = await ipv4Endpoint(host as string);
+
   try {
     const transport = nodemailer.createTransport({
-      host,
+      host: endpoint.host,
+      // Only set when `host` is a literal address — see `ipv4Endpoint`.
+      ...(endpoint.servername ? { servername: endpoint.servername } : {}),
       port,
       // 465 is implicit TLS; 587 starts plaintext and upgrades via STARTTLS.
       secure: port === 465,
@@ -179,7 +215,7 @@ async function sendViaSmtp({
       ok: false,
       reason: "send-failed",
       via: "smtp",
-      detail: `${error instanceof Error ? error.message : String(error)} (host=${host} port=${port} user=${user} from=${from} to=${to})`,
+      detail: `${error instanceof Error ? error.message : String(error)} (host=${host} addr=${endpoint.host} port=${port} user=${user} from=${from} to=${to})`,
     };
   }
 }
