@@ -1,5 +1,7 @@
 import type { StaticImageData } from "next/image";
 
+import matyas from "../../public/portrait-matyas.jpg";
+
 /**
  * "Die andere Hälfte der Geschichte" — one portrait per calendar month.
  *
@@ -84,7 +86,43 @@ export type Portrait = {
  * added in any order.
  */
 export const portraits: Portrait[] = [
-  // Matyas lands here once the portrait photo, interview video and text arrive.
+  {
+    slug: "matyas-sagi-kiss",
+    /*
+     * Deliberately covers September and October. Nothing special is needed for
+     * that: rotation is "newest published wins", so with no October entry this
+     * stays current until November's portrait is added. `monthLabel` only
+     * changes how the archive card reads once it gets there.
+     */
+    month: "2026-09",
+    monthLabel: {
+      de: "September – Oktober 2026",
+      en: "September – October 2026",
+    },
+    image: matyas,
+    imageAlt: {
+      de: "Matyas Sagi-Kiss sitzt lächelnd in seinem Elektrorollstuhl auf einem sonnigen Platz unter Bäumen. Links neben ihm sitzt sein schwarzer Assistenzhund an der Leine.",
+      en: "Matyas Sagi-Kiss sitting and smiling in his electric wheelchair on a sunny square under trees. His black assistance dog sits on a lead to his left.",
+    },
+    // `video`, `fullVideo` and `transcript` are filled in once the interview is
+    // cut and uploaded. The page simply omits those sections until then.
+    de: {
+      title: "Matyas – Die andere Hälfte der Barrierefreiheit",
+      lead: "Matyas Sagi-Kiss lebt im Zollhaus. Barrierefreiheit prägt seinen Alltag und ist ihm ein wichtiges Anliegen.",
+      paragraphs: [
+        "Im Monatsporträt erzählt er, wo ihm im Alltag noch Barrieren begegnen und was aus seiner Sicht verbessert werden sollte.",
+        "Mit viel Charme erzählt Matyas aus seinem spannenden Alltag und zeigt, welche Rolle Barrierefreiheit dabei spielt. So ermöglicht er uns einen Perspektivenwechsel.",
+      ],
+    },
+    en: {
+      title: "Matyas – The other half of accessibility",
+      lead: "Matyas Sagi-Kiss lives at the Zollhaus. Accessibility shapes his everyday life, and it matters to him.",
+      paragraphs: [
+        "In this month's portrait he talks about the barriers he still runs into day to day, and what he thinks should change.",
+        "Matyas describes his eventful everyday life with a lot of charm, and shows the part accessibility plays in it — offering us a change of perspective.",
+      ],
+    },
+  },
 ];
 
 const monthKey = (date: Date) =>

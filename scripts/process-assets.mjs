@@ -383,6 +383,29 @@ await photo({
 // which is why they need `sharp` rather than a plain copy. Cropped to 4:5 from
 // the top so the head and torso survive and the legs are trimmed.
 // Per Tobias: 009 is Kareem, 007 is Hannes.
+/*
+ * Monatsporträt subjects.
+ *
+ * Matyas arrived as a phone screenshot of the photo rather than the photo
+ * itself: 837x2048 with letterbox bars top and bottom and an Android navigation
+ * bar below. The bars are pure black, so the picture was located by finding the
+ * first and last rows with any brightness — 396 to 1651 — and the region below
+ * is expressed as fractions of the source so it survives a re-export at another
+ * size.
+ *
+ * 837px wide is under what a full-width hero wants on a retina screen, and it
+ * has already been through WhatsApp's compressor twice. Ask for the original
+ * file and re-run this; nothing else needs to change.
+ */
+console.log("\nPortrait subjects:");
+await photo({
+  src: s("portraits/matyas.jpeg"),
+  out: "portrait-matyas.jpg",
+  region: { left: 0, top: 396 / 2048, width: 1, height: (1651 - 396) / 2048 },
+  width: 1200,
+  quality: 86,
+});
+
 console.log("\nFounder portraits:");
 await photo({
   src: s("Kareem_F_009.jpeg", "Kareem_F_009 2.jpeg"),
