@@ -752,6 +752,8 @@
     "readMore": "Read the portrait",
     "backToOverview": "All monthly portraits",
     "videoHeading": "The conversation",
-    "captionsHint": "Subtitles can be switched on in the player."
+    "captionsHint": "Subtitles can be switched on in the player.",
+    "fullVideoHeading": "The full conversation",
+    "transcriptHeading": "Read the conversation"
   }
 }

@@ -4,7 +4,12 @@ import { getTranslations } from "next-intl/server";
 import { ctaClass } from "@/components/brand/cta-button";
 import { CherryMark } from "@/components/brand/sticker";
 import { PageHeader, Section, SectionHeader } from "@/components/layout/section";
-import { archivedPortraits, currentPortrait, portraitText } from "@/content/portraits";
+import {
+  archivedPortraits,
+  currentPortrait,
+  portraitMonthLabel,
+  portraitText,
+} from "@/content/portraits";
 import { Link } from "@/i18n/navigation";
 import {
   createMetadata,
@@ -112,7 +117,7 @@ export default async function PortraitsPage({ params }: LocaleParams) {
                       className="border-ink/20 aspect-[4/3] w-full rounded-md border object-cover"
                     />
                   ) : null}
-                  <p className="label-caps text-sunset-ink mt-4">{portrait.month}</p>
+                  <p className="label-caps text-sunset-ink mt-4">{portraitMonthLabel(portrait, locale)}</p>
                   <h3 className="text-h3 mt-2">{text.title}</h3>
                   <p className="text-charcoal/70 mt-2 text-sm leading-relaxed">{text.lead}</p>
                   <Link

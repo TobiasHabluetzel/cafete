@@ -22,8 +22,30 @@ export type PortraitCaption = {
   srclang: string;
   /** Shown in the player's subtitle menu. */
   label: string;
-  /** Path to a WebVTT file. */
+  /**
+   * Path to a WebVTT file, served from our own `/public`.
+   *
+   * Keep these same-origin even when the video itself is not. A `<track>` loaded
+   * cross-origin needs CORS headers *and* `crossorigin` on the `<video>`, and
+   * silently shows no subtitles when either is missing. The files are a few kB,
+   * so there is nothing to gain by putting them on the video host.
+   */
   src: string;
+};
+
+export type PortraitVideo = {
+  /**
+   * Absolute URL to an MP4 on object storage — never a path inside this repo.
+   *
+   * Two things the host must do, or a long interview is unusable: answer HTTP
+   * Range requests, without which the player cannot seek, and serve a file
+   * written with `-movflags +faststart`, without which playback waits for the
+   * whole download. Google Drive satisfies neither and cannot be used here.
+   */
+  src: string;
+  /** e.g. "4 Min." — sets expectations before anyone commits to pressing play. */
+  duration?: Record<string, string>;
+  captions?: PortraitCaption[];
 };
 
 export type Portrait = {
@@ -31,11 +53,28 @@ export type Portrait = {
   slug: string;
   /** "YYYY-MM" — sorts lexicographically, which is why it is a string. */
   month: string;
+  /**
+   * Overrides the month shown on archive cards, e.g. "September – Oktober 2026"
+   * for a portrait that deliberately covers two months. Rotation still runs off
+   * `month` alone: a portrait stays current until a newer one is published, so
+   * spanning two months needs no entry for the second one.
+   */
+  monthLabel?: Record<string, string>;
   image?: StaticImageData;
   imageAlt?: Record<string, string>;
-  /** Local path under /public or an absolute URL if hosted elsewhere. */
-  video?: string;
-  captions?: PortraitCaption[];
+  /** The short cut, played inline. This is what most visitors will watch. */
+  video?: PortraitVideo;
+  /** The full interview, offered under the short cut for anyone who wants it. */
+  fullVideo?: PortraitVideo;
+  /**
+   * The conversation as text, one string per paragraph, per locale.
+   *
+   * Not optional in spirit. An hour of video is invisible to search engines and
+   * useless to anyone who cannot or would rather not watch it — and the first
+   * portrait is about accessibility, so shipping it without one would undercut
+   * the subject.
+   */
+  transcript?: Record<string, string[]>;
   de: PortraitText;
   en: PortraitText;
 };
@@ -73,4 +112,24 @@ export function portraitBySlug(slug: string): Portrait | undefined {
 
 export function portraitText(portrait: Portrait, locale: string): PortraitText {
   return locale === "en" ? portrait.en : portrait.de;
+}
+
+/**
+ * How the month reads on an archive card: "September 2026", not "2026-09".
+ *
+ * `monthLabel` wins when set, which is how a portrait covering two months names
+ * both. Falls back to the raw key if the month cannot be parsed, so a typo shows
+ * up rather than throwing.
+ */
+export function portraitMonthLabel(portrait: Portrait, locale: string): string {
+  const override = portrait.monthLabel?.[locale];
+  if (override) return override;
+
+  const [year, month] = portrait.month.split("-").map(Number);
+  if (!year || !month) return portrait.month;
+
+  return new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "de-CH", {
+    month: "long",
+    year: "numeric",
+  }).format(new Date(Date.UTC(year, month - 1, 1)));
 }

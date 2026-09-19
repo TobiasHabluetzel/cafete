@@ -5,6 +5,7 @@ import { getTranslations } from "next-intl/server";
 
 import { ctaClass } from "@/components/brand/cta-button";
 import { PageHeader, Section } from "@/components/layout/section";
+import { hasCaptions, PortraitPlayer } from "@/components/portraits/portrait-player";
 import { JsonLd } from "@/components/seo/json-ld";
 import { site } from "@/config/site";
 import { portraitBySlug, portraits, portraitText } from "@/content/portraits";
@@ -99,39 +100,77 @@ export default async function PortraitPage({ params }: Props) {
         </div>
       </Section>
 
-      {portrait.video ? (
+      {portrait.video || portrait.fullVideo ? (
         <Section tone="night">
           <div className="mx-auto max-w-3xl">
             <h2 className="text-h2 text-gold">{t("videoHeading")}</h2>
+
+            {portrait.video ? (
+              <PortraitPlayer
+                video={portrait.video}
+                poster={portrait.image?.src}
+                locale={locale}
+                /* The short cut is the one people actually watch, so its metadata
+                   may load with the page. */
+                preload="metadata"
+                className="mt-6"
+              />
+            ) : null}
+
             {/*
-              * No autoplay, native controls, and the portrait photo as the poster
-              * so the frame is a face rather than a black box. `preload="metadata"`
-              * keeps an interview-length file off the wire until someone presses
-              * play. Caption tracks appear in the player's own subtitle menu.
+              * The full interview runs about an hour. It sits below the short cut
+              * with `preload="none"`, so it costs a visitor nothing at all unless
+              * they choose it — no metadata request, no bytes.
               */}
-            <video
-              controls
-              preload="metadata"
-              playsInline
-              poster={portrait.image?.src}
-              className="border-ink/80 bg-charcoal mt-6 w-full rounded-lg border-2 shadow-[6px_6px_0_rgba(0,0,0,0.45)]"
-            >
-              <source src={portrait.video} type="video/mp4" />
-              {portrait.captions?.map((caption) => (
-                <track
-                  key={caption.srclang}
-                  kind="captions"
-                  src={caption.src}
-                  srcLang={caption.srclang}
-                  label={caption.label}
-                  default={caption.srclang === locale}
+            {portrait.fullVideo ? (
+              <div className="mt-10">
+                <h3 className="text-h3 text-cream">
+                  {t("fullVideoHeading")}
+                  {portrait.fullVideo.duration?.[locale] ? (
+                    <span className="text-cream/55 ml-2 text-base font-normal">
+                      {portrait.fullVideo.duration[locale]}
+                    </span>
+                  ) : null}
+                </h3>
+                <PortraitPlayer
+                  video={portrait.fullVideo}
+                  poster={portrait.image?.src}
+                  locale={locale}
+                  preload="none"
+                  className="mt-4"
                 />
-              ))}
-            </video>
-            {portrait.captions && portrait.captions.length > 0 ? (
-              <p className="text-cream/60 mt-3 text-sm">{t("captionsHint")}</p>
+              </div>
+            ) : null}
+
+            {hasCaptions(portrait.video) || hasCaptions(portrait.fullVideo) ? (
+              <p className="text-cream/60 mt-4 text-sm">{t("captionsHint")}</p>
             ) : null}
           </div>
+        </Section>
+      ) : null}
+
+      {/*
+        * The conversation as text. Collapsed so an hour of transcript does not
+        * bury the page, but rendered in the markup rather than fetched on demand,
+        * so search engines and screen readers still get all of it.
+        */}
+      {portrait.transcript?.[locale]?.length ? (
+        <Section tone="cream">
+          <details className="border-charcoal/15 mx-auto max-w-3xl rounded-lg border-2 bg-white/60 p-6">
+            <summary className="font-display cursor-pointer text-lg font-extrabold">
+              {t("transcriptHeading")}
+            </summary>
+            <div className="mt-5">
+              {portrait.transcript[locale].map((paragraph) => (
+                <p
+                  key={paragraph}
+                  className="text-charcoal/80 mb-4 leading-relaxed"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </details>
         </Section>
       ) : null}
 

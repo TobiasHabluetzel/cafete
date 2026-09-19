@@ -752,6 +752,8 @@
     "readMore": "Porträt lesen",
     "backToOverview": "Alle Monatsporträts",
     "videoHeading": "Das Gespräch",
-    "captionsHint": "Untertitel lassen sich im Player zuschalten."
+    "captionsHint": "Untertitel lassen sich im Player zuschalten.",
+    "fullVideoHeading": "Das ganze Gespräch",
+    "transcriptHeading": "Gespräch zum Nachlesen"
   }
 }
