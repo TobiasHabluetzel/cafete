@@ -754,6 +754,7 @@
     "videoHeading": "Das Gespräch",
     "captionsHint": "Untertitel lassen sich im Player zuschalten.",
     "fullVideoHeading": "Das ganze Gespräch",
-    "transcriptHeading": "Gespräch zum Nachlesen"
+    "transcriptHeading": "Gespräch zum Nachlesen",
+    "youtubeConsent": "Video abspielen – lädt YouTube"
   }
 }

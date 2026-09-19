@@ -103,13 +103,24 @@ export default async function PortraitPage({ params }: Props) {
       {portrait.video || portrait.fullVideo ? (
         <Section tone="night">
           <div className="mx-auto max-w-3xl">
-            <h2 className="text-h2 text-gold">{t("videoHeading")}</h2>
+            {/* With only one video there is nothing to distinguish it from, so
+                its length goes on the section heading and the "Das ganze
+                Gespräch" sub-heading below is dropped as redundant. */}
+            <h2 className="text-h2 text-gold">
+              {t("videoHeading")}
+              {!portrait.video && portrait.fullVideo?.duration?.[locale] ? (
+                <span className="text-cream/55 ml-3 text-base font-normal">
+                  {portrait.fullVideo.duration[locale]}
+                </span>
+              ) : null}
+            </h2>
 
             {portrait.video ? (
               <PortraitPlayer
                 video={portrait.video}
                 poster={portrait.image?.src}
                 locale={locale}
+                title={text.title}
                 /* The short cut is the one people actually watch, so its metadata
                    may load with the page. */
                 preload="metadata"
@@ -123,21 +134,24 @@ export default async function PortraitPage({ params }: Props) {
               * they choose it — no metadata request, no bytes.
               */}
             {portrait.fullVideo ? (
-              <div className="mt-10">
-                <h3 className="text-h3 text-cream">
-                  {t("fullVideoHeading")}
-                  {portrait.fullVideo.duration?.[locale] ? (
-                    <span className="text-cream/55 ml-2 text-base font-normal">
-                      {portrait.fullVideo.duration[locale]}
-                    </span>
-                  ) : null}
-                </h3>
+              <div className={portrait.video ? "mt-10" : ""}>
+                {portrait.video ? (
+                  <h3 className="text-h3 text-cream">
+                    {t("fullVideoHeading")}
+                    {portrait.fullVideo.duration?.[locale] ? (
+                      <span className="text-cream/55 ml-2 text-base font-normal">
+                        {portrait.fullVideo.duration[locale]}
+                      </span>
+                    ) : null}
+                  </h3>
+                ) : null}
                 <PortraitPlayer
                   video={portrait.fullVideo}
                   poster={portrait.image?.src}
                   locale={locale}
+                  title={text.title}
                   preload="none"
-                  className="mt-4"
+                  className="mt-6"
                 />
               </div>
             ) : null}

@@ -754,6 +754,7 @@
     "videoHeading": "The conversation",
     "captionsHint": "Subtitles can be switched on in the player.",
     "fullVideoHeading": "The full conversation",
-    "transcriptHeading": "Read the conversation"
+    "transcriptHeading": "Read the conversation",
+    "youtubeConsent": "Play video – loads YouTube"
   }
 }

@@ -35,18 +35,28 @@ export type PortraitCaption = {
   src: string;
 };
 
+/**
+ * Where a portrait's video lives. Exactly one of `src` or `youtubeId`.
+ *
+ * `src` is a self-hosted MP4: no third party, the browser's own controls, nothing
+ * to declare in the privacy policy. The host must answer HTTP Range requests, or
+ * the player cannot seek, and the file must be written with `-movflags
+ * +faststart`, or playback waits for the whole download. Google Drive does
+ * neither and cannot be used. Its weakness is that one file means one quality —
+ * fine for a short cut, poor for an hour on mobile data.
+ *
+ * `youtubeId` is the pragmatic option for a long interview: adaptive streaming,
+ * and automatic captions, which a self-hosted MP4 cannot produce on its own. It
+ * is embedded click-to-load through youtube-nocookie.com, so nothing reaches
+ * Google until the visitor decides to play it.
+ */
 export type PortraitVideo = {
-  /**
-   * Absolute URL to an MP4 on object storage — never a path inside this repo.
-   *
-   * Two things the host must do, or a long interview is unusable: answer HTTP
-   * Range requests, without which the player cannot seek, and serve a file
-   * written with `-movflags +faststart`, without which playback waits for the
-   * whole download. Google Drive satisfies neither and cannot be used here.
-   */
-  src: string;
-  /** e.g. "4 Min." — sets expectations before anyone commits to pressing play. */
+  src?: string;
+  /** The bare ID, e.g. "dQw4w9WgXcQ" — not the whole watch URL. */
+  youtubeId?: string;
+  /** e.g. "58 Min." — sets expectations before anyone commits to pressing play. */
   duration?: Record<string, string>;
+  /** Only used with `src`. A YouTube embed carries its own captions. */
   captions?: PortraitCaption[];
 };
 
@@ -104,8 +114,10 @@ export const portraits: Portrait[] = [
       de: "Matyas Sagi-Kiss sitzt lächelnd in seinem Elektrorollstuhl auf einem sonnigen Platz unter Bäumen. Links neben ihm sitzt sein schwarzer Assistenzhund an der Leine.",
       en: "Matyas Sagi-Kiss sitting and smiling in his electric wheelchair on a sunny square under trees. His black assistance dog sits on a lead to his left.",
     },
-    // `video`, `fullVideo` and `transcript` are filled in once the interview is
-    // cut and uploaded. The page simply omits those sections until then.
+    // Waiting on the YouTube ID. Once it lands this becomes, in one line:
+    //   fullVideo: { youtubeId: "…", duration: { de: "58 Min.", en: "58 min" } },
+    // Verified against a placeholder ID: heading, poster and consent button all
+    // render, and the page contains no reference to YouTube until it is clicked.
     de: {
       title: "Matyas – Die andere Hälfte der Barrierefreiheit",
       lead: "Matyas Sagi-Kiss lebt im Zollhaus. Barrierefreiheit prägt seinen Alltag und ist ihm ein wichtiges Anliegen.",

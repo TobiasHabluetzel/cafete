@@ -1,3 +1,4 @@
+import { YouTubeEmbed } from "@/components/portraits/youtube-embed";
 import type { PortraitVideo } from "@/content/portraits";
 
 /**
@@ -16,6 +17,7 @@ export function PortraitPlayer({
   poster,
   locale,
   preload,
+  title,
   className,
 }: {
   video: PortraitVideo;
@@ -23,8 +25,20 @@ export function PortraitPlayer({
   locale: string;
   /** "none" for the hour-long cut, so it costs nothing until someone asks. */
   preload: "none" | "metadata";
+  /** Used as the iframe title when the video is a YouTube embed. */
+  title: string;
   className?: string;
 }) {
+  if (video.youtubeId) {
+    return (
+      <div className={className}>
+        <YouTubeEmbed id={video.youtubeId} poster={poster} title={title} />
+      </div>
+    );
+  }
+
+  if (!video.src) return null;
+
   return (
     <div className={className}>
       <video
