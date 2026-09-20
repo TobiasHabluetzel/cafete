@@ -14,7 +14,6 @@ const INDEXABLE: { path: StaticPathname; priority: number }[] = [
   { path: "/produkt", priority: 0.9 },
   { path: "/shop", priority: 0.9 },
   { path: "/monatsportraets", priority: 0.8 },
-  { path: "/event", priority: 0.8 },
   { path: "/ueber-uns", priority: 0.7 },
   { path: "/faq", priority: 0.6 },
   { path: "/kontakt", priority: 0.5 },

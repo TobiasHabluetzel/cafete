@@ -2,7 +2,6 @@ import { setRequestLocale } from "next-intl/server";
 
 import { SloganMarquee } from "@/components/brand/marquee";
 import { CoffeeFruit } from "@/components/sections/coffee-fruit";
-import { EventBand } from "@/components/sections/event-band";
 import { Hero } from "@/components/sections/hero";
 import { Pillars } from "@/components/sections/pillars";
 import { ShopTeaser } from "@/components/sections/shop-teaser";
@@ -46,7 +45,6 @@ export default async function HomePage({
       <Story variant="teaser" />
       <ShopTeaser entryPrice={entryPrice} />
       <SloganMarquee />
-      <EventBand />
     </>
   );
 }

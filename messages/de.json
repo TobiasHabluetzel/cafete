@@ -11,7 +11,6 @@
     "product": "Produkt",
     "shop": "Shop",
     "about": "Über uns",
-    "event": "Launch Event",
     "faq": "FAQ",
     "contact": "Kontakt",
     "cart": "Warenkorb",
@@ -27,7 +26,6 @@
     "subtitle": "Das koffeinhaltige Erfrischungsgetränk aus der Kaffeefrucht",
     "slogan": "Fruity. Fizzy. Focus.",
     "ctaPrimary": "Jetzt bestellen",
-    "ctaSecondary": "Launch Event",
     "ctaPrimaryWithPrice": "Jetzt bestellen — ab {price}"
   },
   "badges": {
@@ -129,7 +127,7 @@
     "redirecting": "Weiterleitung zu Stripe …",
     "cartCount": "{count, plural, =0 {Warenkorb leer} =1 {# Artikel} other {# Artikel}}",
     "bottlesTotal": "{count, plural, =1 {# Flasche} other {# Flaschen}} total",
-    "notConfigured": "Der Shop öffnet zum Launch am 19. September 2026. Bis dahin kannst du dich für den Newsletter anmelden.",
+    "notConfigured": "Der Onlineshop ist im Moment nicht verfügbar. Schreib uns — wir melden uns, sobald wieder bestellt werden kann.",
     "error": "Der Checkout konnte nicht gestartet werden. Versuch es später nochmals oder schreib uns an {email}.",
     "securePayment": "Sichere Zahlung mit Karte oder TWINT über Stripe.",
     "perBottle": "{price} pro Flasche",
@@ -137,32 +135,11 @@
     "priceTbd": "Preis folgt",
     "bestValue": "Bester Preis pro Flasche",
     "unavailableLine": "Ein Artikel ist momentan nicht verfügbar. Bitte entferne ihn, um fortzufahren.",
-    "comingSoon": "Erhältlich ab 19. September 2026!",
+    "comingSoon": "In Kürze verfügbar",
     "bestseller": "Bestseller",
     "shippingIncluded": "inkl. Versand",
     "legalNote": "Mit dem Absenden der Bestellung bestätigst du, die <terms>AGB</terms> gelesen zu haben, und erkennst an, dass für korrekt gelieferte Lebensmittel <returns>kein allgemeines Widerrufsrecht</returns> besteht. Wie wir deine Daten bearbeiten, steht in der <privacy>Datenschutzerklärung</privacy>.",
     "stripeTerms": "Es gelten die AGB von CAFÉTÉ. Für korrekt gelieferte Lebensmittel und Getränke besteht kein allgemeines Widerrufsrecht; Ansprüche bei beschädigter oder falsch gelieferter Ware bleiben vorbehalten."
-  },
-  "event": {
-    "label": "Save the date",
-    "title": "CAFÉTÉ Launch Event",
-    "dateLine": "Samstag, 19. September 2026",
-    "timeLine": "13:00 – 17:00 Uhr",
-    "venue": "Restaurant Osso",
-    "address": "Zollstrasse 121, 8005 Zürich",
-    "body": "Wir feiern den Launch von CAFÉTÉ — mit Degustation, den Gründern und der Geschichte hinter der Kaffeefrucht. Der Eintritt ist frei, wir freuen uns über eine kurze Anmeldung.",
-    "addToCalendar": "Zum Kalender hinzufügen",
-    "openMap": "Auf der Karte öffnen",
-    "rsvpTitle": "Anmeldung",
-    "rsvpIntro": "Damit wir genug Flaschen kühl stellen.",
-    "rsvpName": "Name",
-    "rsvpEmail": "E-Mail",
-    "rsvpGuests": "Anzahl Personen",
-    "rsvpMessage": "Nachricht (optional)",
-    "rsvpSubmit": "Anmelden",
-    "rsvpSending": "Wird gesendet …",
-    "rsvpSuccess": "Danke! Deine Anmeldung ist bei uns eingetroffen.",
-    "rsvpError": "Das hat leider nicht funktioniert. Schreib uns direkt an {email} — wir nehmen dich gerne auf die Liste."
   },
   "product": {
     "label": "Sparkling · Naturally energizing",
@@ -213,16 +190,16 @@
   },
   "shop": {
     "title": "Shop",
-    "intro": "Der Onlineshop öffnet zum Launch am 19. September 2026. Melde dich für den Newsletter an und du erfährst es als Erste oder Erster.",
+    "intro": "Der Onlineshop ist im Moment nicht geöffnet. Melde dich für den Newsletter an und du erfährst es als Erste oder Erster.",
     "packHeading": "Packungsgrössen",
     "packBody": "CAFÉTÉ gibt es im 6er-, 12er- und 24er-Pack.",
-    "notifyCta": "Zum Launch Event",
+    "notifyCta": "Kontakt aufnehmen",
     "priceTbd": "Preis folgt",
     "entryPriceLine": "Einstiegspreis ab {price} für das 6er-Pack."
   },
   "cart": {
     "title": "Warenkorb",
-    "empty": "Dein Warenkorb ist noch leer. Der Shop öffnet zum Launch am 19. September 2026.",
+    "empty": "Dein Warenkorb ist noch leer.",
     "continue": "Weiter zum Shop"
   },
   "order": {
@@ -282,9 +259,7 @@
     "intro": "Fragen zum Produkt, Interesse als Händler oder Gastronomiebetrieb, oder einfach Lust, Hallo zu sagen — wir antworten gerne.",
     "emailLabel": "E-Mail",
     "producerLabel": "Ein Produkt von",
-    "bottlerLabel": "Abgefüllt von",
-    "eventLabel": "Trefft uns",
-    "eventValue": "Am Launch Event vom 19. September 2026 im Restaurant Osso, Zürich."
+    "bottlerLabel": "Abgefüllt von"
   },
   "legal": {
     "germanBinding": "Verbindlich ist die deutsche Fassung.",
@@ -720,9 +695,8 @@
   "pageMeta": {
     "home": "CAFÉTÉ ist das prickelnde Erfrischungsgetränk aus der Kaffeefrucht: fruchtig, natürlich koffeinhaltig und mit über 50 % weniger Zucker. Entwickelt in der Schweiz.",
     "product": "Alle Fakten zu CAFÉTÉ: Zutaten, Nährwerte, Koffein und Geschmack. 33-cl-Glasflasche mit echtem Aufguss aus der Kaffeekirsche — kein Extrakt, kein Aroma.",
-    "shop": "CAFÉTÉ im 6er-, 12er- und 24er-Pack bestellen. Preise inklusive Versand innerhalb der Schweiz. Erhältlich ab dem 19. September 2026.",
+    "shop": "CAFÉTÉ im 6er-, 12er- und 24er-Pack bestellen. Preise inklusive Versand innerhalb der Schweiz.",
     "cart": "Dein Warenkorb bei CAFÉTÉ — prüfe deine Packungsgrössen und gehe zur sicheren Kasse mit Karte oder TWINT.",
-    "event": "CAFÉTÉ Launch Event am Samstag, 19. September 2026, 13–17 Uhr im Restaurant Osso in Zürich. Degustation, Gründer und Anmeldung.",
     "faq": "Häufige Fragen zu CAFÉTÉ: Koffein, Zucker, Zutaten, Lagerung, Versand und Rückgabe — kurz und konkret beantwortet.",
     "contact": "Kontakt zu CAFÉTÉ: Fragen zum Produkt, Anfragen von Händlern und Gastronomie, oder einfach Hallo sagen.",
     "about": "Wie aus einer Handvoll Kaffeefrüchten CAFÉTÉ wurde — die Geschichte, die Gründer Kareem und Hannes und die Vision hinter der Kaffeefrucht.",

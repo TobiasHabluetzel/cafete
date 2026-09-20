@@ -80,19 +80,11 @@ export function Hero({ entryPrice }: { entryPrice: string | null }) {
             {t("subtitle")}
           </h1>
 
+          {/* One call to action since the launch event passed on 19 Sept 2026 —
+              the second button pointed at it. */}
           <div className="relative mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
             <Link href="/shop" className={ctaClass({ variant: "gold", size: "lg" })}>
               {entryPrice ? t("ctaPrimaryWithPrice", { price: entryPrice }) : t("ctaPrimary")}
-            </Link>
-            <Link
-              href="/event"
-              className={ctaClass({
-                variant: "outline",
-                size: "lg",
-                className: "text-cream hover:bg-cream/15",
-              })}
-            >
-              {t("ctaSecondary")}
             </Link>
           </div>
 

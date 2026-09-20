@@ -74,6 +74,21 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
+  /*
+   * The launch event happened on 19 September 2026 and its page is gone, but the
+   * URL was on social posts and in the RSVP confirmations, so it redirects to the
+   * homepage rather than 404ing on anyone who follows an old link.
+   *
+   * 307 rather than 308 for the same reason as above: if a recap page ever takes
+   * that address, a permanently cached redirect would keep people from reaching
+   * it. Matches `/de/event` and `/en/event`, which share a slug.
+   */
+  if (/^\/(de|en)\/event\/?$/.test(pathname)) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/${pathname.split("/")[1]}`;
+    return NextResponse.redirect(url);
+  }
+
   return intl(request);
 }
 

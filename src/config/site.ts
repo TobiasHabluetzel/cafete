@@ -59,14 +59,13 @@ export const site = {
   },
 } as const;
 
-export const launchEvent = {
-  /** Sat 19 Sept 2026, 13:00–17:00, Europe/Zurich. */
-  start: "2026-09-19T13:00:00+02:00",
-  end: "2026-09-19T17:00:00+02:00",
-  venue: "Restaurant Osso",
-  street: "Zollstrasse 121",
-  city: "8005 Zürich",
-} as const;
+/*
+ * `launchEvent` lived here — the date, time and venue of the launch on
+ * 19 September 2026 (Restaurant Osso, Zollstrasse 121, Zürich). It fed the event
+ * page, the homepage band, the calendar download, the Event JSON-LD and the RSVP
+ * notification; all of those went when the event did, leaving it unused. Recover
+ * it from git history if a second event ever needs the same scaffolding.
+ */
 
 /**
  * Pack sizes. `stripePriceEnv` names the env var holding the Stripe Price ID,
@@ -106,7 +105,6 @@ export const mainNav: NavItem[] = [
   { href: "/shop", labelKey: "shop" },
   { href: "/ueber-uns", labelKey: "about" },
   { href: "/monatsportraets", labelKey: "portraits" },
-  { href: "/event", labelKey: "event" },
   { href: "/faq", labelKey: "faq" },
   { href: "/kontakt", labelKey: "contact" },
 ];

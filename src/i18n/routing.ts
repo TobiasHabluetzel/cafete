@@ -18,7 +18,6 @@ export const routing = defineRouting({
     "/produkt": { de: "/produkt", en: "/product" },
     "/shop": { de: "/shop", en: "/shop" },
     "/warenkorb": { de: "/warenkorb", en: "/cart" },
-    "/event": { de: "/event", en: "/event" },
     "/ueber-uns": { de: "/ueber-uns", en: "/about" },
     "/monatsportraets": { de: "/monatsportraets", en: "/monthly-portraits" },
     // The portrait's own URL must survive the move into the archive, so the slug

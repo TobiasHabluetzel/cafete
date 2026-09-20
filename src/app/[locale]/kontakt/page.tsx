@@ -32,12 +32,9 @@ export default async function ContactPage({ params }: LocaleParams) {
               <Mail className="size-5 shrink-0" aria-hidden />
               {site.email}
             </a>
-            <p className="text-charcoal/70 mt-6 text-sm">
-              <span className="label-caps text-charcoal/50 block">
-                {t("eventLabel")}
-              </span>
-              <span className="mt-2 block">{t("eventValue")}</span>
-            </p>
+            {/* A "Trefft uns" line pointing at the launch event used to sit
+                here. The event has passed and there is nothing standing to
+                replace it with, so the card is just the email address. */}
           </div>
 
           <div className="border-charcoal/10 rounded-lg border bg-white/60 p-7">

@@ -99,7 +99,10 @@ export default async function ShopPage({ params }: LocaleParams) {
             <p className="border-sunset text-charcoal/80 mt-8 border-l-4 pl-5 leading-relaxed">
               {tCheckout("notConfigured")}
             </p>
-            <Link href="/event" className={ctaClass({ size: "lg", className: "mt-8" })}>
+            {/* This used to send people to the launch event to be notified.
+                That date has passed, so the newsletter in the footer is the
+                remaining way to hear when something changes. */}
+            <Link href="/kontakt" className={ctaClass({ size: "lg", className: "mt-8" })}>
               {t("notifyCta")}
             </Link>
           </div>
