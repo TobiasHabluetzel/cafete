@@ -114,10 +114,20 @@ export const portraits: Portrait[] = [
       de: "Matyas Sagi-Kiss sitzt lächelnd in seinem Elektrorollstuhl auf einem sonnigen Platz unter Bäumen. Links neben ihm sitzt sein schwarzer Assistenzhund an der Leine.",
       en: "Matyas Sagi-Kiss sitting and smiling in his electric wheelchair on a sunny square under trees. His black assistance dog sits on a lead to his left.",
     },
-    // Waiting on the YouTube ID. Once it lands this becomes, in one line:
-    //   fullVideo: { youtubeId: "…", duration: { de: "58 Min.", en: "58 min" } },
-    // Verified against a placeholder ID: heading, poster and consent button all
-    // render, and the page contains no reference to YouTube until it is clicked.
+    /*
+     * No short cut for now, so this is the only video and the page drops the
+     * "Das ganze Gespräch" sub-heading, putting the length on the section
+     * heading instead.
+     *
+     * 4254 s as reported by YouTube. The track is German ASR
+     * ("Deutsch (automatisch erzeugt)"), so captions are on — worth a read
+     * through in YouTube Studio when there is time, since automatic German
+     * transcription is unreliable with names and with Swiss speech.
+     */
+    fullVideo: {
+      youtubeId: "iaF2jXMdkA0",
+      duration: { de: "1 Std. 11 Min.", en: "1 hr 11 min" },
+    },
     de: {
       title: "Matyas – Die andere Hälfte der Barrierefreiheit",
       lead: "Matyas Sagi-Kiss lebt im Zollhaus. Barrierefreiheit prägt seinen Alltag und ist ihm ein wichtiges Anliegen.",
