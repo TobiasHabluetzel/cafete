@@ -106,6 +106,43 @@ at a time and tidies them off the desktop afterwards, so on any given day some a
 absent, and one gone file must not stop the rest of `public/` being regenerated.
 Every skip is listed at the end of the run, so a mistyped filename still shows up.
 
+## Database (reviews)
+
+Railway Postgres, Drizzle for schema and migrations. One table, `reviews`.
+
+```bash
+npm run db:generate   # after editing src/db/schema.ts
+npm run db:migrate    # apply, with DATABASE_URL set to the PUBLIC proxy URL
+npm run db:studio     # browse
+```
+
+**Migrations are applied by hand, not on container start.** Railway keeps the old
+and new container alive together during a deploy, so a boot-time migration means
+two processes racing, and a failed one becomes a crash loop behind a failing
+healthcheck instead of a readable error. One table and two founders do not need
+that.
+
+Three decisions that are load-bearing:
+
+- **Reviews default to `pending`.** Nothing a stranger submits reaches the site
+  without a founder approving it, which makes spam an inbox problem rather than a
+  public one — and removes any need for takedown flows or cache purges on delete.
+- **Integrity rules live in Postgres**, not only in the route handler: rating
+  1–5, body 10–2000 chars, locale in (de, en), and reply body and timestamp set
+  together or not at all. The handler is one caller among several; a bad row is
+  far harder to find later than a rejected insert is now.
+- **No sessions or tokens table.** Admin magic links are HMAC-signed and carry
+  their own expiry; the session is a signed cookie. Rotating the signing secret
+  invalidates everything, which is the escape hatch if a laptop goes missing.
+
+`DATABASE_URL` unset is supported — `isDatabaseConfigured()` lets the review
+section hide itself, so `next build` and local development work without a
+database.
+
+Schema verified against Postgres 16 before first deploy: all five check
+constraints reject bad input, the status default is `pending`, and the aggregate
+query counts approved rows only.
+
 ## i18n
 
 - Copy lives only in `messages/de.json` and `messages/en.json`.
@@ -128,6 +165,7 @@ See `.env.local.example`. Summary:
 | `STRIPE_WEBHOOK_SECRET` | 2 | From the Stripe webhook endpoint / `stripe listen` |
 | `STRIPE_PRICE_PACK_{6,12,24}` | 2 | Price IDs — never hardcode in source |
 | `RESEND_API_KEY`, `RESEND_FROM` | 2 | Order + RSVP confirmations. **The working transport on Railway** |
+| `DATABASE_URL` | 3 | Postgres for reviews. Unset = review section hidden, not broken |
 | `SMTP_*`, `MAIL_FROM` | 2 | Infomaniak SMTP. Leave unset on Railway — outbound SMTP is blocked |
 
 ## Deploying to Railway
