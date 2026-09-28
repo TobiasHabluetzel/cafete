@@ -73,6 +73,20 @@ export function alternatesFor(pathname: StaticPathname, locale: string): Metadat
 }
 
 /**
+ * A title with the brand appended, the way the document-title template does it —
+ * unless the title already carries the brand.
+ *
+ * Link previews have no template applied, so the brand has to be added by hand
+ * here. The homepage's title *starts* with "CAFÉTÉ", and appending it again gave
+ * every shared link "CAFÉTÉ — Das koffeinhaltige Erfrischungsgetränk aus der
+ * Kaffeefrucht — CAFÉTÉ". Sub-page titles ("Produkt", "Shop") do not contain it
+ * and are unaffected.
+ */
+function brandedTitle(title: string) {
+  return title.includes(site.name) ? title : `${title} — ${site.name}`;
+}
+
+/**
  * Per-page metadata: its own title, its own description, and its canonical and
  * hreflang set. Every page had been inheriting one shared description, which
  * makes them look like near-duplicates to a crawler.
@@ -98,19 +112,16 @@ export function createMetadata({
 
     const title = t(titleKey);
     const description = tMeta(descriptionKey);
+    const shared = brandedTitle(title);
 
     return {
       title,
       description,
       alternates: alternatesFor(pathname, locale),
-      openGraph: buildOpenGraph({
-        title: `${title} — ${site.name}`,
-        description,
-        locale,
-      }),
+      openGraph: buildOpenGraph({ title: shared, description, locale }),
       twitter: {
         card: "summary_large_image" as const,
-        title: `${title} — ${site.name}`,
+        title: shared,
         description,
         images: [OG_IMAGE],
       },
