@@ -36,7 +36,12 @@ export function PackPicker({
   packs,
   prices,
 }: {
-  packs: { bottles: number; labelKey: string; badge?: "bestseller" }[];
+  packs: {
+    bottles: number;
+    labelKey: string;
+    badge?: "bestseller";
+    shippingMinorUnits: number;
+  }[];
   prices: PackPrice[];
 }) {
   const t = useTranslations("checkout");
@@ -126,10 +131,19 @@ export function PackPicker({
                     })}
                   </p>
                   {/* Sits directly under the price rather than in the small print
-                      below the grid, which is where it used to live. */}
+                      below the grid, which is where it used to live. Naming the
+                      amount was the owner's ask: "inkl. Versand" on its own is a
+                      claim, with the figure it is something a buyer can check
+                      against the price. */}
                   <p className="mt-2">
                     <Sticker tone="cream" className="rotate-0 text-xs">
-                      {t("shippingIncluded")}
+                      {t("shippingIncluded", {
+                        amount: formatMoney(
+                          pack.shippingMinorUnits,
+                          price.currency,
+                          locale,
+                        ),
+                      })}
                     </Sticker>
                   </p>
                 </>

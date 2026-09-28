@@ -80,10 +80,28 @@ type PackDefinition = {
   labelKey: string;
   stripePriceEnv: string;
   badge?: "bestseller";
+  /**
+   * The shipping portion already contained in the pack price, in rappen.
+   *
+   * Shown on the card so "inkl. Versand" is checkable rather than a claim — the
+   * owner's ask, 28 Sept: CHF 12 for the 6 and 12-packs, CHF 21 for the 24. It
+   * is *not* charged on top; Stripe bills the pack price as it stands and no
+   * shipping rate is attached. Minor units to match every other amount here,
+   * which all come from Stripe.
+   *
+   * These are quoted figures, not derived ones, so they cannot drift with the
+   * Stripe price on their own. If postage changes, change them here.
+   */
+  shippingMinorUnits: number;
 };
 
 export const packSizes: readonly PackDefinition[] = [
-  { bottles: 6, labelKey: "six", stripePriceEnv: "STRIPE_PRICE_PACK_6" },
+  {
+    bottles: 6,
+    labelKey: "six",
+    stripePriceEnv: "STRIPE_PRICE_PACK_6",
+    shippingMinorUnits: 1200,
+  },
   // `badge` is a marketing call, not data — kept here rather than in Stripe
   // metadata so it needs no dashboard work. Move it to metadata if it starts
   // changing often enough to want editing without a deploy.
@@ -92,8 +110,15 @@ export const packSizes: readonly PackDefinition[] = [
     labelKey: "twelve",
     stripePriceEnv: "STRIPE_PRICE_PACK_12",
     badge: "bestseller",
+    shippingMinorUnits: 1200,
   },
-  { bottles: 24, labelKey: "twentyfour", stripePriceEnv: "STRIPE_PRICE_PACK_24" },
+  {
+    bottles: 24,
+    labelKey: "twentyfour",
+    stripePriceEnv: "STRIPE_PRICE_PACK_24",
+    // Heavier, so a franc more than double the smaller packs' postage.
+    shippingMinorUnits: 2100,
+  },
 ] as const;
 
 export type PackSize = (typeof packSizes)[number];
