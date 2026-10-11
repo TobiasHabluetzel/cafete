@@ -299,66 +299,66 @@ stripe trigger checkout.session.completed
   account set up — see "Connecting Stripe" above.
 - **Phase 3:** SEO/OG images, `hreflang`, sitemap, robots, analytics, a11y pass.
 
-## Status — 24 August 2026
+## Status — 11 October 2026
 
-Live at **https://cafete-production.up.railway.app** (Railway, sandbox Stripe keys).
-Custom domain `drink-cafete.ch` not yet pointed. Launch anchor: **19 September 2026**.
+Live at **https://www.drink-cafete.ch** on Railway, on the real domain with
+live-mode Stripe. The launch event ran on 19 September 2026 and every trace of it
+has been removed from the site.
 
-Done: Phases 0–2. Bilingual marketing site with all routes, real brand assets and
-copy, and a working shop — pack selector → cart → Stripe Checkout → payment →
-thank-you page, verified end to end with a real test payment.
+Working end to end: the bilingual marketing site, the shop (pack picker → cart →
+Stripe Checkout → order confirmation by email), the four legal documents in the
+owner's reviewed versions, the QR landing page with its print-ready codes, and the
+first Monatsporträt with its hour-long interview.
 
-### Owner change round, 24 Aug
+**In progress: comments and star ratings.** The database layer is committed and
+tested; nothing above it is built. See "Reviews" below for where to pick up.
 
-Applied: sugar disclosure now opens from the hero's "Über 50 % weniger Zucker"
-sticker (the standalone dropdown was a misunderstanding and is gone); shortened
-coffee-fruit block; "Cascara aus Brasilien" → "Kaffeefrüchte aus Brasilien";
-story teaser + button with Kareem folded into the Über uns prose at ~20 years;
-"recyclebar" and the whole "Auf dem Etikett" row removed; keywords bolded in the
-product text via `t.rich`; "Die andere Hälfte des Kaffees" no longer on the
-product page; Über uns heading + jar illustration; new Hannes photo; transparent
-packshot on the shop cards; shipping stated as included (FAQ + AGB §2/§3 +
-checkout note); Vision section moved to orange and its duplicated paragraph
-removed from the page header. No new Lieferkonditionen page, as instructed.
+Shipped since the August status, in rough order: the QR lander and print assets,
+real pack photography, the four reviewed legal texts, the move from SMTP to Resend
+after discovering Railway blocks outbound SMTP, the first portrait, removal of the
+launch event, link-preview fixes, and shipping costs named on the pack cards.
 
-Two bugs found while implementing, both fixed:
+### The shop is live
 
-- The vision paragraph rendered **twice** on Über uns — once as the page-header
-  intro and again in its own section.
-- `text-cherry-deep` on an orange background is only **2.1:1**, failing AA. It was
-  labelling the pillars, the event band and the mobile menu. Added
-  `cherry-ink` (#5E0E0A — 5.1:1 on orange, 11.8:1 on cream). Note the cart keeps
-  `cherry-deep` for error text, which is correct on cream.
+The `availability=coming_soon` metadata is off the Stripe Prices, so the packs are
+buyable. Prices are read live from Stripe and nothing about money is hardcoded —
+as of this date CHF 31.80 / 49.80 / 94.80 for 6, 12 and 24 bottles.
 
-Still waiting on the owner:
+Each card names the shipping contained in that price (CHF 12 / 12 / 21). Those
+figures live in `packSizes` in `src/config/site.ts` as quoted values, *not*
+derived from anything, so a Stripe price change cannot move them. They describe a
+portion of the price, not an addition: no Stripe shipping rate is attached.
 
-- **The caffeine figure.** He supplied "So viel wie ein Espresso" with the amount
-  left as "(Menge einfügen)", so the answer ships without the mg value. Adding it
-  is a one-line change. The labelling point stands: espresso-level caffeine in a
-  33 cl bottle is ~200 mg/l, over the 150 mg/l that forces *"Erhöhter
-  Koffeingehalt…"* onto the bottle.
-- **"59 % weniger als Energydrinks" / "20 % weniger als Mate"** are now live in the
-  hero disclosure. Cross-category comparisons, and 20 % is below the 30 % a
-  "reduced" claim needs — still unverified.
-- **The four pillar titles** — no body copy supplied, and "Nachhaltiger Anbau"
-  implies cultivation when the USP is that none happens.
-- **24er-Pack price** — target unknown; a Stripe change, not a code one.
-- **A clean Hannes cutout.** He matched the studio grey (Kareem's backdrop is
-  #818594, graduating #797F8D → #8A8D9C) but the version sent has background
-  remnants on both shoulders and a halo over the scalp, and was never saved to
-  disk.
+Checkout asks for terms acceptance via `consent_collection`, which needs a terms
+of service URL set under Stripe → Settings → Public details. If that is missing
+Stripe rejects the whole session, so `createSession()` retries once without the
+checkbox and logs what to go and set — checkout never dies over a Dashboard
+field. **Unverified whether that URL has actually been set.**
 
-### Shop is deliberately in pre-launch mode
+### Reviews — comments and star ratings (in progress)
 
-All three Prices carry `availability=coming_soon` metadata in Stripe, so the cards
-show **CHF 24.90 / 39.90 / 74.90** with per-bottle figures but render "Demnächst
-verfügbar" instead of add-to-cart, and `/api/checkout` returns 422. This is the
-intended state (confirmed by Tobias, 24 Aug) — **not a bug**.
+Agreed with the owner, 28 September: Railway Postgres, magic-link admin auth, and
+the public section gated until there are a few approved reviews.
 
-To put a pack on sale: delete the `availability` key from that Price in Stripe.
-Effective in seconds, no deploy. Stripe cannot enforce coming-soon itself — a
-flagged Price is valid and Stripe would charge for it — so the server-side check
-in `/api/checkout` is what actually prevents a sale.
+Built: `src/db/` (Drizzle schema and lazy client), `drizzle/0000_*.sql`, the
+`db:generate` / `db:migrate` / `db:studio` scripts. Verified against Postgres 16
+in Docker — all five check constraints reject bad input, status defaults to
+`pending`, and the aggregate counts approved rows only.
+
+**Not yet done, in order:**
+
+1. **Apply the migration.** Needs `railway connect Postgres --tunnel-only` and the
+   localhost URL it prints. The CLI is installed; the login is interactive and has
+   to be done by the owner. Nothing else can proceed until this is done.
+2. Public form, list and aggregate on the product page, hidden under 3 approved.
+3. Magic-link auth and `/admin` — approve, reject, reply.
+4. Spam handling: honeypot, timing check, per-IP rate limit.
+5. `aggregateRating` into the existing Product JSON-LD.
+
+**The Datenschutzerklärung needs a clause before this goes public** — a published
+name, an optional email and a hashed IP are new personal data, and revDSG needs a
+deletion route. Owner-supplied text, like the rest of the legal pages.
+
 
 ### The QR landing page and the `/qr` short URL
 
@@ -410,14 +410,33 @@ revalidates daily, which is ample for a monthly rotation.
 whether it is current or archived, which is why rotation is keyed on the month
 rather than the route. Never change a slug once published.
 
-To add one: append to `portraits`, drop the image and video into `public/` (or set
-`video` to an absolute URL — see below), and add WebVTT caption files.
+To add one: append to `portraits`, drop the photo into `public/` via
+`process-assets.mjs`, and set the video.
 
-**Interview videos should not live in the repo.** The homepage clip is 4.5 MB and
-tolerable. A 3–5 minute interview is 30–60 MB, twelve a year, committed forever
-into git history and into every Docker image, served by Railway with no CDN in
-front. Put them on object storage or a streaming host and set `video` to the
-absolute URL — the component already accepts one.
+**The first portrait is live**: Matyas Sagi-Kiss, published as `2026-09` and
+covering September *and* October. That needs no special handling — rotation is
+"newest published wins", so with no October entry it simply stays current.
+`monthLabel` only changes how the archive card reads.
+
+**A video is either `src` or `youtubeId`, not both.** `src` is a self-hosted MP4:
+no third party, the browser's own controls, nothing to declare in the privacy
+policy — but one file means one quality, which is fine for a short cut and poor
+for an hour on mobile data. The host must answer HTTP Range requests or the
+player cannot seek, and the file needs `-movflags +faststart` or playback waits
+for the whole download. **Google Drive does neither and cannot be used.**
+
+`youtubeId` is the pragmatic choice for a long interview: adaptive streaming, and
+automatic captions, which a self-hosted MP4 cannot produce. It renders
+click-to-load through youtube-nocookie.com — until someone presses play the page
+contains no iframe, no script and no URL to any Google-owned host, so nothing is
+requested and no cookie is set. Verified on the built page.
+
+**Interview videos must not live in the repo** either way. An hour is 500–800 MB,
+twelve a year, committed forever into git history and into every Docker image,
+served by Railway with no CDN in front.
+
+`transcript` is built and unused. It is the one thing that makes an hour of video
+searchable, and on a portrait about accessibility it is not decoration.
 
 ### Going live: DNS and mail (verified 24 Aug)
 
@@ -485,62 +504,71 @@ timeout before falling through.
 interchangeable: Resend may only send from the verified `send.` subdomain, so a
 root-domain `MAIL_FROM` left in place would have every Resend send refused.
 
-### Blocking, in priority order
+### Open, in priority order
 
-1. **The 6-pack Stripe Price is inactive.** Checkout rejects it ("The price
-   specified is inactive"), so the shop hides that pack. Reactivate it, or create a
-   new Price and update `STRIPE_PRICE_PACK_6`. Editing a price in Stripe archives
-   the old one and mints a new ID — the env var must be updated when that happens.
-2. **No order confirmation emails are being sent.** `STRIPE_WEBHOOK_SECRET` and
-   `RESEND_API_KEY` are unset in Railway, so `checkout.session.completed` never
-   reaches us. Orders complete silently. Do this before showing anyone the site.
-3. **Confirm the pack prices.** They were provisional. Because the site reads them
-   live from Stripe, confirming them needs no code change.
-4. **Placeholder legal text** — Impressum, AGB, Datenschutz, Widerruf are all
-   drafts behind a visible warning. Also needs the registered company name + UID.
-5. **Live-mode Stripe.** Live mode is a separate world: recreate the Product and
-   Prices there, get new `price_…` IDs, swap the Railway variables. Until then the
-   public URL accepts test-card orders from anyone who finds it.
+1. **The reviews migration has never been applied.** See above. Everything else
+   in that feature is blocked on it.
+2. **Datenschutz clause for review data**, before any review form is public.
+3. **Matyas portrait follow-ups.** The photo on the page is a WhatsApp screenshot
+   of the photo (837px, already twice-compressed) — ask for the original and
+   re-run `process-assets.mjs`, nothing else changes. No transcript yet, and the
+   `transcript` field is built and waiting. The YouTube auto-captions are German
+   ASR and need a proofread in Studio; names and Swiss speech are where it fails.
+   The video is **public**, not unlisted as suggested — worth confirming Matyas is
+   content to be findable on YouTube rather than only through the site.
+4. **Shipping label format.** The owner asked for "inkl. Versand 12.- CHF"; it
+   ships as "inkl. Versand CHF 12.00" to match the price directly above it on the
+   same card. One line to change to his form, or to "CHF 12.–". Awaiting his call.
+5. **Unverified product claims**, outstanding since August: the caffeine figure
+   ("So viel wie ein Espresso" has no mg) and the 59% / 20% sugar comparisons
+   against energy and mate drinks. The "over 50% less than soft drinks" claim is
+   stated with its comparison and is fine.
+6. **Logo source is 570px.** Header and hero render below 2× on retina. A vector
+   or ≥1500px export fixes it with one script run.
+7. **Shop copy is date-free but passive.** Removing the launch date left strings
+   like `shop.intro` saying what the shop is *not*. What it should say now that it
+   is open is the owner's call.
 
 ### Worth doing, not blocking
 
-- **Enable TWINT** (Settings → Payment methods). It is not currently active, so
-  checkout is card-only. No code change needed — the payment-method list is not
-  hardcoded, precisely so this can be switched on independently.
-- **Trim payment methods.** Klarna, Amazon Pay and Link are on by default;
-  buy-now-pay-later on a CHF 25 soft drink is an odd fit.
-- **Rename the Stripe Products.** They read "6 Cafete" / "12 Cafete", and that text
-  appears on Checkout, the receipt and the thank-you page.
-- **Stripe Checkout branding** (Settings → Branding): set `#FF751F` and the logo so
-  the hosted page looks like the site. Cheapest possible win.
-- **Shipping rate.** `STRIPE_SHIPPING_RATE` is unset, so delivery is currently free.
-- Ask the designer for a **vector or ≥1500px logo** — the source is 570px, so the
-  header and hero render below 2× on retina.
-- **Phase 3** is untouched: OG images, `hreflang`, sitemap, robots, analytics.
+- **Verify TWINT is enabled in live mode** (Settings → Payment methods). Per-mode,
+  so enabling it in the sandbox did not enable it live. No code change needed —
+  the payment-method list is deliberately not hardcoded.
+- **Trim payment methods.** Klarna, Amazon Pay and Link default on; buy-now-pay-later
+  on a CHF 31 soft drink is an odd fit.
+- **Stripe Checkout branding** — set `#FF751F` and the logo so the hosted page
+  matches the site.
+- **Rename the Stripe Products** if they still read "6 Cafete"; that text appears
+  on Checkout, the receipt and the thank-you page.
+- **Rotate the Postgres password.** It was pasted into a chat transcript. The host
+  is private so it is not externally reachable, but rotate before ever enabling
+  Public Access. The app references `${{Postgres.DATABASE_URL}}`, so it picks up a
+  new one with no edit.
+- **Verified-purchase reviews** via the Stripe session — the biggest trust lever,
+  but phase 2.
 
 ### Decisions taken, so they are not relitigated
 
-- **Hosted Stripe Checkout, not embedded.** `ui_mode: 'embedded_page'` exists and
-  is a contained change, but TWINT is a redirect/app-switch method that leaves the
-  page anyway — so embedding adds a client-side dependency and a new failure
-  surface to keep only card payers on-site. Revisit post-launch.
-- **Stripe is the sole source of truth for prices.** Nothing about money is
-  hardcoded. A hardcoded "ab CHF 24.90" had already drifted from the real 24.50
-  within a day of the first real price existing.
-- **Never offer a pack without an active Stripe Price.** Deriving the offer from
-  "is the env var set?" let the shop advertise something Checkout would refuse.
-- **No single-bottle SKU** — 6, 12 and 24 only; the 6-pack is the entry price.
-- **Four pillars** (Funktional / Sozial / Ökologisch / Ökonomisch), not the three
-  from the original brief. Brand-tokens v2 and the content pack supersede it.
-- **The logo keeps its orange tile**; the orange is structural. On the orange
-  header bar the tile is invisible because the hexes match exactly.
-
-## Before going live
-
-- Ask the designer for a **vector or ≥1500px logo** — the current source is 570px, so it renders below 2× on retina.
-- Replace the placeholder legal text (Impressum / AGB / Datenschutz / Widerruf).
-- Confirm the registered company name + UID for the Impressum.
-- Create the Stripe Product/Prices, set shipping rates and free-shipping
-  threshold, and confirm Swiss MwSt handling (reduced foodstuff rate) with the
-  Treuhänder.
-- Review the EN copy — it is a draft translation (see `docs/cafete-content-pack.md`).
+- **Reviews are held until approved.** Spam becomes an inbox problem rather than a
+  public one, and there is no takedown flow, "removed" placeholder or cache purge
+  on delete to get wrong.
+- **Mail goes over HTTPS via Resend, not SMTP.** Railway blocks outbound SMTP on
+  465, 587 and 2525. Settled by measurement; see the section above.
+- **Migrations are applied by hand**, not at container start — Railway runs old and
+  new containers together during a deploy.
+- **Legal texts are verbatim and duplicated** across four documents rather than
+  interpolated from `site.ts`. They are dated artefacts; an address change needs a
+  deliberate edit and a new "Stand" date, not a silent substitution.
+- **The QR code's `/qr` redirect is 307, not 308.** A code already printed on paper
+  must stay repointable.
+- **The YouTube embed is click-to-load.** No request reaches Google until a visitor
+  presses play, which is a stronger privacy position than a line of small print.
+- **Hosted Stripe Checkout, not embedded.** TWINT redirects anyway, so embedding
+  adds a failure surface to keep only card payers on-site.
+- **Stripe is the sole source of truth for prices.** A hardcoded "ab CHF 24.90" had
+  already drifted from the real figure within a day.
+- **Never offer a pack without an active Stripe Price.**
+- **No single-bottle SKU** — 6, 12 and 24 only.
+- **Four pillars** (Funktional / Sozial / Ökologisch / Ökonomisch), superseding the
+  three in the original brief.
+- **The logo keeps its orange tile**; the orange is structural.
