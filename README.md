@@ -319,7 +319,7 @@ stripe trigger checkout.session.completed
   account set up — see "Connecting Stripe" above.
 - **Phase 3:** SEO/OG images, `hreflang`, sitemap, robots, analytics, a11y pass.
 
-## Status — 11 October 2026
+## Status — 19 October 2026
 
 Live at **https://www.drink-cafete.ch** on Railway, on the real domain with
 live-mode Stripe. The launch event ran on 19 September 2026 and every trace of it
@@ -327,8 +327,17 @@ has been removed from the site.
 
 Working end to end: the bilingual marketing site, the shop (pack picker → cart →
 Stripe Checkout → order confirmation by email), the four legal documents in the
-owner's reviewed versions, the QR landing page with its print-ready codes, and the
-first Monatsporträt with its hour-long interview.
+owner's reviewed versions, and the QR landing page with its print-ready codes.
+
+**Monatsporträts are switched off for now** (Kareem, 19 October: "vorerst
+raus"). The series is built and was live with its first portrait; it sits behind
+`features.portraits` in `src/config/site.ts`, and nothing of it was deleted. See
+the Monatsporträts section for what "off" means and how to bring it back.
+
+**Hardened on 19 October:** every response now carries `Strict-Transport-Security`,
+`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy` and
+`Permissions-Policy`, production builds also a `Content-Security-Policy`, and the
+`X-Powered-By: Next.js` header is gone. See "Security headers" below.
 
 **In progress: comments and star ratings.** The database layer is committed and
 tested; nothing above it is built. See "Reviews" below for where to pick up.
@@ -425,6 +434,15 @@ whitespace around the code is part of the code** and must not be cropped.
 
 ### Monatsporträts — "Die andere Hälfte der Geschichte"
 
+**Switched off since 19 October 2026.** `features.portraits` in
+`src/config/site.ts` is `false`: no entry in the header, mobile menu or footer,
+nothing in the sitemap, no portrait page is built, and both routes answer 404 —
+a 404 rather than a redirect, because the addresses are meant to come back
+exactly as they were. The content in `src/content/portraits.ts`, the components,
+the copy in `messages/` and the slug map are all untouched, so setting the flag
+to `true` restores every URL unchanged. Everything below describes the series as
+built, and applies again the moment it is switched back on.
+
 A monthly portrait series at `/de/monatsportraets` and `/en/monthly-portraits`.
 
 **Rotation is derived, not manual.** `src/content/portraits.ts` holds one entry per
@@ -464,6 +482,27 @@ served by Railway with no CDN in front.
 
 `transcript` is built and unused. It is the one thing that makes an hour of video
 searchable, and on a portrait about accessibility it is not decoration.
+
+### Security headers (19 Oct)
+
+Set in `next.config.ts` via `headers()`, on every path. HSTS is one year with
+`includeSubDomains` and deliberately without `preload`: the apex domain is served
+by Infomaniak, which would have to send the header too before preloading is
+valid. `X-Frame-Options: DENY` and `frame-ancestors 'none'` say the same thing
+for old and new browsers.
+
+The Content-Security-Policy is applied to production builds only, because React
+Fast Refresh in development needs `eval` and a websocket. It allows scripts,
+styles, fonts, images, media and fetches from this origin only, plus `data:` and
+`blob:` images for the blur placeholders and `https://www.youtube-nocookie.com`
+as the one permitted frame source. `'unsafe-inline'` for scripts and styles is a
+known compromise: Next's hydration payload is an inline script, and a per-request
+nonce would make every page dynamic. Stripe needs nothing here — Checkout is a
+full-page redirect to stripe.com, and the shop never loads Stripe.js.
+
+If a new third party is ever added (analytics, a chat widget, a CMS preview), it
+has to be allowed in the policy or the browser will block it silently; the
+console shows the violation.
 
 ### Going live: DNS and mail (verified 24 Aug)
 
@@ -536,7 +575,8 @@ root-domain `MAIL_FROM` left in place would have every Resend send refused.
 1. **The reviews migration has never been applied.** See above. Everything else
    in that feature is blocked on it.
 2. **Datenschutz clause for review data**, before any review form is public.
-3. **Matyas portrait follow-ups.** The photo on the page is a WhatsApp screenshot
+3. **Matyas portrait follow-ups** — only once the series is switched back on.
+   The photo on the page is a WhatsApp screenshot
    of the photo (837px, already twice-compressed) — ask for the original and
    re-run `process-assets.mjs`, nothing else changes. No transcript yet, and the
    `transcript` field is built and waiting. The YouTube auto-captions are German

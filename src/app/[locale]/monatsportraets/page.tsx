@@ -1,9 +1,11 @@
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
 import { ctaClass } from "@/components/brand/cta-button";
 import { CherryMark } from "@/components/brand/sticker";
 import { PageHeader, Section, SectionHeader } from "@/components/layout/section";
+import { features } from "@/config/site";
 import {
   archivedPortraits,
   currentPortrait,
@@ -30,6 +32,10 @@ export const generateMetadata = createMetadata({
 export const revalidate = 86400;
 
 export default async function PortraitsPage({ params }: LocaleParams) {
+  // The series is switched off for now — see `features.portraits` in site.ts.
+  // A 404, not a redirect: the address is meant to come back as it was.
+  if (!features.portraits) notFound();
+
   const locale = await resolvePageLocale(params);
   const t = await getTranslations({ locale, namespace: "portraits" });
 
