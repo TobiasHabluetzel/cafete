@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: "/",
         // Cart and order confirmations are per-visitor and worthless in an index.
-        disallow: ["/api/", "/de/warenkorb", "/en/cart", "/de/bestellung/", "/en/order/"],
+        disallow: ["/api/", "/admin", "/de/warenkorb", "/en/cart", "/de/bestellung/", "/en/order/"],
       },
     ],
     sitemap: `${site.url}/sitemap.xml`,

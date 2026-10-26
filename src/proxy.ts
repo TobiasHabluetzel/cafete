@@ -93,6 +93,8 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Skip API routes, Next internals and anything with a file extension.
-  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
+  // Skip API routes, the admin, Next internals and anything with a file
+  // extension. `/admin` sits outside the locale tree on purpose, so sending it
+  // through next-intl would redirect it to /de/admin and 404.
+  matcher: ["/((?!api|admin|_next|_vercel|.*\\..*).*)"],
 };

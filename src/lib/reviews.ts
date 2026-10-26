@@ -172,3 +172,77 @@ export async function recentCountByIp(ipHash: string, hours = 24): Promise<numbe
     return 0;
   }
 }
+
+// ---------------------------------------------------------------------------
+// Moderation. Used only by the admin, which is why these are the only
+// functions here that can change what the public sees.
+// ---------------------------------------------------------------------------
+
+/** A review as the moderator sees it — including what is never published. */
+export type ModeratedReview = Review;
+
+/** Everything for a subject, newest first, whatever its status. */
+export async function listAllReviews(
+  subject: string = PRODUCT_SUBJECT,
+  limit = 200,
+): Promise<ModeratedReview[]> {
+  if (!isDatabaseConfigured()) return [];
+  try {
+    return await getDb()
+      .select()
+      .from(reviews)
+      .where(eq(reviews.subject, subject))
+      .orderBy(desc(reviews.createdAt))
+      .limit(limit);
+  } catch (error) {
+    console.error("[reviews] admin list failed:", error instanceof Error ? error.message : error);
+    return [];
+  }
+}
+
+/**
+ * Publish or hide a review.
+ *
+ * `approvedAt` is stamped on approval and cleared otherwise, so the column
+ * always answers "when did this become public" rather than "when was it first
+ * touched".
+ */
+export async function setReviewStatus(
+  id: string,
+  status: "pending" | "approved" | "rejected",
+): Promise<boolean> {
+  if (!isDatabaseConfigured()) return false;
+  try {
+    await getDb()
+      .update(reviews)
+      .set({ status, approvedAt: status === "approved" ? new Date() : null })
+      .where(eq(reviews.id, id));
+    return true;
+  } catch (error) {
+    console.error("[reviews] status update failed:", error instanceof Error ? error.message : error);
+    return false;
+  }
+}
+
+/**
+ * Add or clear CAFÉTÉ's reply. Body and timestamp move together, because the
+ * table's check constraint requires both or neither.
+ */
+export async function setReviewReply(id: string, body: string): Promise<boolean> {
+  if (!isDatabaseConfigured()) return false;
+  const trimmed = body.trim();
+  try {
+    await getDb()
+      .update(reviews)
+      .set(
+        trimmed
+          ? { replyBody: trimmed, replyAt: new Date() }
+          : { replyBody: null, replyAt: null },
+      )
+      .where(eq(reviews.id, id));
+    return true;
+  } catch (error) {
+    console.error("[reviews] reply update failed:", error instanceof Error ? error.message : error);
+    return false;
+  }
+}
