@@ -12,11 +12,21 @@ import {
   resolvePageLocale,
   type LocaleParams,
 } from "@/lib/page";
+import { ReviewsSection } from "@/components/reviews/reviews-section";
 import { getPackPrices } from "@/lib/pricing";
+import { getReviewSummary, MIN_PUBLIC_REVIEWS } from "@/lib/reviews";
 
 import bottle from "../../../../public/bottle-photo.jpg";
 
 export const generateStaticParams = generateLocaleParams;
+
+/*
+ * The page was fully static, so a newly approved review would never have shown
+ * up without a redeploy. An hour is the backstop; approving a review in the
+ * admin will call `revalidatePath` so it appears immediately. Prices are read
+ * from Stripe on the same schedule.
+ */
+export const revalidate = 3600;
 export const generateMetadata = createMetadata({ namespace: "nav", titleKey: "product", descriptionKey: "product", pathname: "/produkt" });
 
 type NutritionRow = { nutrient: string; value: string };
@@ -35,6 +45,13 @@ export default async function ProductPage({ params }: LocaleParams) {
     { label: t("extractLabel"), value: t("extractValue") },
     { label: t("storageLabel"), value: t("storageValue") },
   ];
+
+  /*
+   * Only used for `aggregateRating` below. The section fetches its own copy —
+   * one extra indexed count query on a page that is already hitting Stripe is
+   * not worth threading state through for.
+   */
+  const reviewSummary = await getReviewSummary();
 
   return (
     <>
@@ -60,6 +77,24 @@ export default async function ProductPage({ params }: LocaleParams) {
                     : "https://schema.org/InStock",
                   url: `${site.url}/de/shop`,
                 })),
+              }
+            : {}),
+          /*
+           * Google can show stars in search results from this — but only if the
+           * reviews are genuine and visible on the page, which is why it is
+           * emitted from the same approved-only summary the section renders,
+           * and only once there are enough to publish. An aggregateRating for
+           * reviews a visitor cannot find is exactly what gets a site penalised.
+           */
+          ...(reviewSummary.count >= MIN_PUBLIC_REVIEWS && reviewSummary.average !== null
+            ? {
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: reviewSummary.average,
+                  reviewCount: reviewSummary.count,
+                  bestRating: 5,
+                  worstRating: 1,
+                },
               }
             : {}),
         }}
@@ -146,6 +181,8 @@ export default async function ProductPage({ params }: LocaleParams) {
           </div>
         </div>
       </Section>
+
+      <ReviewsSection locale={locale} />
     </>
   );
 }
