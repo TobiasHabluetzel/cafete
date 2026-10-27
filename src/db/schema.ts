@@ -113,3 +113,25 @@ export type NewReview = typeof reviews.$inferInsert;
 
 /** The only subject there is today. */
 export const PRODUCT_SUBJECT = "product:cafete";
+
+/**
+ * Admins added through the admin page.
+ *
+ * Deliberately *additional* to the `ADMIN_EMAILS` environment variable rather
+ * than a replacement for it. The env list is the break-glass: it cannot be
+ * edited from the UI, so no sequence of clicks can lock everyone out of their
+ * own admin, and it still works if this table is empty or unreachable.
+ *
+ * This is the one table the design does take, having avoided tables for
+ * sessions and tokens. Those are derivable from a signed string; a list of who
+ * may sign in is not.
+ */
+export const adminEmails = pgTable("admin_emails", {
+  /** Stored lowercased — the application compares case-insensitively. */
+  email: text("email").primaryKey(),
+  /** Who added them, for answering "how did this person get access". */
+  addedBy: text("added_by").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export type AdminEmail = typeof adminEmails.$inferSelect;

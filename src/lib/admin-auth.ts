@@ -28,20 +28,13 @@ function secret(): string | undefined {
   return value && value.length >= 32 ? value : undefined;
 }
 
-export function isAdminConfigured() {
-  return Boolean(secret() && adminEmails().length > 0);
-}
-
-/** Addresses allowed to receive a link. Comma-separated, case-insensitive. */
-function adminEmails(): string[] {
-  return (process.env.ADMIN_EMAILS ?? "")
-    .split(",")
-    .map((entry) => entry.trim().toLowerCase())
-    .filter(Boolean);
-}
-
-export function isAdminEmail(email: string) {
-  return adminEmails().includes(email.trim().toLowerCase());
+/**
+ * Whether links can be signed at all. Says nothing about *who* may sign in —
+ * that is `isAllowedAdmin` in `lib/admins.ts`, which reads the database and so
+ * cannot live in this module.
+ */
+export function isSigningConfigured() {
+  return Boolean(secret());
 }
 
 function sign(payload: string, key: string) {
@@ -81,10 +74,16 @@ function decode(kind: "magic" | "session", token: string): string | null {
   if (!email || !Number.isFinite(Number(expiry))) return null;
   if (Date.now() > Number(expiry)) return null;
 
-  // Removal from the allowlist takes effect immediately, even mid-session.
-  return isAdminEmail(email) ? email : null;
+  /*
+   * Returns who the token says they are, not whether they are still allowed in.
+   * Authorisation is checked per request in `currentAdmin()`, which can reach
+   * the database — so removing an admin takes effect immediately rather than
+   * when their cookie expires, and this module stays pure and synchronous.
+   */
+  return email;
 }
 
+/** The caller must have checked the address is allowed before calling this. */
 export function createMagicToken(email: string): string | null {
   const key = secret();
   if (!key) return null;

@@ -5,12 +5,8 @@ import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { site } from "@/config/site";
-import {
-  createMagicToken,
-  isAdminConfigured,
-  isAdminEmail,
-  SESSION_COOKIE,
-} from "@/lib/admin-auth";
+import { createMagicToken, isSigningConfigured, SESSION_COOKIE } from "@/lib/admin-auth";
+import { addAdmin, isAllowedAdmin, isBootstrapAdmin, removeAdmin } from "@/lib/admins";
 import { isValidEmail, sendMail } from "@/lib/email";
 import { setReviewReply, setReviewStatus } from "@/lib/reviews";
 import { requireAdmin } from "@/lib/admin-session";
@@ -37,10 +33,11 @@ export async function requestMagicLink(formData: FormData) {
    */
   const done = () => redirect("/admin?sent=1");
 
-  if (!isAdminConfigured() || !isValidEmail(email) || !isAdminEmail(email)) {
-    if (!isAdminConfigured()) {
-      console.error("[admin] ADMIN_SECRET or ADMIN_EMAILS missing — no link can be sent");
-    }
+  if (!isSigningConfigured()) {
+    console.error("[admin] ADMIN_SECRET missing or too short — no link can be sent");
+    return done();
+  }
+  if (!isValidEmail(email) || !(await isAllowedAdmin(email))) {
     return done();
   }
 
@@ -115,5 +112,43 @@ export async function replyToReview(formData: FormData) {
     await setReviewReply(id, body);
     refreshProductPage();
   }
+  redirect("/admin");
+}
+
+/**
+ * Grant access to another address.
+ *
+ * Any admin can add another — with two founders and a shared inbox, a role
+ * hierarchy would be ceremony. Who added whom is recorded, which is the part
+ * that actually helps later.
+ */
+export async function addAdminEmail(formData: FormData) {
+  const actor = await requireAdmin();
+  const email = String(formData.get("email") ?? "").trim();
+  if (isValidEmail(email)) {
+    await addAdmin(email, actor);
+  }
+  redirect("/admin");
+}
+
+/**
+ * Revoke access. Takes effect on their next request, because the allowlist is
+ * rechecked per request rather than trusted from the session cookie.
+ */
+export async function removeAdminEmail(formData: FormData) {
+  const actor = await requireAdmin();
+  const email = String(formData.get("email") ?? "").trim().toLowerCase();
+
+  /*
+   * Two refusals, both about not being able to lock yourself out:
+   * - the env list is the break-glass and is not editable here at all;
+   * - removing yourself is almost always a slip, and if it is not, another
+   *   admin can do it for you.
+   */
+  if (!email || isBootstrapAdmin(email) || email === actor.toLowerCase()) {
+    return redirect("/admin?error=cannot-remove");
+  }
+
+  await removeAdmin(email);
   redirect("/admin");
 }

@@ -1,12 +1,15 @@
 import { ctaClass } from "@/components/brand/cta-button";
 import { Stars } from "@/components/reviews/stars";
-import { isAdminConfigured } from "@/lib/admin-auth";
+import { isSigningConfigured } from "@/lib/admin-auth";
 import { currentAdmin } from "@/lib/admin-session";
+import { bootstrapAdmins, listManagedAdmins } from "@/lib/admins";
 import { listAllReviews, MIN_PUBLIC_REVIEWS } from "@/lib/reviews";
 
 import {
+  addAdminEmail,
   approveReview,
   rejectReview,
+  removeAdminEmail,
   replyToReview,
   requestMagicLink,
   signOut,
@@ -35,10 +38,10 @@ export default async function AdminPage({
       <main className="mx-auto max-w-md px-5 py-20">
         <h1 className="font-display text-charcoal text-2xl font-extrabold">CAFÉTÉ Admin</h1>
 
-        {!isAdminConfigured() ? (
+        {!isSigningConfigured() ? (
           <p role="alert" className="border-cherry-deep/30 bg-gold/20 mt-6 rounded-lg border-l-4 p-4 text-sm leading-relaxed">
-            Nicht konfiguriert. <code>ADMIN_SECRET</code> (mindestens 32 Zeichen) und{" "}
-            <code>ADMIN_EMAILS</code> müssen gesetzt sein.
+            Nicht konfiguriert. <code>ADMIN_SECRET</code> (mindestens 32 Zeichen) muss
+            gesetzt sein, und <code>ADMIN_EMAILS</code> mit mindestens einer Adresse.
           </p>
         ) : params.sent ? (
           <p role="status" className="border-charcoal/20 bg-white mt-6 rounded-lg border-l-4 p-4 text-sm leading-relaxed">
@@ -47,7 +50,10 @@ export default async function AdminPage({
           </p>
         ) : (
           <>
-            {params.error ? (
+            {/* Only the values the callback actually sets — anything else is
+                someone typing in the address bar, and guessing at a message
+                for it is how "not configured" ends up on a working install. */}
+            {params.error === "link" || params.error === "config" ? (
               <p role="alert" className="text-cherry-deep mt-6 text-sm">
                 {params.error === "link"
                   ? "Dieser Link ist abgelaufen oder ungültig. Fordere einen neuen an."
@@ -76,7 +82,8 @@ export default async function AdminPage({
     );
   }
 
-  const reviews = await listAllReviews();
+  const [reviews, managedAdmins] = await Promise.all([listAllReviews(), listManagedAdmins()]);
+  const envAdmins = bootstrapAdmins();
   const pending = reviews.filter((r) => r.status === "pending");
   const decided = reviews.filter((r) => r.status !== "pending");
   const approvedCount = reviews.filter((r) => r.status === "approved").length;
@@ -133,6 +140,84 @@ export default async function AdminPage({
             <ReviewCard key={review.id} review={review} when={when} />
           ))}
         </ul>
+      </section>
+
+      <section className="border-charcoal/15 mt-16 border-t pt-10">
+        <h2 className="font-display text-charcoal text-lg font-extrabold">Zugriff</h2>
+        <p className="text-charcoal/60 mt-1 text-sm">
+          Wer sich hier anmelden darf. Wer entfernt wird, verliert den Zugang sofort —
+          auch mit einer noch offenen Sitzung.
+        </p>
+
+        {params.error === "cannot-remove" ? (
+          <p role="alert" className="border-cherry-deep/30 bg-gold/20 mt-4 rounded-lg border-l-4 p-4 text-sm leading-relaxed">
+            Diese Adresse lässt sich hier nicht entfernen — entweder ist es die eigene,
+            oder sie steht in <code>ADMIN_EMAILS</code>.
+          </p>
+        ) : null}
+
+        <ul className="border-charcoal/15 mt-6 divide-y divide-charcoal/10 rounded-lg border-2 bg-white">
+          {envAdmins.map((email) => (
+            <li key={email} className="flex flex-wrap items-center justify-between gap-3 px-5 py-3">
+              <div>
+                <span className="text-charcoal font-semibold">{email}</span>
+                <span className="text-charcoal/50 ml-2 text-xs">
+                  aus <code>ADMIN_EMAILS</code>
+                </span>
+              </div>
+              {/*
+                No remove button by design. This list is the way back in if the
+                table is wrong or unreachable, so it is changed in Railway only.
+              */}
+              <span className="text-charcoal/40 text-xs">nur in Railway änderbar</span>
+            </li>
+          ))}
+
+          {managedAdmins.map((entry) => (
+            <li key={entry.email} className="flex flex-wrap items-center justify-between gap-3 px-5 py-3">
+              <div>
+                <span className="text-charcoal font-semibold">{entry.email}</span>
+                <span className="text-charcoal/50 ml-2 text-xs">
+                  hinzugefügt von {entry.addedBy} · {when.format(entry.createdAt)}
+                </span>
+              </div>
+              {entry.email === admin.toLowerCase() ? (
+                <span className="text-charcoal/40 text-xs">das bist du</span>
+              ) : (
+                <form action={removeAdminEmail}>
+                  <input type="hidden" name="email" value={entry.email} />
+                  <button
+                    type="submit"
+                    className="text-cherry-deep text-sm font-semibold underline underline-offset-4"
+                  >
+                    Entfernen
+                  </button>
+                </form>
+              )}
+            </li>
+          ))}
+        </ul>
+
+        <form action={addAdminEmail} className="mt-6 flex flex-wrap items-end gap-3">
+          <label className="block grow">
+            <span className="label-caps text-charcoal/70">Neue Adresse</span>
+            <input
+              name="email"
+              type="email"
+              required
+              autoComplete="off"
+              placeholder="name@drink-cafete.ch"
+              className="border-charcoal/25 focus:border-sunset mt-1.5 w-full rounded-md border-2 bg-white px-3 py-2 outline-none"
+            />
+          </label>
+          <button type="submit" className={ctaClass({ size: "md", className: "h-11" })}>
+            Zugriff geben
+          </button>
+        </form>
+        <p className="text-charcoal/55 mt-3 text-sm">
+          Die Person meldet sich danach selbst an: Adresse auf dieser Seite eingeben,
+          Anmeldelink kommt per E-Mail. Ein Passwort gibt es nicht.
+        </p>
       </section>
     </main>
   );

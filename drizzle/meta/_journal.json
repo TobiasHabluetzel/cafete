@@ -8,6 +8,13 @@
       "when": 1790603064139,
       "tag": "0000_open_maggott",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793096857673,
+      "tag": "0001_flowery_vengeance",
+      "breakpoints": true
     }
   ]
 }
