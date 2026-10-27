@@ -49,8 +49,26 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+# Migrations, applied at startup by scripts/migrate.mjs.
+#
+# The SQL and the journal are data, not code, so nothing imports them and the
+# standalone trace leaves them out. The two packages are overlaid in full for
+# the same reason: tracing keeps only the files the app itself reaches, and the
+# app never imports drizzle-orm's migrator.
+COPY --from=builder --chown=nextjs:nodejs /app/drizzle ./drizzle
+# Only this one script — the others in scripts/ are build-time asset tooling.
+COPY --from=builder --chown=nextjs:nodejs /app/scripts/migrate.mjs ./scripts/migrate.mjs
+COPY --from=deps --chown=nextjs:nodejs /app/node_modules/drizzle-orm ./node_modules/drizzle-orm
+COPY --from=deps --chown=nextjs:nodejs /app/node_modules/pg ./node_modules/pg
+
 USER nextjs
 EXPOSE 8080
 
+# Migrate, then hand the container over to the server.
+#
+# `;` not `&&`: the migration script reports its own failures and a schema
+# problem must not keep the shop offline. `exec` so the server becomes PID 1
+# and receives Railway's shutdown signals instead of the shell swallowing them.
+#
 # Railway injects PORT; server.js reads PORT and HOSTNAME from the environment.
-CMD ["node", "server.js"]
+CMD ["sh", "-c", "node scripts/migrate.mjs; exec node server.js"]

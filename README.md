@@ -108,19 +108,37 @@ Every skip is listed at the end of the run, so a mistyped filename still shows u
 
 ## Database (reviews)
 
-Railway Postgres, Drizzle for schema and migrations. One table, `reviews`.
+Railway Postgres, Drizzle for schema and migrations. Two tables, `reviews` and
+`admin_emails`.
 
 ```bash
 npm run db:generate   # after editing src/db/schema.ts
-npm run db:migrate    # apply, with DATABASE_URL set to the PUBLIC proxy URL
+npm run db:migrate    # apply locally, with DATABASE_URL set to the PUBLIC proxy URL
 npm run db:studio     # browse
 ```
 
-**Migrations are applied by hand, not on container start.** Railway keeps the old
-and new container alive together during a deploy, so a boot-time migration means
-two processes racing, and a failed one becomes a crash loop behind a failing
-healthcheck instead of a readable error. One table and two founders do not need
-that.
+**Migrations are applied on container start**, by `scripts/migrate.mjs`, before
+the Next server is exec'd. Deploying a schema change is `git push` and nothing
+else.
+
+This reverses an earlier decision to apply them by hand, which cost a forgotten
+migration and an afternoon of a feature silently doing nothing. The two
+objections behind it were real, and are what the script is shaped around:
+
+- **Railway runs the old and new container together during a deploy**, so more
+  than one process can migrate at once. The script takes a Postgres advisory
+  lock, so the others wait rather than race. Verified with five containers
+  started simultaneously against an empty database: one journal row per
+  migration, no duplicates.
+- **A failed migration must not become a crash loop** behind a failing
+  healthcheck. It does not fail the boot: it logs loudly and the server starts
+  anyway. Most of the site — shop, checkout, every content page — never touches
+  Postgres, and the code that does already degrades on its own. The trade is
+  that a broken migration is visible in the deploy log rather than in the
+  healthcheck, so read the log after a schema change.
+
+Migrations already applied by hand are recognised by their hash and not re-run;
+that path is tested too, since production reached `0001` that way.
 
 Three decisions that are load-bearing:
 
@@ -335,25 +353,32 @@ Stripe rejects the whole session, so `createSession()` retries once without the
 checkbox and logs what to go and set — checkout never dies over a Dashboard
 field. **Unverified whether that URL has actually been set.**
 
-### Reviews — comments and star ratings (in progress)
+### Reviews — comments and star ratings (live)
 
 Agreed with the owner, 28 September: Railway Postgres, magic-link admin auth, and
 the public section gated until there are a few approved reviews.
 
-Built: `src/db/` (Drizzle schema and lazy client), `drizzle/0000_*.sql`, the
-`db:generate` / `db:migrate` / `db:studio` scripts. Verified against Postgres 16
-in Docker — all five check constraints reject bad input, status defaults to
-`pending`, and the aggregate counts approved rows only.
+All of it is built and deployed — schema and migrations, the public form, list
+and aggregate on the product page (hidden under 3 approved reviews, though the
+form is always visible), magic-link auth, `/admin` with approve / reject / reply,
+honeypot plus timing check plus per-IP rate limit, and `aggregateRating` in the
+Product JSON-LD.
 
-**Not yet done, in order:**
+Admin access is managed on `/admin` itself. `ADMIN_EMAILS` is the break-glass
+list: checked first, without touching the database, and not editable from the UI,
+so neither a wrong click nor a database outage can lock the founders out. Anyone
+added through the page lives in `admin_emails` and can be removed there.
+Authorisation is rechecked per request rather than trusted from the session
+cookie, so a removal takes effect immediately instead of in up to 30 days.
 
-1. **Apply the migration.** Needs `railway connect Postgres --tunnel-only` and the
-   localhost URL it prints. The CLI is installed; the login is interactive and has
-   to be done by the owner. Nothing else can proceed until this is done.
-2. Public form, list and aggregate on the product page, hidden under 3 approved.
-3. Magic-link auth and `/admin` — approve, reject, reply.
-4. Spam handling: honeypot, timing check, per-IP rate limit.
-5. `aggregateRating` into the existing Product JSON-LD.
+**Still owed, and none of it is code:**
+
+- **A Datenschutz clause for review data** — published name, optional email,
+  hashed IP, and how to ask for deletion. Owner-supplied text. This is the one
+  that matters before the form gets promoted anywhere.
+- **`REVIEW_IP_SALT` is not set in Railway.** Without it no IP hash is stored and
+  the per-IP rate limit is off. That is deliberate rather than a fallback: an
+  unsalted IPv4 hash is brute-forced back to the address in seconds.
 
 **The Datenschutzerklärung needs a clause before this goes public** — a published
 name, an optional email and a hashed IP are new personal data, and revDSG needs a
