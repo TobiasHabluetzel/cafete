@@ -1,6 +1,9 @@
-# syntax=docker/dockerfile:1
-
 # CAFÉTÉ — production image for Railway (or any Docker host).
+#
+# Deliberately no `# syntax=` directive. That would make every build pull a
+# parser image from Docker Hub first, which can rate-limit or die mid-build
+# ("frontend grpc server closed unexpectedly") — and nothing here needs it:
+# no RUN --mount, no heredocs, no COPY --link. Add it back if that changes.
 # Alpine/musl is deliberate: on glibc, next/image + sharp need extra allocator
 # tuning to avoid runaway memory. See Next.js self-hosting docs.
 
