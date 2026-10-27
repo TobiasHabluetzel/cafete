@@ -15,6 +15,7 @@ import {
   signOut,
   unpublishReview,
 } from "./actions";
+import { SavedNote, SubmitButton } from "./submit-button";
 
 /** Never cached: a moderation queue showing stale rows is worse than slow. */
 export const dynamic = "force-dynamic";
@@ -72,9 +73,9 @@ export default async function AdminPage({
                   className="border-charcoal/25 focus:border-sunset mt-1.5 w-full rounded-md border-2 bg-white px-3 py-2 outline-none"
                 />
               </label>
-              <button type="submit" className={ctaClass({ size: "md" })}>
+              <SubmitButton pendingLabel="Wird gesendet …" className={ctaClass({ size: "md" })}>
                 Anmeldelink senden
-              </button>
+              </SubmitButton>
             </form>
           </>
         )}
@@ -102,9 +103,12 @@ export default async function AdminPage({
           </p>
         </div>
         <form action={signOut}>
-          <button type="submit" className="text-charcoal/60 hover:text-charcoal text-sm underline underline-offset-4">
+          <SubmitButton
+            pendingLabel="Wird abgemeldet …"
+            className="text-charcoal/60 hover:text-charcoal text-sm underline underline-offset-4"
+          >
             Abmelden
-          </button>
+          </SubmitButton>
         </form>
       </header>
 
@@ -193,12 +197,12 @@ export default async function AdminPage({
               ) : (
                 <form action={removeAdminEmail}>
                   <input type="hidden" name="email" value={entry.email} />
-                  <button
-                    type="submit"
+                  <SubmitButton
+                    pendingLabel="Wird entfernt …"
                     className="text-cherry-deep text-sm font-semibold underline underline-offset-4"
                   >
                     Entfernen
-                  </button>
+                  </SubmitButton>
                 </form>
               )}
             </li>
@@ -217,9 +221,12 @@ export default async function AdminPage({
               className="border-charcoal/25 focus:border-sunset mt-1.5 w-full rounded-md border-2 bg-white px-3 py-2 outline-none"
             />
           </label>
-          <button type="submit" className={ctaClass({ size: "md", className: "h-11" })}>
+          <SubmitButton
+            pendingLabel="Wird hinzugefügt …"
+            className={ctaClass({ size: "md", className: "h-11" })}
+          >
             Zugriff geben
-          </button>
+          </SubmitButton>
         </form>
         <p className="text-charcoal/55 mt-3 text-sm">
           Die Person meldet sich danach selbst an: Adresse auf dieser Seite eingeben,
@@ -267,25 +274,34 @@ function ReviewCard({
         {review.status !== "approved" ? (
           <form action={approveReview}>
             <input type="hidden" name="id" value={review.id} />
-            <button type="submit" className={ctaClass({ size: "md", className: "h-9 px-4 text-sm" })}>
+            <SubmitButton
+              pendingLabel="…"
+              className={ctaClass({ size: "md", className: "h-9 px-4 text-sm" })}
+            >
               Freigeben
-            </button>
+            </SubmitButton>
           </form>
         ) : (
           <form action={unpublishReview}>
             <input type="hidden" name="id" value={review.id} />
-            <button type="submit" className={ctaClass({ variant: "outline", size: "md", className: "text-charcoal h-9 px-4 text-sm" })}>
+            <SubmitButton
+              pendingLabel="…"
+              className={ctaClass({ variant: "outline", size: "md", className: "text-charcoal h-9 px-4 text-sm" })}
+            >
               Zurückziehen
-            </button>
+            </SubmitButton>
           </form>
         )}
 
         {review.status !== "rejected" ? (
           <form action={rejectReview}>
             <input type="hidden" name="id" value={review.id} />
-            <button type="submit" className={ctaClass({ variant: "outline", size: "md", className: "text-charcoal h-9 px-4 text-sm" })}>
+            <SubmitButton
+              pendingLabel="…"
+              className={ctaClass({ variant: "outline", size: "md", className: "text-charcoal h-9 px-4 text-sm" })}
+            >
               Ablehnen
-            </button>
+            </SubmitButton>
           </form>
         ) : null}
       </div>
@@ -322,14 +338,13 @@ function ReviewCard({
           />
         </label>
         <div className="mt-2 flex items-center gap-3">
-          <button type="submit" className="text-sunset-ink text-sm font-semibold underline underline-offset-4">
+          <SubmitButton
+            pendingLabel="Wird gespeichert …"
+            className="text-sunset-ink text-sm font-semibold underline underline-offset-4"
+          >
             Antwort speichern
-          </button>
-          {justSaved ? (
-            <span role="status" className="text-sm font-semibold text-emerald-700">
-              Gespeichert
-            </span>
-          ) : null}
+          </SubmitButton>
+          <SavedNote show={justSaved} />
         </div>
       </form>
     </li>
