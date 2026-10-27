@@ -108,11 +108,19 @@ export async function replyToReview(formData: FormData) {
   await requireAdmin();
   const id = String(formData.get("id") ?? "");
   const body = String(formData.get("reply") ?? "");
-  if (id) {
-    await setReviewReply(id, body);
-    refreshProductPage();
+  if (!id) redirect("/admin");
+
+  /*
+   * The outcome has to reach the page. Saving a reply changes nothing the
+   * moderator can see — the textarea is filled from the stored value either
+   * way — so a swallowed failure and a success are the same screen.
+   */
+  if (!(await setReviewReply(id, body))) {
+    redirect("/admin?error=reply-failed");
   }
-  redirect("/admin");
+
+  refreshProductPage();
+  redirect(`/admin?saved=${encodeURIComponent(id)}`);
 }
 
 /**

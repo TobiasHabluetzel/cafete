@@ -28,7 +28,7 @@ const STATUS_STYLE = {
 export default async function AdminPage({
   searchParams,
 }: {
-  searchParams: Promise<{ sent?: string; error?: string }>;
+  searchParams: Promise<{ sent?: string; error?: string; saved?: string }>;
 }) {
   const params = await searchParams;
   const admin = await currentAdmin();
@@ -108,6 +108,13 @@ export default async function AdminPage({
         </form>
       </header>
 
+      {params.error === "reply-failed" ? (
+        <p role="alert" className="border-cherry-deep/30 bg-gold/20 mt-6 rounded-lg border-l-4 p-4 text-sm leading-relaxed">
+          Die Antwort konnte nicht gespeichert werden. Bitte nochmals versuchen —
+          bleibt es dabei, steht der Grund im Railway-Log der Seite.
+        </p>
+      ) : null}
+
       {approvedCount < MIN_PUBLIC_REVIEWS ? (
         <p className="border-charcoal/20 bg-white mt-6 rounded-lg border-l-4 p-4 text-sm leading-relaxed">
           Der Bewertungsbereich auf der Produktseite ist noch verborgen. Er erscheint,
@@ -125,7 +132,7 @@ export default async function AdminPage({
         ) : (
           <ul className="mt-4 space-y-4">
             {pending.map((review) => (
-              <ReviewCard key={review.id} review={review} when={when} />
+              <ReviewCard key={review.id} review={review} when={when} justSaved={params.saved === review.id} />
             ))}
           </ul>
         )}
@@ -137,7 +144,7 @@ export default async function AdminPage({
         </h2>
         <ul className="mt-4 space-y-4">
           {decided.map((review) => (
-            <ReviewCard key={review.id} review={review} when={when} />
+            <ReviewCard key={review.id} review={review} when={when} justSaved={params.saved === review.id} />
           ))}
         </ul>
       </section>
@@ -226,9 +233,11 @@ export default async function AdminPage({
 function ReviewCard({
   review,
   when,
+  justSaved,
 }: {
   review: Awaited<ReturnType<typeof listAllReviews>>[number];
   when: Intl.DateTimeFormat;
+  justSaved: boolean;
 }) {
   return (
     <li className="border-charcoal/15 rounded-lg border-2 bg-white p-5">
@@ -281,10 +290,29 @@ function ReviewCard({
         ) : null}
       </div>
 
+      {/*
+        The saved reply, shown as text rather than only as the textarea's
+        contents. Without this there is nothing on screen that distinguishes
+        "saved" from "typed but not saved" — which is what made the save
+        button look dead.
+      */}
+      {review.replyBody ? (
+        <div className="border-sunset/40 bg-gold/10 mt-4 rounded-md border-l-4 py-2 pl-4">
+          <p className="label-caps text-charcoal/60">
+            Gespeicherte Antwort · {review.replyAt ? when.format(review.replyAt) : null}
+          </p>
+          <p className="text-charcoal/85 mt-1 leading-relaxed whitespace-pre-line">
+            {review.replyBody}
+          </p>
+        </div>
+      ) : null}
+
       <form action={replyToReview} className="mt-4">
         <input type="hidden" name="id" value={review.id} />
         <label className="block">
-          <span className="label-caps text-charcoal/70">Antwort von CAFÉTÉ</span>
+          <span className="label-caps text-charcoal/70">
+            {review.replyBody ? "Antwort bearbeiten" : "Antwort von CAFÉTÉ"}
+          </span>
           <textarea
             name="reply"
             rows={2}
@@ -293,9 +321,16 @@ function ReviewCard({
             className="border-charcoal/25 focus:border-sunset mt-1.5 w-full rounded-md border-2 bg-white px-3 py-2 text-sm outline-none"
           />
         </label>
-        <button type="submit" className="text-sunset-ink mt-2 text-sm font-semibold underline underline-offset-4">
-          Antwort speichern
-        </button>
+        <div className="mt-2 flex items-center gap-3">
+          <button type="submit" className="text-sunset-ink text-sm font-semibold underline underline-offset-4">
+            Antwort speichern
+          </button>
+          {justSaved ? (
+            <span role="status" className="text-sm font-semibold text-emerald-700">
+              Gespeichert
+            </span>
+          ) : null}
+        </div>
       </form>
     </li>
   );
