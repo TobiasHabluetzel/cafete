@@ -122,10 +122,8 @@ export function PackPicker({
               />
             </div>
 
+            {/* No "6 Flaschen" line under "6er-Pack": the title already says it. */}
             <h3 className="text-h3 mt-5">{tPacks(pack.labelKey)}</h3>
-            <p className="text-charcoal/60 mt-1 text-sm">
-              {tPacks("bottles", { count: pack.bottles })}
-            </p>
 
             <div className="mt-4">
               {price ? (
