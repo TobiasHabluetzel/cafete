@@ -130,7 +130,7 @@
     "notConfigured": "Der Onlineshop ist im Moment nicht verfügbar. Schreib uns — wir melden uns, sobald wieder bestellt werden kann.",
     "error": "Der Checkout konnte nicht gestartet werden. Versuch es später nochmals oder schreib uns an {email}.",
     "securePayment": "Sichere Zahlung mit Karte oder TWINT über Stripe.",
-    "perBottle": "{price} pro Flasche",
+    "perBottle": "{price} pro Flasche (ohne Versand)",
     "subtotal": "Zwischensumme",
     "priceTbd": "Preis folgt",
     "bestValue": "Bester Preis pro Flasche",

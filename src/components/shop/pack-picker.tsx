@@ -68,7 +68,15 @@ export function PackPicker({
    * the badge entirely. While nothing is buyable the badge is pure price
    * information, which is what the owner wanted back.
    */
-  const perBottle = (price: PackPrice) => price.amount / price.bottles;
+  /*
+   * Per bottle *without* the shipping that is baked into the pack price. Dividing
+   * the all-in price showed CHF 5.30 for a 6-pack — the owner found that number
+   * off-putting and misleading, since CHF 2.– of it per bottle is postage.
+   */
+  const shippingFor = (bottles: number) =>
+    packs.find((pack) => pack.bottles === bottles)?.shippingMinorUnits ?? 0;
+  const perBottle = (price: PackPrice) =>
+    Math.max(0, price.amount - shippingFor(price.bottles)) / price.bottles;
   const bestValue =
     prices.length > 1
       ? prices.reduce((min, p) => (perBottle(p) < perBottle(min) ? p : min)).bottles
