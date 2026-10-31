@@ -10,25 +10,27 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
  * self-hosts the Google fonts at build time), its own images plus the `data:`
  * blur placeholders, the homepage MP4, and fetches to its own API routes. Stripe
  * Checkout is a full-page redirect to stripe.com, so nothing of Stripe runs on
- * this origin. The one third party is the click-to-load YouTube iframe on a
- * portrait page.
+ * this origin. The third parties are the click-to-load YouTube iframe on a
+ * portrait page and, when a pixel ID is configured, the Meta Pixel.
  *
  * `'unsafe-inline'` for scripts and styles is deliberate: Next's hydration data
  * is an inline script, and a per-request nonce would make every page dynamic.
  * The policy still pins where scripts may be *fetched* from, forbids plugins,
- * framing and base-URL hijacking, and limits fetch targets to this origin.
+ * framing and base-URL hijacking, and limits fetch targets to this origin and Meta's pixel endpoints.
  *
  * Not applied in development, where React Fast Refresh needs eval and a
  * websocket. Railway builds with NODE_ENV=production, so the live site gets it.
  */
 const contentSecurityPolicy = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
+  // connect.facebook.net / www.facebook.com: the Meta Pixel, only loaded when
+  // NEXT_PUBLIC_META_PIXEL_ID is set (see src/lib/meta-pixel.ts).
+  "script-src 'self' 'unsafe-inline' https://connect.facebook.net",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
+  "img-src 'self' data: blob: https://www.facebook.com",
   "font-src 'self'",
   "media-src 'self'",
-  "connect-src 'self'",
+  "connect-src 'self' https://www.facebook.com https://connect.facebook.net",
   "frame-src https://www.youtube-nocookie.com",
   "object-src 'none'",
   "base-uri 'self'",
