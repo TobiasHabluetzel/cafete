@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { site } from "@/config/site";
+import { features, site } from "@/config/site";
 import { portraits } from "@/content/portraits";
 import { getPathname } from "@/i18n/navigation";
 import { routing, type StaticPathname } from "@/i18n/routing";
@@ -13,7 +13,8 @@ const INDEXABLE: { path: StaticPathname; priority: number }[] = [
   { path: "/", priority: 1 },
   { path: "/produkt", priority: 0.9 },
   { path: "/shop", priority: 0.9 },
-  { path: "/monatsportraets", priority: 0.8 },
+  // Listed only while the series is switched on — see `features` in site.ts.
+  ...(features.portraits ? [{ path: "/monatsportraets" as const, priority: 0.8 }] : []),
   { path: "/ueber-uns", priority: 0.7 },
   { path: "/faq", priority: 0.6 },
   { path: "/kontakt", priority: 0.5 },
@@ -53,13 +54,16 @@ function entriesFor(
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...INDEXABLE.flatMap(({ path, priority }) => entriesFor(path, priority, "monthly")),
-    // Each portrait keeps a permanent URL, so each belongs here in its own right.
-    ...portraits.flatMap((portrait) =>
-      entriesFor(
-        { pathname: "/monatsportraets/[slug]", params: { slug: portrait.slug } },
-        0.6,
-        "yearly",
-      ),
-    ),
+    // Each portrait keeps a permanent URL, so each belongs here in its own right —
+    // while the series is on. Off, the routes 404 and must not be advertised.
+    ...(features.portraits
+      ? portraits.flatMap((portrait) =>
+          entriesFor(
+            { pathname: "/monatsportraets/[slug]", params: { slug: portrait.slug } },
+            0.6,
+            "yearly",
+          ),
+        )
+      : []),
   ];
 }

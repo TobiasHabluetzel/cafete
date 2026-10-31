@@ -2,6 +2,8 @@
 
 import { useCallback, useSyncExternalStore } from "react";
 
+import { trackPixel } from "@/lib/meta-pixel";
+
 const STORAGE_KEY = "cafete.cart.v1";
 export const MAX_QUANTITY = 20;
 
@@ -108,6 +110,7 @@ export function useCart() {
           )
         : [...current, { bottles, quantity }],
     );
+    trackPixel("AddToCart", { content_ids: [`pack-${bottles}`], content_type: "product", num_items: quantity });
   }, []);
 
   const setQuantity = useCallback((bottles: number, quantity: number) => {

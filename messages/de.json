@@ -130,7 +130,7 @@
     "notConfigured": "Der Onlineshop ist im Moment nicht verfügbar. Schreib uns — wir melden uns, sobald wieder bestellt werden kann.",
     "error": "Der Checkout konnte nicht gestartet werden. Versuch es später nochmals oder schreib uns an {email}.",
     "securePayment": "Sichere Zahlung mit Karte oder TWINT über Stripe.",
-    "perBottle": "{price} pro Flasche",
+    "perBottle": "{price} pro Flasche (ohne Versand)",
     "subtotal": "Zwischensumme",
     "priceTbd": "Preis folgt",
     "bestValue": "Bester Preis pro Flasche",
@@ -545,7 +545,15 @@
             },
             {
               "type": "p",
-              "text": "Über zusätzliche Analyse- oder Marketingtechnologien informieren wir gegebenenfalls gesondert."
+              "text": "Für die Messung unserer Werbung auf Instagram und Facebook setzen wir das Meta-Pixel und die Conversions API der Meta Platforms Ireland Ltd. ein. Dabei werden beim Besuch unseres Shops Ereignisse wie Seitenaufruf, Warenkorb und Kauf (mit Bestellwert) an Meta übermittelt. Bei einem Kauf übermitteln wir zusätzlich Ihre E-Mail-Adresse, Postleitzahl und Ihr Land ausschliesslich in verschlüsselter (gehashter) Form. Meta kann diese Daten auch in Länder ausserhalb der Schweiz, insbesondere in die USA, übertragen."
+            },
+            {
+              "type": "p",
+              "text": "Wenn Sie über einen Link mit Kampagnen-Kennzeichnung (z. B. aus Instagram) auf unsere Website gelangen, speichern wir diese Kennzeichnung bis zu 30 Tage in Ihrem Browser und ordnen sie Ihrer Bestellung zu, damit wir erkennen, welche Beiträge zu Bestellungen führen."
+            },
+            {
+              "type": "p",
+              "text": "Sie können dies verhindern, indem Sie Cookies und Tracking in Ihrem Browser blockieren oder in Ihren Meta-Kontoeinstellungen unter «Werbepräferenzen» widersprechen."
             }
           ]
         },
@@ -581,7 +589,7 @@
           ]
         }
       ],
-      "updated": "Stand: September 2026"
+      "updated": "Stand: November 2026"
     },
     "returns": {
       "title": "Rückgabe & Widerruf",

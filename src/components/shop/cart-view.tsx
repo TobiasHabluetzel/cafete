@@ -9,6 +9,8 @@ import { MAX_QUANTITY, useCart } from "@/components/shop/use-cart";
 import { packSizes, site } from "@/config/site";
 import { Link } from "@/i18n/navigation";
 import { formatMoney } from "@/lib/format-money";
+import { readAttribution } from "@/lib/attribution";
+import { trackPixel } from "@/lib/meta-pixel";
 import type { PackPrice } from "@/lib/pricing";
 
 export function CartView({ prices }: { prices: PackPrice[] }) {
@@ -45,11 +47,12 @@ export function CartView({ prices }: { prices: PackPrice[] }) {
 
   async function checkout() {
     setStatus("redirecting");
+    trackPixel("InitiateCheckout", { num_items: totalBottles, value: subtotal / 100, currency });
     try {
       const response = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items: lines, locale }),
+        body: JSON.stringify({ items: lines, locale, attribution: readAttribution() }),
       });
 
       if (response.status === 503) {

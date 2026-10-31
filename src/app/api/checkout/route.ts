@@ -4,6 +4,7 @@ import type Stripe from "stripe";
 
 import { getPathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { sanitizeAttribution } from "@/lib/attribution";
 import { getPackPrices } from "@/lib/pricing";
 import { resolveRequestOrigin } from "@/lib/request-origin";
 import {
@@ -62,10 +63,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "invalid-json" }, { status: 400 });
   }
 
-  const { items, locale: rawLocale } = (payload ?? {}) as {
+  const { items, locale: rawLocale, attribution: rawAttribution } = (payload ?? {}) as {
     items?: unknown;
     locale?: unknown;
+    attribution?: unknown;
   };
+  // Campaign tags from the visit (see lib/attribution). Whitelisted and capped,
+  // since this is client input that ends up in Stripe metadata.
+  const attribution = sanitizeAttribution(rawAttribution);
 
   const locale =
     typeof rawLocale === "string" &&
@@ -164,9 +169,15 @@ export async function POST(request: Request) {
       ...(process.env.STRIPE_SHIPPING_RATE
         ? { shipping_options: [{ shipping_rate: process.env.STRIPE_SHIPPING_RATE }] }
         : {}),
+      /*
+       * Lets a customer type a promotion code (e.g. one sent in an Instagram DM).
+       * Codes are created in the Dashboard under Products → Coupons; with none
+       * active, Checkout only shows an unused "Add promotion code" link.
+       */
+      allow_promotion_codes: true,
       success_url: `${origin}${successPath.replace("SESSION_ID", "{CHECKOUT_SESSION_ID}")}`,
       cancel_url: `${origin}${cancelPath}`,
-      metadata: { locale },
+      metadata: { locale, ...attribution },
     });
 
     if (!session.url) {

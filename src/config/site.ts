@@ -123,13 +123,31 @@ export const packSizes: readonly PackDefinition[] = [
 
 export type PackSize = (typeof packSizes)[number];
 
+/**
+ * Switches for parts of the site that exist in the code but are not shown.
+ *
+ * `portraits` — the Monatsporträts. Kareem, 19 October 2026: "vorerst raus".
+ * Off means no entry in the header, mobile menu or footer, nothing in the
+ * sitemap, and both portrait routes answer 404. Nothing is deleted: the content
+ * in `src/content/portraits.ts`, the components, the copy and the slug map all
+ * stay, so setting this back to `true` brings every URL back unchanged — which
+ * is what the "a portrait's URL is permanent" rule in the README requires.
+ */
+export const features: { portraits: boolean } = {
+  portraits: false,
+};
+
 type NavItem = { href: StaticPathname; labelKey: string };
+
+const portraitsNav: NavItem[] = features.portraits
+  ? [{ href: "/monatsportraets", labelKey: "portraits" }]
+  : [];
 
 export const mainNav: NavItem[] = [
   { href: "/produkt", labelKey: "product" },
   { href: "/shop", labelKey: "shop" },
   { href: "/ueber-uns", labelKey: "about" },
-  { href: "/monatsportraets", labelKey: "portraits" },
+  ...portraitsNav,
   { href: "/faq", labelKey: "faq" },
   { href: "/kontakt", labelKey: "contact" },
 ];

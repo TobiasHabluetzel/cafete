@@ -130,7 +130,7 @@
     "notConfigured": "The online shop is not available at the moment. Write to us and we’ll let you know as soon as you can order again.",
     "error": "Checkout could not be started. Please try again later or write to us at {email}.",
     "securePayment": "Secure payment by card or TWINT via Stripe.",
-    "perBottle": "{price} per bottle",
+    "perBottle": "{price} per bottle (excl. shipping)",
     "subtotal": "Subtotal",
     "priceTbd": "Price to follow",
     "bestValue": "Best per bottle",
@@ -545,7 +545,15 @@
             },
             {
               "type": "p",
-              "text": "We will inform you separately where appropriate about any additional analytics or marketing technologies."
+              "text": "To measure our advertising on Instagram and Facebook, we use the Meta Pixel and the Conversions API of Meta Platforms Ireland Ltd. When you visit our shop, events such as page views, cart additions and purchases (including the order value) are transmitted to Meta. For a purchase, we additionally transmit your email address, postcode and country, exclusively in encrypted (hashed) form. Meta may transfer this data to countries outside Switzerland, in particular to the USA."
+            },
+            {
+              "type": "p",
+              "text": "If you reach our website via a link with a campaign tag (e.g. from Instagram), we store this tag in your browser for up to 30 days and assign it to your order so that we can see which posts lead to orders."
+            },
+            {
+              "type": "p",
+              "text": "You can prevent this by blocking cookies and tracking in your browser or by objecting in your Meta account settings under “Ad preferences”."
             }
           ]
         },
@@ -581,7 +589,7 @@
           ]
         }
       ],
-      "updated": "Last updated: September 2026"
+      "updated": "Last updated: November 2026"
     },
     "returns": {
       "title": "Returns & Withdrawal",

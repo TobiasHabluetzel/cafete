@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { Tracking } from "@/components/analytics/tracking";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Toaster } from "@/components/ui/sonner";
 import { site } from "@/config/site";
@@ -96,6 +97,7 @@ export default async function LocaleLayout({
           </main>
           <SiteFooter />
           <Toaster />
+          <Tracking />
         </NextIntlClientProvider>
       </body>
     </html>

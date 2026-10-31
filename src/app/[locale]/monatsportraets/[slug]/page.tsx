@@ -7,7 +7,7 @@ import { ctaClass } from "@/components/brand/cta-button";
 import { PageHeader, Section } from "@/components/layout/section";
 import { hasCaptions, PortraitPlayer } from "@/components/portraits/portrait-player";
 import { JsonLd } from "@/components/seo/json-ld";
-import { site } from "@/config/site";
+import { features, site } from "@/config/site";
 import { portraitBySlug, portraits, portraitText } from "@/content/portraits";
 import { Link } from "@/i18n/navigation";
 import { getPathname } from "@/i18n/navigation";
@@ -22,6 +22,9 @@ type Props = { params: Promise<{ locale: string; slug: string }> };
  * whole point of deriving rotation from the month rather than the route.
  */
 export function generateStaticParams() {
+  // Switched off: build no portrait pages at all. See `features` in site.ts.
+  if (!features.portraits) return [];
+
   return routing.locales.flatMap((locale) =>
     portraits.map((portrait) => ({ locale, slug: portrait.slug })),
   );
@@ -29,7 +32,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const portrait = portraitBySlug(slug);
+  const portrait = features.portraits ? portraitBySlug(slug) : undefined;
   if (!portrait) return {};
 
   const text = portraitText(portrait, locale);
@@ -58,7 +61,7 @@ export default async function PortraitPage({ params }: Props) {
   const { locale, slug } = await params;
   await resolvePageLocale(Promise.resolve({ locale }));
 
-  const portrait = portraitBySlug(slug);
+  const portrait = features.portraits ? portraitBySlug(slug) : undefined;
   if (!portrait) notFound();
 
   const t = await getTranslations({ locale, namespace: "portraits" });

@@ -2,7 +2,9 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
 import { site } from "@/config/site";
+import { describeAttribution } from "@/lib/attribution";
 import { sendMail, sendNotification } from "@/lib/email";
+import { sendPurchaseToMeta } from "@/lib/meta-capi";
 import { getStripe, isStripeConfigured } from "@/lib/stripe";
 
 /**
@@ -180,9 +182,18 @@ async function handleCompletedCheckout(
       `Session:  ${session.id}`,
       `E-Mail:   ${email ?? "—"}`,
       `Bezahlt:  ${session.payment_status}`,
+      `Quelle:   ${describeAttribution(session.metadata) ?? "— (ohne Kampagnen-Link)"}`,
       "",
       summary,
     ].join("\n"),
     ...(email ? { replyTo: email } : {}),
   });
+
+  // Server-side copy of the Purchase event for Meta (no-op unless configured).
+  // Never fail the webhook over it: the order is already confirmed above.
+  try {
+    await sendPurchaseToMeta(session);
+  } catch (error) {
+    console.error("[webhook] meta conversions api failed:", error instanceof Error ? error.message : String(error));
+  }
 }
