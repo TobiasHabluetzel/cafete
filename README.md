@@ -185,6 +185,8 @@ See `.env.local.example`. Summary:
 | `RESEND_API_KEY`, `RESEND_FROM` | 2 | Order + RSVP confirmations. **The working transport on Railway** |
 | `DATABASE_URL` | 3 | Postgres for reviews. Unset = review section hidden, not broken |
 | `SMTP_*`, `MAIL_FROM` | 2 | Infomaniak SMTP. Leave unset on Railway — outbound SMTP is blocked |
+| `NEXT_PUBLIC_META_PIXEL_ID` | 4 | Meta Pixel for Instagram/Facebook measurement. Unset = no pixel, nothing loaded. Inlined at build time |
+| `META_CAPI_TOKEN` | 4 | Conversions API token; sends Purchase from the Stripe webhook (deduplicated with the pixel). Optional `META_CAPI_TEST_CODE` for Events Manager tests |
 
 ## Deploying to Railway
 

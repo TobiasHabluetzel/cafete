@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 
+import { TrackOnMount } from "@/components/analytics/tracking";
 import { ctaClass } from "@/components/brand/cta-button";
 import { Sticker } from "@/components/brand/sticker";
 import { PageHeader, Section } from "@/components/layout/section";
@@ -50,6 +51,14 @@ export default async function OrderPage({ params }: Props) {
     <>
       {/* The order exists, so the basket has served its purpose. */}
       {paid ? <ClearCartOnMount /> : null}
+      {/* Same eventID as the webhook's Conversions API call, so Meta counts it once. */}
+      {paid && session.total !== null ? (
+        <TrackOnMount
+          event="Purchase"
+          params={{ value: session.total / 100, currency: session.currency }}
+          eventId={session.id}
+        />
+      ) : null}
 
       <PageHeader title={t("title")} intro={paid ? t("intro") : t("pending")}>
         <div className="mt-7">
@@ -119,6 +128,7 @@ async function loadSession(id: string) {
 
     const address = session.customer_details?.address;
     return {
+      id: session.id,
       reference: session.id.slice(-8).toUpperCase(),
       paymentStatus: session.payment_status,
       currency: (session.currency ?? "chf").toUpperCase(),

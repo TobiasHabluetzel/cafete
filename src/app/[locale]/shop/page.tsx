@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 
+import { TrackOnMount } from "@/components/analytics/tracking";
 import { ctaClass } from "@/components/brand/cta-button";
 import { Sticker } from "@/components/brand/sticker";
 import { PageHeader, Section } from "@/components/layout/section";
@@ -45,6 +46,7 @@ export default async function ShopPage({ params }: LocaleParams) {
 
   return (
     <>
+      <TrackOnMount event="ViewContent" params={{ content_type: "product", content_ids: buyable.map((pack) => `pack-${pack.bottles}`) }} />
       <PageHeader
         showLogo
         label={tNav("shop")}
