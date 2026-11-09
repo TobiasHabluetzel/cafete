@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 
 import { ctaClass } from "@/components/brand/cta-button";
+import type { Fruit3D, Fruit3DKind, FruitPose } from "@/components/sections/journey-fruit-3d";
 import { Link } from "@/i18n/navigation";
 
 import bottle from "../../../public/bottle-transparent.png";
@@ -203,6 +204,14 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
     let width = window.innerWidth;
     let height = window.innerHeight;
     let current = 0;
+    // The sharp fruit as real 3D, once it has loaded. Until then, or without WebGL, the images show.
+    let fruit3d: Fruit3D | null = null;
+    let disposed = false;
+    const poses = new Map<number, FruitPose>();
+    const stage = one(".journey-stage");
+    const sharpLayer = one(".journey-fruit-layer--1");
+    const kind3d = (kind: FruitKind): Fruit3DKind =>
+      kind.startsWith("cherry") ? "cherry" : kind.startsWith("cran") ? "cran" : kind.startsWith("elder") ? "elder" : "slice";
     let frame = 0;
     let last = 0;
     let visible = false;
@@ -264,6 +273,8 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
       show(fruitLayers, fruitOn);
       if (fruitOn) {
         const absorb = smooth(seg(0.27, 0.36));
+        // Same size rule as the CSS: --size * max(0.66px, 0.15vmin).
+        const unit = Math.max(0.66, 0.0015 * Math.min(width, height));
         for (const el of fruits) {
           const index = Number(el.dataset.i);
           const f = FRUIT[index];
@@ -278,10 +289,13 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
           const scale = past ? 1 + absorb * 0.5 : 1 - absorb * 0.8;
           // A photo has its light baked in, so a full spin would give it away.
           const turn = `rotate(${f.spin * (10 + p * 50)}deg)`;
-          el.style.opacity = String(seg(0.015 + lag, 0.07 + lag) * (1 - absorb));
+          const opacity = seg(0.015 + lag, 0.07 + lag) * (1 - absorb);
+          el.style.opacity = String(opacity);
           el.style.transform = `translate3d(${x}px, ${y}px, 0) ${turn} scale(${f.flip ? -scale : scale}, ${scale})`;
+          if (f.depth === 1) poses.set(index, { x, y, size: f.size * unit, scale, opacity });
         }
       }
+      fruit3d?.update(poses, p, fruitOn && visible);
 
       // Bubbles only exist in the Fizzy scene; their height is tied to the scroll.
       const fizzOn = p > 0.28 && p < 0.72;
@@ -358,6 +372,7 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
     const measure = () => {
       width = window.innerWidth;
       height = window.innerHeight;
+      fruit3d?.resize();
       wake();
     };
 
@@ -365,6 +380,7 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         visible = entry.isIntersecting;
+        if (!visible) fruit3d?.update(poses, current, false);
         wake();
       },
       { rootMargin: "20% 0px" },
@@ -374,9 +390,31 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
     current = target();
     render(current);
 
+    // Three.js is only fetched here, so pages and visitors that never reach the scene pay nothing.
+    if (stage && sharpLayer && !(navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData) {
+      import("@/components/sections/journey-fruit-3d")
+        .then(({ createFruit3D }) => {
+          if (disposed) return;
+          fruit3d = createFruit3D(
+            stage,
+            sharpLayer,
+            FRUIT.flatMap((f, index) => (f.depth === 1 ? [{ index, kind: kind3d(f.kind), spin: f.spin }] : [])),
+          );
+          if (!fruit3d) return;
+          root.classList.add("journey--3d");
+          render(current);
+        })
+        .catch(() => {
+          // Without WebGL the drawn images simply stay.
+        });
+    }
+
     window.addEventListener("scroll", wake, { passive: true });
     window.addEventListener("resize", measure, { passive: true });
     return () => {
+      disposed = true;
+      fruit3d?.dispose();
+      root.classList.remove("journey--3d");
       observer.disconnect();
       window.removeEventListener("scroll", wake);
       window.removeEventListener("resize", measure);
