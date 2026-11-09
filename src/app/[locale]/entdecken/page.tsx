@@ -17,7 +17,7 @@ import {
 } from "@/lib/page";
 import { getPackPrices, lowestPriceFrom } from "@/lib/pricing";
 
-import bottlePhoto from "../../../../public/bottle-photo.jpg";
+import cherryPhoto from "../../../../public/coffee-cherry-photo.jpg";
 import bottle from "../../../../public/bottle-transparent.png";
 import pack6 from "../../../../public/pack-6.png";
 
@@ -79,10 +79,10 @@ export default async function DiscoverPage({ params }: LocaleParams) {
   return (
     <>
       <section className="bg-night text-cream relative isolate overflow-hidden">
-        {/* The bottle shot as atmosphere rather than as subject — the product
+        {/* The cherry photo as atmosphere rather than as subject — the product
             gets its own full-size showing in the closing band. */}
         <Image
-          src={bottlePhoto}
+          src={cherryPhoto}
           alt=""
           priority
           fill

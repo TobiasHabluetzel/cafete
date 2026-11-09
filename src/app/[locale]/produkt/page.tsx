@@ -1,10 +1,12 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import { ViewTransition } from "react";
 
 import { ctaClass } from "@/components/brand/cta-button";
 import { PageHeader, Section } from "@/components/layout/section";
 import { JsonLd } from "@/components/seo/json-ld";
 import { site } from "@/config/site";
+import { PackPicker } from "@/components/shop/pack-picker";
 import { Link } from "@/i18n/navigation";
 import {
   createMetadata,
@@ -15,8 +17,9 @@ import {
 import { ReviewsSection } from "@/components/reviews/reviews-section";
 import { getPackPrices } from "@/lib/pricing";
 import { getReviewSummary, MIN_PUBLIC_REVIEWS } from "@/lib/reviews";
+import { configuredPacks } from "@/lib/stripe";
 
-import bottle from "../../../../public/bottle-photo.jpg";
+import bottle from "../../../../public/bottle-transparent.png";
 
 export const generateStaticParams = generateLocaleParams;
 
@@ -39,6 +42,10 @@ export default async function ProductPage({ params }: LocaleParams) {
 
   const nutrition = t.raw("nutrition") as NutritionRow[];
   const packPrices = await getPackPrices();
+  const tShopPage = await getTranslations({ locale, namespace: "shop" });
+  const buyable = configuredPacks().filter((pack) =>
+    packPrices.some((price) => price.bottles === pack.bottles),
+  );
 
   const specs = [
     { label: t("volumeLabel"), value: t("volumeValue") },
@@ -105,14 +112,15 @@ export default async function ProductPage({ params }: LocaleParams) {
       <Section tone="cream">
         <div className="grid gap-12 lg:grid-cols-[0.7fr_1fr] lg:gap-16">
           <div className="relative mx-auto w-full max-w-sm lg:mx-0">
-            <Image
-              src={bottle}
-              alt={t("bottleAlt")}
-              priority
-              sizes="(max-width: 1024px) 80vw, 30vw"
-              placeholder="blur"
-              className="border-ink/80 h-auto w-full rounded-lg border-2 shadow-[6px_6px_0_rgba(0,0,0,0.35)]"
-            />
+            <ViewTransition name="cafete-bottle" share="bottle-morph" default="none">
+              <Image
+                src={bottle}
+                alt={t("bottleAlt")}
+                priority
+                sizes="(max-width: 1024px) 40vw, 14rem"
+                className="mx-auto h-[26rem] w-auto drop-shadow-[0_22px_26px_rgba(70,20,0,0.35)] lg:h-[34rem]"
+              />
+            </ViewTransition>
           </div>
 
           <div>
@@ -135,12 +143,29 @@ export default async function ProductPage({ params }: LocaleParams) {
               ))}
             </dl>
 
-            <Link href="/shop" className={ctaClass({ size: "lg", className: "mt-10" })}>
-              {tShop("cta")}
-            </Link>
+            {buyable.length > 0 ? (
+              <a href="#bestellen" className={ctaClass({ size: "lg", className: "mt-10" })}>
+                {tShopPage("packHeading")}
+              </a>
+            ) : (
+              <Link href="/shop" className={ctaClass({ size: "lg", className: "mt-10" })}>
+                {tShop("cta")}
+              </Link>
+            )}
           </div>
         </div>
       </Section>
+
+      {buyable.length > 0 ? (
+        <Section tone="sunset">
+          <div id="bestellen" className="scroll-mt-28">
+            <h2 className="text-h2">{tShopPage("packHeading")}</h2>
+            <div className="mt-8">
+              <PackPicker packs={buyable.map((pack) => ({ ...pack }))} prices={packPrices} />
+            </div>
+          </div>
+        </Section>
+      ) : null}
 
       <Section tone="white">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">

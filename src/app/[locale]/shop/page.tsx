@@ -2,7 +2,6 @@ import { getTranslations } from "next-intl/server";
 
 import { TrackOnMount } from "@/components/analytics/tracking";
 import { ctaClass } from "@/components/brand/cta-button";
-import { Sticker } from "@/components/brand/sticker";
 import { PageHeader, Section } from "@/components/layout/section";
 import { PackPicker } from "@/components/shop/pack-picker";
 import { packSizes } from "@/config/site";
@@ -29,7 +28,6 @@ export default async function ShopPage({ params }: LocaleParams) {
   const tNav = await getTranslations({ locale, namespace: "nav" });
   const tPacks = await getTranslations({ locale, namespace: "packs" });
   const tCheckout = await getTranslations({ locale, namespace: "checkout" });
-  const tBadges = await getTranslations({ locale, namespace: "badges" });
 
   /*
    * A pack is only offered if Stripe holds an *active* price for it — not merely
@@ -59,14 +57,6 @@ export default async function ShopPage({ params }: LocaleParams) {
             : t("intro")
         }
       >
-        <div className="mt-7 flex flex-wrap gap-3">
-          <Sticker tone="gold" className="-rotate-1">
-            {tBadges("volume")}
-          </Sticker>
-          <Sticker tone="cherry" className="rotate-1">
-            {tBadges("energizing")}
-          </Sticker>
-        </div>
       </PageHeader>
 
       <Section tone="cream">

@@ -26,11 +26,15 @@ export function Pillars() {
         className="relative"
       />
 
-      <ol className="relative mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <ol
+        tabIndex={0}
+        aria-label={t("title")}
+        className="pillar-rail relative -mx-4 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pt-1 pb-3 sm:mx-0 sm:mt-14 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:p-0 lg:grid-cols-4"
+      >
         {keys.map((key, index) => (
           <li
             key={key}
-            className="reveal border-ink/85 bg-cream flex flex-col rounded-lg border-2 p-6 shadow-[5px_5px_0_rgba(0,0,0,0.45)]"
+            className="reveal border-ink/85 bg-cream flex w-[84%] shrink-0 snap-center flex-col rounded-lg border-2 p-6 sm:w-auto shadow-[5px_5px_0_rgba(0,0,0,0.45)]"
           >
             <span
               aria-hidden

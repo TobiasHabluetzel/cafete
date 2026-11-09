@@ -164,18 +164,6 @@ async function inkCutout({ src, out, resizeWidth, ink = [0, 0, 0] }) {
  * from git history if a delivery ever arrives pre-cut again.
  */
 
-/** Straight re-encode: artwork whose background is part of the design. */
-async function asDesigned({ src, out, resizeWidth }) {
-  if (missing(src, out)) return;
-  let pipeline = sharp(src);
-  if (resizeWidth) pipeline = pipeline.resize({ width: resizeWidth, withoutEnlargement: true });
-  await pipeline.png({ compressionLevel: 9 }).toFile(path.join(OUT_DIR, out));
-  const meta = await sharp(path.join(OUT_DIR, out)).metadata();
-  console.log(
-    `  ${out.padEnd(34)} ${String(meta.width).padStart(5)}x${String(meta.height).padEnd(5)} (background kept)`,
-  );
-}
-
 async function cutout({ src, out, resizeWidth, tol, feather, globalClear }) {
   if (missing(src, out)) return;
   let pipeline = sharp(src).ensureAlpha();
@@ -283,7 +271,8 @@ console.log(`Processing brand assets from ${SOURCE_DIR}\n`);
 // continuous region as the outer background, so no fill can separate them.
 // Keying it leaves a hole where the ring should be. We present it as a sticker.
 console.log("As designed (background is part of the artwork):");
-await asDesigned({ src: s("Cafété Logo satt.png"), out: "logo-cafete.png" });
+// logo-cafete.png is rendered from the vector master public/logo-cafete.svg, so
+// it is no longer produced from the small `Cafété Logo satt.png` here.
 
 // Pure black bubble lettering on flat orange → black on transparent, so it can
 // be laid on our own orange band at any height.
@@ -372,12 +361,8 @@ await photo({
   width: 1733,
   quality: 84,
 });
-await photo({
-  src: s("Cafété Mockup.png"),
-  out: "bottle-photo.jpg",
-  width: 1086,
-  quality: 86,
-});
+// The `Cafété Mockup.png` render is gone from the site: it read as AI next to the
+// real bottle, which is `bottle-transparent.png`.
 
 // Founder portraits. Delivered as 2832x4240 TIFFs despite the .jpeg extension,
 // which is why they need `sharp` rather than a plain copy. Cropped to 4:5 from

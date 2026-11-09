@@ -23,6 +23,7 @@
   },
   "hero": {
     "title": "CAFÉTÉ",
+    "headline": "The|other|half|of|coffee.",
     "subtitle": "The caffeinated refreshment made from the coffee fruit",
     "slogan": "Fruity. Fizzy. Focus.",
     "ctaPrimary": "Order now",
@@ -39,8 +40,8 @@
   },
   "coffeeFruit": {
     "label": "The coffee fruit",
-    "title": "The other half of coffee",
-    "intro": "The other half of coffee is the pulp of the coffee cherry. That fruit is exactly what Cafété puts at the centre.",
+    "title": "What is coffee fruit?",
+    "intro": "The pulp of the coffee cherry. That fruit is exactly what CAFÉTÉ puts at the centre.",
     "tasteTitle": "What does CAFÉTÉ taste like?",
     "tasteBody": "Fruity notes, light floral aromas, a delicate natural sweetness and a gentle acidity define the taste. The finish recalls red berries and rosehip — not classic coffee.",
     "traditionTitle": "Valued for generations",
@@ -80,7 +81,7 @@
     "p1": "CAFÉTÉ began three years ago in a <b>claro shop</b>, where Kareem — a passionate hospitality professional of some twenty years and the founder of CAFÉTÉ — spotted a large glass jar full of dried, reddish fruit. He couldn’t say what it was. When he asked, he learned: it’s <b>part of the coffee plant</b>. His curiosity was sparked — and since hardly anyone asked about it back then, he was given a handful to try.",
     "p2": "At home he brewed his first infusion from it: <b>fruity, slightly tart and surprisingly distinct</b>. The more Kareem learned about the coffee fruit, the clearer it became that there was far more to it.",
     "p3": "Three years later, a handful of coffee fruit became CAFÉTÉ.",
-    "teaser": "Within three years, a handful of coffee fruit became Cafété.",
+    "teaser": "Within three years, a handful of coffee fruit became CAFÉTÉ.",
     "cta": "About us"
   },
   "vision": {
@@ -90,12 +91,37 @@
   },
   "founders": {
     "label": "The founder",
-    "title": "The person behind Cafété",
+    "title": "The person behind CAFÉTÉ",
     "kareem": {
       "name": "Kareem Oueini",
       "role": "Product & brand development",
       "bio": "Kareem Oueini is a trained chef and food craftsman by passion. He has worked in hospitality for some two decades, developing a fine instinct for taste, balance and quality. He brings that experience to CAFÉTÉ — especially in recipe development, where the interplay of aromas, sweetness, acidity and structure is decisive. A nature-loving and sporty person, he has also long been interested in nutrition, hydration and the quality of what we put into our bodies."
     }
+  },
+  "journey": {
+    "bottleAlt": "CAFÉTÉ bottle",
+    "fruity": {
+      "title": "Fruity",
+      "body": "Fruity notes, a delicate natural sweetness and a finish of red berries and rosehip."
+    },
+    "fizzy": {
+      "title": "Fizzy",
+      "body": "Sparkling and refreshing, with over 50 % less sugar than conventional soft drinks."
+    },
+    "focus": {
+      "title": "Focus",
+      "body": "Natural caffeine from the coffee fruit, for active moments in everyday life."
+    }
+  },
+  "reel": {
+    "title": "Best served ice cold.",
+    "play": "Play video",
+    "pause": "Pause video"
+  },
+  "facts": {
+    "volume": { "value": "33 cl", "label": "Glass bottle" },
+    "sugar": { "value": "4.5 g", "label": "Sugar per 100 ml" },
+    "swiss": { "value": "CH", "label": "Developed and bottled in Switzerland" }
   },
   "shopTeaser": {
     "label": "Shop",
@@ -236,7 +262,7 @@
       },
       {
         "q": "Where do you ship to?",
-        "a": "At launch we ship within Switzerland. Shipping is included in the price."
+        "a": "We ship within Switzerland. Shipping is included in the price."
       },
       {
         "q": "Can I return or exchange an order?",
@@ -324,7 +350,7 @@
             },
             {
               "type": "p",
-              "text": "Referred to below as “Cafété”."
+              "text": "Referred to below as “CAFÉTÉ”."
             }
           ]
         },
@@ -411,7 +437,7 @@
           "blocks": [
             {
               "type": "p",
-              "text": "Cafété is liable within the scope of mandatory statutory provisions. Any further liability is excluded to the extent permitted by law."
+              "text": "CAFÉTÉ is liable within the scope of mandatory statutory provisions. Any further liability is excluded to the extent permitted by law."
             }
           ]
         },
@@ -657,7 +683,7 @@
     "privacy": "Privacy",
     "returns": "Returns",
     "newsletterHeading": "Stay in the loop",
-    "newsletterText": "Launch, availability and events — a few emails a year, no spam.",
+    "newsletterText": "News, availability and events — a few emails a year, no spam.",
     "newsletterPlaceholder": "you@email.com",
     "newsletterLabel": "Email address",
     "newsletterSubmit": "Sign up",
@@ -671,11 +697,12 @@
     "placeholderNotice": "This section will be built in one of the next phases."
   },
   "sugar": {
-    "body": "Cafété contains over 50 % less sugar than conventional soft drinks, 59 % less sugar than conventional energy drinks and 20 % less sugar than common mate drinks."
+    "body": "CAFÉTÉ contains over 50 % less sugar than conventional soft drinks, 59 % less sugar than conventional energy drinks and 20 % less sugar than common mate drinks."
   },
   "video": {
-    "label": "Watch",
-    "title": "CAFÉTÉ in action"
+    "label": "On video",
+    "title": "Kareem tells how it all began",
+    "play": "Play video"
   },
   "qr": {
     "label": "Just scanned",

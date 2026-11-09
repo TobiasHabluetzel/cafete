@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import { LogoSticker } from "@/components/brand/wordmark";
 import { LocaleSwitcher } from "@/components/layout/locale-switcher";
+import { CartDrawer, openCartDrawer } from "@/components/shop/cart-drawer";
 import { useCart } from "@/components/shop/use-cart";
 import { Button } from "@/components/ui/button";
 import {
@@ -37,7 +38,10 @@ export function SiteHeader() {
      * Text on orange is charcoal/ink — cream is only 2.3:1 here, and black on
      * orange is what the artwork itself does.
      */
-    <header className="bg-sunset text-charcoal border-ink/25 sticky top-0 z-50 border-b-2">
+    <header
+      className="bg-sunset text-charcoal border-ink/25 sticky top-0 z-50 border-b-2"
+      style={{ viewTransitionName: "site-header" }}
+    >
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:h-20 lg:px-8">
         <Link
           href="/"
@@ -87,10 +91,20 @@ export function SiteHeader() {
               totalItems > 0 ? `${t("cart")} — ${tCheckout("cartCount", { count: totalItems })}` : t("cart")
             }
             nativeButton={false}
-            render={<Link href="/warenkorb" />}
+            render={
+              <Link
+                href="/warenkorb"
+                onClick={(event) => {
+                  // Let a new-tab click, or a click on the cart page itself, behave normally.
+                  if (event.metaKey || event.ctrlKey || event.shiftKey || pathname === "/warenkorb") return;
+                  event.preventDefault();
+                  openCartDrawer();
+                }}
+              />
+            }
             className="text-charcoal hover:bg-ink/10 hover:text-ink relative"
           >
-            <ShoppingBag />
+            <ShoppingBag data-cart-target />
             {/* `ready` gates this so the server markup and first paint agree. */}
             {ready && totalItems > 0 ? (
               <span
@@ -101,6 +115,7 @@ export function SiteHeader() {
               </span>
             ) : null}
           </Button>
+          <CartDrawer />
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger

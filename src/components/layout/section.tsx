@@ -97,7 +97,7 @@ export function PageHeader({
           aria-hidden
           className="absolute top-1/2 right-6 hidden -translate-y-1/2 lg:block"
         >
-          <LogoSticker sizes="16rem" className="lg:w-[13rem] xl:w-[15rem]" />
+          <LogoSticker priority sizes="16rem" className="lg:w-[13rem] xl:w-[15rem]" />
         </span>
       ) : null}
 

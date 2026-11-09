@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
-import { Sticker } from "@/components/brand/sticker";
-
 import cherryPhoto from "../../../public/coffee-cherry-photo.jpg";
 
 /**
@@ -41,14 +39,9 @@ export function CoffeeFruit() {
             <p className="text-cream/85 mt-6 text-lg leading-relaxed text-balance">
               {t("intro")}
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Sticker tone="cherry" className="-rotate-2">
-                {tBadges("cascara")}
-              </Sticker>
-              <Sticker tone="gold" className="rotate-1">
-                {tBadges("noExtract")}
-              </Sticker>
-            </div>
+            <p className="label-caps text-gold mt-6">
+              {tBadges("cascara")} · {tBadges("noExtract")}
+            </p>
           </div>
         </div>
       </div>

@@ -23,6 +23,7 @@
   },
   "hero": {
     "title": "CAFÉTÉ",
+    "headline": "Die|andere|Hälfte|des|Kaffees.",
     "subtitle": "Das koffeinhaltige Erfrischungsgetränk aus der Kaffeefrucht",
     "slogan": "Fruity. Fizzy. Focus.",
     "ctaPrimary": "Jetzt bestellen",
@@ -32,15 +33,15 @@
     "volume": "33 cl Glasflasche",
     "lessSugar": "Über 50 % weniger Zucker",
     "swissMade": "Entwickelt in der Schweiz",
-    "sparkling": "Sparkling",
-    "energizing": "Naturally energizing",
+    "sparkling": "Prickelnd",
+    "energizing": "Natürlich koffeinhaltig",
     "noExtract": "Kein Extrakt, kein Aroma",
     "cascara": "Kaffeefrüchte aus Brasilien"
   },
   "coffeeFruit": {
     "label": "Die Kaffeefrucht",
-    "title": "Die andere Hälfte des Kaffees",
-    "intro": "Die andere Hälfte des Kaffees ist das Fruchtfleisch der Kaffeekirsche. Genau diese Frucht steht bei Cafété im Mittelpunkt.",
+    "title": "Was ist die Kaffeefrucht?",
+    "intro": "Das Fruchtfleisch der Kaffeekirsche. Genau diese Frucht steht bei CAFÉTÉ im Mittelpunkt.",
     "tasteTitle": "Wie schmeckt CAFÉTÉ?",
     "tasteBody": "Fruchtige Noten, leichte florale Aromen, eine feine natürliche Süsse und eine dezente Säure prägen den Geschmack. Im Abgang erinnert CAFÉTÉ an rote Beeren und Hagebutte — nicht an klassischen Kaffee.",
     "traditionTitle": "Seit Generationen geschätzt",
@@ -80,7 +81,7 @@
     "p1": "Angefangen hat CAFÉTÉ vor drei Jahren in einem <b>claro-Laden</b>. Dort entdeckte Kareem, leidenschaftlicher Gastronom seit rund 20 Jahren und Gründer von CAFÉTÉ, einen grossen Glasbehälter voll getrockneter, rötlicher Früchte. Was das war, konnte er nicht sagen. Auf Nachfrage erfuhr er: <b>ein Teil der Kaffeepflanze</b>. Das Interesse war geweckt — und weil damals kaum jemand danach fragte, bekam er eine Handvoll zum Probieren geschenkt.",
     "p2": "Zuhause bereitete er daraus seinen ersten Aufguss zu: <b>fruchtig, leicht säuerlich und überraschend eigenständig</b>. Je mehr Kareem über die Kaffeefrucht lernte, desto klarer wurde ihm, dass in dieser Frucht weit mehr steckt.",
     "p3": "Drei Jahre später wurde aus einer Handvoll Kaffeefrüchten CAFÉTÉ.",
-    "teaser": "Innerhalb von drei Jahren entwickelte sich aus einer Handvoll Kaffeefrüchten Cafété.",
+    "teaser": "Innerhalb von drei Jahren entwickelte sich aus einer Handvoll Kaffeefrüchten CAFÉTÉ.",
     "cta": "Über uns"
   },
   "vision": {
@@ -90,12 +91,37 @@
   },
   "founders": {
     "label": "Der Gründer",
-    "title": "Der Mensch hinter Cafété",
+    "title": "Der Mensch hinter CAFÉTÉ",
     "kareem": {
       "name": "Kareem Oueini",
       "role": "Produkt- & Markenentwicklung",
       "bio": "Kareem Oueini ist gelernter Koch und Lebensmittelveredler aus Leidenschaft. Seit rund zwei Jahrzehnten arbeitet er in der Gastronomie und hat dabei ein ausgeprägtes Feingefühl für Geschmack, Balance und Qualität entwickelt. Diese Erfahrung bringt er auch in das Projekt CAFÉTÉ ein — insbesondere bei der Rezeptentwicklung, wo das Zusammenspiel von Aromen, Süsse, Säure und Struktur entscheidend ist. Als naturverbundener und sportlicher Mensch beschäftigt er sich zudem seit längerem mit der Bedeutung von Ernährung, Hydration und der Qualität dessen, was wir unserem Körper zuführen."
     }
+  },
+  "journey": {
+    "bottleAlt": "CAFÉTÉ Flasche",
+    "fruity": {
+      "title": "Fruity",
+      "body": "Fruchtige Noten, eine feine natürliche Süsse und im Abgang rote Beeren und Hagebutte."
+    },
+    "fizzy": {
+      "title": "Fizzy",
+      "body": "Prickelnd und erfrischend, mit über 50 % weniger Zucker als herkömmliche Softdrinks."
+    },
+    "focus": {
+      "title": "Focus",
+      "body": "Natürliches Koffein aus der Kaffeefrucht, für aktive Momente im Alltag."
+    }
+  },
+  "reel": {
+    "title": "Am besten eiskalt.",
+    "play": "Video abspielen",
+    "pause": "Video anhalten"
+  },
+  "facts": {
+    "volume": { "value": "33 cl", "label": "Glasflasche" },
+    "sugar": { "value": "4,5 g", "label": "Zucker pro 100 ml" },
+    "swiss": { "value": "CH", "label": "Entwickelt und abgefüllt in der Schweiz" }
   },
   "shopTeaser": {
     "label": "Shop",
@@ -137,7 +163,7 @@
     "stripeTerms": "Es gelten die AGB von CAFÉTÉ. Für korrekt gelieferte Lebensmittel und Getränke besteht kein allgemeines Widerrufsrecht; Ansprüche bei beschädigter oder falsch gelieferter Ware bleiben vorbehalten."
   },
   "product": {
-    "label": "Sparkling · Naturally energizing",
+    "label": "Prickelnd · Natürlich koffeinhaltig",
     "title": "CAFÉTÉ",
     "subtitle": "Kohlensäurehaltiges Erfrischungsgetränk mit Aufguss aus getrockneter Pulpe der Kaffeekirsche (Cascara aus Brasilien), pasteurisiert.",
     "volumeLabel": "Inhalt",
@@ -236,7 +262,7 @@
       },
       {
         "q": "Wohin liefert ihr?",
-        "a": "Zum Start liefern wir innerhalb der Schweiz. Die Versandkosten sind im Preis inbegriffen."
+        "a": "Wir liefern innerhalb der Schweiz. Die Versandkosten sind im Preis inbegriffen."
       },
       {
         "q": "Kann ich zurückgeben oder umtauschen?",
@@ -324,7 +350,7 @@
             },
             {
               "type": "p",
-              "text": "Nachfolgend «Cafété» genannt."
+              "text": "Nachfolgend «CAFÉTÉ» genannt."
             }
           ]
         },
@@ -411,7 +437,7 @@
           "blocks": [
             {
               "type": "p",
-              "text": "Cafété haftet im Rahmen der zwingenden gesetzlichen Bestimmungen. Eine weitergehende Haftung wird, soweit gesetzlich zulässig, ausgeschlossen."
+              "text": "CAFÉTÉ haftet im Rahmen der zwingenden gesetzlichen Bestimmungen. Eine weitergehende Haftung wird, soweit gesetzlich zulässig, ausgeschlossen."
             }
           ]
         },
@@ -657,7 +683,7 @@
     "privacy": "Datenschutz",
     "returns": "Rückgabe",
     "newsletterHeading": "Bleib auf dem Laufenden",
-    "newsletterText": "Launch, Verfügbarkeit und Events — ein paar Mails pro Jahr, kein Spam.",
+    "newsletterText": "Neuigkeiten, Verfügbarkeit und Events — ein paar Mails pro Jahr, kein Spam.",
     "newsletterPlaceholder": "deine@email.ch",
     "newsletterLabel": "E-Mail-Adresse",
     "newsletterSubmit": "Anmelden",
@@ -671,11 +697,12 @@
     "placeholderNotice": "Dieser Abschnitt wird in einer der nächsten Phasen gebaut."
   },
   "sugar": {
-    "body": "Cafété enthält über 50 % weniger Zucker als herkömmliche Softdrinks, 59 % weniger Zucker als herkömmliche Energydrinks und 20 % weniger Zucker als gängige Mate-Getränke."
+    "body": "CAFÉTÉ enthält über 50 % weniger Zucker als herkömmliche Softdrinks, 59 % weniger Zucker als herkömmliche Energydrinks und 20 % weniger Zucker als gängige Mate-Getränke."
   },
   "video": {
-    "label": "Im Bewegtbild",
-    "title": "CAFÉTÉ in Aktion"
+    "label": "Im Video",
+    "title": "Kareem erzählt, wie alles begann",
+    "play": "Video abspielen"
   },
   "qr": {
     "label": "Frisch gescannt",

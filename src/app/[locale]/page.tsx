@@ -2,11 +2,13 @@ import { setRequestLocale } from "next-intl/server";
 
 import { SloganMarquee } from "@/components/brand/marquee";
 import { CoffeeFruit } from "@/components/sections/coffee-fruit";
+import { FactStrip } from "@/components/sections/fact-strip";
+import { FlavourJourney } from "@/components/sections/flavour-journey";
 import { Hero } from "@/components/sections/hero";
+import { MoodReel } from "@/components/sections/mood-reel";
 import { Pillars } from "@/components/sections/pillars";
 import { ShopTeaser } from "@/components/sections/shop-teaser";
 import { Story } from "@/components/sections/story";
-import { VideoClip } from "@/components/sections/video-clip";
 import { routing } from "@/i18n/routing";
 import { createMetadata } from "@/lib/page";
 import { getEntryPrice } from "@/lib/pricing";
@@ -38,11 +40,12 @@ export default async function HomePage({
   return (
     <>
       <Hero entryPrice={entryPrice} />
-      <SloganMarquee />
-      <VideoClip />
+      <FlavourJourney entryPrice={entryPrice} />
+      <FactStrip />
       <CoffeeFruit />
       <Pillars />
       <Story variant="teaser" />
+      <MoodReel />
       <ShopTeaser entryPrice={entryPrice} />
       <SloganMarquee />
     </>

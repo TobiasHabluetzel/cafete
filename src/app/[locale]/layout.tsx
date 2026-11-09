@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { SmoothScroll } from "@/components/layout/smooth-scroll";
 import { Tracking } from "@/components/analytics/tracking";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Toaster } from "@/components/ui/sonner";
@@ -98,6 +99,7 @@ export default async function LocaleLayout({
           <SiteFooter />
           <Toaster />
           <Tracking />
+          <SmoothScroll />
         </NextIntlClientProvider>
       </body>
     </html>

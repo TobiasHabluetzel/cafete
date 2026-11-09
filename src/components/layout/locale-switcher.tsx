@@ -48,7 +48,8 @@ export function LocaleSwitcher({ className }: { className?: string }) {
             disabled={isPending}
             aria-current={isActive ? "true" : undefined}
             className={cn(
-              "cursor-pointer rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-wider transition-colors",
+              // The ::after grows the tap target to 44px without changing how the pill looks.
+              "relative cursor-pointer rounded-full px-2.5 py-1 text-xs after:absolute after:-inset-y-2.5 after:inset-x-0 after:content-[''] font-bold uppercase tracking-wider transition-colors",
               "focus-visible:ring-ink focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:outline-none",
               // Charcoal pill on the orange bar: the fill reads at 7:1 against
               // the bar and the cream label at 16:1 inside it.

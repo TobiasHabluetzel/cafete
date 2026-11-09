@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
  * form controls; this is the loud one used on the hero, shop and event bands.
  */
 export const ctaVariants = cva(
-  "inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full font-display font-extrabold tracking-tight whitespace-nowrap transition-all outline-none select-none focus-visible:ring-3 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent active:translate-y-px disabled:pointer-events-none disabled:opacity-50 [&_svg]:shrink-0",
+  "inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full font-display font-extrabold tracking-tight whitespace-nowrap transition-all outline-none select-none focus-visible:ring-3 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent hover:-translate-y-0.5 active:translate-y-px active:scale-[0.98] motion-reduce:hover:translate-y-0 disabled:pointer-events-none disabled:opacity-50 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
