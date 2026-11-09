@@ -172,8 +172,7 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
       Array.from(root.querySelectorAll<T>(selector));
     const one = (selector: string) => root.querySelector<HTMLElement>(selector);
 
-    const words = all(".journey-word:not(.journey-word--front) > span");
-    const frontWords = all(".journey-word--front > span");
+    const words = all(".journey-word > span");
     const scenes = all(".journey-scene");
     const fruits = all(".journey-fruit");
     const bubbles = all(".journey-bubble");
@@ -247,11 +246,6 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
         if (word) {
           word.style.opacity = String(presence);
           word.style.transform = `translate3d(${lerp(13, -13, travel)}%, 0, 0) scale(${lerp(0.92, 1.03, travel)})`;
-          const front = frontWords[index];
-          if (front) {
-            front.style.opacity = word.style.opacity;
-            front.style.transform = word.style.transform;
-          }
         }
 
         const caption = scenes[index];
@@ -320,7 +314,6 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
       if (focusWord) {
         const sharp = smooth(seg(0.665, 0.77));
         focusWord.style.filter = focusOn && sharp < 1 ? `blur(${(1 - sharp) * 22}px)` : "none";
-        if (frontWords[2]) frontWords[2].style.filter = focusWord.style.filter;
       }
       if (focusOn) {
         if (vignette) vignette.style.opacity = String(0.7 * smooth(seg(0.68, 0.86)));
@@ -478,16 +471,6 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
             <Image src={bottle} alt={t("bottleAlt")} sizes="(max-width: 1024px) 40vw, 18rem" />
           </div>
         </div>
-
-        {SCENES.map((scene) => (
-          <p
-            key={`front-${scene.key}`}
-            aria-hidden
-            className={`journey-word journey-word--${scene.key} journey-word--front`}
-          >
-            <span>{t(`${scene.key}.title`)}</span>
-          </p>
-        ))}
 
         {renderBubbles("over")}
         {renderFruit(2)}

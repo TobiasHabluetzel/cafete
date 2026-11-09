@@ -453,7 +453,7 @@
   .journey-track {
     --journey-head: 4rem;
     /*
-     * Bottle, glow and fruit meet in the middle, in front of the word. The point stays clear of
+     * Bottle, glow and fruit meet in the middle; the word runs behind the bottle. The point stays clear of
      * the tallest caption (Focus, with its button) even on short screens.
      */
     --journey-bottle-h: 42svh;
@@ -677,14 +677,6 @@
   }
   .journey-word--focus {
     color: var(--color-gold);
-  }
-  /*
-   * A half-transparent copy of the word in front of the bottle. Where nothing covers the word it
-   * lies on the solid word and changes nothing; over the bottle the word still reads.
-   */
-  .journey-word--front {
-    z-index: 2;
-    opacity: 0.35;
   }
 
   .journey-glow {
