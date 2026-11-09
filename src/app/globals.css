@@ -453,13 +453,12 @@
   .journey-track {
     --journey-head: 4rem;
     /*
-     * On a phone the word sits on top, the bottle below it and the text at the bottom, so the
-     * bottle covers neither. The point where bottle, glow and fruit meet stays clear of the
-     * tallest caption (Focus, with its button) even on short screens.
+     * Bottle, glow and fruit meet in the middle; the word runs behind the bottle. The point stays clear of
+     * the tallest caption (Focus, with its button) even on short screens.
      */
-    --journey-bottle-h: 38svh;
+    --journey-bottle-h: 42svh;
     --journey-point: min(
-      calc(var(--journey-head) + (100svh - var(--journey-head)) * 0.56),
+      calc(var(--journey-head) + (100svh - var(--journey-head)) * 0.44),
       calc(100svh - 10.5rem - var(--journey-bottle-h) / 2)
     );
     height: 420svh;
@@ -653,13 +652,12 @@
     display: grid;
     place-items: center;
     position: absolute;
-    inset: var(--journey-head) 0 calc(100svh - var(--journey-point) + var(--journey-bottle-h) / 2 + 0.25rem) 0;
+    inset: var(--journey-head) 0 12svh 0;
     z-index: 0;
     margin: 0;
     overflow: hidden;
     font-family: var(--font-display);
-    /* As wide as the phone allows, but never taller than the space above the bottle. */
-    font-size: min(40vw, calc((var(--journey-point) - var(--journey-bottle-h) / 2 - var(--journey-head)) * 0.85));
+    font-size: clamp(8rem, 40vw, 28rem);
     font-weight: 800;
     line-height: 1;
     letter-spacing: 0;
