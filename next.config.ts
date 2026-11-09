@@ -23,18 +23,19 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
  */
 const contentSecurityPolicy = [
   "default-src 'self'",
-  // connect.facebook.net / www.facebook.com: the Meta Pixel, only loaded when
-  // NEXT_PUBLIC_META_PIXEL_ID is set (see src/lib/meta-pixel.ts).
+  // connect.facebook.net / www.facebook.com: the Meta Pixel (see src/lib/meta-pixel.ts).
+  // It can send events by image, by fetch, or by posting a form into an iframe, so
+  // www.facebook.com is needed in img-src, connect-src, frame-src and form-action.
   "script-src 'self' 'unsafe-inline' https://connect.facebook.net",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https://www.facebook.com",
   "font-src 'self'",
   "media-src 'self'",
   "connect-src 'self' https://www.facebook.com https://connect.facebook.net",
-  "frame-src https://www.youtube-nocookie.com",
+  "frame-src https://www.youtube-nocookie.com https://www.facebook.com",
   "object-src 'none'",
   "base-uri 'self'",
-  "form-action 'self'",
+  "form-action 'self' https://www.facebook.com",
   "frame-ancestors 'none'",
 ].join("; ");
 
