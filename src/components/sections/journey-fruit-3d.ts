@@ -12,7 +12,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
  * that they are flat and they cost nothing.
  */
 
-export type Fruit3DKind = "cherry" | "cran" | "elder" | "slice";
+export type Fruit3DKind = "cherry" | "cran" | "elder";
 
 /** Where one fruit is this frame, in pixels from the scene's centre point. */
 export interface FruitPose {
@@ -155,69 +155,6 @@ function textures() {
   return { cherryColor, cranColor, elderColor, bump };
 }
 
-/** The lemon face, painted once onto a canvas and used as the slice's top and bottom. */
-function lemonFace(): { map: THREE.CanvasTexture; bump: THREE.CanvasTexture } {
-  const size = 512;
-  const canvas = document.createElement("canvas");
-  canvas.width = canvas.height = size;
-  const g = canvas.getContext("2d")!;
-  const c = size / 2;
-  const ring = (r: number, fill: string | CanvasGradient) => {
-    g.beginPath();
-    g.arc(c, c, r, 0, Math.PI * 2);
-    g.fillStyle = fill;
-    g.fill();
-  };
-  const rind = g.createRadialGradient(c * 0.8, c * 0.7, 10, c, c, c);
-  rind.addColorStop(0, "#fff35a");
-  rind.addColorStop(1, "#ffd200");
-  ring(c, rind);
-  ring(c * 0.9, "#fffbe6");
-  ring(c * 0.84, "#fff6c8");
-  const flesh = g.createRadialGradient(c, c, 0, c, c, c * 0.82);
-  flesh.addColorStop(0, "#fffbc8");
-  flesh.addColorStop(0.5, "#fff044");
-  flesh.addColorStop(1, "#ffdc00");
-  for (let i = 0; i < 10; i++) {
-    const a0 = ((i * 36 + 4.5) * Math.PI) / 180;
-    const a1 = (((i + 1) * 36 - 4.5) * Math.PI) / 180;
-    const mid = (a0 + a1) / 2;
-    g.beginPath();
-    g.moveTo(c + Math.cos(mid) * c * 0.1, c + Math.sin(mid) * c * 0.1);
-    g.arc(c, c, c * 0.8, a0, a1);
-    g.closePath();
-    g.fillStyle = flesh;
-    g.fill();
-    const dome = g.createRadialGradient(
-      c + Math.cos(mid) * c * 0.5 - 12,
-      c + Math.sin(mid) * c * 0.5 - 12,
-      2,
-      c + Math.cos(mid) * c * 0.5,
-      c + Math.sin(mid) * c * 0.5,
-      c * 0.3,
-    );
-    dome.addColorStop(0, "rgba(255,255,255,0.5)");
-    dome.addColorStop(1, "rgba(255,255,255,0)");
-    g.fillStyle = dome;
-    g.fill();
-  }
-  ring(c * 0.08, "#fff8e2");
-  const map = new THREE.CanvasTexture(canvas);
-  map.colorSpace = THREE.SRGBColorSpace;
-  map.anisotropy = 4;
-
-  // Juice cells: fine streaks running outwards from the centre.
-  const cells = noise(size, size, 90, 2, 53);
-  const bump = paint(size, size, (u, v, i) => {
-    const dx = u - 0.5;
-    const dy = v - 0.5;
-    const streak = Math.sin(Math.atan2(dy, dx) * 120) * 0.5 + 0.5;
-    const n = 128 + (cells[i] - 0.5) * 120 + (streak - 0.5) * 50;
-    return [n, n, n];
-  }, false);
-  return { map, bump };
-}
-
 /** A sphere with gentle lumps, so no two read as machine-made. */
 function lumpy(seed: number, amount: number) {
   const geometry = new THREE.SphereGeometry(0.5, 64, 40);
@@ -239,12 +176,10 @@ function skin(params: THREE.MeshPhysicalMaterialParameters) {
 }
 
 type Shared = ReturnType<typeof textures> & {
-  face: ReturnType<typeof lemonFace>;
   cherryBody: THREE.SphereGeometry;
   cranBody: THREE.SphereGeometry;
   berryBody: THREE.SphereGeometry;
   small: THREE.SphereGeometry;
-  sliceBody: THREE.CylinderGeometry;
   sepal: THREE.ConeGeometry;
   ring: THREE.TorusGeometry;
 };
@@ -259,24 +194,6 @@ function build(kind: Fruit3DKind, s: Shared) {
     return mesh;
   };
   const dark = (color: string) => skin({ color, roughness: 0.75 });
-
-  if (kind === "slice") {
-    const side = skin({ color: "#ffd400", roughness: 0.45, bumpMap: s.bump, bumpScale: 1.5, emissive: "#6a5200", emissiveIntensity: 0.5 });
-    const top = skin({
-      color: "#ffffff",
-      map: s.face.map,
-      emissiveMap: s.face.map,
-      emissive: "#ffffff",
-      emissiveIntensity: 0.7,
-      bumpMap: s.face.bump,
-      bumpScale: 2,
-      roughness: 0.22,
-      clearcoat: 0.6,
-      clearcoatRoughness: 0.15,
-    });
-    add(s.sliceBody, [side, top, top]);
-    return { group, materials };
-  }
 
   if (kind === "cherry") {
     // The sphere's poles lie along x: stem on the left, blossom crown on the right.
@@ -395,12 +312,10 @@ export function createFruit3D(
   cherryBody.rotateZ(Math.PI / 2);
   const shared: Shared = {
     ...textures(),
-    face: lemonFace(),
     cherryBody,
     cranBody: lumpy(7, 0.03),
     berryBody: lumpy(13, 0.015),
     small: new THREE.SphereGeometry(0.5, 16, 12),
-    sliceBody: new THREE.CylinderGeometry(0.5, 0.5, 0.11, 72),
     sepal: new THREE.ConeGeometry(0.022, 0.07, 5),
     ring: new THREE.TorusGeometry(0.075, 0.022, 10, 24),
   };
@@ -454,10 +369,7 @@ export function createFruit3D(
       g.scale.setScalar(pose.size * pose.scale);
       const t = clock + piece.seed * 10;
       const s = piece.spin;
-      if (piece.kind === "slice") {
-        // Keeps its face towards the viewer while it wobbles and turns.
-        g.rotation.set(1.05 + 0.3 * Math.sin(t * 0.7), 0.4 * Math.sin(t * 0.5), s * (t * 0.35 + progress * 3));
-      } else if (piece.kind === "cherry") {
+      if (piece.kind === "cherry") {
         g.rotation.set(0.5 * Math.sin(t * 0.6), 0.7 * Math.sin(t * 0.45) + progress * 2 * s, s * (0.3 + t * 0.25));
       } else {
         // Berries tip forward now and then, so the crown shows.
@@ -487,8 +399,6 @@ export function createFruit3D(
       for (const value of Object.values(shared)) {
         if (value instanceof THREE.BufferGeometry || value instanceof THREE.Texture) value.dispose();
       }
-      shared.face.map.dispose();
-      shared.face.bump.dispose();
       scene.environment?.dispose();
       pmrem.dispose();
       renderer.dispose();
