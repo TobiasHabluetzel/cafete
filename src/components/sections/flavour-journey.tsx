@@ -385,6 +385,7 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
 
     // Three.js is only fetched here, so pages and visitors that never reach the scene pay nothing.
     if (stage && sharpLayer && !(navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData) {
+      root.classList.add("journey--3d-pending");
       import("@/components/sections/journey-fruit-3d")
         .then(({ createFruit3D }) => {
           if (disposed) return;
@@ -393,12 +394,14 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
             sharpLayer,
             FRUIT.flatMap((f, index) => (f.depth === 1 ? [{ index, kind: kind3d(f.kind), spin: f.spin }] : [])),
           );
+          root.classList.remove("journey--3d-pending");
           if (!fruit3d) return;
           root.classList.add("journey--3d");
           render(current);
         })
         .catch(() => {
           // Without WebGL the drawn images simply stay.
+          root.classList.remove("journey--3d-pending");
         });
     }
 
@@ -407,7 +410,7 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
     return () => {
       disposed = true;
       fruit3d?.dispose();
-      root.classList.remove("journey--3d");
+      root.classList.remove("journey--3d", "journey--3d-pending");
       observer.disconnect();
       window.removeEventListener("scroll", wake);
       window.removeEventListener("resize", measure);
