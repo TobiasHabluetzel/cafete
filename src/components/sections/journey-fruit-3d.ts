@@ -5,14 +5,14 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
  * The in-focus fruit of the Fruity scene as real 3D, in the style of a drinks commercial:
  * not real, but perfect. Each fruit has what makes real fruit read as real — a crown or stem,
  * a slightly uneven shape, fine pores, colour that shifts across the skin and a soft sheen
- * rather than lacquer. Elderberries carry the dusty bloom that berries have.
+ * rather than lacquer.
  *
  * Loaded only when the scene is used, and only where WebGL works; otherwise the drawn images
  * stay. The blurred fruit in front of and behind the word stay images, because blur hides
  * that they are flat and they cost nothing.
  */
 
-export type Fruit3DKind = "cherry" | "cran" | "elder";
+export type Fruit3DKind = "cherry" | "cran";
 
 /** Where one fruit is this frame, in pixels from the scene's centre point. */
 export interface FruitPose {
@@ -144,15 +144,12 @@ function textures() {
     return c;
   }, true);
 
-  // Elderberry: purple-black with a slightly lighter, uneven shimmer.
-  const elderColor = paint(W, H, (_u, _v, i) => mix([26, 6, 40], [70, 22, 92], broad[i] * 0.8 + fine[i] * 0.2), true);
-
   const bump = paint(W, H, (_u, _v, i) => {
     const n = 128 + (pores[i] - 0.5) * 150 + (fine[i] - 0.5) * 60;
     return [n, n, n];
   }, false);
 
-  return { cherryColor, cranColor, elderColor, bump };
+  return { cherryColor, cranColor, bump };
 }
 
 /** A sphere with gentle lumps, so no two read as machine-made. */
@@ -178,7 +175,6 @@ function skin(params: THREE.MeshPhysicalMaterialParameters) {
 type Shared = ReturnType<typeof textures> & {
   cherryBody: THREE.SphereGeometry;
   cranBody: THREE.SphereGeometry;
-  berryBody: THREE.SphereGeometry;
   small: THREE.SphereGeometry;
   sepal: THREE.ConeGeometry;
   ring: THREE.TorusGeometry;
@@ -225,47 +221,30 @@ function build(kind: Fruit3DKind, s: Shared) {
     return { group, materials };
   }
 
-  const isCran = kind === "cran";
+  // Cranberry.
   add(
-    isCran ? s.cranBody : s.berryBody,
-    isCran
-      ? skin({
-          map: s.cranColor,
-          bumpMap: s.bump,
-          bumpScale: 0.8,
-          roughness: 0.24,
-          clearcoat: 0.7,
-          clearcoatRoughness: 0.1,
-          emissive: "#3a000c",
-          emissiveIntensity: 0.35,
-        })
-      : skin({
-          // The dusty bloom of a berry: sheen in a pale blue-grey over a deep purple.
-          map: s.elderColor,
-          bumpMap: s.bump,
-          bumpScale: 0.6,
-          roughness: 0.42,
-          sheen: 1,
-          sheenColor: "#8a94c4",
-          sheenRoughness: 0.55,
-          clearcoat: 0.25,
-          clearcoatRoughness: 0.3,
-          emissive: "#12041c",
-          emissiveIntensity: 0.4,
-        }),
-  ).scale.set(1, isCran ? 1.05 : 1, 1);
+    s.cranBody,
+    skin({
+      map: s.cranColor,
+      bumpMap: s.bump,
+      bumpScale: 0.8,
+      roughness: 0.24,
+      clearcoat: 0.7,
+      clearcoatRoughness: 0.1,
+      emissive: "#3a000c",
+      emissiveIntensity: 0.35,
+    }),
+  ).scale.set(1, 1.05, 1);
   // Crown at the top: a dark centre with small pointed sepals.
-  const top = isCran ? 0.52 : 0.49;
-  const centre = add(s.small, dark(isCran ? "#3a0612" : "#120408"));
+  const top = 0.52;
+  const centre = add(s.small, dark("#3a0612"));
   centre.scale.set(0.09, 0.02, 0.09);
   centre.position.y = top;
-  const count = isCran ? 4 : 5;
-  for (let i = 0; i < count; i++) {
-    const a = (i / count) * Math.PI * 2;
-    const sepal = add(s.sepal, dark(isCran ? "#5a1a1a" : "#2a1020"));
+  for (let i = 0; i < 4; i++) {
+    const a = (i / 4) * Math.PI * 2;
+    const sepal = add(s.sepal, dark("#5a1a1a"));
     sepal.position.set(Math.cos(a) * 0.06, top - 0.005, Math.sin(a) * 0.06);
     sepal.rotation.set(0, -a, -Math.PI / 2 + 0.25);
-    sepal.scale.setScalar(isCran ? 1 : 0.9);
   }
   return { group, materials };
 }
@@ -314,7 +293,6 @@ export function createFruit3D(
     ...textures(),
     cherryBody,
     cranBody: lumpy(7, 0.03),
-    berryBody: lumpy(13, 0.015),
     small: new THREE.SphereGeometry(0.5, 16, 12),
     sepal: new THREE.ConeGeometry(0.022, 0.07, 5),
     ring: new THREE.TorusGeometry(0.075, 0.022, 10, 24),

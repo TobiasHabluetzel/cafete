@@ -79,25 +79,6 @@ function cranberry(v){
   <path d="${body}" fill="none" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/>`);
 }
 
-function elderberry(v){
-  return svg(120,120,`<defs>
-    <radialGradient id="eb" cx="0.36" cy="0.32" r="0.78"><stop offset="0" stop-color="${v.hi}"/><stop offset="0.3" stop-color="${v.mid}"/><stop offset="0.75" stop-color="#14061c"/><stop offset="1" stop-color="#07020b"/></radialGradient>
-    <radialGradient id="core" cx="0.34" cy="0.28" r="0.92"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="0.5" stop-color="#000" stop-opacity="0"/><stop offset="0.72" stop-color="#000" stop-opacity="0.55"/><stop offset="0.86" stop-color="#000" stop-opacity="0.3"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
-    <clipPath id="clip"><circle cx="60" cy="62" r="44"/></clipPath>
-    <mask id="rim"><circle cx="60" cy="62" r="44" fill="#fff"/><circle cx="55" cy="57" r="44" fill="#000"/></mask>
-    ${blur("b1",1)}${blur("b3",3)}
-  </defs>
-  <circle cx="60" cy="62" r="44" fill="url(#eb)"/>
-  <circle cx="60" cy="62" r="44" fill="url(#core)"/>
-  <circle cx="60" cy="62" r="44" fill="#b07ad0" opacity="0.28" mask="url(#rim)" filter="url(#b3)" clip-path="url(#clip)"/>
-  <ellipse cx="44" cy="44" rx="13" ry="8" transform="rotate(-35 44 44)" fill="#fff" opacity="0.35" filter="url(#b3)"/>
-  <ellipse cx="42" cy="42" rx="6" ry="3.6" transform="rotate(-35 42 42)" fill="#fff" opacity="0.95" filter="url(#b1)"/>
-  <g transform="translate(${v.crown[0]} ${v.crown[1]}) rotate(${v.rot})">
-    <path d="M0 -7 L2 -2 L7 -2 L3 1.5 L4.5 7 L0 3.8 L-4.5 7 L-3 1.5 L-7 -2 L-2 -2 Z" fill="#1a0a12" stroke="#5a3a4a" stroke-width="1"/>
-  </g>
-  <circle cx="60" cy="62" r="44" fill="none" stroke="${INK}" stroke-width="2.5"/>`);
-}
-
 const dots=(seed)=>{const r=[];let s=seed;for(let i=0;i<14;i++){s=(s*9301+49297)%233280;const a=s/233280*6.28;s=(s*9301+49297)%233280;const d=40+s/233280*80;r.push([150+Math.cos(a)*d,155+Math.sin(a)*d])}return r};
 const pieces={
   "coffee-cherry":coffeeCherry({hi:"#ff6b55",mid:"#e3261f",deep:"#a50e15",seed:3}),
@@ -105,14 +86,11 @@ const pieces={
   "cranberry-1":cranberry({hi:"#ff4058",mid:"#e20f30",deep:"#930421",seed:2,navel:[150,46],dots:dots(5),body:"M150 32 C222 30 270 82 270 152 C270 222 220 270 150 270 C80 270 30 222 30 150 C30 84 82 34 150 32 Z"}),
   "cranberry-2":cranberry({hi:"#ff4a50",mid:"#ea1428",deep:"#9c061c",seed:11,navel:[156,52],dots:dots(9),body:"M150 40 C214 36 262 86 262 152 C262 220 214 266 148 266 C84 266 38 220 38 154 C38 92 86 44 150 40 Z"}),
   "cranberry-3":cranberry({hi:"#f43050",mid:"#c80a2a",deep:"#7a031a",seed:17,navel:[146,42],dots:dots(13),body:"M146 30 C214 28 266 76 268 146 C270 222 222 272 152 272 C82 272 32 226 32 152 C32 80 80 32 146 30 Z"}),
-  "elderberry-1":elderberry({hi:"#9a5ab8",mid:"#3a0f4e",crown:[60,22],rot:0}),
-  "elderberry-2":elderberry({hi:"#8a4aa8",mid:"#320a46",crown:[66,24],rot:20}),
-  "elderberry-3":elderberry({hi:"#a466c0",mid:"#40125a",crown:[56,21],rot:-15}),
 };
 (async()=>{
   for(const [name,code] of Object.entries(pieces)){
     fs.writeFileSync(path.join(here,name+".svg"),code);
-    const w=name.startsWith("elder")?120:name.startsWith("cran")?300:420;
+    const w=name.startsWith("cran")?300:420;
     await sharp(Buffer.from(code),{density:72*3}).resize({width:w*1.5}).trim({threshold:1}).webp({quality:90,alphaQuality:95}).toFile(path.join(OUT,name+".webp"));
     const m=await sharp(path.join(OUT,name+".webp")).metadata();console.log(name,m.width+"x"+m.height,Math.round(fs.statSync(path.join(OUT,name+".webp")).size/1024)+" KB");
   }

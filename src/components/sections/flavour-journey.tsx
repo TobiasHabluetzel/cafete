@@ -14,9 +14,6 @@ import coffeeCherry2 from "../../../public/fruit/coffee-cherry-2.webp";
 import cranberry1 from "../../../public/fruit/cranberry-1.webp";
 import cranberry2 from "../../../public/fruit/cranberry-2.webp";
 import cranberry3 from "../../../public/fruit/cranberry-3.webp";
-import elderberry1 from "../../../public/fruit/elderberry-1.webp";
-import elderberry2 from "../../../public/fruit/elderberry-2.webp";
-import elderberry3 from "../../../public/fruit/elderberry-3.webp";
 
 /**
  * The scroll story: the bottle stays pinned while the slogan plays out around it.
@@ -55,9 +52,6 @@ const FRUIT_IMAGE = {
   cran1: cranberry1,
   cran2: cranberry2,
   cran3: cranberry3,
-  elder1: elderberry1,
-  elder2: elderberry2,
-  elder3: elderberry3,
 };
 type FruitKind = keyof typeof FRUIT_IMAGE;
 
@@ -78,8 +72,8 @@ const FRUIT: {
 }[] = [
   { kind: "cherry", size: 54, x: -0.44, y: -0.3, depth: 0, spin: 1 },
   { kind: "cran2", size: 36, x: 0.46, y: -0.2, depth: 0, spin: -1 },
-  { kind: "elder2", size: 22, x: 0.27, y: -0.42, depth: 0, spin: 1 },
-  { kind: "elder3", size: 24, x: -0.27, y: 0.17, depth: 0, spin: -1 },
+  { kind: "cran3", size: 26, x: 0.27, y: -0.42, depth: 0, spin: 1 },
+  { kind: "cherry", size: 30, x: -0.27, y: 0.17, depth: 0, spin: -1 },
   { kind: "cherry2", size: 44, x: -0.47, y: 0.1, depth: 0, spin: 1, flip: true },
   { kind: "cran1", size: 32, x: 0.44, y: 0.2, depth: 0, spin: -1 },
 
@@ -90,10 +84,10 @@ const FRUIT: {
   { kind: "cherry2", size: 88, x: 0.23, y: -0.38, depth: 1, spin: 1, flip: true },
   { kind: "cherry", size: 116, x: 0.3, y: 0.15, depth: 1, spin: -1, flip: true },
   { kind: "cran3", size: 56, x: 0.44, y: 0.04, depth: 1, spin: 1 },
-  { kind: "elder1", size: 32, x: 0.18, y: 0.03, depth: 1, spin: 1 },
-  { kind: "elder2", size: 28, x: -0.3, y: -0.22, depth: 1, spin: -1 },
-  { kind: "elder3", size: 30, x: 0.38, y: 0.27, depth: 1, spin: 1 },
-  { kind: "elder1", size: 26, x: -0.13, y: 0.3, depth: 1, spin: -1, flip: true },
+  { kind: "cran2", size: 40, x: 0.18, y: 0.03, depth: 1, spin: 1 },
+  { kind: "cran1", size: 36, x: -0.3, y: -0.22, depth: 1, spin: -1 },
+  { kind: "cherry2", size: 44, x: 0.38, y: 0.27, depth: 1, spin: 1, flip: true },
+  { kind: "cran3", size: 34, x: -0.13, y: 0.3, depth: 1, spin: -1 },
 
   { kind: "cran2", size: 180, x: -0.42, y: -0.36, depth: 2, spin: 1 },
   { kind: "cherry2", size: 250, x: 0.42, y: 0.27, depth: 2, spin: -1 },
@@ -209,7 +203,7 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
     const stage = one(".journey-stage");
     const sharpLayer = one(".journey-fruit-layer--1");
     const kind3d = (kind: FruitKind): Fruit3DKind =>
-      kind.startsWith("cherry") ? "cherry" : kind.startsWith("cran") ? "cran" : "elder";
+      kind.startsWith("cherry") ? "cherry" : "cran";
     let frame = 0;
     let last = 0;
     let visible = false;
