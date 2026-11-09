@@ -456,7 +456,8 @@
      * Bottle, glow and fruit meet in the middle; the word runs behind the bottle. The point stays clear of
      * the tallest caption (Focus, with its button) even on short screens.
      */
-    --journey-bottle-h: 42svh;
+    /* About as tall as the word, as on desktop. */
+    --journey-bottle-h: 28svh;
     --journey-point: min(
       calc(var(--journey-head) + (100svh - var(--journey-head)) * 0.44),
       calc(100svh - 10.5rem - var(--journey-bottle-h) / 2)
@@ -506,9 +507,10 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 170vmax;
-    height: 170vmax;
-    margin: -85vmax 0 0 -85vmax;
+    /* Just enough to cover the screen while turning; a larger layer strains phone graphics memory. */
+    width: 120vmax;
+    height: 120vmax;
+    margin: -60vmax 0 0 -60vmax;
     opacity: 0.14;
     will-change: transform, opacity;
   }
@@ -779,6 +781,11 @@
   }
 
   @media (min-width: 1024px) {
+    .journey-rays {
+      width: 170vmax;
+      height: 170vmax;
+      margin: -85vmax 0 0 -85vmax;
+    }
     .journey-track {
       --journey-head: 5rem;
       height: 460svh;
@@ -851,9 +858,10 @@
   position: absolute;
   top: 46%;
   left: var(--hero-focus);
-  width: 190vmax;
-  height: 190vmax;
-  margin: -95vmax 0 0 -95vmax;
+  /* Just enough to cover the hero while turning; a larger layer strains phone graphics memory. */
+  width: 135vmax;
+  height: 135vmax;
+  margin: -67.5vmax 0 0 -67.5vmax;
   opacity: 0.28;
 }
 .hero-bubbles {
@@ -940,6 +948,11 @@
 }
 
 @media (min-width: 1024px) {
+  .hero-rays {
+    width: 190vmax;
+    height: 190vmax;
+    margin: -95vmax 0 0 -95vmax;
+  }
   /*
    * Type and bottle scale with the window height, so a fixed content width cannot hold them
    * on a large screen. The slogan gets the width it needs and the bottle takes the rest, which
