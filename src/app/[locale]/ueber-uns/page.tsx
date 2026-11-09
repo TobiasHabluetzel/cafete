@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { Sticker } from "@/components/brand/sticker";
 import { PageHeader, Section, SectionHeader } from "@/components/layout/section";
 import { Story } from "@/components/sections/story";
+import { VideoClip } from "@/components/sections/video-clip";
 import {
   createMetadata,
   generateLocaleParams,
@@ -89,6 +90,8 @@ export default async function AboutPage({ params }: LocaleParams) {
           })}
         </div>
       </Section>
+
+      <VideoClip />
 
       {/* Orange, not charcoal: the footer directly below is charcoal, so a dark
           Vision block merged into it instead of reading as its own section. */}
