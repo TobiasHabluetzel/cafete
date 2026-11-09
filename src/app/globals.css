@@ -429,6 +429,7 @@
 .journey-particles,
 .journey-word,
 .journey-glow,
+.journey-vignette,
 .journey-rail {
   display: none;
 }
@@ -531,33 +532,99 @@
   .journey-bubble:nth-child(2n) {
     display: none;
   }
-  .journey-cherry {
-    --cherry-scale: 0.62;
+  .journey-bubble--tiny {
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.9);
+    background: radial-gradient(circle at 34% 30%, rgba(255, 255, 255, 0.85) 0 22%, rgba(255, 255, 255, 0.18) 60%);
+  }
+  .journey-bubble--large {
+    border-color: rgba(255, 255, 255, 0.62);
+    background:
+      radial-gradient(ellipse 26% 18% at 33% 26%, rgba(255, 255, 255, 0.85) 0%, transparent 100%),
+      radial-gradient(circle at 50% 50%, transparent 58%, rgba(255, 255, 255, 0.2) 92%, rgba(255, 255, 255, 0.34) 100%);
+  }
+  .journey-bubble-layer--front {
+    z-index: 1;
+  }
+  .journey-bubble-layer--over {
+    z-index: 2;
+  }
+  /* The largest bubbles close to the camera sit just out of focus. */
+  .journey-bubble-layer--over .journey-bubble--large {
+    filter: blur(2px);
+  }
+
+  .journey-fruit-layer--0 {
+    z-index: -1;
+  }
+  .journey-fruit-layer--2 {
+    z-index: 2;
+  }
+  .journey-fruit {
+    /* Grows with the screen, so the fruit keeps its presence on a large monitor. */
+    --fruit-size: calc(var(--size) * max(0.66px, 0.15vmin));
     position: absolute;
     top: 0;
     left: 0;
-    width: calc(var(--size) * var(--cherry-scale) * 1px);
-    height: calc(var(--size) * var(--cherry-scale) * 1.08px);
-    margin: -1.25rem 0 0 -1.25rem;
-    border-radius: 50% 50% 47% 47% / 56% 56% 44% 44%;
-    background:
-      radial-gradient(ellipse 22% 15% at 34% 26%, rgba(255, 225, 215, 0.75) 0%, transparent 100%),
-      radial-gradient(circle at 38% 34%, #e8302a 0%, #b5171a 48%, #6d0d0f 82%, #3a0608 100%);
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
+    width: var(--fruit-size);
+    height: var(--fruit-size);
+    margin: calc(var(--fruit-size) / -2) 0 0 calc(var(--fruit-size) / -2);
     opacity: 0;
-    will-change: transform;
+    will-change: transform, opacity;
   }
-  .journey-cherry::after {
-    content: "";
+  .journey-fruit img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .journey-fruit-layer--0 img {
+    filter: blur(3px) brightness(0.8);
+  }
+  .journey-fruit-layer--1 img {
+    filter: drop-shadow(0 16px 20px rgba(0, 0, 0, 0.5));
+  }
+  .journey-fruit-layer--2 img {
+    filter: blur(9px);
+  }
+
+  .journey-vignette {
+    display: block;
     position: absolute;
-    bottom: 5%;
-    left: 50%;
-    width: 18%;
-    height: 11%;
-    margin-left: -9%;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(circle at 50% 48%, transparent 34%, rgba(0, 0, 0, 0.9) 100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .journey-ring {
+    --ring: min(88vmin, 82svh);
+    position: absolute;
+    top: calc(var(--ring) / -2);
+    left: calc(var(--ring) / -2);
+    width: var(--ring);
+    height: var(--ring);
+    overflow: visible;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  .journey-ring circle {
+    fill: none;
+    stroke: var(--color-gold);
+    stroke-width: 0.22;
+  }
+  .journey-mote {
+    position: absolute;
+    top: 0;
+    left: 0;
     border-radius: 50%;
-    background: #2a0506;
-    box-shadow: 0 0 0 1px rgba(90, 15, 12, 0.7);
+    background: #ffe27a;
+    box-shadow: 0 0 8px 2px rgba(255, 196, 70, 0.75);
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  .journey-mote:nth-of-type(2n) {
+    display: none;
   }
 
   .journey-word {
@@ -684,7 +751,8 @@
   }
 
   @media (min-width: 768px) {
-    .journey-bubble:nth-child(2n) {
+    .journey-bubble:nth-child(2n),
+    .journey-mote:nth-of-type(2n) {
       display: block;
     }
   }
@@ -706,9 +774,6 @@
     }
     .journey-bottle {
       height: 76svh;
-    }
-    .journey-cherry {
-      --cherry-scale: 1;
     }
     .journey-scene {
       right: auto;
@@ -735,11 +800,12 @@
 .hero {
   --hero-head: 4rem;
   --hero-gutter: 1rem;
+  --hero-focus: 62%;
   position: relative;
   isolation: isolate;
   min-height: calc(100svh - var(--hero-head));
   overflow: hidden;
-  background: radial-gradient(circle at 62% 46%, var(--color-sunset-glow) 0%, var(--color-sunset) 56%, var(--color-sunset-deep) 118%);
+  background: radial-gradient(circle at var(--hero-focus) 46%, var(--color-sunset-glow) 0%, var(--color-sunset) 56%, var(--color-sunset-deep) 118%);
   color: var(--color-ink);
 }
 .hero-rays-frame {
@@ -748,13 +814,13 @@
   z-index: -2;
   overflow: hidden;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(circle at 62% 46%, black 0%, black 22%, transparent 70%);
-  mask-image: radial-gradient(circle at 62% 46%, black 0%, black 22%, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle at var(--hero-focus) 46%, black 0%, black 22%, transparent 70%);
+  mask-image: radial-gradient(circle at var(--hero-focus) 46%, black 0%, black 22%, transparent 70%);
 }
 .hero-rays {
   position: absolute;
   top: 46%;
-  left: 62%;
+  left: var(--hero-focus);
   width: 190vmax;
   height: 190vmax;
   margin: -95vmax 0 0 -95vmax;
@@ -830,25 +896,52 @@
 }
 
 @media (min-width: 1024px) {
+  /*
+   * Type and bottle scale with the window height, so a fixed content width cannot hold them
+   * on a large screen. The slogan gets the width it needs and the bottle takes the rest, which
+   * keeps the two apart at any window size.
+   */
   .hero {
     --hero-head: 5rem;
-    --hero-gutter: max(2rem, calc((100vw - 80rem) / 2 + 2rem));
+    --hero-gutter: clamp(2rem, 2.5vw, 4rem);
+    --hero-focus: 68%;
+    --hero-bottle-height: min(104svh, 75vw);
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    grid-template-rows: 1fr auto;
+    column-gap: 2rem;
+    padding-inline: var(--hero-gutter);
     min-height: max(40rem, calc(100svh - var(--hero-head)));
   }
   .hero-slogan {
-    top: 7svh;
+    position: relative;
+    top: auto;
+    left: auto;
+    grid-column: 1;
+    grid-row: 1;
+    margin-top: 7svh;
     font-size: min(11.5vw, 23svh);
   }
+  /* Absolute inside its grid area: it may run off the bottom without making the hero taller. */
   .hero-bottle {
-    right: var(--hero-gutter);
+    grid-column: 2;
+    grid-row: 1 / 3;
+    right: 0;
     bottom: -11svh;
-    height: 104svh;
+    left: 0;
+    width: calc(var(--hero-bottle-height) * 437 / 1486);
+    height: var(--hero-bottle-height);
+    margin-inline: auto;
   }
   .hero-foot {
+    position: relative;
     right: auto;
-    bottom: 8svh;
-    left: var(--hero-gutter);
+    bottom: auto;
+    left: auto;
+    grid-column: 1;
+    grid-row: 2;
     width: 26rem;
+    margin-block: 2rem 8svh;
   }
   .hero-title {
     max-width: none;

@@ -57,3 +57,10 @@ The source is named `Kareem_F_009`. Two quirks worth knowing:
 - **The designer's vector logo.** `logo-cafete.svg` is a trace of the 570×451 PNG:
   faithful, but the finest hatching on the bean is simplified. Replace it if the
   original `Cafete.eps` turns up.
+
+## Fruit in the scroll story (`fruit/`)
+
+- `coffee-cherry.webp`: cut out of our own `coffee-cherry-photo.jpg`.
+- `lemon-whole.webp`: Pixabay Content License, https://pixabay.com/photos/lemon-yellow-citrus-yellow-lemon-3330200/
+- `lemon-slice.webp`: Pixabay Content License, https://pixabay.com/photos/fruit-lemons-citrus-juicy-healthy-2489366/
+- `lemon-small.webp`: Pixabay Content License, https://pixabay.com/photos/lemon-fruit-fresh-god-vitamin-4744686/
