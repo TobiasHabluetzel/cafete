@@ -8,11 +8,15 @@ import { ctaClass } from "@/components/brand/cta-button";
 import { Link } from "@/i18n/navigation";
 
 import bottle from "../../../public/bottle-transparent.png";
+import coffeeCherry from "../../../public/fruit/coffee-cherry.webp";
+import lemonSlice from "../../../public/fruit/lemon-slice.webp";
+import lemonSmall from "../../../public/fruit/lemon-small.webp";
+import lemonWhole from "../../../public/fruit/lemon-whole.webp";
 
 /**
  * The scroll story: the bottle stays pinned while the slogan plays out around it.
- * Fruity (cherries fly in), Fizzy (the world turns orange and bubbles rise),
- * Focus (the sun opens up and the order button arrives).
+ * Fruity (photographed fruit flies in, in three layers of depth), Fizzy (the world turns
+ * orange and bubbles rise), Focus (everything draws in on the bottle and the word snaps sharp).
  *
  * Everything moves through `transform` and `opacity`, written straight to the
  * elements from one animation frame, so React never re-renders during a scroll.
@@ -39,31 +43,109 @@ const SCENES = [
  * Fixed tables rather than Math.random(): the server and the first client render
  * have to produce identical markup. Positions are fractions of the stage size.
  */
-const CHERRIES = [
-  { size: 64, fromX: -0.62, fromY: -0.5, toX: -0.33, toY: -0.27, spin: 1 },
-  { size: 40, fromX: -0.7, fromY: 0.06, toX: -0.42, toY: -0.06, spin: -1 },
-  { size: 78, fromX: -0.68, fromY: 0.18, toX: -0.34, toY: 0.15, spin: 1 },
-  { size: 32, fromX: -0.32, fromY: -0.72, toX: -0.2, toY: -0.36, spin: -1 },
-  { size: 50, fromX: 0.6, fromY: -0.6, toX: 0.31, toY: -0.3, spin: -1 },
-  { size: 72, fromX: 0.72, fromY: -0.04, toX: 0.39, toY: -0.04, spin: 1 },
-  { size: 36, fromX: 0.58, fromY: 0.68, toX: 0.34, toY: 0.24, spin: -1 },
-  { size: 56, fromX: 0.3, fromY: 0.78, toX: 0.24, toY: 0.32, spin: 1 },
-  { size: 28, fromX: 0.34, fromY: -0.76, toX: 0.17, toY: -0.39, spin: 1 },
-  { size: 26, fromX: 0.14, fromY: 0.8, toX: 0.14, toY: 0.36, spin: -1 },
+const FRUIT_IMAGE = {
+  cherry: coffeeCherry,
+  lemon: lemonWhole,
+  slice: lemonSlice,
+  small: lemonSmall,
+};
+type FruitKind = keyof typeof FRUIT_IMAGE;
+
+/** 0 sits soft behind the word, 1 is sharp in front of it, 2 is out of focus close to the camera. */
+type Depth = 0 | 1 | 2;
+const DRIFT: Record<Depth, number> = { 0: 0.03, 1: 0.08, 2: 0.26 };
+
+/** Real photographs. Their light comes from one side, so they only turn a little. */
+const FRUIT: { kind: FruitKind; size: number; x: number; y: number; depth: Depth; spin: number }[] = [
+  { kind: "cherry", size: 50, x: -0.44, y: -0.3, depth: 0, spin: 1 },
+  { kind: "cherry", size: 44, x: 0.46, y: -0.2, depth: 0, spin: -1 },
+  { kind: "slice", size: 62, x: 0.27, y: -0.42, depth: 0, spin: 1 },
+  { kind: "small", size: 62, x: -0.27, y: 0.17, depth: 0, spin: -1 },
+  { kind: "cherry", size: 40, x: -0.47, y: 0.1, depth: 0, spin: 1 },
+  { kind: "cherry", size: 38, x: 0.44, y: 0.2, depth: 0, spin: -1 },
+
+  { kind: "lemon", size: 170, x: -0.34, y: -0.08, depth: 1, spin: -1 },
+  { kind: "cherry", size: 100, x: -0.2, y: 0.17, depth: 1, spin: 1 },
+  { kind: "cherry", size: 66, x: -0.21, y: -0.38, depth: 1, spin: -1 },
+  { kind: "slice", size: 128, x: 0.36, y: -0.2, depth: 1, spin: 1 },
+  { kind: "cherry", size: 84, x: 0.23, y: -0.38, depth: 1, spin: 1 },
+  { kind: "cherry", size: 112, x: 0.3, y: 0.15, depth: 1, spin: -1 },
+  { kind: "small", size: 92, x: 0.44, y: 0.04, depth: 1, spin: 1 },
+
+  { kind: "small", size: 210, x: -0.42, y: -0.36, depth: 2, spin: 1 },
+  { kind: "cherry", size: 250, x: 0.42, y: 0.27, depth: 2, spin: -1 },
+  { kind: "slice", size: 180, x: 0.43, y: -0.4, depth: 2, spin: 1 },
 ];
 
-const BUBBLES = Array.from({ length: 34 }, (_, index) => ({
+/** Three sizes, because real fizz is mostly tiny with a few large bubbles among it. */
+const BUBBLES = Array.from({ length: 132 }, (_, index) => {
+  const large = index % 11 === 0;
+  const medium = !large && index % 3 === 0;
   // Golden-ratio spacing spreads them evenly without looking like a grid.
-  x: ((index * 0.618034) % 1) * 1.04 - 0.02,
-  phase: (index * 0.381966) % 1,
-  size: 8 + ((index * 7) % 30),
-  speed: 1.1 + ((index * 3) % 7) / 5,
+  const spread = ((index * 0.618034) % 1) * 1.04 - 0.02;
+  return {
+    // Every fifth one rises around the bottle, like the stream from an opened drink.
+    x: index % 5 === 0 ? 0.4 + ((index * 0.381966) % 1) * 0.2 : spread,
+    phase: (index * 0.381966) % 1,
+    size: large ? 38 + ((index * 7) % 30) : medium ? 14 + ((index * 5) % 18) : 4 + ((index * 3) % 8),
+    speed: large ? 0.9 + ((index * 3) % 5) / 10 : medium ? 1.3 + ((index * 3) % 6) / 8 : 1.7 + ((index * 3) % 7) / 5,
+    kind: large ? "large" : medium ? "medium" : "tiny",
+    // Most stay behind the word; some pass in front of it, and a few in front of the bottle too.
+    layer: index % 13 === 0 ? "over" : index % 3 === 1 ? "front" : "back",
+  };
+});
+
+const MOTES = Array.from({ length: 44 }, (_, index) => ({
+  angle: index * 2.39996,
+  from: 0.55 + ((index * 0.381966) % 1) * 0.5,
+  to: 0.2 + ((index * 0.618034) % 1) * 0.26,
+  lag: ((index * 0.618034) % 1) * 0.08,
+  size: 2 + ((index * 3) % 5),
+  turn: index % 2 === 0 ? 1 : -1,
 }));
+
+const RINGS = [{ dashed: false }, { dashed: true }, { dashed: false }, { dashed: true }];
 
 export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
   const t = useTranslations("journey");
   const tHero = useTranslations("hero");
   const track = useRef<HTMLElement>(null);
+
+  const renderFruit = (depth: Depth) => (
+    <div
+      aria-hidden
+      className={`journey-particles journey-particles--centered journey-fruit-layer journey-fruit-layer--${depth}`}
+    >
+      {FRUIT.map((fruit, index) =>
+        fruit.depth === depth ? (
+          <span
+            key={index}
+            data-i={index}
+            className="journey-fruit"
+            style={{ "--size": fruit.size } as React.CSSProperties}
+          >
+            {/* Eager, because a lazy image inside a hidden layer would pop in as the scene starts. */}
+            <Image src={FRUIT_IMAGE[fruit.kind]} alt="" loading="eager" sizes="(max-width: 1024px) 40vw, 24vw" />
+          </span>
+        ) : null,
+      )}
+    </div>
+  );
+
+  const renderBubbles = (layer: "back" | "front" | "over") => (
+    <div aria-hidden className={`journey-particles journey-bubble-layer journey-bubble-layer--${layer}`}>
+      {BUBBLES.map((bubble, index) =>
+        bubble.layer === layer ? (
+          <span
+            key={index}
+            data-i={index}
+            className={`journey-bubble journey-bubble--${bubble.kind}`}
+            style={{ width: bubble.size, height: bubble.size }}
+          />
+        ) : null,
+      )}
+    </div>
+  );
 
   useEffect(() => {
     const root = track.current;
@@ -75,8 +157,18 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
 
     const words = all(".journey-word > span");
     const scenes = all(".journey-scene");
-    const cherries = all(".journey-cherry");
+    const fruits = all(".journey-fruit");
     const bubbles = all(".journey-bubble");
+    const rings = all(".journey-ring");
+    const motes = all(".journey-mote");
+    const fruitLayers = all(".journey-fruit-layer");
+    const bubbleLayers = all(".journey-bubble-layer");
+    const focusLayers = all(".journey-focus-layer");
+    const vignette = one(".journey-vignette");
+    // Off-stage layers leave the page entirely, so all these elements cost nothing outside their scene.
+    const show = (layers: HTMLElement[], on: boolean) => {
+      for (const layer of layers) layer.style.display = on ? "block" : "none";
+    };
     const bgSunset = one(".journey-bg--sunset");
     const bgFocus = one(".journey-bg--focus");
     const rays = one(".journey-rays");
@@ -143,28 +235,75 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
         }
       });
 
-      // Cherries fly in around the bottle, then get pulled into it.
-      const arrive = easeOut(seg(0.02, 0.24));
-      const absorb = smooth(seg(0.27, 0.36));
-      cherries.forEach((el, index) => {
-        const c = CHERRIES[index];
-        const x = lerp(lerp(c.fromX, c.toX, arrive), 0, absorb) * width;
-        const y = lerp(lerp(c.fromY, c.toY, arrive), 0, absorb) * height;
-        el.style.opacity = String(seg(0.02, 0.06) * (1 - absorb));
-        el.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${p * 900 * c.spin}deg) scale(${1 - absorb * 0.8})`;
-      });
+      // Fruit flies in around the bottle. The sharp layers get pulled into it; the ones close to the camera fly past.
+      const fruitOn = p < 0.4;
+      show(fruitLayers, fruitOn);
+      if (fruitOn) {
+        const absorb = smooth(seg(0.27, 0.36));
+        for (const el of fruits) {
+          const index = Number(el.dataset.i);
+          const f = FRUIT[index];
+          const lag = ((index * 0.618034) % 1) * 0.07;
+          const arrive = easeOut(seg(0.015 + lag, 0.2 + lag));
+          const push = 1 + DRIFT[f.depth] * seg(0.02, 0.34);
+          const restX = lerp(f.x * 2.3, f.x, arrive) * push;
+          const restY = lerp(f.y * 2.3 + (f.y < 0 ? -0.2 : 0.2), f.y, arrive) * push + Math.sin(p * 26 + index) * 0.012;
+          const past = f.depth === 2;
+          const x = lerp(restX, past ? restX * 2.2 : 0, absorb) * width;
+          const y = lerp(restY, past ? restY * 2.2 : 0, absorb) * height;
+          const scale = past ? 1 + absorb * 0.5 : 1 - absorb * 0.8;
+          // A photo has its light baked in, so a full spin would give it away.
+          const turn = `rotate(${f.spin * (10 + p * 50)}deg)`;
+          el.style.opacity = String(seg(0.015 + lag, 0.07 + lag) * (1 - absorb));
+          el.style.transform = `translate3d(${x}px, ${y}px, 0) ${turn} scale(${scale})`;
+        }
+      }
 
       // Bubbles only exist in the Fizzy scene; their height is tied to the scroll.
-      const fizz = smooth(seg(0.33, 0.4)) * (1 - smooth(seg(0.62, 0.68)));
-      const lift = seg(0.3, 0.7);
-      bubbles.forEach((el, index) => {
-        const b = BUBBLES[index];
-        const climb = (b.phase + lift * b.speed) % 1.2;
-        const y = height * (1.1 - climb);
-        const x = (b.x + Math.sin(climb * 9 + index) * 0.015) * width;
-        el.style.opacity = String(fizz * 0.9);
-        el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      });
+      const fizzOn = p > 0.28 && p < 0.72;
+      show(bubbleLayers, fizzOn);
+      if (fizzOn) {
+        const fizz = smooth(seg(0.33, 0.4)) * (1 - smooth(seg(0.62, 0.68)));
+        const lift = seg(0.3, 0.7);
+        for (const el of bubbles) {
+          const index = Number(el.dataset.i);
+          const b = BUBBLES[index];
+          const climb = (b.phase + lift * b.speed) % 1.2;
+          const y = height * (1.1 - climb);
+          const x = (b.x + Math.sin(climb * 9 + index) * 0.015) * width;
+          el.style.opacity = String(fizz * 0.92);
+          el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        }
+      }
+
+      // Focus: the word snaps sharp, rings close in on the bottle, gold dust spirals towards it.
+      const focusOn = p > 0.62;
+      show(focusLayers, focusOn);
+      const focusWord = words[2];
+      if (focusWord) {
+        const sharp = smooth(seg(0.665, 0.77));
+        focusWord.style.filter = focusOn && sharp < 1 ? `blur(${(1 - sharp) * 22}px)` : "none";
+      }
+      if (focusOn) {
+        if (vignette) vignette.style.opacity = String(0.7 * smooth(seg(0.68, 0.86)));
+        rings.forEach((el, index) => {
+          const close = easeOut(seg(0.665 + index * 0.03, 0.86 + index * 0.03));
+          const size = lerp(2.5 + index * 0.45, 1 + index * 0.24, close);
+          el.style.opacity = String(close * (0.6 - index * 0.1));
+          el.style.transform = `scale(${size}) rotate(${p * (index % 2 ? -200 : 200)}deg)`;
+        });
+        const far = Math.max(width, height);
+        const near = Math.min(width, height);
+        for (const el of motes) {
+          const index = Number(el.dataset.i);
+          const m = MOTES[index];
+          const draw = easeOut(seg(0.665 + m.lag, 0.96));
+          const radius = lerp(m.from * far, m.to * near, draw);
+          const angle = m.angle + p * 3 * m.turn;
+          el.style.opacity = String(draw * (0.55 + 0.45 * Math.sin(p * 70 + index)));
+          el.style.transform = `translate3d(${Math.cos(angle) * radius}px, ${Math.sin(angle) * radius}px, 0)`;
+        }
+      }
 
       if (rail) rail.style.transform = `scaleY(${p})`;
     };
@@ -235,15 +374,8 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
           <div className="journey-rays rays" />
         </div>
 
-        <div aria-hidden className="journey-particles">
-          {BUBBLES.map((bubble, index) => (
-            <span
-              key={index}
-              className="journey-bubble"
-              style={{ width: bubble.size, height: bubble.size }}
-            />
-          ))}
-        </div>
+        {renderBubbles("back")}
+        {renderFruit(0)}
 
         {SCENES.map((scene) => (
           <p key={scene.key} aria-hidden className={`journey-word journey-word--${scene.key}`}>
@@ -251,15 +383,31 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
           </p>
         ))}
 
-        <div aria-hidden className="journey-particles journey-particles--centered">
-          {CHERRIES.map((cherry, index) => (
+        <div aria-hidden className="journey-vignette journey-focus-layer" />
+        <div aria-hidden className="journey-particles journey-particles--centered journey-focus-layer">
+          {RINGS.map((ring, index) => (
+            <svg key={index} className="journey-ring" viewBox="0 0 100 100">
+              <circle
+                cx="50"
+                cy="50"
+                r="49.5"
+                pathLength={360}
+                strokeDasharray={ring.dashed ? "0.6 3.4" : undefined}
+              />
+            </svg>
+          ))}
+          {MOTES.map((mote, index) => (
             <span
               key={index}
-              className="journey-cherry"
-              style={{ "--size": cherry.size } as React.CSSProperties}
+              data-i={index}
+              className="journey-mote"
+              style={{ width: mote.size, height: mote.size }}
             />
           ))}
         </div>
+
+        {renderBubbles("front")}
+        {renderFruit(1)}
 
         <div aria-hidden className="journey-glow" />
 
@@ -268,6 +416,9 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
             <Image src={bottle} alt={t("bottleAlt")} sizes="(max-width: 1024px) 40vw, 18rem" />
           </div>
         </div>
+
+        {renderBubbles("over")}
+        {renderFruit(2)}
 
         {SCENES.map((scene) => (
           <div key={scene.key} className={`journey-scene journey-scene--${scene.key}`}>
