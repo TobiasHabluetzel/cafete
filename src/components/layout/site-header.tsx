@@ -37,7 +37,10 @@ export function SiteHeader() {
      * Text on orange is charcoal/ink — cream is only 2.3:1 here, and black on
      * orange is what the artwork itself does.
      */
-    <header className="bg-sunset text-charcoal border-ink/25 sticky top-0 z-50 border-b-2">
+    <header
+      className="bg-sunset text-charcoal border-ink/25 sticky top-0 z-50 border-b-2"
+      style={{ viewTransitionName: "site-header" }}
+    >
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:h-20 lg:px-8">
         <Link
           href="/"
@@ -90,7 +93,7 @@ export function SiteHeader() {
             render={<Link href="/warenkorb" />}
             className="text-charcoal hover:bg-ink/10 hover:text-ink relative"
           >
-            <ShoppingBag />
+            <ShoppingBag data-cart-target />
             {/* `ready` gates this so the server markup and first paint agree. */}
             {ready && totalItems > 0 ? (
               <span

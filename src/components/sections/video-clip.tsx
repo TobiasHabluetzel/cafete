@@ -1,19 +1,13 @@
 import { useTranslations } from "next-intl";
 
+import { VideoPlayer } from "@/components/sections/video-player";
+
 /**
- * The founders' clip, embedded between the slogan marquee and the coffee-fruit
- * section — the slot the owner marked.
- *
- * Deliberately not autoplayed and not upscaled:
- *
- * - The source is 368×368 and 2:22 long. Stretching a 368px video across a wide
- *   section would look soft, so it is capped near its native width and framed,
- *   which reads as an intentional clip rather than a blurry banner.
- * - At 11 MB and 142 seconds it is far too heavy to autoplay, and Railway serves
- *   it without a CDN. `preload="metadata"` means visitors who never press play
- *   fetch only a few kilobytes.
- * - Self-hosted rather than embedded from YouTube: no third-party tracking, which
- *   keeps the cookie-free claim in the privacy policy honest.
+ * The founder's clip. Deliberately not autoplayed and not upscaled: the source is
+ * only 368×368, so it stays near its native width, framed like a clip rather than
+ * a blurry banner. Self-hosted rather than embedded from YouTube, so nobody loads
+ * anything from a third party, and nothing of the file loads until someone presses
+ * play. The poster is a still from the clip, public/cafete-clip-poster.jpg.
  */
 export function VideoClip() {
   const t = useTranslations("video");
@@ -27,14 +21,7 @@ export function VideoClip() {
         </div>
 
         <div className="mt-8 flex justify-center">
-          <video
-            controls
-            preload="metadata"
-            playsInline
-            className="border-ink/80 bg-charcoal w-full max-w-[26rem] rounded-lg border-2 shadow-[6px_6px_0_rgba(0,0,0,0.45)]"
-          >
-            <source src="/cafete-clip.mp4" type="video/mp4" />
-          </video>
+          <VideoPlayer playLabel={t("play")} />
         </div>
       </div>
     </section>

@@ -2,6 +2,7 @@ import { setRequestLocale } from "next-intl/server";
 
 import { SloganMarquee } from "@/components/brand/marquee";
 import { CoffeeFruit } from "@/components/sections/coffee-fruit";
+import { FlavourJourney } from "@/components/sections/flavour-journey";
 import { Hero } from "@/components/sections/hero";
 import { Pillars } from "@/components/sections/pillars";
 import { ShopTeaser } from "@/components/sections/shop-teaser";
@@ -39,6 +40,7 @@ export default async function HomePage({
     <>
       <Hero entryPrice={entryPrice} />
       <SloganMarquee />
+      <FlavourJourney entryPrice={entryPrice} />
       <VideoClip />
       <CoffeeFruit />
       <Pillars />

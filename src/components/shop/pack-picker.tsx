@@ -9,6 +9,7 @@ import { ctaClass } from "@/components/brand/cta-button";
 import { Sticker } from "@/components/brand/sticker";
 import { useCart } from "@/components/shop/use-cart";
 import type { PackPrice } from "@/lib/pricing";
+import { flyToCart } from "@/lib/fly-to-cart";
 import { formatMoney } from "@/lib/format-money";
 import { cn } from "@/lib/utils";
 
@@ -50,7 +51,8 @@ export function PackPicker({
   const { add } = useCart();
   const [justAdded, setJustAdded] = useState<number | null>(null);
 
-  function onAdd(bottles: number) {
+  function onAdd(bottles: number, button: HTMLElement) {
+    flyToCart(button.closest("li")?.querySelector("img"));
     add(bottles);
     setJustAdded(bottles);
     window.setTimeout(() => {
@@ -91,7 +93,7 @@ export function PackPicker({
         return (
           <li
             key={pack.bottles}
-            className="border-ink/85 relative flex flex-col rounded-lg border-2 bg-white p-5 shadow-[5px_5px_0_rgba(0,0,0,0.35)]"
+            className="border-ink/85 relative flex flex-col rounded-lg border-2 bg-white p-5 shadow-[5px_5px_0_rgba(0,0,0,0.35)] transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-[7px_9px_0_rgba(0,0,0,0.35)] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
           >
             {price && pack.bottles === bestValue ? (
               <Sticker
@@ -109,16 +111,17 @@ export function PackPicker({
               </Sticker>
             ) : null}
 
-            {/* The pack shots are landscape while the single bottle is tall, so
-                the box is fixed and the image is contained rather than sized by
-                height — otherwise a 6-bottle group would run off the card. */}
+            {/* The pack shots are landscape while the single bottle is tall, so the
+                box is fixed and the image is contained. It fills the box from the
+                start: sized by `w-auto` it stayed 0×0 until loaded, so the blur
+                placeholder never showed and the card sat empty. */}
             <div className="flex h-52 items-center justify-center">
               <Image
                 src={PACK_IMAGES[pack.bottles] ?? bottle}
                 alt={tPacks("imageAlt", { pack: tPacks(pack.labelKey) })}
                 sizes="(max-width: 1024px) 80vw, 20rem"
                 placeholder="blur"
-                className="max-h-full w-auto max-w-full object-contain drop-shadow-[0_10px_24px_rgba(20,16,14,0.25)]"
+                className="h-full w-full object-contain drop-shadow-[0_10px_24px_rgba(20,16,14,0.25)]"
               />
             </div>
 
@@ -170,7 +173,7 @@ export function PackPicker({
             ) : (
               <button
                 type="button"
-                onClick={() => onAdd(pack.bottles)}
+                onClick={(event) => onAdd(pack.bottles, event.currentTarget)}
                 aria-live="polite"
                 className={cn(
                   ctaClass({ variant: added ? "dark" : "solid", size: "md" }),

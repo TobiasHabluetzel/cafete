@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { ViewTransition } from "react";
 
 import { ctaClass } from "@/components/brand/cta-button";
 import { SunburstRays, WarmGlow } from "@/components/brand/sunburst";
@@ -21,19 +22,21 @@ export function Hero({ entryPrice }: { entryPrice: string | null }) {
        * clip the top and bottom off a bottle this tall.
        */}
       <div className="relative h-[19rem] sm:h-[24rem] lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[54%]">
-        <Image
-          src={bottle}
-          alt=""
-          priority
-          sizes="(max-width: 1024px) 100vw, 54vw"
-          className="size-full object-cover object-center"
-          style={{
-            maskImage:
-              "linear-gradient(to bottom, black 0%, black 64%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, black 0%, black 64%, transparent 100%)",
-          }}
-        />
+        <ViewTransition name="cafete-bottle" share="bottle-morph" default="none">
+          <Image
+            src={bottle}
+            alt=""
+            priority
+            sizes="(max-width: 1024px) 100vw, 54vw"
+            className="size-full object-cover object-center"
+            style={{
+              maskImage:
+                "linear-gradient(to bottom, black 0%, black 64%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to bottom, black 0%, black 64%, transparent 100%)",
+            }}
+          />
+        </ViewTransition>
         <div
           aria-hidden
           className="absolute inset-0 hidden lg:block"

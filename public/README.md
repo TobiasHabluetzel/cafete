@@ -10,7 +10,9 @@ node scripts/process-assets.mjs "/Users/tobiashablutzel/Desktop/Cafeete"
 
 | Output | Source | Treatment |
 | --- | --- | --- |
-| `logo-cafete.png` | `Cafété Logo satt.png` | Re-encoded, **orange background kept** |
+| `logo-cafete.svg` | Traced from `Cafété Logo satt.png` | Vector master in the exact brand colours, **orange background kept** |
+| `logo-cafete.png` | `logo-cafete.svg` | Rendered at 1710 px; what the site serves, because the SVG is far heavier |
+| `cafete-clip-poster.jpg` | `cafete-clip.mp4` at 14 s | Video still, enlarged 2×, q82 |
 | `banner-slogan.png` | `Slogan Orange Schwarz optimiert mit Lineal.png` | Orange keyed out → black ink on transparent |
 | `coffee-cherry-illustration.png` | `Kaffeekirsche.png` | Orange keyed out via border flood fill |
 | `coffee-cherry-photo.jpg` | `Kaffeekirsche für Post.png` | Resized, mozjpeg q84 |
@@ -53,5 +55,6 @@ The source is named `Kareem_F_009`. Two quirks worth knowing:
 
 ## Still missing from the designer
 
-- **A vector logo.** The source is only 570×451, so the header and hero render it
-  below 2× on retina. An SVG or a ≥1500px PNG export would sharpen it.
+- **The designer's vector logo.** `logo-cafete.svg` is a trace of the 570×451 PNG:
+  faithful, but the finest hatching on the bean is simplified. Replace it if the
+  original `Cafete.eps` turns up.

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import { ViewTransition } from "react";
 
 import { ctaClass } from "@/components/brand/cta-button";
 import { PageHeader, Section } from "@/components/layout/section";
@@ -105,14 +106,16 @@ export default async function ProductPage({ params }: LocaleParams) {
       <Section tone="cream">
         <div className="grid gap-12 lg:grid-cols-[0.7fr_1fr] lg:gap-16">
           <div className="relative mx-auto w-full max-w-sm lg:mx-0">
-            <Image
-              src={bottle}
-              alt={t("bottleAlt")}
-              priority
-              sizes="(max-width: 1024px) 80vw, 30vw"
-              placeholder="blur"
-              className="border-ink/80 h-auto w-full rounded-lg border-2 shadow-[6px_6px_0_rgba(0,0,0,0.35)]"
-            />
+            <ViewTransition name="cafete-bottle" share="bottle-morph" default="none">
+              <Image
+                src={bottle}
+                alt={t("bottleAlt")}
+                priority
+                sizes="(max-width: 1024px) 80vw, 30vw"
+                placeholder="blur"
+                className="border-ink/80 h-auto w-full rounded-lg border-2 shadow-[6px_6px_0_rgba(0,0,0,0.35)]"
+              />
+            </ViewTransition>
           </div>
 
           <div>
