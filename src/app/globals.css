@@ -1048,7 +1048,7 @@
 }
 .tilt {
   transform-style: preserve-3d;
-  transition: transform 0.25s ease-out;
+  transition: transform 0.2s ease-out;
 }
 ::selection {
   background: var(--color-gold);

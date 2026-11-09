@@ -128,7 +128,7 @@ export function Playground() {
           const box = card.getBoundingClientRect();
           const x = (event.clientX - box.left) / box.width - 0.5;
           const y = (event.clientY - box.top) / box.height - 0.5;
-          card.style.transform = `perspective(900px) rotateX(${-y * 7}deg) rotateY(${x * 7}deg)`;
+          card.style.transform = `perspective(700px) rotateX(${-y * 18}deg) rotateY(${x * 18}deg) scale(1.03)`;
         },
         { passive: true },
       );
