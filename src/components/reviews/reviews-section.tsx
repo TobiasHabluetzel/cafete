@@ -31,7 +31,7 @@ export async function ReviewsSection({ locale }: { locale: string }) {
   });
 
   return (
-    <Section tone="white">
+    <Section id="bewertungen" tone="white" className="scroll-mt-24">
       <SectionHeader
         label={t("label")}
         title={t("title")}

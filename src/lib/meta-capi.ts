@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import type Stripe from "stripe";
 
 import { site } from "@/config/site";
+import { META_PIXEL_ID } from "@/lib/meta-pixel";
 
 /**
  * Meta Conversions API — the server-side half of the Purchase event.
@@ -12,7 +13,7 @@ import { site } from "@/config/site";
  * the Stripe webhook as well closes that gap; Meta matches the two by `event_id`
  * (the Checkout Session ID, also used by the order page) and counts it once.
  *
- * Needs both `NEXT_PUBLIC_META_PIXEL_ID` and `META_CAPI_TOKEN` (Events Manager →
+ * Needs `META_CAPI_TOKEN` (Events Manager →
  * Settings → Conversions API → Generate access token). Without them this does
  * nothing. Personal data is only ever sent SHA-256 hashed, as Meta requires.
  */
@@ -23,7 +24,7 @@ function sha256(value: string) {
 }
 
 export async function sendPurchaseToMeta(session: Stripe.Checkout.Session) {
-  const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+  const pixelId = META_PIXEL_ID;
   const token = process.env.META_CAPI_TOKEN;
   if (!pixelId || !token || session.payment_status !== "paid") return;
 

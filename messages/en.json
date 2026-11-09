@@ -592,7 +592,41 @@
           ]
         },
         {
-          "heading": "8. Retention",
+          "heading": "8. Reviews",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "If you submit a review, we store your name, your star rating, your text, the language and the time. Giving your email address is optional."
+            },
+            {
+              "type": "p",
+              "text": "After we have checked it, your name, star rating and text are published on our website. Your email address is not published. We use it only to reply to you and to recognise repeat submissions."
+            },
+            {
+              "type": "p",
+              "text": "To protect against misuse, a hashed value of your IP address may also be stored. We do not store the IP address itself in this case."
+            },
+            {
+              "type": "p",
+              "text": "We may keep reviews we do not publish so that our decisions can be traced. To have your review deleted, simply write to info@drink-cafete.ch."
+            }
+          ]
+        },
+        {
+          "heading": "9. Newsletter",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "If you sign up for our newsletter, your email address is sent to us by email and used to send you news about CAFÉTÉ, availability and events."
+            },
+            {
+              "type": "p",
+              "text": "You can unsubscribe at any time by writing to info@drink-cafete.ch."
+            }
+          ]
+        },
+        {
+          "heading": "10. Retention",
           "blocks": [
             {
               "type": "p",
@@ -601,7 +635,7 @@
           ]
         },
         {
-          "heading": "9. Rights of data subjects",
+          "heading": "11. Rights of data subjects",
           "blocks": [
             {
               "type": "p",
@@ -614,7 +648,7 @@
           ]
         },
         {
-          "heading": "10. Changes",
+          "heading": "12. Changes",
           "blocks": [
             {
               "type": "p",

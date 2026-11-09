@@ -592,7 +592,41 @@
           ]
         },
         {
-          "heading": "8. Aufbewahrung",
+          "heading": "8. Bewertungen",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Wenn Sie eine Bewertung abgeben, speichern wir Ihren Namen, Ihre Sternewertung, Ihren Text, die Sprache und den Zeitpunkt. Die Angabe Ihrer E-Mail-Adresse ist freiwillig."
+            },
+            {
+              "type": "p",
+              "text": "Name, Sternewertung und Text werden nach unserer Prüfung auf unserer Website veröffentlicht. Ihre E-Mail-Adresse wird nicht veröffentlicht. Wir verwenden sie nur, um Ihnen zu antworten und mehrfache Einsendungen zu erkennen."
+            },
+            {
+              "type": "p",
+              "text": "Zum Schutz vor Missbrauch kann zusätzlich ein gehashter Wert Ihrer IP-Adresse gespeichert werden. Die IP-Adresse selbst speichern wir dabei nicht."
+            },
+            {
+              "type": "p",
+              "text": "Bewertungen, die wir nicht veröffentlichen, können wir zur Nachvollziehbarkeit aufbewahren. Möchten Sie Ihre Bewertung löschen lassen, genügt eine Nachricht an info@drink-cafete.ch."
+            }
+          ]
+        },
+        {
+          "heading": "9. Newsletter",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Wenn Sie sich für unseren Newsletter anmelden, wird Ihre E-Mail-Adresse per E-Mail an uns übermittelt und von uns verwendet, um Ihnen Neuigkeiten zu CAFÉTÉ, zur Verfügbarkeit und zu Events zu senden."
+            },
+            {
+              "type": "p",
+              "text": "Sie können sich jederzeit abmelden. Eine Nachricht an info@drink-cafete.ch genügt."
+            }
+          ]
+        },
+        {
+          "heading": "10. Aufbewahrung",
           "blocks": [
             {
               "type": "p",
@@ -601,7 +635,7 @@
           ]
         },
         {
-          "heading": "9. Rechte betroffener Personen",
+          "heading": "11. Rechte betroffener Personen",
           "blocks": [
             {
               "type": "p",
@@ -614,7 +648,7 @@
           ]
         },
         {
-          "heading": "10. Änderungen",
+          "heading": "12. Änderungen",
           "blocks": [
             {
               "type": "p",
