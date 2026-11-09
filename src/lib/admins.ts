@@ -1,5 +1,7 @@
 import "server-only";
 
+import { createHash } from "node:crypto";
+
 import { eq } from "drizzle-orm";
 
 import { getDb, isDatabaseConfigured } from "@/db";
@@ -14,10 +16,22 @@ import { adminEmails, type AdminEmail } from "@/db/schema";
  *    no sequence of clicks locks everyone out, and it still works when the
  *    database is unreachable.
  * 2. the `admin_emails` table — managed on the admin page.
+ * 3. `OWNER_ADMIN_HASHES` below — owners who may not have access to the hosting
+ *    settings. Hashed, because this repository is public.
  *
  * Checked on every request rather than baked into the session, so removing
  * someone takes effect immediately instead of whenever their cookie expires.
  */
+
+/** SHA-256 of the lowercased address. Remove a line to revoke that access. */
+const OWNER_ADMIN_HASHES = [
+  "0541a38d4b9dde1810192681d26b714ba3914276f0e84f82144fa5ffb88f0972",
+];
+
+function isOwnerAdmin(email: string): boolean {
+  const hash = createHash("sha256").update(email.trim().toLowerCase()).digest("hex");
+  return OWNER_ADMIN_HASHES.includes(hash);
+}
 
 /** The env list, lowercased. */
 export function bootstrapAdmins(): string[] {
@@ -51,7 +65,7 @@ export async function listManagedAdmins(): Promise<AdminEmail[]> {
 export async function isAllowedAdmin(email: string): Promise<boolean> {
   const normalised = email.trim().toLowerCase();
   if (!normalised) return false;
-  if (isBootstrapAdmin(normalised)) return true;
+  if (isBootstrapAdmin(normalised) || isOwnerAdmin(normalised)) return true;
   if (!isDatabaseConfigured()) return false;
 
   try {
