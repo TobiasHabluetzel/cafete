@@ -77,7 +77,7 @@
   "story": {
     "label": "Unsere Geschichte",
     "title": "Wie alles begann",
-    "p1": "Angefangen hat CAFÉTÉ vor drei Jahren in einem <b>claro-Laden</b>. Dort entdeckte Kareem, leidenschaftlicher Gastronom seit rund 20 Jahren und einer der beiden Gründer, einen grossen Glasbehälter voll getrockneter, rötlicher Früchte. Was das war, konnte er nicht sagen. Auf Nachfrage erfuhr er: <b>ein Teil der Kaffeepflanze</b>. Das Interesse war geweckt — und weil damals kaum jemand danach fragte, bekam er eine Handvoll zum Probieren geschenkt.",
+    "p1": "Angefangen hat CAFÉTÉ vor drei Jahren in einem <b>claro-Laden</b>. Dort entdeckte Kareem, leidenschaftlicher Gastronom seit rund 20 Jahren und Gründer von CAFÉTÉ, einen grossen Glasbehälter voll getrockneter, rötlicher Früchte. Was das war, konnte er nicht sagen. Auf Nachfrage erfuhr er: <b>ein Teil der Kaffeepflanze</b>. Das Interesse war geweckt — und weil damals kaum jemand danach fragte, bekam er eine Handvoll zum Probieren geschenkt.",
     "p2": "Zuhause bereitete er daraus seinen ersten Aufguss zu: <b>fruchtig, leicht säuerlich und überraschend eigenständig</b>. Je mehr Kareem über die Kaffeefrucht lernte, desto klarer wurde ihm, dass in dieser Frucht weit mehr steckt.",
     "p3": "Drei Jahre später wurde aus einer Handvoll Kaffeefrüchten CAFÉTÉ.",
     "teaser": "Innerhalb von drei Jahren entwickelte sich aus einer Handvoll Kaffeefrüchten Cafété.",
@@ -89,17 +89,12 @@
     "body": "CAFÉTÉ möchte die Kaffeefrucht als eigenständige Getränkekategorie in der Schweiz etablieren. Nicht als Nischenprodukt für Kenner, sondern als feste Grösse im Getränkeregal. Wir glauben, dass die Kaffeefrucht mehr Aufmerksamkeit verdient. Mit CAFÉTÉ machen wir einen traditionsreichen Rohstoff auf eine neue Art erlebbar."
   },
   "founders": {
-    "label": "Die Gründer",
-    "title": "Die Gründer hinter Cafété",
+    "label": "Der Gründer",
+    "title": "Der Mensch hinter Cafété",
     "kareem": {
       "name": "Kareem Oueini",
       "role": "Produkt- & Markenentwicklung",
       "bio": "Kareem Oueini ist gelernter Koch und Lebensmittelveredler aus Leidenschaft. Seit rund zwei Jahrzehnten arbeitet er in der Gastronomie und hat dabei ein ausgeprägtes Feingefühl für Geschmack, Balance und Qualität entwickelt. Diese Erfahrung bringt er auch in das Projekt CAFÉTÉ ein — insbesondere bei der Rezeptentwicklung, wo das Zusammenspiel von Aromen, Süsse, Säure und Struktur entscheidend ist. Als naturverbundener und sportlicher Mensch beschäftigt er sich zudem seit längerem mit der Bedeutung von Ernährung, Hydration und der Qualität dessen, was wir unserem Körper zuführen."
-    },
-    "hannes": {
-      "name": "Hannes-Valentin Juon",
-      "role": "Kaufmännisches & Aufbau",
-      "bio": "Hannes-Valentin Juon hat durch seine Weiterbildung zum Technischen Kaufmann FA gute betriebswirtschaftliche Grundlagen und ein praktisches Gespür für Zahlen und wirtschaftliche Zusammenhänge. Bei CAFÉTÉ ist er zuständig für die kaufmännische Seite: Finanzplanung, Preisgestaltung und zusammen mit Kareem für die generelle Ausrichtung des Unternehmens. Er interessiert sich zudem für Digitalisierung und Betriebsorganisation und möchte CAFÉTÉ Schritt für Schritt zu einem stabilen, lokal verankerten Unternehmen aufbauen."
     }
   },
   "shopTeaser": {
@@ -732,7 +727,7 @@
     "cart": "Dein Warenkorb bei CAFÉTÉ — prüfe deine Packungsgrössen und gehe zur sicheren Kasse mit Karte oder TWINT.",
     "faq": "Häufige Fragen zu CAFÉTÉ: Koffein, Zucker, Zutaten, Lagerung, Versand und Rückgabe — kurz und konkret beantwortet.",
     "contact": "Kontakt zu CAFÉTÉ: Fragen zum Produkt, Anfragen von Händlern und Gastronomie, oder einfach Hallo sagen.",
-    "about": "Wie aus einer Handvoll Kaffeefrüchten CAFÉTÉ wurde — die Geschichte, die Gründer Kareem und Hannes und die Vision hinter der Kaffeefrucht.",
+    "about": "Wie aus einer Handvoll Kaffeefrüchten CAFÉTÉ wurde — die Geschichte, Gründer Kareem und die Vision hinter der Kaffeefrucht.",
     "imprint": "Impressum von CAFÉTÉ — Anbieterkennzeichnung, Kontakt und rechtliche Angaben.",
     "terms": "Allgemeine Geschäftsbedingungen für Bestellungen im CAFÉTÉ Onlineshop: Preise, Lieferung, Zahlung und Gewährleistung.",
     "privacy": "Datenschutzerklärung von CAFÉTÉ — welche Daten wir bearbeiten, zu welchem Zweck, und deine Rechte nach revDSG.",

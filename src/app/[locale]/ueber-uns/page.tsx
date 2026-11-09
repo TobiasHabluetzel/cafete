@@ -11,7 +11,6 @@ import {
   type LocaleParams,
 } from "@/lib/page";
 
-import hannesPhoto from "../../../../public/founder-hannes.jpg";
 import kareemPhoto from "../../../../public/founder-kareem.jpg";
 
 export const generateStaticParams = generateLocaleParams;
@@ -25,7 +24,6 @@ export default async function AboutPage({ params }: LocaleParams) {
 
   const founders = [
     { key: "kareem", photo: kareemPhoto },
-    { key: "hannes", photo: hannesPhoto },
   ] as const;
 
   return (
