@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { site } from "@/config/site";
@@ -44,8 +44,11 @@ export async function requestMagicLink(formData: FormData) {
   const token = createMagicToken(email);
   if (!token) return done();
 
-  const origin = (await headers()).get("origin") ?? site.url;
-  const link = `${origin}/admin/callback?token=${encodeURIComponent(token)}`;
+  /*
+   * Always the configured site address. The request's Origin header is set by the sender,
+   * so using it could put a valid sign-in token behind a link to someone else's domain.
+   */
+  const link = `${site.url}/admin/callback?token=${encodeURIComponent(token)}`;
 
   const result = await sendMail({
     to: email,
