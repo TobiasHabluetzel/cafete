@@ -579,7 +579,7 @@
     object-fit: contain;
   }
   .journey-fruit-layer--0 img {
-    filter: blur(3px) brightness(0.8);
+    filter: blur(3px) brightness(0.9);
   }
   .journey-fruit-layer--1 img {
     filter: drop-shadow(0 16px 20px rgba(0, 0, 0, 0.5));
