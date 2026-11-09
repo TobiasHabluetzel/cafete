@@ -1176,3 +1176,11 @@ html {
   text-shadow: 0.05em 0.05em 0 var(--color-ink);
   pointer-events: none;
 }
+
+/* The accent half of the homepage headline, in the same lettering as the logo. */
+.hero-word--accent {
+  color: var(--color-gold);
+  -webkit-text-stroke: 0.035em var(--color-ink);
+  paint-order: stroke fill;
+  text-shadow: 0.045em 0.045em 0 var(--color-ink);
+}
