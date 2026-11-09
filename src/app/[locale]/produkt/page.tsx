@@ -4,6 +4,7 @@ import { ViewTransition } from "react";
 
 import { ctaClass } from "@/components/brand/cta-button";
 import { PageHeader, Section } from "@/components/layout/section";
+import { SugarBars } from "@/components/sections/sugar-bars";
 import { JsonLd } from "@/components/seo/json-ld";
 import { site } from "@/config/site";
 import { PackPicker } from "@/components/shop/pack-picker";
@@ -15,7 +16,7 @@ import {
   type LocaleParams,
 } from "@/lib/page";
 import { ReviewsSection } from "@/components/reviews/reviews-section";
-import { getPackPrices } from "@/lib/pricing";
+import { getCachedPackPrices } from "@/lib/pricing";
 import { getReviewSummary, MIN_PUBLIC_REVIEWS } from "@/lib/reviews";
 import { configuredPacks } from "@/lib/stripe";
 
@@ -29,7 +30,7 @@ export const generateStaticParams = generateLocaleParams;
  * admin will call `revalidatePath` so it appears immediately. Prices are read
  * from Stripe on the same schedule.
  */
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 export const generateMetadata = createMetadata({ namespace: "nav", titleKey: "product", descriptionKey: "product", pathname: "/produkt" });
 
 type NutritionRow = { nutrient: string; value: string };
@@ -41,7 +42,7 @@ export default async function ProductPage({ params }: LocaleParams) {
   const tShop = await getTranslations({ locale, namespace: "shopTeaser" });
 
   const nutrition = t.raw("nutrition") as NutritionRow[];
-  const packPrices = await getPackPrices();
+  const packPrices = await getCachedPackPrices();
   const tShopPage = await getTranslations({ locale, namespace: "shop" });
   const buyable = configuredPacks().filter((pack) =>
     packPrices.some((price) => price.bottles === pack.bottles),
@@ -107,7 +108,7 @@ export default async function ProductPage({ params }: LocaleParams) {
         }}
       />
 
-      <PageHeader label={t("label")} title={t("title")} intro={t("subtitle")} />
+      <PageHeader showBottle label={t("label")} title={t("title")} intro={t("subtitle")} />
 
       <Section tone="cream">
         <div className="grid gap-12 lg:grid-cols-[0.7fr_1fr] lg:gap-16">
@@ -206,6 +207,8 @@ export default async function ProductPage({ params }: LocaleParams) {
           </div>
         </div>
       </Section>
+
+      <SugarBars />
 
       <ReviewsSection locale={locale} />
     </>

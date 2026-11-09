@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { TrackOnMount } from "@/components/analytics/tracking";
 import { ctaClass } from "@/components/brand/cta-button";
 import { PageHeader, Section } from "@/components/layout/section";
+import { FactStrip } from "@/components/sections/fact-strip";
 import { PackPicker } from "@/components/shop/pack-picker";
 import { packSizes } from "@/config/site";
 import { Link } from "@/i18n/navigation";
@@ -46,7 +47,7 @@ export default async function ShopPage({ params }: LocaleParams) {
     <>
       <TrackOnMount event="ViewContent" params={{ content_type: "product", content_ids: buyable.map((pack) => `pack-${pack.bottles}`) }} />
       <PageHeader
-        showLogo
+        showBottle
         label={tNav("shop")}
         title={t("title")}
         intro={
@@ -100,6 +101,8 @@ export default async function ShopPage({ params }: LocaleParams) {
           </div>
         )}
       </Section>
+
+      <FactStrip />
     </>
   );
 }

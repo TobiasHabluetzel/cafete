@@ -10,6 +10,7 @@ import { Sticker } from "@/components/brand/sticker";
 import { openCartDrawer } from "@/components/shop/cart-drawer";
 import { useCart } from "@/components/shop/use-cart";
 import type { PackPrice } from "@/lib/pricing";
+import { burstBubbles } from "@/lib/bubbles";
 import { flyToCart } from "@/lib/fly-to-cart";
 import { formatMoney } from "@/lib/format-money";
 import { cn } from "@/lib/utils";
@@ -54,6 +55,8 @@ export function PackPicker({
 
   function onAdd(bottles: number, button: HTMLElement) {
     flyToCart(button.closest("li")?.querySelector("img"));
+    const box = button.getBoundingClientRect();
+    burstBubbles(box.left + box.width / 2, box.top + box.height / 2);
     add(bottles);
     // The panel opens as the pack lands, so the two read as one movement.
     window.setTimeout(openCartDrawer, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 620);
@@ -96,7 +99,7 @@ export function PackPicker({
         return (
           <li
             key={pack.bottles}
-            className="border-ink/85 relative flex flex-col rounded-lg border-2 bg-white p-5 shadow-[5px_5px_0_rgba(0,0,0,0.35)] transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-[7px_9px_0_rgba(0,0,0,0.35)] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+            className="tilt border-ink/85 relative flex flex-col rounded-lg border-2 bg-white p-5 shadow-[5px_5px_0_rgba(0,0,0,0.35)] transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-[7px_9px_0_rgba(0,0,0,0.35)] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
           >
             {price && pack.bottles === bestValue ? (
               <Sticker

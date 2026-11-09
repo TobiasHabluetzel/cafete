@@ -3,6 +3,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
+import { Playground } from "@/components/layout/playground";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
@@ -100,6 +101,7 @@ export default async function LocaleLayout({
           <Toaster />
           <Tracking />
           <SmoothScroll />
+          <Playground />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -49,7 +49,7 @@ export async function LegalPage({
 
   return (
     <>
-      <PageHeader title={t(`${namespace}.title`)} />
+      <PageHeader compact title={t(`${namespace}.title`)} />
 
       <Section tone="cream">
         <div className="max-w-3xl">

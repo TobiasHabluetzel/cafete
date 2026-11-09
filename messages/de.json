@@ -119,9 +119,18 @@
     "pause": "Video anhalten"
   },
   "facts": {
-    "volume": { "value": "33 cl", "label": "Glasflasche" },
-    "sugar": { "value": "4,5 g", "label": "Zucker pro 100 ml" },
-    "swiss": { "value": "CH", "label": "Entwickelt und abgefüllt in der Schweiz" }
+    "volume": {
+      "value": "33 cl",
+      "label": "Glasflasche"
+    },
+    "sugar": {
+      "value": "4,5 g",
+      "label": "Zucker pro 100 ml"
+    },
+    "swiss": {
+      "value": "CH",
+      "label": "Entwickelt und abgefüllt in der Schweiz"
+    }
   },
   "shopTeaser": {
     "label": "Shop",
@@ -272,7 +281,9 @@
         "q": "Gibt es CAFÉTÉ auch in der Gastronomie oder im Laden?",
         "a": "Wir sind dabei, den Vertrieb aufzubauen. Bei Interesse als Gastronomiebetrieb oder Händler: schreib uns an {email}."
       }
-    ]
+    ],
+    "moreTitle": "Deine Frage ist nicht dabei?",
+    "moreCta": "Schreib uns"
   },
   "contact": {
     "label": "Kontakt",
@@ -280,7 +291,9 @@
     "intro": "Fragen zum Produkt, Interesse als Händler oder Gastronomiebetrieb, oder einfach Lust, Hallo zu sagen — wir antworten gerne.",
     "emailLabel": "E-Mail",
     "producerLabel": "Ein Produkt von",
-    "bottlerLabel": "Abgefüllt von"
+    "bottlerLabel": "Abgefüllt von",
+    "copy": "Adresse kopieren",
+    "copied": "Kopiert!"
   },
   "legal": {
     "germanBinding": "Verbindlich ist die deutsche Fassung.",
@@ -670,7 +683,9 @@
   "notFound": {
     "title": "Diese Seite gibt es nicht",
     "body": "Die gesuchte Seite wurde verschoben oder existiert nicht. Zurück zum Start — dort wartet etwas Prickelndes.",
-    "cta": "Zur Startseite"
+    "cta": "Zur Startseite",
+    "popHint": "Tipp die Blasen an",
+    "popped": "{count, plural, =1 {# Blase geplatzt} other {# Blasen geplatzt}}"
   },
   "footer": {
     "tagline": "Entwickelt und abgefüllt in der Schweiz. Hergestellt aus der Kaffeefrucht. Natürlich koffeinhaltig.",
@@ -785,5 +800,30 @@
     "fullVideoHeading": "Das ganze Gespräch",
     "transcriptHeading": "Gespräch zum Nachlesen",
     "youtubeConsent": "Video abspielen – lädt YouTube"
+  },
+  "fun": {
+    "cheers": "Prost! Du hast das Geheimnis gefunden.",
+    "tab": "Es prickelt noch … · CAFÉTÉ"
+  },
+  "aboutStats": {
+    "years": "Jahre in der Gastronomie, rund gerechnet",
+    "journey": "Jahre von der ersten Kostprobe bis zu CAFÉTÉ",
+    "handful": "Handvoll Kaffeefrüchte, mit der alles begann"
+  },
+  "sugarBars": {
+    "label": "Zucker im Vergleich",
+    "title": "Weniger Zucker als die üblichen Verdächtigen.",
+    "soft": {
+      "name": "Softdrinks",
+      "value": "über 50 % weniger"
+    },
+    "energy": {
+      "name": "Energydrinks",
+      "value": "59 % weniger"
+    },
+    "mate": {
+      "name": "Mate-Getränke",
+      "value": "20 % weniger"
+    }
   }
 }

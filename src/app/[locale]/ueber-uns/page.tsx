@@ -1,8 +1,10 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 
+import { ScrollWords } from "@/components/brand/scroll-words";
 import { Sticker } from "@/components/brand/sticker";
 import { PageHeader, Section, SectionHeader } from "@/components/layout/section";
+import { AboutStats } from "@/components/sections/about-stats";
 import { Story } from "@/components/sections/story";
 import { VideoClip } from "@/components/sections/video-clip";
 import {
@@ -34,6 +36,8 @@ export default async function AboutPage({ params }: LocaleParams) {
       <PageHeader label={tFounders("label")} title={tNav("about")} />
 
       <Story variant="full" />
+
+      <AboutStats />
 
       <Section tone="cream">
         <SectionHeader
@@ -67,7 +71,7 @@ export default async function AboutPage({ params }: LocaleParams) {
                     // Same keyline and hard offset as the stickers, so the
                     // portraits sit inside the design language rather than
                     // beside it.
-                    "border-ink/80 mx-auto w-full max-w-sm rounded-lg border-2 shadow-[7px_7px_0_rgba(0,0,0,0.35)] lg:mx-0 lg:max-w-none" +
+                    "tilt border-ink/80 mx-auto w-full max-w-sm rounded-lg border-2 shadow-[7px_7px_0_rgba(0,0,0,0.35)] lg:mx-0 lg:max-w-none" +
                     (flipped ? " lg:order-2" : "")
                   }
                 />
@@ -99,9 +103,11 @@ export default async function AboutPage({ params }: LocaleParams) {
         <SectionHeader
           label={tVision("label")}
           title={tVision("title")}
-          intro={tVision("body")}
-          align="center"
           labelClassName="text-cherry-ink"
+        />
+        <ScrollWords
+          text={tVision("body")}
+          className="font-display mt-8 max-w-5xl text-3xl leading-[1.12] font-extrabold lg:text-6xl"
         />
       </Section>
     </>

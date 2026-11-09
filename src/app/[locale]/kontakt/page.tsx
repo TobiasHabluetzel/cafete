@@ -1,7 +1,7 @@
-import { Mail } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
 import { PageHeader, Section } from "@/components/layout/section";
+import { CopyEmail } from "@/components/sections/copy-email";
 import { site } from "@/config/site";
 import {
   createMetadata,
@@ -22,22 +22,13 @@ export default async function ContactPage({ params }: LocaleParams) {
       <PageHeader label={t("label")} title={t("title")} intro={t("intro")} />
 
       <Section tone="cream">
-        <div className="grid gap-10 lg:grid-cols-3">
-          <div className="border-charcoal/10 shadow-brand rounded-lg border bg-white p-7">
-            <h2 className="label-caps text-sunset-ink">{t("emailLabel")}</h2>
-            <a
-              href={`mailto:${site.email}`}
-              className="font-display text-charcoal hover:text-sunset-ink mt-3 inline-flex items-center gap-2 text-lg font-extrabold break-all transition-colors"
-            >
-              <Mail className="size-5 shrink-0" aria-hidden />
-              {site.email}
-            </a>
-            {/* A "Trefft uns" line pointing at the launch event used to sit
-                here. The event has passed and there is nothing standing to
-                replace it with, so the card is just the email address. */}
-          </div>
+        <h2 className="label-caps text-sunset-ink">{t("emailLabel")}</h2>
+        <div className="mt-4">
+          <CopyEmail email={site.email} />
+        </div>
 
-          <div className="border-charcoal/10 rounded-lg border bg-white/60 p-7">
+        <div className="mt-14 grid gap-6 lg:mt-20 lg:grid-cols-2">
+          <div className="tilt border-ink/85 rounded-lg border-2 bg-white p-7 shadow-[5px_5px_0_rgba(0,0,0,0.35)]">
             <h2 className="label-caps text-sunset-ink">{t("producerLabel")}</h2>
             <address className="text-charcoal/80 mt-3 space-y-1 not-italic">
               <p className="font-semibold">{site.producer.legalName}</p>
@@ -47,7 +38,7 @@ export default async function ContactPage({ params }: LocaleParams) {
             </address>
           </div>
 
-          <div className="border-charcoal/10 rounded-lg border bg-white/60 p-7">
+          <div className="tilt border-ink/85 rounded-lg border-2 bg-white p-7 shadow-[5px_5px_0_rgba(0,0,0,0.35)]">
             <h2 className="label-caps text-sunset-ink">{t("bottlerLabel")}</h2>
             <address className="text-charcoal/80 mt-3 space-y-1 not-italic">
               <p className="font-semibold">{site.bottler.name}</p>

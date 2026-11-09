@@ -1,5 +1,7 @@
 import { useTranslations } from "next-intl";
 
+import { SloganMarquee } from "@/components/brand/marquee";
+
 import { NewsletterForm } from "@/components/layout/newsletter-form";
 import { legalNav, mainNav, site } from "@/config/site";
 import { Link } from "@/i18n/navigation";
@@ -10,6 +12,7 @@ export function SiteFooter() {
 
   return (
     <footer className="bg-charcoal text-cream mt-auto">
+      <SloganMarquee />
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div className="max-w-md">
@@ -78,6 +81,9 @@ export function SiteFooter() {
           </p>
         </div>
       </div>
+      <span aria-hidden className="footer-giant">
+        CAFÉTÉ
+      </span>
     </footer>
   );
 }

@@ -15,7 +15,7 @@ import {
   resolvePageLocale,
   type LocaleParams,
 } from "@/lib/page";
-import { getPackPrices, lowestPriceFrom } from "@/lib/pricing";
+import { getCachedPackPrices, lowestPriceFrom } from "@/lib/pricing";
 
 import cherryPhoto from "../../../../public/coffee-cherry-photo.jpg";
 import bottle from "../../../../public/bottle-transparent.png";
@@ -45,7 +45,7 @@ export async function generateMetadata(props: LocaleParams): Promise<Metadata> {
 
 // The price comes from Stripe, so the page refreshes hourly rather than being
 // frozen at build time — the same arrangement as the homepage and the shop.
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 /**
  * The QR landing page, reached from the flyers and stickers via `/qr`.
@@ -68,7 +68,7 @@ export default async function DiscoverPage({ params }: LocaleParams) {
   const tCommon = await getTranslations({ locale, namespace: "common" });
   const tPacks = await getTranslations({ locale, namespace: "packs" });
 
-  const price = lowestPriceFrom(await getPackPrices(), locale);
+  const price = lowestPriceFrom(await getCachedPackPrices(), locale);
 
   const facts = [
     { title: t("factOneTitle"), body: t("factOneBody") },

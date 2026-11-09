@@ -119,9 +119,18 @@
     "pause": "Pause video"
   },
   "facts": {
-    "volume": { "value": "33 cl", "label": "Glass bottle" },
-    "sugar": { "value": "4.5 g", "label": "Sugar per 100 ml" },
-    "swiss": { "value": "CH", "label": "Developed and bottled in Switzerland" }
+    "volume": {
+      "value": "33 cl",
+      "label": "Glass bottle"
+    },
+    "sugar": {
+      "value": "4.5 g",
+      "label": "Sugar per 100 ml"
+    },
+    "swiss": {
+      "value": "CH",
+      "label": "Developed and bottled in Switzerland"
+    }
   },
   "shopTeaser": {
     "label": "Shop",
@@ -272,7 +281,9 @@
         "q": "Is CAFÉTÉ available in bars, restaurants or shops?",
         "a": "We’re building out distribution. If you’re a venue or retailer and interested, write to us at {email}."
       }
-    ]
+    ],
+    "moreTitle": "Is your question not here?",
+    "moreCta": "Write to us"
   },
   "contact": {
     "label": "Contact",
@@ -280,7 +291,9 @@
     "intro": "Questions about the product, interest as a retailer or venue, or simply saying hello — we’re happy to reply.",
     "emailLabel": "Email",
     "producerLabel": "A product by",
-    "bottlerLabel": "Bottled by"
+    "bottlerLabel": "Bottled by",
+    "copy": "Copy address",
+    "copied": "Copied!"
   },
   "legal": {
     "germanBinding": "This is a translation provided for convenience. Only the German version is legally binding.",
@@ -670,7 +683,9 @@
   "notFound": {
     "title": "This page doesn’t exist",
     "body": "The page you were looking for has moved or never existed. Head back to the start — something fizzy is waiting.",
-    "cta": "Back to home"
+    "cta": "Back to home",
+    "popHint": "Tap the bubbles",
+    "popped": "{count, plural, =1 {# bubble popped} other {# bubbles popped}}"
   },
   "footer": {
     "tagline": "Developed and bottled in Switzerland. Made from the coffee fruit. Naturally caffeinated.",
@@ -785,5 +800,30 @@
     "fullVideoHeading": "The full conversation",
     "transcriptHeading": "Read the conversation",
     "youtubeConsent": "Play video – loads YouTube"
+  },
+  "fun": {
+    "cheers": "Cheers! You found the secret.",
+    "tab": "Still fizzing … · CAFÉTÉ"
+  },
+  "aboutStats": {
+    "years": "years in hospitality, give or take",
+    "journey": "years from the first taste to CAFÉTÉ",
+    "handful": "handful of coffee fruit that started it all"
+  },
+  "sugarBars": {
+    "label": "Sugar compared",
+    "title": "Less sugar than the usual suspects.",
+    "soft": {
+      "name": "Soft drinks",
+      "value": "over 50 % less"
+    },
+    "energy": {
+      "name": "Energy drinks",
+      "value": "59 % less"
+    },
+    "mate": {
+      "name": "Mate drinks",
+      "value": "20 % less"
+    }
   }
 }
