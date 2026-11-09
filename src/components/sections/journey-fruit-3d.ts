@@ -12,7 +12,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
  * that they are flat and they cost nothing.
  */
 
-export type Fruit3DKind = "cherry" | "cran";
+export type Fruit3DKind = "cherry" | "cran" | "leaf";
 
 /** Where one fruit is this frame, in pixels from the scene's centre point. */
 export interface FruitPose {
@@ -152,6 +152,84 @@ function textures() {
   return { cherryColor, cranColor, bump };
 }
 
+/** A coffee leaf painted onto a canvas: glossy deep green, pale midrib, curved side veins. */
+function leafTexture() {
+  const W = 1024;
+  const H = 430;
+  const canvas = document.createElement("canvas");
+  canvas.width = W;
+  canvas.height = H;
+  const g = canvas.getContext("2d")!;
+  const x0 = 30;
+  const x1 = 1000;
+  const cy = H / 2;
+  // Narrow towards the stalk, widest just behind the middle, then a long drawn-out tip.
+  const half = (t: number) => {
+    const body = Math.pow(Math.sin(Math.PI * Math.pow(t, 0.85)), 0.9);
+    const tip = t > 0.72 ? 1 - 0.5 * Math.pow((t - 0.72) / 0.28, 1.1) : 1;
+    return 175 * body * tip * (1 - 0.12 * t) + (t > 0.04 && t < 0.9 ? 6 * Math.sin(t * 30) : 0);
+  };
+  const mid = (t: number) => cy - 18 * Math.sin(Math.PI * t);
+  const X = (t: number) => x0 + (x1 - x0) * t;
+  const outline = new Path2D();
+  for (let i = 0; i <= 80; i++) {
+    const t = i / 80;
+    if (i === 0) outline.moveTo(X(t), mid(t) - half(t));
+    else outline.lineTo(X(t), mid(t) - half(t));
+  }
+  for (let i = 80; i >= 0; i--) outline.lineTo(X(i / 80), mid(i / 80) + half(i / 80));
+  outline.closePath();
+  const fill = g.createLinearGradient(0, 0, 0, H);
+  fill.addColorStop(0, "#3f9248");
+  fill.addColorStop(0.45, "#1f6a30");
+  fill.addColorStop(1, "#0c3a19");
+  g.fillStyle = fill;
+  g.fill(outline);
+  g.save();
+  g.clip(outline);
+  g.strokeStyle = "rgba(134, 194, 120, 0.55)";
+  g.lineWidth = 4;
+  g.lineCap = "round";
+  for (let k = 1; k <= 7; k++) {
+    const t = 0.04 + k * 0.1;
+    const t2 = Math.min(0.9, t + 0.12);
+    for (const s of [-1, 1]) {
+      g.beginPath();
+      g.moveTo(X(t), mid(t));
+      g.quadraticCurveTo(X(t + 0.04), mid(t) + s * half(t) * 0.55, X(t2), mid(t2) + s * half(t2) * 0.86);
+      g.stroke();
+    }
+  }
+  g.strokeStyle = "#b2dc94";
+  g.lineWidth = 8;
+  g.beginPath();
+  g.moveTo(X(0), mid(0));
+  for (let i = 1; i <= 30; i++) g.lineTo(X((i / 30) * 0.97), mid((i / 30) * 0.97));
+  g.stroke();
+  g.restore();
+  g.strokeStyle = "#0b2a12";
+  g.lineWidth = 5;
+  g.stroke(outline);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.anisotropy = 4;
+  return texture;
+}
+
+/** A plane bent like a real leaf: arched along its length, folded along the midrib, a little wavy. */
+function leafGeometry() {
+  const geometry = new THREE.PlaneGeometry(1, 0.42, 48, 16);
+  const p = geometry.attributes.position;
+  for (let i = 0; i < p.count; i++) {
+    const x = p.getX(i);
+    const y = p.getY(i);
+    const z = -0.32 * x * x + 0.22 * Math.abs(y) + 0.012 * Math.sin(x * 26 + y * 9);
+    p.setZ(i, z);
+  }
+  geometry.computeVertexNormals();
+  return geometry;
+}
+
 /** A sphere with gentle lumps, so no two read as machine-made. */
 function lumpy(seed: number, amount: number) {
   const geometry = new THREE.SphereGeometry(0.5, 64, 40);
@@ -175,6 +253,8 @@ function skin(params: THREE.MeshPhysicalMaterialParameters) {
 type Shared = ReturnType<typeof textures> & {
   cherryBody: THREE.SphereGeometry;
   cranBody: THREE.SphereGeometry;
+  leafBody: THREE.PlaneGeometry;
+  leafMap: THREE.CanvasTexture;
   small: THREE.SphereGeometry;
   sepal: THREE.ConeGeometry;
   ring: THREE.TorusGeometry;
@@ -190,6 +270,26 @@ function build(kind: Fruit3DKind, s: Shared) {
     return mesh;
   };
   const dark = (color: string) => skin({ color, roughness: 0.75 });
+
+  if (kind === "leaf") {
+    add(
+      s.leafBody,
+      skin({
+        map: s.leafMap,
+        alphaTest: 0.5,
+        side: THREE.DoubleSide,
+        roughness: 0.3,
+        clearcoat: 0.8,
+        clearcoatRoughness: 0.1,
+        emissive: "#06240e",
+        emissiveIntensity: 0.4,
+      }),
+    );
+    const stalk = add(new THREE.CylinderGeometry(0.012, 0.016, 0.1, 8), dark("#3a3a16"));
+    stalk.rotation.z = Math.PI / 2;
+    stalk.position.set(-0.53, 0, -0.08);
+    return { group, materials };
+  }
 
   if (kind === "cherry") {
     // The sphere's poles lie along x: stem on the left, blossom crown on the right.
@@ -293,6 +393,8 @@ export function createFruit3D(
     ...textures(),
     cherryBody,
     cranBody: lumpy(7, 0.03),
+    leafBody: leafGeometry(),
+    leafMap: leafTexture(),
     small: new THREE.SphereGeometry(0.5, 16, 12),
     sepal: new THREE.ConeGeometry(0.022, 0.07, 5),
     ring: new THREE.TorusGeometry(0.075, 0.022, 10, 24),
@@ -343,17 +445,25 @@ export function createFruit3D(
         continue;
       }
       g.visible = true;
-      g.position.set(centre.x + pose.x - width / 2, -(centre.y + pose.y - height / 2), 0);
+      // Leaves sit a little behind, so fruit crossing them passes in front.
+      g.position.set(centre.x + pose.x - width / 2, -(centre.y + pose.y - height / 2), piece.kind === "leaf" ? -60 : 0);
       g.scale.setScalar(pose.size * pose.scale);
       const t = clock + piece.seed * 10;
       const s = piece.spin;
-      if (piece.kind === "cherry") {
+      if (piece.kind === "leaf") {
+        // Drifts and turns slowly, keeping its face mostly towards the viewer.
+        g.rotation.set(0.3 * Math.sin(t * 0.5), 0.3 * Math.sin(t * 0.37), s * (0.5 + t * 0.12 + progress * 1.5));
+      } else if (piece.kind === "cherry") {
         g.rotation.set(0.5 * Math.sin(t * 0.6), 0.7 * Math.sin(t * 0.45) + progress * 2 * s, s * (0.3 + t * 0.25));
       } else {
         // Berries tip forward now and then, so the crown shows.
         g.rotation.set(0.6 + 0.7 * Math.sin(t * 0.5) + progress * 2 * s, t * 0.4 * s, 0.4 * Math.sin(t * 0.3));
       }
-      for (const m of piece.materials) m.opacity = pose.opacity;
+      for (const m of piece.materials) {
+        m.opacity = pose.opacity;
+        // A cut-out leaf would vanish at once as it fades; the cut-off fades with it.
+        if (m.alphaTest > 0) m.alphaTest = Math.max(0.02, 0.5 * pose.opacity);
+      }
     }
     renderer.render(scene, camera);
     if (active) frame = requestAnimationFrame(draw);

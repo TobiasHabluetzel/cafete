@@ -14,6 +14,7 @@ import coffeeCherry2 from "../../../public/fruit/coffee-cherry-2.webp";
 import cranberry1 from "../../../public/fruit/cranberry-1.webp";
 import cranberry2 from "../../../public/fruit/cranberry-2.webp";
 import cranberry3 from "../../../public/fruit/cranberry-3.webp";
+import coffeeLeaf from "../../../public/fruit/coffee-leaf.webp";
 
 /**
  * The scroll story: the bottle stays pinned while the slogan plays out around it.
@@ -52,6 +53,7 @@ const FRUIT_IMAGE = {
   cran1: cranberry1,
   cran2: cranberry2,
   cran3: cranberry3,
+  leaf: coffeeLeaf,
 };
 type FruitKind = keyof typeof FRUIT_IMAGE;
 
@@ -59,8 +61,7 @@ type FruitKind = keyof typeof FRUIT_IMAGE;
 type Depth = 0 | 1 | 2;
 const DRIFT: Record<Depth, number> = { 0: 0.03, 1: 0.08, 2: 0.26 };
 
-/** Real photographs. Their light comes from one side, so they only turn a little. */
-/** The first layout, with what is in the drink. Flipped copies keep repeats from showing. */
+/** The first layout, with what is in the drink, and coffee leaves for green. Flipped copies keep repeats from showing. */
 const FRUIT: {
   kind: FruitKind;
   size: number;
@@ -76,6 +77,7 @@ const FRUIT: {
   { kind: "cherry", size: 30, x: -0.27, y: 0.17, depth: 0, spin: -1 },
   { kind: "cherry2", size: 44, x: -0.47, y: 0.1, depth: 0, spin: 1, flip: true },
   { kind: "cran1", size: 32, x: 0.44, y: 0.2, depth: 0, spin: -1 },
+  { kind: "leaf", size: 110, x: 0.13, y: 0.38, depth: 0, spin: 1 },
 
   { kind: "cran3", size: 72, x: -0.36, y: -0.1, depth: 1, spin: -1 },
   { kind: "cherry", size: 104, x: -0.2, y: 0.17, depth: 1, spin: 1 },
@@ -88,10 +90,14 @@ const FRUIT: {
   { kind: "cran1", size: 36, x: -0.3, y: -0.22, depth: 1, spin: -1 },
   { kind: "cherry2", size: 44, x: 0.38, y: 0.27, depth: 1, spin: 1, flip: true },
   { kind: "cran3", size: 34, x: -0.13, y: 0.3, depth: 1, spin: -1 },
+  { kind: "leaf", size: 200, x: -0.4, y: 0.06, depth: 1, spin: -1 },
+  { kind: "leaf", size: 175, x: 0.41, y: -0.1, depth: 1, spin: 1, flip: true },
+  { kind: "leaf", size: 130, x: 0.1, y: -0.43, depth: 1, spin: 1 },
 
   { kind: "cran2", size: 180, x: -0.42, y: -0.36, depth: 2, spin: 1 },
   { kind: "cherry2", size: 250, x: 0.42, y: 0.27, depth: 2, spin: -1 },
   { kind: "cran1", size: 150, x: 0.43, y: -0.4, depth: 2, spin: 1 },
+  { kind: "leaf", size: 280, x: -0.5, y: -0.02, depth: 2, spin: -1 },
 ];
 
 /** Three sizes, because real fizz is mostly tiny with a few large bubbles among it. */
@@ -203,7 +209,7 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
     const stage = one(".journey-stage");
     const sharpLayer = one(".journey-fruit-layer--1");
     const kind3d = (kind: FruitKind): Fruit3DKind =>
-      kind.startsWith("cherry") ? "cherry" : "cran";
+      kind === "leaf" ? "leaf" : kind.startsWith("cherry") ? "cherry" : "cran";
     let frame = 0;
     let last = 0;
     let visible = false;

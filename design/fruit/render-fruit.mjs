@@ -79,12 +79,45 @@ function cranberry(v){
   <path d="${body}" fill="none" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/>`);
 }
 
+// A glossy coffee leaf: pointed tip, wavy edge, a pale midrib and curved side veins.
+function coffeeLeaf(){
+  const x0=36,x1=404,cy=96,N=60;
+  // Narrow towards the stalk, widest just behind the middle, then a long drawn-out tip.
+  const half=(t)=>{const body=Math.pow(Math.sin(Math.PI*Math.pow(t,0.85)),0.9);const tip=t>0.72?1-0.5*Math.pow((t-0.72)/0.28,1.1):1;return 70*body*tip*(1-0.12*t)+(t>0.04&&t<0.9?2.4*Math.sin(t*30):0);};
+  const mid=(t)=>cy-10*Math.sin(Math.PI*t);
+  const X=(t)=>x0+(x1-x0)*t;
+  let top="",bot="";
+  for(let i=0;i<=N;i++){const t=i/N;top+=(i?"L":"M")+X(t).toFixed(1)+" "+(mid(t)-half(t)).toFixed(1)+" ";}
+  for(let i=N;i>=0;i--){const t=i/N;bot+="L"+X(t).toFixed(1)+" "+(mid(t)+half(t)).toFixed(1)+" ";}
+  const outline=top+bot+"Z";
+  let veins="";
+  for(let k=1;k<=7;k++){const t=0.04+k*0.1,t2=Math.min(0.9,t+0.12);
+    for(const s of [-1,1]){veins+=`<path d="M${X(t).toFixed(1)} ${mid(t).toFixed(1)} Q${X(t+0.04).toFixed(1)} ${(mid(t)+s*half(t)*0.55).toFixed(1)} ${X(t2).toFixed(1)} ${(mid(t2)+s*half(t2)*0.86).toFixed(1)}"/>`;}}
+  let rib="M"+X(0)+" "+mid(0);for(let i=1;i<=20;i++){const t=i/20*0.97;rib+=" L"+X(t).toFixed(1)+" "+mid(t).toFixed(1);}
+  return svg(420,200,`<defs>
+    <linearGradient id="lf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3f9248"/><stop offset="0.45" stop-color="#1f6a30"/><stop offset="1" stop-color="#0c3a19"/></linearGradient>
+    <radialGradient id="sheen" cx="0.38" cy="0.3" r="0.5"><stop offset="0" stop-color="#fff" stop-opacity="0.38"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <clipPath id="clip"><path d="${outline}"/></clipPath>
+    ${blur("b6",6)}
+  </defs>
+  <path d="M10 ${cy+6} L${x0+4} ${mid(0)}" stroke="#3a3a16" stroke-width="6" stroke-linecap="round"/>
+  <path d="${outline}" fill="url(#lf)"/>
+  <g clip-path="url(#clip)">
+    <path d="${outline}" fill="url(#sheen)"/>
+    <g fill="none" stroke="#86c278" stroke-opacity="0.55" stroke-width="1.8" stroke-linecap="round">${veins}</g>
+    <path d="${rib}" fill="none" stroke="#b2dc94" stroke-width="3.4" stroke-linecap="round"/>
+    <ellipse cx="160" cy="70" rx="110" ry="14" transform="rotate(-6 160 70)" fill="#fff" opacity="0.2" filter="url(#b6)"/>
+  </g>
+  <path d="${outline}" fill="none" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/>`);
+}
+
 const dots=(seed)=>{const r=[];let s=seed;for(let i=0;i<14;i++){s=(s*9301+49297)%233280;const a=s/233280*6.28;s=(s*9301+49297)%233280;const d=40+s/233280*80;r.push([150+Math.cos(a)*d,155+Math.sin(a)*d])}return r};
 const pieces={
   "coffee-cherry":coffeeCherry({hi:"#ff6b55",mid:"#e3261f",deep:"#a50e15",seed:3}),
   "coffee-cherry-2":coffeeCherry({hi:"#ff7a50",mid:"#dc2a1a",deep:"#9a1012",seed:8}),
   "cranberry-1":cranberry({hi:"#ff4058",mid:"#e20f30",deep:"#930421",seed:2,navel:[150,46],dots:dots(5),body:"M150 32 C222 30 270 82 270 152 C270 222 220 270 150 270 C80 270 30 222 30 150 C30 84 82 34 150 32 Z"}),
   "cranberry-2":cranberry({hi:"#ff4a50",mid:"#ea1428",deep:"#9c061c",seed:11,navel:[156,52],dots:dots(9),body:"M150 40 C214 36 262 86 262 152 C262 220 214 266 148 266 C84 266 38 220 38 154 C38 92 86 44 150 40 Z"}),
+  "coffee-leaf":coffeeLeaf(),
   "cranberry-3":cranberry({hi:"#f43050",mid:"#c80a2a",deep:"#7a031a",seed:17,navel:[146,42],dots:dots(13),body:"M146 30 C214 28 266 76 268 146 C270 222 222 272 152 272 C82 272 32 226 32 152 C32 80 80 32 146 30 Z"}),
 };
 (async()=>{
