@@ -3,96 +3,90 @@ import { useTranslations } from "next-intl";
 import { ViewTransition } from "react";
 
 import { ctaClass } from "@/components/brand/cta-button";
-import { SunburstRays, WarmGlow } from "@/components/brand/sunburst";
-import { LogoSticker, SloganBanner } from "@/components/brand/wordmark";
-import { HeroBadges } from "@/components/sections/hero-badges";
 import { Link } from "@/i18n/navigation";
 
-import bottle from "../../../public/bottle-photo.jpg";
+import bottle from "../../../public/bottle-transparent.png";
 
+/** Fixed table: the server and the first client render must produce the same markup. */
+const BUBBLES = [
+  { left: 6, size: 14, duration: 9, delay: -2 },
+  { left: 17, size: 26, duration: 13, delay: -8 },
+  { left: 31, size: 10, duration: 8, delay: -5 },
+  { left: 44, size: 20, duration: 11, delay: -1 },
+  { left: 58, size: 12, duration: 7, delay: -4 },
+  { left: 69, size: 32, duration: 14, delay: -10 },
+  { left: 81, size: 16, duration: 10, delay: -6 },
+  { left: 93, size: 22, duration: 12, delay: -3 },
+];
+
+/**
+ * The opening poster: the headline as huge type with the bottle beside it, then
+ * one sentence and one button. Fruity, Fizzy and Focus get their moment right below. It runs straight into the scroll story.
+ * The words and bottle arrive on load and drift apart on the way out; both are
+ * progressive enhancements, and the resting state is fully visible.
+ */
 export function Hero({ entryPrice }: { entryPrice: string | null }) {
   const t = useTranslations("hero");
+  const tJourney = useTranslations("journey");
+  const words = t("headline").split("|");
 
   return (
-    <section className="bg-night text-cream relative isolate overflow-hidden">
-      {/*
-       * The bottle shot bleeds off the right edge and dissolves leftwards. Filling
-       * the section top-to-bottom means the only boundary that could show is the
-       * left one, and that is what the mask removes — a radial fade would instead
-       * clip the top and bottom off a bottle this tall.
-       */}
-      <div className="relative h-[19rem] sm:h-[24rem] lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[54%]">
-        <ViewTransition name="cafete-bottle" share="bottle-morph" default="none">
-          <Image
-            src={bottle}
-            alt=""
-            priority
-            sizes="(max-width: 1024px) 100vw, 54vw"
-            className="size-full object-cover object-center"
-            style={{
-              maskImage:
-                "linear-gradient(to bottom, black 0%, black 64%, transparent 100%)",
-              WebkitMaskImage:
-                "linear-gradient(to bottom, black 0%, black 64%, transparent 100%)",
-            }}
-          />
-        </ViewTransition>
-        <div
-          aria-hidden
-          className="absolute inset-0 hidden lg:block"
-          style={{
-            backdropFilter: "none",
-            background:
-              "linear-gradient(to right, var(--color-night) 0%, rgba(11,9,8,0.55) 26%, transparent 58%)",
-          }}
-        />
+    <section className="hero">
+      <div aria-hidden className="hero-rays-frame">
+        <div className="hero-rays rays animate-spin-rays" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 pt-4 pb-16 sm:px-6 lg:grid lg:min-h-[40rem] lg:grid-cols-[minmax(0,46%)_1fr] lg:items-center lg:px-8 lg:pt-16 lg:pb-24">
-        <div>
-          {/* Tobias' explicit ask: the logo and the slogan together as the
-              homepage banner. Two overlapping rotated stickers, with the burst
-              radiating from behind the wordmark exactly as in the artwork. */}
-          <div className="relative inline-block max-w-full">
-            <SunburstRays
-              size="w-[34rem] lg:w-[40rem]"
-              opacity="opacity-30"
-              className="-top-8"
-            />
-            <WarmGlow className="inset-0 m-auto size-[22rem] max-w-[85vw]" />
+      <div aria-hidden className="hero-bubbles">
+        {BUBBLES.map((bubble) => (
+          <span
+            key={bubble.left}
+            className="hero-bubble"
+            style={{
+              left: `${bubble.left}%`,
+              width: bubble.size,
+              height: bubble.size,
+              animationDuration: `${bubble.duration}s`,
+              animationDelay: `${bubble.delay}s`,
+            }}
+          />
+        ))}
+      </div>
 
-            <div className="relative">
-              <LogoSticker
+      <h1 className="hero-slogan" aria-label={words.join(" ")}>
+        {words.map((word, index) => (
+          <span key={word} aria-hidden className="contents">
+            <span className="hero-word">
+              <span className="hero-word-inner">{word}</span>
+            </span>{" "}
+            {/* Five lines on a phone, three on a wide screen. */}
+            {index === 1 || index === 3 ? <br className="hidden lg:block" /> : null}
+          </span>
+        ))}
+      </h1>
+
+      <div className="hero-bottle">
+        <div className="hero-bottle-rise">
+          <div className="hero-bottle-scroll">
+            <ViewTransition name="cafete-bottle" share="bottle-morph" default="none">
+              <Image
+                src={bottle}
+                alt={tJourney("bottleAlt")}
                 priority
-                sizes="(max-width: 1024px) 62vw, 24rem"
-                className="w-[14rem] sm:w-[18rem] lg:w-[22rem]"
+                sizes="(max-width: 1024px) 50vw, 24rem"
               />
-              <div className="bg-sunset border-ink/80 -mt-6 ml-2 rotate-1 rounded-md border-2 px-4 py-2.5 shadow-[6px_6px_0_rgba(0,0,0,0.45)] sm:-mt-7 sm:px-6">
-                <SloganBanner priority className="max-w-[22rem] sm:max-w-[27rem]" />
-              </div>
-            </div>
+            </ViewTransition>
           </div>
-
-          {/*
-            * The page's H1. The wordmark above it is an image, so without this the
-            * homepage had no text heading at all — invisible to search engines and
-            * to anyone navigating by headings. The subtitle is the natural
-            * candidate: real, descriptive copy rather than hidden keyword text.
-            */}
-          <h1 className="text-cream/85 relative mt-8 max-w-xl text-lg leading-snug font-medium text-balance sm:text-xl">
-            {t("subtitle")}
-          </h1>
-
-          {/* One call to action since the launch event passed on 19 Sept 2026 —
-              the second button pointed at it. */}
-          <div className="relative mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-            <Link href="/shop" className={ctaClass({ variant: "gold", size: "lg" })}>
-              {entryPrice ? t("ctaPrimaryWithPrice", { price: entryPrice }) : t("ctaPrimary")}
-            </Link>
-          </div>
-
-          <HeroBadges />
         </div>
+      </div>
+
+      <div className="hero-foot">
+        <p className="hero-title">{t("subtitle")}</p>
+        <Link
+          href="/shop"
+          className={ctaClass({ variant: "dark", size: "lg", className: "mt-4 w-full lg:w-auto" })}
+        >
+          {entryPrice ? t("ctaPrimaryWithPrice", { price: entryPrice }) : t("ctaPrimary")}
+        </Link>
       </div>
     </section>
   );

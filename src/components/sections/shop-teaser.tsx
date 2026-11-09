@@ -2,18 +2,21 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import { ctaClass } from "@/components/brand/cta-button";
-import { Sticker } from "@/components/brand/sticker";
-import { photoFadeStyle, SunburstRays, WarmGlow } from "@/components/brand/sunburst";
+import { SunburstRays, WarmGlow } from "@/components/brand/sunburst";
 import { SectionHeader } from "@/components/layout/section";
 import { packSizes } from "@/config/site";
 import { Link } from "@/i18n/navigation";
 
-import bottle from "../../../public/bottle-photo.jpg";
+import bottle from "../../../public/bottle-transparent.png";
+import pack6 from "../../../public/pack-6.png";
+import pack12 from "../../../public/pack-12.png";
+import pack24 from "../../../public/pack-24.png";
+
+const PACK_IMAGES: Record<number, typeof pack6> = { 6: pack6, 12: pack12, 24: pack24 };
 
 export function ShopTeaser({ entryPrice }: { entryPrice: string | null }) {
   const t = useTranslations("shopTeaser");
   const tPacks = useTranslations("packs");
-  const tBadges = useTranslations("badges");
 
   return (
     <section className="bg-night text-cream relative isolate overflow-hidden py-16 lg:py-24">
@@ -24,10 +27,8 @@ export function ShopTeaser({ entryPrice }: { entryPrice: string | null }) {
           <Image
             src={bottle}
             alt=""
-            sizes="(max-width: 1024px) 80vw, 34vw"
-            placeholder="blur"
-            className="relative h-auto w-full"
-            style={photoFadeStyle}
+            sizes="(max-width: 1024px) 40vw, 14rem"
+            className="relative mx-auto h-[27rem] w-auto -rotate-3 drop-shadow-[0_24px_30px_rgba(0,0,0,0.55)] lg:h-[34rem]"
           />
         </div>
 
@@ -39,22 +40,24 @@ export function ShopTeaser({ entryPrice }: { entryPrice: string | null }) {
             labelClassName="text-gold"
           />
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Sticker tone="gold" className="-rotate-1">
-              {tBadges("sparkling")}
-            </Sticker>
-            <Sticker tone="cherry" className="rotate-1">
-              {tBadges("energizing")}
-            </Sticker>
-          </div>
-
           <p className="label-caps text-cream/55 mt-10">{t("packLabel")}</p>
-          <ul className="mt-4 flex flex-wrap gap-3">
+          <ul className="mt-4 grid grid-cols-3 gap-3">
             {packSizes.map((pack) => (
               <li key={pack.bottles}>
-                <span className="border-cream/25 bg-cream/5 text-cream font-display inline-flex items-center rounded-full border px-4 py-2 text-sm font-bold">
-                  {tPacks(pack.labelKey)}
-                </span>
+                <Link
+                  href="/shop"
+                  className="bg-cream text-charcoal focus-visible:ring-gold group block rounded-md p-2.5 transition-transform duration-300 ease-out hover:-translate-y-1 focus-visible:ring-2 focus-visible:outline-none motion-reduce:transition-none motion-reduce:hover:translate-y-0 lg:p-4"
+                >
+                  <Image
+                    src={PACK_IMAGES[pack.bottles] ?? bottle}
+                    alt=""
+                    sizes="(max-width: 1024px) 30vw, 10rem"
+                    className="aspect-square w-full object-contain transition-transform duration-300 ease-out group-hover:scale-105 motion-reduce:transition-none"
+                  />
+                  <span className="font-display mt-2 block text-center text-sm font-extrabold lg:text-base">
+                    {tPacks(pack.labelKey)}
+                  </span>
+                </Link>
               </li>
             ))}
           </ul>

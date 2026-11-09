@@ -23,6 +23,7 @@
   },
   "hero": {
     "title": "CAFÉTÉ",
+    "headline": "Die|andere|Hälfte|des|Kaffees.",
     "subtitle": "Das koffeinhaltige Erfrischungsgetränk aus der Kaffeefrucht",
     "slogan": "Fruity. Fizzy. Focus.",
     "ctaPrimary": "Jetzt bestellen",
@@ -39,8 +40,8 @@
   },
   "coffeeFruit": {
     "label": "Die Kaffeefrucht",
-    "title": "Die andere Hälfte des Kaffees",
-    "intro": "Gemeint ist das Fruchtfleisch der Kaffeekirsche. Genau diese Frucht steht bei CAFÉTÉ im Mittelpunkt.",
+    "title": "Was ist die Kaffeefrucht?",
+    "intro": "Das Fruchtfleisch der Kaffeekirsche. Genau diese Frucht steht bei CAFÉTÉ im Mittelpunkt.",
     "tasteTitle": "Wie schmeckt CAFÉTÉ?",
     "tasteBody": "Fruchtige Noten, leichte florale Aromen, eine feine natürliche Süsse und eine dezente Säure prägen den Geschmack. Im Abgang erinnert CAFÉTÉ an rote Beeren und Hagebutte — nicht an klassischen Kaffee.",
     "traditionTitle": "Seit Generationen geschätzt",
@@ -111,6 +112,16 @@
       "title": "Focus",
       "body": "Natürliches Koffein aus der Kaffeefrucht, für aktive Momente im Alltag."
     }
+  },
+  "reel": {
+    "title": "Am besten eiskalt.",
+    "play": "Video abspielen",
+    "pause": "Video anhalten"
+  },
+  "facts": {
+    "volume": { "value": "33 cl", "label": "Glasflasche" },
+    "sugar": { "value": "4,5 g", "label": "Zucker pro 100 ml" },
+    "swiss": { "value": "CH", "label": "Entwickelt und abgefüllt in der Schweiz" }
   },
   "shopTeaser": {
     "label": "Shop",

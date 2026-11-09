@@ -16,7 +16,6 @@ node scripts/process-assets.mjs "/Users/tobiashablutzel/Desktop/Cafeete"
 | `banner-slogan.png` | `Slogan Orange Schwarz optimiert mit Lineal.png` | Orange keyed out → black ink on transparent |
 | `coffee-cherry-illustration.png` | `Kaffeekirsche.png` | Orange keyed out via border flood fill |
 | `coffee-cherry-photo.jpg` | `Kaffeekirsche für Post.png` | Resized, mozjpeg q84 |
-| `bottle-photo.jpg` | `Cafété Mockup.png` | Resized, mozjpeg q86 |
 | `founder-kareem.jpg` | `Kareem_F_009.jpeg` | 4:5 top crop, mozjpeg q84 |
 
 ## Why the logo keeps its orange background

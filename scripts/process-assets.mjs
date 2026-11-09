@@ -361,12 +361,8 @@ await photo({
   width: 1733,
   quality: 84,
 });
-await photo({
-  src: s("Cafété Mockup.png"),
-  out: "bottle-photo.jpg",
-  width: 1086,
-  quality: 86,
-});
+// The `Cafété Mockup.png` render is gone from the site: it read as AI next to the
+// real bottle, which is `bottle-transparent.png`.
 
 // Founder portraits. Delivered as 2832x4240 TIFFs despite the .jpeg extension,
 // which is why they need `sharp` rather than a plain copy. Cropped to 4:5 from

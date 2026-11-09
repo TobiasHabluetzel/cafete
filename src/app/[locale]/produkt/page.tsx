@@ -17,7 +17,7 @@ import { ReviewsSection } from "@/components/reviews/reviews-section";
 import { getPackPrices } from "@/lib/pricing";
 import { getReviewSummary, MIN_PUBLIC_REVIEWS } from "@/lib/reviews";
 
-import bottle from "../../../../public/bottle-photo.jpg";
+import bottle from "../../../../public/bottle-transparent.png";
 
 export const generateStaticParams = generateLocaleParams;
 
@@ -111,9 +111,8 @@ export default async function ProductPage({ params }: LocaleParams) {
                 src={bottle}
                 alt={t("bottleAlt")}
                 priority
-                sizes="(max-width: 1024px) 80vw, 30vw"
-                placeholder="blur"
-                className="border-ink/80 h-auto w-full rounded-lg border-2 shadow-[6px_6px_0_rgba(0,0,0,0.35)]"
+                sizes="(max-width: 1024px) 40vw, 14rem"
+                className="mx-auto h-[26rem] w-auto drop-shadow-[0_22px_26px_rgba(70,20,0,0.35)] lg:h-[34rem]"
               />
             </ViewTransition>
           </div>

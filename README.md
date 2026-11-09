@@ -42,7 +42,7 @@ src/
 │  └─ ui/                      # shadcn/ui primitives
 ├─ config/site.ts              # domain, contact, addresses, launch event, nav
 ├─ i18n/                       # routing (locales + slug map), navigation, request config
-├─ lib/fonts.ts                # Baloo 2 (display) + Geist (body/mono)
+├─ lib/fonts.ts                # Bricolage Grotesque (display) + Geist (body)
 └─ proxy.ts                    # next-intl locale middleware (Next 16 calls it "proxy")
 messages/{de,en}.json           # ALL user-facing copy — no hardcoded strings
 docs/                           # brief, brand tokens, content pack (source of truth)

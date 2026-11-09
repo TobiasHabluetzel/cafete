@@ -23,6 +23,7 @@
   },
   "hero": {
     "title": "CAFÉTÉ",
+    "headline": "The|other|half|of|coffee.",
     "subtitle": "The caffeinated refreshment made from the coffee fruit",
     "slogan": "Fruity. Fizzy. Focus.",
     "ctaPrimary": "Order now",
@@ -39,8 +40,8 @@
   },
   "coffeeFruit": {
     "label": "The coffee fruit",
-    "title": "The other half of coffee",
-    "intro": "That means the pulp of the coffee cherry. That fruit is exactly what CAFÉTÉ puts at the centre.",
+    "title": "What is coffee fruit?",
+    "intro": "The pulp of the coffee cherry. That fruit is exactly what CAFÉTÉ puts at the centre.",
     "tasteTitle": "What does CAFÉTÉ taste like?",
     "tasteBody": "Fruity notes, light floral aromas, a delicate natural sweetness and a gentle acidity define the taste. The finish recalls red berries and rosehip — not classic coffee.",
     "traditionTitle": "Valued for generations",
@@ -111,6 +112,16 @@
       "title": "Focus",
       "body": "Natural caffeine from the coffee fruit, for active moments in everyday life."
     }
+  },
+  "reel": {
+    "title": "Best served ice cold.",
+    "play": "Play video",
+    "pause": "Pause video"
+  },
+  "facts": {
+    "volume": { "value": "33 cl", "label": "Glass bottle" },
+    "sugar": { "value": "4.5 g", "label": "Sugar per 100 ml" },
+    "swiss": { "value": "CH", "label": "Developed and bottled in Switzerland" }
   },
   "shopTeaser": {
     "label": "Shop",
