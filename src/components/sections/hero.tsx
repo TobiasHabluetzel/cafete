@@ -55,7 +55,8 @@ export function Hero({ entryPrice }: { entryPrice: string | null }) {
       <h1 className="hero-slogan" aria-label={words.join(" ")}>
         {words.map((word, index) => (
           <span key={word} aria-hidden className="contents">
-            <span className="hero-word">
+            {/* The second half of the sentence in the logo's lettering: gold with a black outline. */}
+            <span className={index >= 3 ? "hero-word hero-word--accent" : "hero-word"}>
               <span className="hero-word-inner">{word}</span>
             </span>{" "}
             {/* Five lines on a phone, three on a wide screen. */}

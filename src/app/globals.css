@@ -1048,7 +1048,7 @@
 }
 .tilt {
   transform-style: preserve-3d;
-  transition: transform 0.25s ease-out;
+  transition: transform 0.2s ease-out;
 }
 ::selection {
   background: var(--color-gold);
@@ -1156,4 +1156,31 @@ html {
   to {
     transform: translate3d(18px, -125svh, 0);
   }
+}
+
+/* "Cheers!" from the logo easter egg: the word itself, in the brand's sticker lettering, with no box. */
+.fun-shout {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 85;
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 19vw, 17rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+  color: var(--color-gold);
+  -webkit-text-stroke: 0.035em var(--color-ink);
+  paint-order: stroke fill;
+  text-shadow: 0.05em 0.05em 0 var(--color-ink);
+  pointer-events: none;
+}
+
+/* The accent half of the homepage headline, in the same lettering as the logo. */
+.hero-word--accent {
+  color: var(--color-gold);
+  -webkit-text-stroke: 0.035em var(--color-ink);
+  paint-order: stroke fill;
+  text-shadow: 0.045em 0.045em 0 var(--color-ink);
 }

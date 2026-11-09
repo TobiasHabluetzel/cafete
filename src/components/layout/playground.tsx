@@ -2,9 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
-import { toast } from "sonner";
 
-import { bubbleStorm, burstBubbles, riseBubble } from "@/lib/bubbles";
+import { bubbleStorm, burstBubbles, riseBubble, shoutOut } from "@/lib/bubbles";
 
 /**
  * All the small toys on the site, in one place. Each has its own switch: set one
@@ -128,7 +127,7 @@ export function Playground() {
           const box = card.getBoundingClientRect();
           const x = (event.clientX - box.left) / box.width - 0.5;
           const y = (event.clientY - box.top) / box.height - 0.5;
-          card.style.transform = `perspective(900px) rotateX(${-y * 7}deg) rotateY(${x * 7}deg)`;
+          card.style.transform = `perspective(700px) rotateX(${-y * 18}deg) rotateY(${x * 18}deg) scale(1.03)`;
         },
         { passive: true },
       );
@@ -157,7 +156,7 @@ export function Playground() {
         if (clicks.length < 5) return;
         clicks = [];
         bubbleStorm();
-        toast(t("cheers"));
+        shoutOut(t("cheers"));
       });
     }
 
