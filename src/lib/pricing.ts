@@ -34,6 +34,25 @@ const COMING_SOON = { key: "availability", value: "coming_soon" } as const;
  * Returns [] when Stripe is unconfigured or the lookup fails — a pricing call must
  * never take a page down.
  */
+const CACHE_MS = 10 * 60 * 1000;
+let cachedPrices: { at: number; prices: PackPrice[] } | null = null;
+
+/**
+ * For pages shown to everyone. Read at request time rather than baked into a build
+ * that has no Stripe keys, which left pages without prices for an hour after each
+ * deploy. An empty answer is never kept, and if Stripe fails the last good prices
+ * stay up. Checkout and the shop keep calling getPackPrices directly.
+ */
+export async function getCachedPackPrices(): Promise<PackPrice[]> {
+  if (cachedPrices && Date.now() - cachedPrices.at < CACHE_MS) return cachedPrices.prices;
+  const prices = await getPackPrices();
+  if (prices.length > 0) {
+    cachedPrices = { at: Date.now(), prices };
+    return prices;
+  }
+  return cachedPrices?.prices ?? prices;
+}
+
 export async function getPackPrices(): Promise<PackPrice[]> {
   if (!isStripeConfigured()) return [];
 
@@ -118,5 +137,5 @@ export function lowestPriceFrom(
  * Null when unknown, so callers omit the figure rather than inventing one.
  */
 export async function getEntryPrice(locale: string): Promise<string | null> {
-  return entryPriceFrom(await getPackPrices(), locale);
+  return entryPriceFrom(await getCachedPackPrices(), locale);
 }

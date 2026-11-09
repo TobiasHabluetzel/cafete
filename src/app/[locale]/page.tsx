@@ -1,6 +1,5 @@
 import { setRequestLocale } from "next-intl/server";
 
-import { SloganMarquee } from "@/components/brand/marquee";
 import { CoffeeFruit } from "@/components/sections/coffee-fruit";
 import { FactStrip } from "@/components/sections/fact-strip";
 import { FlavourJourney } from "@/components/sections/flavour-journey";
@@ -23,9 +22,9 @@ export const generateMetadata = createMetadata({
   pathname: "/",
 });
 
-// The entry price comes from Stripe, so the page is revalidated hourly rather
-// than frozen at build time. A price change shows up without a redeploy.
-export const revalidate = 3600;
+// The entry price comes from Stripe, and the build has no Stripe keys, so this is
+// rendered per request. getCachedPackPrices keeps that from hitting Stripe each time.
+export const dynamic = "force-dynamic";
 
 export default async function HomePage({
   params,
@@ -47,7 +46,6 @@ export default async function HomePage({
       <Story variant="teaser" />
       <MoodReel />
       <ShopTeaser entryPrice={entryPrice} />
-      <SloganMarquee />
     </>
   );
 }

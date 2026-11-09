@@ -1,6 +1,8 @@
 import { getTranslations } from "next-intl/server";
 
+import { ctaClass } from "@/components/brand/cta-button";
 import { PageHeader, Section } from "@/components/layout/section";
+import { Link } from "@/i18n/navigation";
 import {
   Accordion,
   AccordionContent,
@@ -49,18 +51,26 @@ export default async function FaqPage({ params }: LocaleParams) {
       <PageHeader label={t("label")} title={t("title")} />
 
       <Section tone="cream">
-        <Accordion className="mx-auto max-w-3xl">
+        <div className="grid gap-10 lg:grid-cols-[1fr_2.2fr] lg:gap-16">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <p className="font-display text-h2 font-extrabold text-balance">{t("moreTitle")}</p>
+            <Link href="/kontakt" className={ctaClass({ variant: "dark", size: "md", className: "mt-5" })}>
+              {t("moreCta")}
+            </Link>
+          </div>
+        <Accordion>
           {items.map((item, index) => (
-            <AccordionItem key={item.q} value={`faq-${index}`}>
-              <AccordionTrigger className="font-display text-left text-lg font-extrabold">
+            <AccordionItem key={item.q} value={`faq-${index}`} className="faq-item">
+              <AccordionTrigger className="font-display text-left font-extrabold">
                 {item.q}
               </AccordionTrigger>
-              <AccordionContent className="text-charcoal/80 leading-relaxed">
+              <AccordionContent className="text-charcoal/85 pb-3 text-lg leading-relaxed">
                 {item.a}
               </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
+        </div>
       </Section>
     </>
   );

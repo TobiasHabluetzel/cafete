@@ -1,7 +1,8 @@
 import type { ComponentProps, ReactNode } from "react";
 
-import { SunburstRays, WarmGlow } from "@/components/brand/sunburst";
-import { LogoSticker } from "@/components/brand/wordmark";
+import Image from "next/image";
+
+import bottle from "../../../public/bottle-transparent.png";
 import { cn } from "@/lib/utils";
 
 const tones = {
@@ -66,48 +67,68 @@ export function SectionHeader({
   );
 }
 
-/** Page-level heading block, used by the sub-pages. */
+const HEAD_BUBBLES = [
+  { left: 8, size: 14, duration: 9, delay: -2 },
+  { left: 24, size: 24, duration: 12, delay: -7 },
+  { left: 41, size: 10, duration: 8, delay: -4 },
+  { left: 57, size: 18, duration: 11, delay: -1 },
+  { left: 72, size: 28, duration: 13, delay: -9 },
+  { left: 90, size: 15, duration: 10, delay: -5 },
+];
+
+/**
+ * Page-level heading block for the sub-pages: the homepage poster at a smaller
+ * scale. `compact` is for long titles such as the legal pages.
+ */
 export function PageHeader({
   label,
   title,
   intro,
   children,
-  showLogo = false,
+  showBottle = false,
+  compact = false,
 }: {
   label?: ReactNode;
   title: ReactNode;
   intro?: ReactNode;
   children?: ReactNode;
-  /** Fills the empty dark space on the right — used on the shop. */
-  showLogo?: boolean;
+  showBottle?: boolean;
+  compact?: boolean;
 }) {
   return (
-    <div className="bg-night text-cream relative isolate overflow-hidden">
-      <SunburstRays
-        className="right-auto left-[-6rem]"
-        size="w-[34rem]"
-        opacity="opacity-20"
-      />
-      <WarmGlow className="top-[-6rem] left-[52%] size-[30rem] max-w-[80vw]" />
+    <div className="page-head">
+      <div aria-hidden className="hero-rays-frame">
+        <div className="hero-rays rays animate-spin-rays" />
+      </div>
+      <div aria-hidden className="hero-bubbles">
+        {HEAD_BUBBLES.map((bubble) => (
+          <span
+            key={bubble.left}
+            className="hero-bubble"
+            style={{
+              left: `${bubble.left}%`,
+              width: bubble.size,
+              height: bubble.size,
+              animationDuration: `${bubble.duration}s`,
+              animationDelay: `${bubble.delay}s`,
+            }}
+          />
+        ))}
+      </div>
 
-      {showLogo ? (
-        // aria-hidden on the wrapper: the header already names the brand, so a
-        // second "CAFÉTÉ" from the image's alt text is just noise.
-        <span
-          aria-hidden
-          className="absolute top-1/2 right-6 hidden -translate-y-1/2 lg:block"
-        >
-          <LogoSticker priority sizes="16rem" className="lg:w-[13rem] xl:w-[15rem]" />
-        </span>
+      {showBottle ? (
+        <div aria-hidden className="page-head-bottle page-head-bottle-rise">
+          <Image src={bottle} alt="" priority sizes="(max-width: 640px) 40vw, 20rem" className="h-full w-auto" />
+        </div>
       ) : null}
 
-      <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
-        {label ? <p className="label-caps text-gold">{label}</p> : null}
-        <h1 className="text-display text-sticker mt-4 max-w-4xl text-balance">
+      <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+        {label ? <p className="label-caps text-cherry-ink">{label}</p> : null}
+        <h1 className={cn("page-title", compact && "page-title--compact", showBottle && "max-w-[72%]")}>
           {title}
         </h1>
         {intro ? (
-          <p className="text-cream/85 mt-6 max-w-2xl text-lg leading-relaxed text-balance">
+          <p className={cn("page-head-intro mt-6 max-w-2xl text-lg leading-snug font-medium text-balance lg:text-2xl", showBottle && "max-w-[58%] lg:max-w-2xl")}>
             {intro}
           </p>
         ) : null}
