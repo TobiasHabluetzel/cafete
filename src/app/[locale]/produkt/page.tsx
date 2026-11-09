@@ -168,6 +168,9 @@ export default async function ProductPage({ params }: LocaleParams) {
         </Section>
       ) : null}
 
+      {/* Right under the packs: that is where people decide, and want to hear from others. */}
+      <ReviewsSection locale={locale} />
+
       <Section tone="white">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
@@ -209,8 +212,6 @@ export default async function ProductPage({ params }: LocaleParams) {
       </Section>
 
       <SugarBars />
-
-      <ReviewsSection locale={locale} />
     </>
   );
 }

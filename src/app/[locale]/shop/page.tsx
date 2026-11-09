@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { TrackOnMount } from "@/components/analytics/tracking";
 import { ctaClass } from "@/components/brand/cta-button";
 import { PageHeader, Section } from "@/components/layout/section";
+import { ReviewsSection } from "@/components/reviews/reviews-section";
 import { FactStrip } from "@/components/sections/fact-strip";
 import { PackPicker } from "@/components/shop/pack-picker";
 import { packSizes } from "@/config/site";
@@ -101,6 +102,8 @@ export default async function ShopPage({ params }: LocaleParams) {
           </div>
         )}
       </Section>
+
+      <ReviewsSection locale={locale} />
 
       <FactStrip />
     </>
