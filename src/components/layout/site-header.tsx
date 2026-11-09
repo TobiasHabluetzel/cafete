@@ -42,7 +42,7 @@ export function SiteHeader() {
       className="bg-sunset text-charcoal border-ink/25 sticky top-0 z-50 border-b-2"
       style={{ viewTransitionName: "site-header" }}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:h-20 lg:px-8">
+      <div className="flex h-16 items-center gap-4 px-4 sm:px-6 lg:h-20 lg:px-[clamp(2rem,2.5vw,4rem)]">
         <Link
           href="/"
           className="focus-visible:ring-ink flex shrink-0 items-center rounded-sm focus-visible:ring-2 focus-visible:outline-none"

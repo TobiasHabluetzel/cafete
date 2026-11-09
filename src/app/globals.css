@@ -735,11 +735,12 @@
 .hero {
   --hero-head: 4rem;
   --hero-gutter: 1rem;
+  --hero-focus: 62%;
   position: relative;
   isolation: isolate;
   min-height: calc(100svh - var(--hero-head));
   overflow: hidden;
-  background: radial-gradient(circle at 62% 46%, var(--color-sunset-glow) 0%, var(--color-sunset) 56%, var(--color-sunset-deep) 118%);
+  background: radial-gradient(circle at var(--hero-focus) 46%, var(--color-sunset-glow) 0%, var(--color-sunset) 56%, var(--color-sunset-deep) 118%);
   color: var(--color-ink);
 }
 .hero-rays-frame {
@@ -748,13 +749,13 @@
   z-index: -2;
   overflow: hidden;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(circle at 62% 46%, black 0%, black 22%, transparent 70%);
-  mask-image: radial-gradient(circle at 62% 46%, black 0%, black 22%, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle at var(--hero-focus) 46%, black 0%, black 22%, transparent 70%);
+  mask-image: radial-gradient(circle at var(--hero-focus) 46%, black 0%, black 22%, transparent 70%);
 }
 .hero-rays {
   position: absolute;
   top: 46%;
-  left: 62%;
+  left: var(--hero-focus);
   width: 190vmax;
   height: 190vmax;
   margin: -95vmax 0 0 -95vmax;
@@ -830,25 +831,52 @@
 }
 
 @media (min-width: 1024px) {
+  /*
+   * Type and bottle scale with the window height, so a fixed content width cannot hold them
+   * on a large screen. The slogan gets the width it needs and the bottle takes the rest, which
+   * keeps the two apart at any window size.
+   */
   .hero {
     --hero-head: 5rem;
-    --hero-gutter: max(2rem, calc((100vw - 80rem) / 2 + 2rem));
+    --hero-gutter: clamp(2rem, 2.5vw, 4rem);
+    --hero-focus: 68%;
+    --hero-bottle-height: min(104svh, 75vw);
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    grid-template-rows: 1fr auto;
+    column-gap: 2rem;
+    padding-inline: var(--hero-gutter);
     min-height: max(40rem, calc(100svh - var(--hero-head)));
   }
   .hero-slogan {
-    top: 7svh;
+    position: relative;
+    top: auto;
+    left: auto;
+    grid-column: 1;
+    grid-row: 1;
+    margin-top: 7svh;
     font-size: min(11.5vw, 23svh);
   }
+  /* Absolute inside its grid area: it may run off the bottom without making the hero taller. */
   .hero-bottle {
-    right: var(--hero-gutter);
+    grid-column: 2;
+    grid-row: 1 / 3;
+    right: 0;
     bottom: -11svh;
-    height: 104svh;
+    left: 0;
+    width: calc(var(--hero-bottle-height) * 437 / 1486);
+    height: var(--hero-bottle-height);
+    margin-inline: auto;
   }
   .hero-foot {
+    position: relative;
     right: auto;
-    bottom: 8svh;
-    left: var(--hero-gutter);
+    bottom: auto;
+    left: auto;
+    grid-column: 1;
+    grid-row: 2;
     width: 26rem;
+    margin-block: 2rem 8svh;
   }
   .hero-title {
     max-width: none;
