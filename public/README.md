@@ -60,7 +60,4 @@ The source is named `Kareem_F_009`. Two quirks worth knowing:
 
 ## Fruit in the scroll story (`fruit/`)
 
-- `coffee-cherry.webp`: cut out of our own `coffee-cherry-photo.jpg`.
-- `lemon-whole.webp`: Pixabay Content License, https://pixabay.com/photos/lemon-yellow-citrus-yellow-lemon-3330200/
-- `lemon-slice.webp`: Pixabay Content License, https://pixabay.com/photos/fruit-lemons-citrus-juicy-healthy-2489366/
-- `lemon-small.webp`: Pixabay Content License, https://pixabay.com/photos/lemon-fruit-fresh-god-vitamin-4744686/
+Drawn for CAFÉTÉ as SVG and rendered to WebP: coffee cherries, cranberries, elderberries and a lemon slice. No third-party images. Sources and the render script are in `design/fruit/`; run `node design/fruit/render-fruit.mjs` after changing a drawing.
