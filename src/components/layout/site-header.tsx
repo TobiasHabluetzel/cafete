@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import { LogoSticker } from "@/components/brand/wordmark";
 import { LocaleSwitcher } from "@/components/layout/locale-switcher";
+import { CartDrawer, openCartDrawer } from "@/components/shop/cart-drawer";
 import { useCart } from "@/components/shop/use-cart";
 import { Button } from "@/components/ui/button";
 import {
@@ -90,7 +91,17 @@ export function SiteHeader() {
               totalItems > 0 ? `${t("cart")} — ${tCheckout("cartCount", { count: totalItems })}` : t("cart")
             }
             nativeButton={false}
-            render={<Link href="/warenkorb" />}
+            render={
+              <Link
+                href="/warenkorb"
+                onClick={(event) => {
+                  // Let a new-tab click, or a click on the cart page itself, behave normally.
+                  if (event.metaKey || event.ctrlKey || event.shiftKey || pathname === "/warenkorb") return;
+                  event.preventDefault();
+                  openCartDrawer();
+                }}
+              />
+            }
             className="text-charcoal hover:bg-ink/10 hover:text-ink relative"
           >
             <ShoppingBag data-cart-target />
@@ -104,6 +115,7 @@ export function SiteHeader() {
               </span>
             ) : null}
           </Button>
+          <CartDrawer />
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger

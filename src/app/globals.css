@@ -332,6 +332,8 @@
   }
   body {
     font-stretch: 85%;
+    /* Bricolage joins its double f, and at this size the join looks like a mistake. */
+    font-variant-ligatures: no-common-ligatures;
     @apply bg-background text-foreground;
   }
   html {
@@ -570,7 +572,7 @@
     font-size: clamp(8rem, 40vw, 28rem);
     font-weight: 800;
     line-height: 1;
-    letter-spacing: -0.025em;
+    letter-spacing: 0;
     pointer-events: none;
     user-select: none;
   }
@@ -628,13 +630,15 @@
 
   .journey-scene {
     position: absolute;
+    /* No card, which would cover the scene: the words sit above this, so the text is on open background. */
     right: 0;
-    bottom: 0;
+    bottom: max(1.25rem, env(safe-area-inset-bottom));
     left: 0;
     z-index: 3;
     max-width: none;
-    padding: 0 1.25rem max(1.25rem, env(safe-area-inset-bottom));
+    padding: 0 1.25rem;
     text-align: center;
+    text-shadow: 0 1px 14px rgba(0, 0, 0, 0.65);
     opacity: 0;
     visibility: hidden;
     will-change: transform, opacity;
@@ -653,6 +657,7 @@
   .journey-scene--fizzy,
   .journey-scene--fizzy .label-caps {
     color: var(--color-ink);
+    text-shadow: none;
   }
 
   .journey-rail {
@@ -690,8 +695,9 @@
       height: 460svh;
     }
     .journey-word {
-      inset: var(--journey-head) 0 0 0;
-      font-size: clamp(12rem, 30vw, 34rem);
+      /* Centred in the space above the text, and capped by height so they can never reach it. */
+      inset: var(--journey-head) 0 28svh 0;
+      font-size: min(30vw, 50svh);
     }
     .journey-particles--centered,
     .journey-glow,
@@ -706,9 +712,10 @@
     }
     .journey-scene {
       right: auto;
-      bottom: 9svh;
+      right: auto;
+      bottom: 6svh;
       left: max(2rem, calc((100vw - 80rem) / 2 + 2rem));
-      width: 22rem;
+      width: 24rem;
       padding: 0;
       text-align: left;
     }
@@ -778,7 +785,7 @@
   font-size: min(23vw, 12.5svh);
   font-weight: 800;
   line-height: 0.92;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.015em;
   pointer-events: none;
   user-select: none;
 }

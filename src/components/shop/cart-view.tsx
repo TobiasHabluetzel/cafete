@@ -1,6 +1,7 @@
 "use client";
 
 import { Minus, Plus, Trash2 } from "lucide-react";
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 
@@ -12,8 +13,16 @@ import { formatMoney } from "@/lib/format-money";
 import { readAttribution } from "@/lib/attribution";
 import { trackPixel } from "@/lib/meta-pixel";
 import type { PackPrice } from "@/lib/pricing";
+import { cn } from "@/lib/utils";
 
-export function CartView({ prices }: { prices: PackPrice[] }) {
+import bottle from "../../../public/bottle-transparent.png";
+import pack6 from "../../../public/pack-6.png";
+import pack12 from "../../../public/pack-12.png";
+import pack24 from "../../../public/pack-24.png";
+
+const PACK_IMAGES: Record<number, typeof pack6> = { 6: pack6, 12: pack12, 24: pack24 };
+
+export function CartView({ prices, compact = false }: { prices: PackPrice[]; compact?: boolean }) {
   const t = useTranslations("checkout");
   const tCart = useTranslations("cart");
   const tPacks = useTranslations("packs");
@@ -91,15 +100,21 @@ export function CartView({ prices }: { prices: PackPrice[] }) {
   }
 
   return (
-    <div className="max-w-3xl">
+    <div className={compact ? undefined : "max-w-3xl"}>
       <ul className="border-charcoal/15 divide-charcoal/10 divide-y border-y">
         {lines.map((line) => (
           <li
             key={line.bottles}
-            className="flex flex-wrap items-center gap-4 py-5 sm:flex-nowrap"
+            className={cn("flex flex-wrap items-center gap-3 py-5", !compact && "sm:flex-nowrap sm:gap-4")}
           >
+            <Image
+              src={PACK_IMAGES[line.bottles] ?? bottle}
+              alt=""
+              sizes="4rem"
+              className="size-16 shrink-0 object-contain"
+            />
             <div className="min-w-0 flex-1">
-              <p className="font-display text-lg font-extrabold">
+              <p className="font-display text-lg font-extrabold whitespace-nowrap">
                 {labelFor(line.bottles)}
               </p>
               <p className="text-charcoal/60 text-sm">
@@ -176,7 +191,7 @@ export function CartView({ prices }: { prices: PackPrice[] }) {
         type="button"
         onClick={checkout}
         disabled={status === "redirecting" || !allPriced}
-        className={ctaClass({ size: "lg", className: "mt-8" })}
+        className={ctaClass({ size: "lg", className: cn("mt-8", compact && "w-full") })}
       >
         {status === "redirecting" ? t("redirecting") : t("goToCheckout")}
       </button>

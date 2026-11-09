@@ -6,6 +6,7 @@ import { ctaClass } from "@/components/brand/cta-button";
 import { PageHeader, Section } from "@/components/layout/section";
 import { JsonLd } from "@/components/seo/json-ld";
 import { site } from "@/config/site";
+import { PackPicker } from "@/components/shop/pack-picker";
 import { Link } from "@/i18n/navigation";
 import {
   createMetadata,
@@ -16,6 +17,7 @@ import {
 import { ReviewsSection } from "@/components/reviews/reviews-section";
 import { getPackPrices } from "@/lib/pricing";
 import { getReviewSummary, MIN_PUBLIC_REVIEWS } from "@/lib/reviews";
+import { configuredPacks } from "@/lib/stripe";
 
 import bottle from "../../../../public/bottle-transparent.png";
 
@@ -40,6 +42,10 @@ export default async function ProductPage({ params }: LocaleParams) {
 
   const nutrition = t.raw("nutrition") as NutritionRow[];
   const packPrices = await getPackPrices();
+  const tShopPage = await getTranslations({ locale, namespace: "shop" });
+  const buyable = configuredPacks().filter((pack) =>
+    packPrices.some((price) => price.bottles === pack.bottles),
+  );
 
   const specs = [
     { label: t("volumeLabel"), value: t("volumeValue") },
@@ -137,12 +143,29 @@ export default async function ProductPage({ params }: LocaleParams) {
               ))}
             </dl>
 
-            <Link href="/shop" className={ctaClass({ size: "lg", className: "mt-10" })}>
-              {tShop("cta")}
-            </Link>
+            {buyable.length > 0 ? (
+              <a href="#bestellen" className={ctaClass({ size: "lg", className: "mt-10" })}>
+                {tShopPage("packHeading")}
+              </a>
+            ) : (
+              <Link href="/shop" className={ctaClass({ size: "lg", className: "mt-10" })}>
+                {tShop("cta")}
+              </Link>
+            )}
           </div>
         </div>
       </Section>
+
+      {buyable.length > 0 ? (
+        <Section tone="sunset">
+          <div id="bestellen" className="scroll-mt-28">
+            <h2 className="text-h2">{tShopPage("packHeading")}</h2>
+            <div className="mt-8">
+              <PackPicker packs={buyable.map((pack) => ({ ...pack }))} prices={packPrices} />
+            </div>
+          </div>
+        </Section>
+      ) : null}
 
       <Section tone="white">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">

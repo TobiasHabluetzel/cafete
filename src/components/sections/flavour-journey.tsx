@@ -30,9 +30,9 @@ const easeOut = (t: number) => 1 - (1 - t) ** 3;
 
 /** Where each scene is on screen, as fractions of the pinned scroll distance. */
 const SCENES = [
-  { key: "fruity", start: 0, end: 0.32 },
-  { key: "fizzy", start: 0.35, end: 0.64 },
-  { key: "focus", start: 0.67, end: 1.2 },
+  { key: "fruity", start: -0.04, end: 0.335 },
+  { key: "fizzy", start: 0.335, end: 0.665 },
+  { key: "focus", start: 0.665, end: 1.2 },
 ] as const;
 
 /*
@@ -42,14 +42,14 @@ const SCENES = [
 const CHERRIES = [
   { size: 64, fromX: -0.62, fromY: -0.5, toX: -0.33, toY: -0.27, spin: 1 },
   { size: 40, fromX: -0.7, fromY: 0.06, toX: -0.42, toY: -0.06, spin: -1 },
-  { size: 78, fromX: -0.58, fromY: 0.62, toX: -0.3, toY: 0.2, spin: 1 },
+  { size: 78, fromX: -0.68, fromY: 0.18, toX: -0.34, toY: 0.15, spin: 1 },
   { size: 32, fromX: -0.32, fromY: -0.72, toX: -0.2, toY: -0.36, spin: -1 },
   { size: 50, fromX: 0.6, fromY: -0.6, toX: 0.31, toY: -0.3, spin: -1 },
   { size: 72, fromX: 0.72, fromY: -0.04, toX: 0.39, toY: -0.04, spin: 1 },
   { size: 36, fromX: 0.58, fromY: 0.68, toX: 0.34, toY: 0.24, spin: -1 },
   { size: 56, fromX: 0.3, fromY: 0.78, toX: 0.24, toY: 0.32, spin: 1 },
   { size: 28, fromX: 0.34, fromY: -0.76, toX: 0.17, toY: -0.39, spin: 1 },
-  { size: 26, fromX: -0.2, fromY: 0.8, toX: -0.2, toY: 0.33, spin: -1 },
+  { size: 26, fromX: 0.14, fromY: 0.8, toX: 0.14, toY: 0.36, spin: -1 },
 ];
 
 const BUBBLES = Array.from({ length: 34 }, (_, index) => ({
@@ -132,9 +132,14 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
 
         const caption = scenes[index];
         if (caption) {
-          caption.style.opacity = String(presence);
-          caption.style.transform = `translate3d(0, ${(1 - presence) * 26}px, 0)`;
-          caption.style.visibility = presence < 0.01 ? "hidden" : "visible";
+          // The text holds for its whole scene and swaps right at the boundary, so
+          // there is no scroll position where nothing is readable.
+          const shown =
+            smooth(seg(scene.start - 0.012, scene.start + 0.012)) *
+            (1 - smooth(seg(scene.end - 0.012, scene.end + 0.012)));
+          caption.style.opacity = String(shown);
+          caption.style.transform = `translate3d(0, ${(1 - shown) * 10}px, 0)`;
+          caption.style.visibility = shown < 0.01 ? "hidden" : "visible";
         }
       });
 

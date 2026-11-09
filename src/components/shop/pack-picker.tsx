@@ -7,6 +7,7 @@ import { useState } from "react";
 
 import { ctaClass } from "@/components/brand/cta-button";
 import { Sticker } from "@/components/brand/sticker";
+import { openCartDrawer } from "@/components/shop/cart-drawer";
 import { useCart } from "@/components/shop/use-cart";
 import type { PackPrice } from "@/lib/pricing";
 import { flyToCart } from "@/lib/fly-to-cart";
@@ -54,6 +55,8 @@ export function PackPicker({
   function onAdd(bottles: number, button: HTMLElement) {
     flyToCart(button.closest("li")?.querySelector("img"));
     add(bottles);
+    // The panel opens as the pack lands, so the two read as one movement.
+    window.setTimeout(openCartDrawer, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 620);
     setJustAdded(bottles);
     window.setTimeout(() => {
       setJustAdded((current) => (current === bottles ? null : current));
