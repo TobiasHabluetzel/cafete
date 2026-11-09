@@ -77,7 +77,7 @@
   "story": {
     "label": "Our story",
     "title": "How it all began",
-    "p1": "CAFÉTÉ began three years ago in a <b>claro shop</b>, where Kareem — a passionate hospitality professional of some twenty years and one of the two founders — spotted a large glass jar full of dried, reddish fruit. He couldn’t say what it was. When he asked, he learned: it’s <b>part of the coffee plant</b>. His curiosity was sparked — and since hardly anyone asked about it back then, he was given a handful to try.",
+    "p1": "CAFÉTÉ began three years ago in a <b>claro shop</b>, where Kareem — a passionate hospitality professional of some twenty years — spotted a large glass jar full of dried, reddish fruit. He couldn’t say what it was. When he asked, he learned: it’s <b>part of the coffee plant</b>. His curiosity was sparked — and since hardly anyone asked about it back then, he was given a handful to try.",
     "p2": "At home he brewed his first infusion from it: <b>fruity, slightly tart and surprisingly distinct</b>. The more Kareem learned about the coffee fruit, the clearer it became that there was far more to it.",
     "p3": "Three years later, a handful of coffee fruit became CAFÉTÉ.",
     "teaser": "Within three years, a handful of coffee fruit became Cafété.",
@@ -89,17 +89,12 @@
     "body": "CAFÉTÉ wants to establish the coffee fruit as a category of its own in Switzerland — not a niche product for connoisseurs, but a fixture on the shelf. We believe the coffee fruit deserves more attention. With CAFÉTÉ, we make a raw material rich in tradition experienceable in a new way."
   },
   "founders": {
-    "label": "The founders",
-    "title": "The founders behind Cafété",
+    "label": "Cafété in person",
+    "title": "The person behind Cafété",
     "kareem": {
       "name": "Kareem Oueini",
       "role": "Product & brand development",
       "bio": "Kareem Oueini is a trained chef and food craftsman by passion. He has worked in hospitality for some two decades, developing a fine instinct for taste, balance and quality. He brings that experience to CAFÉTÉ — especially in recipe development, where the interplay of aromas, sweetness, acidity and structure is decisive. A nature-loving and sporty person, he has also long been interested in nutrition, hydration and the quality of what we put into our bodies."
-    },
-    "hannes": {
-      "name": "Hannes-Valentin Juon",
-      "role": "Commercial & operations",
-      "bio": "Through his qualification as a Technical Business Specialist (Technischer Kaufmann FA), Hannes-Valentin Juon has a solid grounding in business and a practical feel for numbers and commercial context. At CAFÉTÉ he handles the commercial side: financial planning, pricing and — together with Kareem — the company’s overall direction. He is also interested in digitalisation and operations, and wants to build CAFÉTÉ step by step into a stable, locally rooted company."
     }
   },
   "shopTeaser": {
@@ -732,7 +727,7 @@
     "cart": "Your CAFÉTÉ cart — review your pack sizes and continue to secure checkout by card or TWINT.",
     "faq": "Frequently asked questions about CAFÉTÉ: caffeine, sugar, ingredients, storage, shipping and returns — answered plainly.",
     "contact": "Get in touch with CAFÉTÉ: product questions, retailer and hospitality enquiries, or just to say hello.",
-    "about": "How a handful of coffee fruit became CAFÉTÉ — the story, founders Kareem and Hannes, and the vision behind the coffee fruit.",
+    "about": "How a handful of coffee fruit became CAFÉTÉ — the story, founder Kareem and the vision behind the coffee fruit.",
     "imprint": "CAFÉTÉ imprint — provider identification, contact and legal details.",
     "terms": "Terms and conditions for orders in the CAFÉTÉ online shop: prices, delivery, payment and warranty.",
     "privacy": "CAFÉTÉ privacy policy — what data we process, for what purpose, and your rights under the revised Swiss FADP.",

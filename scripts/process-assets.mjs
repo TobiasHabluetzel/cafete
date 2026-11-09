@@ -382,7 +382,6 @@ await photo({
 // Founder portraits. Delivered as 2832x4240 TIFFs despite the .jpeg extension,
 // which is why they need `sharp` rather than a plain copy. Cropped to 4:5 from
 // the top so the head and torso survive and the legs are trimmed.
-// Per Tobias: 009 is Kareem, 007 is Hannes.
 /*
  * Monatsporträt subjects.
  *
@@ -410,33 +409,11 @@ console.log("\nFounder portraits:");
 await photo({
   src: s("Kareem_F_009.jpeg", "Kareem_F_009 2.jpeg"),
   out: "founder-kareem.jpg",
-  // Cropped in slightly so he fills the frame like Hannes does. Hannes' studio
-  // source is already tight, so it cannot be widened to match — the give has to
-  // come from Kareem's side, where there is plenty of canvas.
   region: { left: 0.061, top: 0.0995, width: 0.878, height: 0.733 },
   width: 1200,
   height: 1500,
   position: "top",
   quality: 84,
-});
-await photo({
-  /*
-   * Replaced 2026-08-24: the owner cut Hannes out of the river shot and placed
-   * him on a grey wall matching Kareem's studio backdrop, with a cast shadow.
-   *
-   * Note the source filenames in the dossier are misleading — every river shot
-   * of Hannes is named "Kareem_F_00x". This one was exported by hand.
-   */
-  // Replaced 2026-09-08: a proper landscape studio shot against concrete.
-  // Because the source is landscape, the 4:5 portrait frame has to come out of
-  // the middle — hence a narrow horizontal window at full height.
-  src: s("Hannes Suit.jpg"),
-  out: "founder-hannes.jpg",
-  region: { left: 0.284, top: 0, width: 0.532, height: 1 },
-  width: 1200,
-  height: 1500,
-  position: "top",
-  quality: 88,
 });
 
 /*

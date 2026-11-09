@@ -59,8 +59,8 @@ All real website copy from your dossier, organized by page/section so it maps st
 ## 3. Story — "Wie alles begann"
 
 **DE**
-> Angefangen hat Cafété vor drei Jahren in einem claro-Laden. Dort entdeckte Kareem, einer der
-> beiden Gründer, einen grossen Glasbehälter voll getrockneter, rötlicher Früchte. Was das war,
+> Angefangen hat Cafété vor drei Jahren in einem claro-Laden. Dort entdeckte Kareem
+> einen grossen Glasbehälter voll getrockneter, rötlicher Früchte. Was das war,
 > konnte er nicht sagen. Auf Nachfrage erfuhr er: ein Teil der Kaffeepflanze. Das Interesse war
 > geweckt – und weil damals kaum jemand danach fragte, bekam er eine Handvoll zum Probieren
 > geschenkt.
@@ -72,7 +72,7 @@ All real website copy from your dossier, organized by page/section so it maps st
 > Drei Jahre später wurde aus einer Handvoll Kaffeefrüchten Cafété.
 
 **EN (draft)**
-> Cafété began three years ago in a claro shop, where Kareem — one of the two founders — spotted
+> Cafété began three years ago in a claro shop, where Kareem spotted
 > a large glass jar full of dried, reddish fruit. He couldn't say what it was. When he asked, he
 > learned: it's part of the coffee plant. His curiosity was sparked — and since hardly anyone
 > asked about it back then, he was given a handful to try.
@@ -152,7 +152,7 @@ All real website copy from your dossier, organized by page/section so it maps st
 
 ---
 
-## 7. Founders / Bios
+## 7. Bio
 
 **Kareem — DE**
 > Kareem Oueini ist gelernter Koch und Lebensmittelveredler aus Leidenschaft. Seit 16 Jahren
@@ -170,22 +170,7 @@ All real website copy from your dossier, organized by page/section so it maps st
 > and structure is decisive. A nature-loving and sporty person, he has also long been interested
 > in nutrition, hydration and the quality of what we put into our bodies.
 
-**Hannes — DE**
-> Hannes-Valentin Juon hat durch seine Weiterbildung zum Technischen Kaufmann FA gute
-> betriebswirtschaftliche Grundlagen und ein praktisches Gespür für Zahlen und wirtschaftliche
-> Zusammenhänge. Bei Cafété ist er zuständig für die kaufmännische Seite: Finanzplanung,
-> Preisgestaltung und zusammen mit Kareem für die generelle Ausrichtung des Unternehmens. Er
-> interessiert sich zudem für Digitalisierung und Betriebsorganisation und möchte Cafété Schritt
-> für Schritt zu einem stabilen, lokal verankerten Unternehmen aufbauen.
-
-**Hannes — EN (draft)**
-> Through his qualification as a Technical Business Specialist (Technischer Kaufmann FA),
-> Hannes-Valentin Juon has a solid grounding in business and a practical feel for numbers and
-> commercial context. At Cafété he handles the commercial side: financial planning, pricing and —
-> together with Kareem — the company's overall direction. He is also interested in digitalisation
-> and operations, and wants to build Cafété step by step into a stable, locally rooted company.
-
-> Note: two founder photos (Kareem_F_009, Kareem_F_007) supplied for the bio section.
+> Note: photo Kareem_F_009 supplied for the bio section.
 
 ---
 
