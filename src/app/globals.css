@@ -587,6 +587,18 @@
   .journey-fruit-layer--2 img {
     filter: blur(9px);
   }
+  /* Once the 3D fruit is running, it replaces the sharp image layer. */
+  .journey--3d .journey-fruit-layer--1 {
+    visibility: hidden;
+  }
+  .journey-fruit3d {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
 
   .journey-vignette {
     display: block;
