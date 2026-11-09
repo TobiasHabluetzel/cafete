@@ -160,6 +160,16 @@ export function Playground() {
       });
     }
 
+    // The hero's rays and bubbles run forever; let them rest while the hero is out of view.
+    const hero = document.querySelector<HTMLElement>(".hero");
+    if (hero) {
+      const watch = new IntersectionObserver(([entry]) => {
+        hero.toggleAttribute("data-offscreen", !entry.isIntersecting);
+      });
+      watch.observe(hero);
+      cleanups.push(() => watch.disconnect());
+    }
+
     if (FUN.tabMessage) {
       let original = "";
       const onVisibility = () => {

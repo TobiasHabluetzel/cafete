@@ -1007,7 +1007,7 @@
     animation: hero-bubble linear infinite;
   }
   .hero-word {
-    animation: hero-word 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: hero-word 0.85s cubic-bezier(0.16, 1, 0.3, 1) backwards;
   }
   .contents:nth-of-type(2) > .hero-word {
     animation-delay: 70ms;
@@ -1022,11 +1022,11 @@
     animation-delay: 280ms;
   }
   .hero-bottle-rise {
-    animation: hero-bottle 1.1s cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
+    animation: hero-bottle 1.1s cubic-bezier(0.16, 1, 0.3, 1) 120ms backwards;
   }
   .hero-title,
   .hero-foot > a {
-    animation: hero-foot 0.7s ease-out 420ms both;
+    animation: hero-foot 0.7s ease-out 420ms backwards;
   }
 
   /*
@@ -1054,6 +1054,16 @@
     }
   }
   }
+}
+/*
+ * Entrance animations fill backwards only: once they end, the words and the bottle are plain
+ * content again instead of staying separate layers. Phone browsers drop such layers under
+ * memory pressure and sometimes do not repaint them after scrolling back up.
+ */
+/* The endless hero animations rest while the hero is off screen (set in playground.tsx). */
+.hero[data-offscreen] .hero-rays,
+.hero[data-offscreen] .hero-bubble {
+  animation-play-state: paused;
 }
 @keyframes hero-word {
   from {
@@ -1155,13 +1165,13 @@
 @media (prefers-reduced-motion: no-preference) {
   .page-title,
   .page-head-intro {
-    animation: hero-word 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: hero-word 0.85s cubic-bezier(0.16, 1, 0.3, 1) backwards;
   }
   .page-head-intro {
     animation-delay: 120ms;
   }
   .page-head-bottle-rise {
-    animation: hero-bottle 1.1s cubic-bezier(0.16, 1, 0.3, 1) 100ms both;
+    animation: hero-bottle 1.1s cubic-bezier(0.16, 1, 0.3, 1) 100ms backwards;
   }
 }
 
