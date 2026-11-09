@@ -2,9 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
-import { toast } from "sonner";
 
-import { bubbleStorm, burstBubbles, riseBubble } from "@/lib/bubbles";
+import { bubbleStorm, burstBubbles, riseBubble, shoutOut } from "@/lib/bubbles";
 
 /**
  * All the small toys on the site, in one place. Each has its own switch: set one
@@ -157,7 +156,7 @@ export function Playground() {
         if (clicks.length < 5) return;
         clicks = [];
         bubbleStorm();
-        toast(t("cheers"));
+        shoutOut(t("cheers"));
       });
     }
 

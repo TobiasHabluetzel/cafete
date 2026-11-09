@@ -72,3 +72,28 @@ export function bubbleStorm() {
       .finally(() => el.remove());
   }
 }
+
+/** One big word over the page, with no box around it. Script-driven so it can leave by itself. */
+export function shoutOut(text: string) {
+  const el = document.createElement("div");
+  el.className = "fun-shout";
+  el.setAttribute("role", "status");
+  el.textContent = text;
+  document.body.appendChild(el);
+  const keyframes = motionOk()
+    ? [
+        { transform: "translate(-50%, -50%) scale(0.4) rotate(-10deg)", opacity: 0 },
+        { transform: "translate(-50%, -50%) scale(1.08) rotate(-4deg)", opacity: 1, offset: 0.14 },
+        { transform: "translate(-50%, -50%) scale(1) rotate(-4deg)", opacity: 1, offset: 0.24 },
+        { transform: "translate(-50%, -50%) scale(1) rotate(-4deg)", opacity: 1, offset: 0.78 },
+        { transform: "translate(-50%, -62%) scale(1.04) rotate(-4deg)", opacity: 0 },
+      ]
+    : [
+        { transform: "translate(-50%, -50%)", opacity: 1, offset: 0 },
+        { transform: "translate(-50%, -50%)", opacity: 1, offset: 0.9 },
+        { transform: "translate(-50%, -50%)", opacity: 0 },
+      ];
+  el.animate(keyframes, { duration: 2200, easing: "ease-out", fill: "both" }).finished
+    .catch(() => undefined)
+    .finally(() => el.remove());
+}
