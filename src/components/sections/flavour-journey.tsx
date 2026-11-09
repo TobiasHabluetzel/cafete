@@ -226,7 +226,8 @@ export function FlavourJourney({ entryPrice }: { entryPrice: string | null }) {
           : p < 0.66
             ? lerp(9, -6, smooth(seg(0.4, 0.66)))
             : lerp(-6, 0, smooth(seg(0.66, 0.84)));
-      const scale = 0.86 + 0.14 * rise + 0.1 * smooth(seg(0.7, 0.95));
+      // It grows for Focus only on wide screens; on a phone that would run into the caption.
+      const scale = 0.86 + 0.14 * rise + (width >= 1024 ? 0.1 : 0) * smooth(seg(0.7, 0.95));
       if (bottleEl) {
         bottleEl.style.transform = `translate3d(0, ${(1 - rise) * height * 0.45}px, 0) rotate(${tilt}deg) scale(${scale})`;
       }
