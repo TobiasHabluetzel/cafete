@@ -171,17 +171,29 @@ export function Playground() {
     }
 
     if (FUN.tabMessage) {
+      // While the visitor is on another tab, the title takes turns between a few short lines.
+      const lines = t("tab").split("|");
       let original = "";
+      let timer = 0;
       const onVisibility = () => {
+        window.clearInterval(timer);
         if (document.hidden) {
           original = document.title;
-          document.title = t("tab");
+          let n = 0;
+          document.title = lines[0];
+          timer = window.setInterval(() => {
+            n = (n + 1) % lines.length;
+            document.title = lines[n];
+          }, 2500);
         } else if (original) {
           document.title = original;
         }
       };
       document.addEventListener("visibilitychange", onVisibility);
-      cleanups.push(() => document.removeEventListener("visibilitychange", onVisibility));
+      cleanups.push(() => {
+        window.clearInterval(timer);
+        document.removeEventListener("visibilitychange", onVisibility);
+      });
     }
 
     return () => cleanups.forEach((cleanup) => cleanup());

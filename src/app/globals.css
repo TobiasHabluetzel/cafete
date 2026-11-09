@@ -598,8 +598,12 @@
   .journey-fruit-layer--2 img {
     filter: blur(9px);
   }
-  /* Once the 3D fruit is running, it replaces the sharp image layer. */
-  .journey--3d .journey-fruit-layer--1 {
+  /*
+   * The 3D fruit replaces the sharp image layer, which also stays hidden while the 3D loads, so
+   * a reload never shows the old fruit first. It only appears where 3D is not available.
+   */
+  .journey--3d .journey-fruit-layer--1,
+  .journey--3d-pending .journey-fruit-layer--1 {
     visibility: hidden;
   }
   .journey-fruit3d {
@@ -659,10 +663,11 @@
     margin: 0;
     overflow: hidden;
     font-family: var(--font-display);
-    font-size: clamp(8rem, 40vw, 28rem);
+    font-size: clamp(7rem, 34vw, 28rem);
     font-weight: 800;
     line-height: 1;
-    letter-spacing: 0;
+    /* Spaced out, so the word still reads while the bottle passes in front. */
+    letter-spacing: 0.08em;
     pointer-events: none;
     user-select: none;
   }
