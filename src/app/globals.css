@@ -978,8 +978,13 @@
     animation: hero-foot 0.7s ease-out 420ms both;
   }
 
-  /* On the way out the words drift apart and the bottle lifts into the next scene. */
+  /*
+   * On the way out the words drift apart and the bottle lifts into the next scene.
+   * Only with a mouse on a wide screen: on phones the address bar changes the viewport while
+   * scrolling, and the words could stay part-way off screen after scrolling back up.
+   */
   @supports (animation-timeline: view()) {
+  @media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
     .hero-word-inner,
     .hero-bottle-scroll {
       animation-timing-function: linear;
@@ -996,6 +1001,7 @@
     .hero-bottle-scroll {
       animation-name: hero-lift;
     }
+  }
   }
 }
 @keyframes hero-word {

@@ -10,7 +10,6 @@ import { Link } from "@/i18n/navigation";
 import bottle from "../../../public/bottle-transparent.png";
 import coffeeCherry from "../../../public/fruit/coffee-cherry.webp";
 import lemonSlice from "../../../public/fruit/lemon-slice.webp";
-import lemonSmall from "../../../public/fruit/lemon-small.webp";
 import lemonWhole from "../../../public/fruit/lemon-whole.webp";
 
 /**
@@ -47,7 +46,6 @@ const FRUIT_IMAGE = {
   cherry: coffeeCherry,
   lemon: lemonWhole,
   slice: lemonSlice,
-  small: lemonSmall,
 };
 type FruitKind = keyof typeof FRUIT_IMAGE;
 
@@ -59,22 +57,23 @@ const DRIFT: Record<Depth, number> = { 0: 0.03, 1: 0.08, 2: 0.26 };
 const FRUIT: { kind: FruitKind; size: number; x: number; y: number; depth: Depth; spin: number }[] = [
   { kind: "cherry", size: 50, x: -0.44, y: -0.3, depth: 0, spin: 1 },
   { kind: "cherry", size: 44, x: 0.46, y: -0.2, depth: 0, spin: -1 },
-  { kind: "slice", size: 62, x: 0.27, y: -0.42, depth: 0, spin: 1 },
-  { kind: "small", size: 62, x: -0.27, y: 0.17, depth: 0, spin: -1 },
+  { kind: "cherry", size: 46, x: 0.27, y: -0.42, depth: 0, spin: 1 },
+  { kind: "slice", size: 50, x: -0.27, y: 0.17, depth: 0, spin: -1 },
   { kind: "cherry", size: 40, x: -0.47, y: 0.1, depth: 0, spin: 1 },
   { kind: "cherry", size: 38, x: 0.44, y: 0.2, depth: 0, spin: -1 },
 
-  { kind: "lemon", size: 170, x: -0.34, y: -0.08, depth: 1, spin: -1 },
+  // The one lemon in focus, kept small: the coffee cherry is the star.
+  { kind: "lemon", size: 112, x: -0.37, y: -0.12, depth: 1, spin: -1 },
   { kind: "cherry", size: 100, x: -0.2, y: 0.17, depth: 1, spin: 1 },
   { kind: "cherry", size: 66, x: -0.21, y: -0.38, depth: 1, spin: -1 },
-  { kind: "slice", size: 128, x: 0.36, y: -0.2, depth: 1, spin: 1 },
-  { kind: "cherry", size: 84, x: 0.23, y: -0.38, depth: 1, spin: 1 },
+  { kind: "cherry", size: 90, x: 0.36, y: -0.2, depth: 1, spin: 1 },
+  { kind: "cherry", size: 74, x: 0.23, y: -0.38, depth: 1, spin: 1 },
   { kind: "cherry", size: 112, x: 0.3, y: 0.15, depth: 1, spin: -1 },
-  { kind: "small", size: 92, x: 0.44, y: 0.04, depth: 1, spin: 1 },
+  { kind: "cherry", size: 64, x: 0.44, y: 0.02, depth: 1, spin: 1 },
 
-  { kind: "small", size: 210, x: -0.42, y: -0.36, depth: 2, spin: 1 },
+  { kind: "cherry", size: 200, x: -0.42, y: -0.36, depth: 2, spin: 1 },
   { kind: "cherry", size: 250, x: 0.42, y: 0.27, depth: 2, spin: -1 },
-  { kind: "slice", size: 180, x: 0.43, y: -0.4, depth: 2, spin: 1 },
+  { kind: "cherry", size: 170, x: 0.43, y: -0.4, depth: 2, spin: 1 },
 ];
 
 /** Three sizes, because real fizz is mostly tiny with a few large bubbles among it. */
