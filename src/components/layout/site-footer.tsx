@@ -1,3 +1,4 @@
+import NextLink from "next/link";
 import { useTranslations } from "next-intl";
 
 import { SloganMarquee } from "@/components/brand/marquee";
@@ -76,8 +77,18 @@ export function SiteFooter() {
           <p className="font-display text-gold-soft text-base font-bold">
             {t("footer.tagline")}
           </p>
-          <p className="text-cream/50 mt-3 text-xs">
-            {t("footer.copyright", { year: String(year) })}
+          <p className="text-cream/50 mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-xs">
+            <span>{t("footer.copyright", { year: String(year) })}</span>
+            {/* /admin has no locale prefix, so this is the plain Next link. No prefetch:
+                nearly every visitor will never open it. */}
+            <NextLink
+              href="/admin"
+              prefetch={false}
+              rel="nofollow"
+              className="text-cream/35 hover:text-cream/80 py-2 transition-colors"
+            >
+              Admin
+            </NextLink>
           </p>
         </div>
       </div>
