@@ -59,7 +59,7 @@ All real website copy from your dossier, organized by page/section so it maps st
 ## 3. Story — "Wie alles begann"
 
 **DE**
-> Angefangen hat Cafété vor drei Jahren in einem claro-Laden. Dort entdeckte Kareem
+> Angefangen hat Cafété vor drei Jahren in einem claro-Laden. Dort entdeckte Kareem, der Gründer,
 > einen grossen Glasbehälter voll getrockneter, rötlicher Früchte. Was das war,
 > konnte er nicht sagen. Auf Nachfrage erfuhr er: ein Teil der Kaffeepflanze. Das Interesse war
 > geweckt – und weil damals kaum jemand danach fragte, bekam er eine Handvoll zum Probieren
@@ -72,7 +72,7 @@ All real website copy from your dossier, organized by page/section so it maps st
 > Drei Jahre später wurde aus einer Handvoll Kaffeefrüchten Cafété.
 
 **EN (draft)**
-> Cafété began three years ago in a claro shop, where Kareem spotted
+> Cafété began three years ago in a claro shop, where Kareem, the founder, spotted
 > a large glass jar full of dried, reddish fruit. He couldn't say what it was. When he asked, he
 > learned: it's part of the coffee plant. His curiosity was sparked — and since hardly anyone
 > asked about it back then, he was given a handful to try.

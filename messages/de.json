@@ -77,7 +77,7 @@
   "story": {
     "label": "Unsere Geschichte",
     "title": "Wie alles begann",
-    "p1": "Angefangen hat CAFÉTÉ vor drei Jahren in einem <b>claro-Laden</b>. Dort entdeckte Kareem, leidenschaftlicher Gastronom seit rund 20 Jahren, einen grossen Glasbehälter voll getrockneter, rötlicher Früchte. Was das war, konnte er nicht sagen. Auf Nachfrage erfuhr er: <b>ein Teil der Kaffeepflanze</b>. Das Interesse war geweckt — und weil damals kaum jemand danach fragte, bekam er eine Handvoll zum Probieren geschenkt.",
+    "p1": "Angefangen hat CAFÉTÉ vor drei Jahren in einem <b>claro-Laden</b>. Dort entdeckte Kareem, leidenschaftlicher Gastronom seit rund 20 Jahren und Gründer von CAFÉTÉ, einen grossen Glasbehälter voll getrockneter, rötlicher Früchte. Was das war, konnte er nicht sagen. Auf Nachfrage erfuhr er: <b>ein Teil der Kaffeepflanze</b>. Das Interesse war geweckt — und weil damals kaum jemand danach fragte, bekam er eine Handvoll zum Probieren geschenkt.",
     "p2": "Zuhause bereitete er daraus seinen ersten Aufguss zu: <b>fruchtig, leicht säuerlich und überraschend eigenständig</b>. Je mehr Kareem über die Kaffeefrucht lernte, desto klarer wurde ihm, dass in dieser Frucht weit mehr steckt.",
     "p3": "Drei Jahre später wurde aus einer Handvoll Kaffeefrüchten CAFÉTÉ.",
     "teaser": "Innerhalb von drei Jahren entwickelte sich aus einer Handvoll Kaffeefrüchten Cafété.",
@@ -89,7 +89,7 @@
     "body": "CAFÉTÉ möchte die Kaffeefrucht als eigenständige Getränkekategorie in der Schweiz etablieren. Nicht als Nischenprodukt für Kenner, sondern als feste Grösse im Getränkeregal. Wir glauben, dass die Kaffeefrucht mehr Aufmerksamkeit verdient. Mit CAFÉTÉ machen wir einen traditionsreichen Rohstoff auf eine neue Art erlebbar."
   },
   "founders": {
-    "label": "Cafété persönlich",
+    "label": "Der Gründer",
     "title": "Der Mensch hinter Cafété",
     "kareem": {
       "name": "Kareem Oueini",
