@@ -59,8 +59,8 @@ export function Hero({ entryPrice }: { entryPrice: string | null }) {
             <span className={index >= 3 ? "hero-word hero-word--accent" : "hero-word"}>
               <span className="hero-word-inner">{word}</span>
             </span>{" "}
-            {/* Five lines on a phone, three on a wide screen. */}
-            {index === 1 || index === 3 ? <br className="hidden lg:block" /> : null}
+            {/* Five lines on a phone, three from a small tablet up. */}
+            {index === 1 || index === 3 ? <br className="hidden sm:block" /> : null}
           </span>
         ))}
       </h1>
