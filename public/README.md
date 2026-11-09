@@ -62,4 +62,6 @@ The source is named `Kareem_F_009`. Two quirks worth knowing:
 
 - `coffee-cherry.webp`: cut out of our own `coffee-cherry-photo.jpg`.
 - `lemon-whole.webp`: Pixabay Content License, https://pixabay.com/photos/lemon-yellow-citrus-yellow-lemon-3330200/
-- `lemon-slice.webp`: Pixabay Content License, https://pixabay.com/photos/fruit-lemons-citrus-juicy-healthy-2489366/
+- `coffee-open.webp`: Pixabay Content License, https://pixabay.com/photos/coffee-fruits-coffee-cherries-6526356/
+- `cranberry-1.webp` to `cranberry-4.webp`: Pixabay Content License, https://pixabay.com/photos/cranberry-spoon-fruit-sour-red-1767426/
+- `elderberry-1.webp` to `elderberry-5.webp`: Pixabay Content License, https://pixabay.com/photos/elderberries-wild-elderberries-7434937/

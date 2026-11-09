@@ -9,7 +9,16 @@ import { Link } from "@/i18n/navigation";
 
 import bottle from "../../../public/bottle-transparent.png";
 import coffeeCherry from "../../../public/fruit/coffee-cherry.webp";
-import lemonSlice from "../../../public/fruit/lemon-slice.webp";
+import coffeeOpen from "../../../public/fruit/coffee-open.webp";
+import cranberry1 from "../../../public/fruit/cranberry-1.webp";
+import cranberry2 from "../../../public/fruit/cranberry-2.webp";
+import cranberry3 from "../../../public/fruit/cranberry-3.webp";
+import cranberry4 from "../../../public/fruit/cranberry-4.webp";
+import elderberry1 from "../../../public/fruit/elderberry-1.webp";
+import elderberry2 from "../../../public/fruit/elderberry-2.webp";
+import elderberry3 from "../../../public/fruit/elderberry-3.webp";
+import elderberry4 from "../../../public/fruit/elderberry-4.webp";
+import elderberry5 from "../../../public/fruit/elderberry-5.webp";
 import lemonWhole from "../../../public/fruit/lemon-whole.webp";
 
 /**
@@ -44,8 +53,17 @@ const SCENES = [
  */
 const FRUIT_IMAGE = {
   cherry: coffeeCherry,
+  open: coffeeOpen,
+  cran1: cranberry1,
+  cran2: cranberry2,
+  cran3: cranberry3,
+  cran4: cranberry4,
+  elder1: elderberry1,
+  elder2: elderberry2,
+  elder3: elderberry3,
+  elder4: elderberry4,
+  elder5: elderberry5,
   lemon: lemonWhole,
-  slice: lemonSlice,
 };
 type FruitKind = keyof typeof FRUIT_IMAGE;
 
@@ -55,25 +73,30 @@ const DRIFT: Record<Depth, number> = { 0: 0.03, 1: 0.08, 2: 0.26 };
 
 /** Real photographs. Their light comes from one side, so they only turn a little. */
 const FRUIT: { kind: FruitKind; size: number; x: number; y: number; depth: Depth; spin: number }[] = [
-  { kind: "cherry", size: 50, x: -0.44, y: -0.3, depth: 0, spin: 1 },
-  { kind: "cherry", size: 44, x: 0.46, y: -0.2, depth: 0, spin: -1 },
-  { kind: "cherry", size: 46, x: 0.27, y: -0.42, depth: 0, spin: 1 },
-  { kind: "slice", size: 50, x: -0.27, y: 0.17, depth: 0, spin: -1 },
-  { kind: "cherry", size: 40, x: -0.47, y: 0.1, depth: 0, spin: 1 },
-  { kind: "cherry", size: 38, x: 0.44, y: 0.2, depth: 0, spin: -1 },
+  { kind: "cran2", size: 40, x: -0.44, y: -0.38, depth: 0, spin: 1 },
+  { kind: "elder5", size: 22, x: 0.46, y: -0.4, depth: 0, spin: -1 },
+  { kind: "cherry", size: 44, x: 0.47, y: -0.15, depth: 0, spin: 1 },
+  { kind: "open", size: 62, x: 0.27, y: -0.06, depth: 0, spin: -1 },
+  { kind: "elder1", size: 20, x: -0.12, y: 0.34, depth: 0, spin: 1 },
+  { kind: "cran1", size: 36, x: 0.15, y: 0.36, depth: 0, spin: -1 },
 
-  // The one lemon in focus, kept small: the coffee cherry is the star.
-  { kind: "lemon", size: 112, x: -0.37, y: -0.12, depth: 1, spin: -1 },
-  { kind: "cherry", size: 100, x: -0.2, y: 0.17, depth: 1, spin: 1 },
-  { kind: "cherry", size: 66, x: -0.21, y: -0.38, depth: 1, spin: -1 },
-  { kind: "cherry", size: 90, x: 0.36, y: -0.2, depth: 1, spin: 1 },
-  { kind: "cherry", size: 74, x: 0.23, y: -0.38, depth: 1, spin: 1 },
-  { kind: "cherry", size: 112, x: 0.3, y: 0.15, depth: 1, spin: -1 },
-  { kind: "cherry", size: 64, x: 0.44, y: 0.02, depth: 1, spin: 1 },
+  // In focus: opened coffee cherries lead, cranberries and elderberries as they are in the drink.
+  { kind: "open", size: 150, x: -0.3, y: 0.18, depth: 1, spin: 1 },
+  { kind: "open", size: 116, x: 0.34, y: -0.24, depth: 1, spin: -1 },
+  { kind: "cherry", size: 92, x: 0.3, y: 0.17, depth: 1, spin: 1 },
+  { kind: "lemon", size: 96, x: -0.38, y: -0.22, depth: 1, spin: -1 },
+  { kind: "cran1", size: 66, x: 0.22, y: -0.4, depth: 1, spin: 1 },
+  { kind: "cran3", size: 58, x: -0.19, y: -0.4, depth: 1, spin: -1 },
+  { kind: "cran4", size: 62, x: 0.45, y: 0.0, depth: 1, spin: 1 },
+  { kind: "cran2", size: 50, x: -0.2, y: 0.0, depth: 1, spin: -1 },
+  { kind: "elder1", size: 34, x: 0.19, y: 0.04, depth: 1, spin: 1 },
+  { kind: "elder2", size: 30, x: -0.45, y: 0.05, depth: 1, spin: -1 },
+  { kind: "elder3", size: 28, x: 0.41, y: 0.29, depth: 1, spin: 1 },
+  { kind: "elder4", size: 32, x: -0.24, y: -0.18, depth: 1, spin: -1 },
 
-  { kind: "cherry", size: 200, x: -0.42, y: -0.36, depth: 2, spin: 1 },
-  { kind: "cherry", size: 250, x: 0.42, y: 0.27, depth: 2, spin: -1 },
-  { kind: "cherry", size: 170, x: 0.43, y: -0.4, depth: 2, spin: 1 },
+  { kind: "open", size: 230, x: -0.42, y: -0.36, depth: 2, spin: 1 },
+  { kind: "cran3", size: 190, x: 0.43, y: 0.3, depth: 2, spin: -1 },
+  { kind: "cherry", size: 160, x: 0.44, y: -0.42, depth: 2, spin: 1 },
 ];
 
 /** Three sizes, because real fizz is mostly tiny with a few large bubbles among it. */
